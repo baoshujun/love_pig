@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menuTopLayout"
+    android:layout_width="@dimen/top_menu_w"
+    android:layout_height="wrap_content"
+    android:background="@drawable/tab_bg"
+    android:gravity="center_vertical"
+    android:baselineAligned="false"
+    android:visibility="gone" >
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/top_btn1"
+            style="@style/right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/menu_item_margin" />
+
+        <Button
+            android:id="@+id/top_btn2"
+            style="@style/right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/menu_item_margin"
+            android:layout_toRightOf="@id/top_btn1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/top_btn4"
+            style="@style/right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/menu_item_margin" />
+
+        <Button
+            android:id="@+id/top_btn3"
+            style="@style/right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/menu_item_margin"
+            android:layout_toLeftOf="@id/top_btn4" />
+    </RelativeLayout>
+
+</LinearLayout>

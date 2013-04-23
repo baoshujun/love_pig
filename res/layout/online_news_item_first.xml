@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/News_Topstories_height"
+    android:layout_below="@id/galleryLayout"
+    android:background="@drawable/liebiao"
+    android:descendantFocusability="blocksDescendants" >
+
+    <ViewFlipper
+        android:id="@+id/ViewFlipper01"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/News_Topstories_height"
+        android:layout_centerVertical="true" >
+
+        <ImageView
+            android:id="@+id/onlinepic1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/news_detail_head" />
+
+        <ImageView
+            android:id="@+id/onlinepic2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/news_detail_head" />
+
+        <ImageView
+            android:id="@+id/onlinepic3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/news_detail_head" />
+    </ViewFlipper>
+
+    <LinearLayout
+        android:id="@+id/dianLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/header_color"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/onlinetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ImageViewFlipperWidthSpace"
+            android:layout_marginRight="@dimen/ImageViewFlipperWidthSpace"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:textColor="@color/btn_color_white"
+            android:textSize="@dimen/news_ad_txt_size" />
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="@dimen/ImageViewFlipperWidthSpace"
+            android:layout_height="@dimen/ImageViewFlipperHeight"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/ImageViewFlipperWidthSpace"
+            android:background="@drawable/dian"
+            android:contentDescription="@string/nothingDescr" />
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="@dimen/ImageViewFlipperWidthSpace"
+            android:layout_height="@dimen/ImageViewFlipperHeight"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/ImageViewFlipperWidthSpace"
+            android:background="@drawable/dian_bg"
+            android:contentDescription="@string/nothingDescr" />
+
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_width="@dimen/ImageViewFlipperWidthSpace"
+            android:layout_height="@dimen/ImageViewFlipperHeight"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/ImageViewFlipperWidthSpace"
+            android:background="@drawable/dian_bg"
+            android:contentDescription="@string/nothingDescr" />
+    </LinearLayout>
+
+</RelativeLayout>

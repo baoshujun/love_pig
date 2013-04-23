@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<resources>
+  <declare-styleable name="TlcySeekBar">
+  <attr name="downbg" format="integer" /> 
+  <attr name="bg" format="integer" /> 
+  <attr name="fing" format="integer" /> 
+  </declare-styleable>
+</resources>

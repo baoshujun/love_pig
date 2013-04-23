@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/titleLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/title" >
+
+    <RelativeLayout
+        android:id="@+id/leftBtnLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/fenlei_title_height"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" >
+
+        <Button
+            android:id="@+id/leftBtn"
+            style="@style/back_button"
+            android:layout_width="@dimen/title_left_btn_w"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/title_left_btn_margin"
+            android:gravity="center"
+            android:maxWidth="120dp"
+            android:padding="0dip"
+            android:singleLine="true"
+            android:text="@string/back"
+            android:textColor="@color/backbotton"
+            android:textSize="@dimen/news_button_text_size"
+            android:visibility="gone" />
+        <!-- android:textSize="@dimen/news_button_text_size" -->
+
+        <ImageView
+            android:id="@+id/logoImg"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/title_left_logo_margin"
+            android:contentDescription="@null"
+            android:src="@drawable/logo"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/fenlei_title_height"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/head_title_margin_l"
+        android:layout_marginRight="@dimen/head_title_margin_l"
+        android:scrollbars="none" >
+
+        <!-- 不加此layout则textView的首字母显示不出来 -->
+
+        <LinearLayout
+            android:id="@+id/titleLayoutForWidth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/fenlei_title_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textAppearance="@style/font_white_dialog"
+                android:textSize="@dimen/news_l_item_title_size" >
+            </TextView>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rightBtnLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/fenlei_title_height"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" >
+
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/title_right_btn_margin"
+            android:gravity="bottom|right"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/rightBtn"
+            style="@style/right_button"
+            android:layout_width="@dimen/title_left_btn_w"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/title_right_btn_margin"
+            android:gravity="center"
+            android:maxWidth="120dp"
+            android:padding="0dip"
+            android:singleLine="true"
+            android:textColor="@color/backbotton"
+            android:textSize="@dimen/news_button_text_size"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <RelativeLayout
+        android:id="@+id/commenteditLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/comment_edit_height"
+        android:layout_below="@id/titleLayout" >
+
+        <EditText
+            android:id="@+id/commentedit"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/shuru"
+            android:gravity="top"
+            android:hint="@string/iwanttocomment"
+            android:maxLength="140"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            android:textAppearance="@style/font_black_middle" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/commentListTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commenteditLayout"
+        android:background="@drawable/anjian_yonghupinglun"
+        android:gravity="center"
+        android:text="@string/commentListTxt"
+        android:textColor="@color/btn_color_title"
+        android:textSize="@dimen/shop_list_item_btn_text_sz" />
+
+    <ListView
+        android:id="@+id/contentlistview"
+        style="@style/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/commentListTxt" >
+    </ListView>
+
+</RelativeLayout>

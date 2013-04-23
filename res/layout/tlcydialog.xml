@@ -1,0 +1,153 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/transparent" >
+
+    <RelativeLayout
+        android:layout_width="@dimen/dialog_w"
+        android:layout_height="@dimen/dialog_h"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:background="@drawable/tanchu_bg" >
+
+        <RelativeLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="@dimen/dialog_title_w"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dialog_title_margiin_l"
+                android:layout_marginTop="@dimen/dialog_title_margiin_t"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/dialog_title_size"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/cancelIcon"
+                style="@style/dialog_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dip"
+                android:visibility="gone" >
+            </Button>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleLayout"
+            android:layout_centerInParent="true" >
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dialog_scrol_h"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip" >
+                <TextView
+                    android:id="@+id/message"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:autoText="true"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/dialog_message_text_size"
+                    android:textStyle="bold" />
+            </ScrollView>
+
+            <EditText
+                android:id="@+id/editMessage"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dialog_edit_msg_h"
+                android:layout_marginLeft="@dimen/dialog_big_edit_msg_margin"
+                android:layout_marginRight="@dimen/dialog_big_edit_msg_margin"
+                android:gravity="center"
+                android:hint=""
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/editBigMessage"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dialog_big_edit_msg_h"
+                android:layout_marginLeft="@dimen/dialog_big_edit_msg_margin"
+                android:layout_marginRight="@dimen/dialog_big_edit_msg_margin"
+                android:gravity="center"
+                android:hint=""
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/listView0"
+                style="@style/listview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:divider="@drawable/ic_launcher"
+                android:gravity="center"
+                android:textColor="#42670f"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutBottom01"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dip"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/BtnOK"
+                style="@style/dialog_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dip"
+                android:text="@string/OK" >
+            </Button>
+
+            <Button
+                android:id="@+id/BtnCancel"
+                style="@style/dialog_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dip"
+                android:text="@string/CANCEL" >
+            </Button>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutBottom02"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dip" >
+
+            <Button
+                android:id="@+id/btnOnlyOK"
+                style="@style/dialog_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/OK" >
+            </Button>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

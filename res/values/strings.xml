@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">爱养猪</string>
+    <string name="pull_to_refresh">下拉可以刷新</string>
+    <string name="tap_to_refresh">点击刷新</string>
+    <string name="load_to_refresh">更多</string>
+    <string name="edit">编辑</string>
+    <string name="unSelectedBeforeDeleteTip">请先选中,再进行删除.</string>
+    <string name="doing_update">加载中…</string>
+    <string name="release_update">松开可以刷新</string>
+    <string name="drop_dowm">下拉可以刷新</string>
+    <string name="update_time">更新于:</string>
+    <string name="netconnecterror">网络连接失败，请稍后再试！</string>
+    <string name="tip">提示</string>
+    <string name="OK">确定</string>
+    <string name="CANCEL">取消</string>
+    <string name="exitTip">确实要退出程序吗?</string>
+    <string name="News">新闻</string>
+    <string name="Shop">商城</string>
+    <string name="Shelf">书架</string>
+    <string name="Media">多媒体</string>
+    <string name="More">更多</string>
+    <string name="account">帐户管理</string>
+    <string name="billings">充值中心</string>
+    <string name="subscribes">订阅管理</string>
+    <string name="friends">好友管理</string>
+    <string name="messages">消息管理</string>
+    <string name="favorites">收藏管理</string>
+    <string name="downloads">下载管理</string>
+    <string name="back">返回</string>
+    <string name="points">…</string>
+    <string name="failedgetdata">获取数据失败！</string>
+    <!-- shopping string modified by zengsonghai satrt -->
+    <!-- shopping string modified by zengsonghai -->
+    <string name="searchkeywordmsg">请输入搜索关键字！</string>
+    <string name="shopbaozhi">报纸</string>
+    <string name="shopqikan">期刊</string>
+    <string name="shopxinwen">新闻</string>
+    <string name="shoptushu">图书</string>
+    <string name="shoptushuguan">图书馆</string>
+    <string name="searchkey">请输入搜索关键字</string>
+
+    <!-- &#160;&#160;&#160;&#160; -->
+    <string name="searchbtntxt">搜索</string>
+    <string name="searchresult">搜索结果</string>
+    <string name="flipperDescriptionTxt">暂无详细信息！</string>
+    <string name="publishinghouse">出版社：</string>
+    <string name="publishingfrom">出品：</string>
+    <string name="author">作者：</string>
+    <string name="price">价格：</string>
+    <string name="grade">评分：</string>
+    <string name="readergrade">读者评分：</string>
+    <string name="iwanttocomment">我要评论</string>
+    <string name="sendcomment">发表评论</string>
+    <string name="tushupurchase">图书购买</string>
+    <string name="tushusend">图书赠送</string>
+    <string name="subscriptionBtn">订阅</string>
+    <string name="subscriptionprice">￥%.2f/期</string>
+    <!--  -->
+    <string name="tushuPriceDetail">￥%.2f/本</string>
+    <string name="tushuPrice">￥</string>
+    <string name="purchaseprice">￥%.2f/月</string>
+    <string name="tushupurchaseprice">%.2f元</string>
+    <string name="purchaseBtn">购买</string>
+    <string name="giftfriendsBtn">赠送</string>
+    <string name="borrowerBtn">借阅</string>
+    <string name="nothingDescr"></string>
+    <string name="inputyourswishes">请输入您的赠言</string>
+    <string name="operate">操作</string>
+    <string name="operateCancel">取消</string>
+    <string name="memberCenter">会员中心</string>
+    <string name="registermemberCenter">成为高级会员</string>
+    <string name="addMemberCenter">您确定加入会员中心吗？</string>
+    <string name="borrowerListTxt">借阅清单</string>
+    <string name="returntheBook">还书</string>
+    <string name="borrowTimeStr">借阅时间：</string>
+    <string name="dueTimeStr">到期时间：</string>
+    <string name="subscribe">订阅</string>
+    <string name="buystr">购买</string>
+    <string name="commentListTxt">用户评论</string>
+    <string name="search_results_resultsTextFormat">%1$d 图书 %2$s 名字 %3$s</string>
+    <string name="writeMsg">写信</string>
+    <string name="messagedate">日期：</string>
+    <string name="reMessage">回信</string>
+    <string name="refuseMessage">拒绝</string>
+    <string name="agreeMessage">同意</string>
+    <string name="deleteMessage">删除</string>
+    <string name="deleteFriend">删除好友</string>
+    <string name="sendBox">发件箱</string>
+    <string name="receiveBox">收件箱</string>
+    <string name="selectReceivedFriend">选择收件人</string>
+    <string name="iWantToSendMsg">写下您对好友的祝福吧</string>
+    <string name="sendMessage">发送</string>
+    <string name="addfriends">添加好友</string>
+    <string name="addMyFriend">加好友</string>
+    <string name="currfriends">当前好友</string>
+    <string name="user_Id">文号：</string>
+    <string name="user_name">昵称：</string>
+    <string name="prePage">上一页</string>
+    <string name="nextPage">下一页</string>
+    <string name="theEndPage">已是最后一页</string>
+    <string name="theFirstPage">已是第一页</string>
+    <string name="jumpToPage">跳转</string>
+    <string name="outOfPage">超出数据范围</string>
+    <string name="dialogJumpPageTxtTip">电梯直达页面:</string>
+    <string name="pageDisp">%1$d/%2$d</string>
+    <string name="pageNumTxt">请输入跳转页数！！</string>
+
+    <!-- ******************yeePay****************************** -->
+    <string name="userSeleYee">我要充值</string>
+    <string name="yeeBuy">购买</string>
+    <string name="yeeCardNum">卡号:</string>
+    <string name="yeeCardPin">密码:</string>
+    <string name="yeeCardMoney">面额:</string>
+    <string name="yeeCardTypeTip">类型:</string>
+    <string name="yeeChinaMobile">移动</string>
+    <string name="yeeChinaUnicom">联通</string>
+    <string name="yeeChinaTelecom">电信</string>
+    <string name="yeeDeclare">充值仅用于本软件使用(不含流量费)</string>
+    <string name="yeeAndSzfDeclare">请务必按充值卡面额选择充值，卡内金额将一次全额扣除（ 一卡一充，无余额，不累计），剩余金额不能再次使用或退还。否则，可能会给您造成不必要的损失。</string>
+    <string name="userTip">提示</string>
+    <string name="userTipOk">确定</string>
+    <string name="userTipCancel">取消</string>
+    <string name="userTip1">卡号不能为空。</string>
+    <string name="userTip2">密码不能为空。</string>
+    <string name="userTip3">请选择金额。</string>
+    <string name="userTip4">请选择支付卡类型。</string>
+    <string name="userBuyingTip">正在购买…</string>
+    <string name="surebuy">您确定要充值吗 ?</string>
+    <string name="userSeleTip">\n请选择付费方式</string>
+    <!-- <string name="userSeleSZF">充值卡充值</string> -->
+    <!-- <string name="userSeleSMS">手机支付</string> -->
+    <!-- <string name="userSeleAlipay">支付宝充值</string> -->
+    <string name="userConsumeRecord">消费记录</string>
+    <string name="selectQueryRecord">查询充值</string>
+    <string name="smspaynotsupport">手机支付暂不支持</string>
+    <string name="userTipNotAlipay">无SIM卡不能使用支付宝服务。</string>
+    <string name="simnotexist">无SIM卡不能使用手机支付服务。</string>
+    <string name="rechargeTime">充值时间：</string>
+    <string name="rechargeWay">充值方式：</string>
+    <string name="rechargeMoney">充值金额：</string>
+    <string name="rechargeSurplus">充值点数： </string>
+    <string name="subscription_goods">商品： </string>
+    <string name="subscription_price">价格： </string>
+    <string name="subscription_date">截止日期： </string>
+    <string name="subscription_donor">赠送人： </string>
+
+    <string-array name="yeeMoney">
+        <item>请选择面额</item>
+        <item>0.01元</item>
+        <item>5.00元</item>
+        <item>10.00元</item>
+        <item>15.00元</item>
+        <item>20.00元</item>
+        <item>30.00元</item>
+        <item>50.00元</item>
+        <item>100.00元</item>
+    </string-array>
+    <string-array name="yeeMoneyValue">
+        <item>-1</item>
+        <item>0.01</item>
+        <item>5.00</item>
+        <item>10.00</item>
+        <item>15.00</item>
+        <item>20.00</item>
+        <item>30.00</item>
+        <item>50.00</item>
+        <item>100.00</item>
+    </string-array>
+    <string-array name="yeeCardtype">
+        <item>请选择卡的类型</item>
+        <item>神州行</item>
+        <item>联通卡</item>
+        <item>电信卡</item>
+    </string-array>
+    <string-array name="yeeCardtypeValue">
+        <item></item>
+        <item>SZX</item>
+        <item>UNICOM</item>
+        <item>TELECOM</item>
+    </string-array>
+    <!-- shopping string modified by zengsonghai end -->
+    <!-- 我的书架 -->
+    <string name="mybookshelf">我的书架</string>
+    <string name="mybook_empty_list_tip">您还没下载任何内容！</string>
+    <!-- 多媒体 -->
+    <string name=" multi_media">多媒体</string>
+    <!-- 在线新闻 -->
+    <string name="onlinenews_back">在线新闻</string>
+    <string name="unbindTip_buyong">您正在对该问号进行解绑操作！请注意:\n1.您已经订阅但尚未下载的内容及本地已下载的内容将被清空。\n2.当使用该文号绑定其他设备时，您可以重新下载您已经购买的内容。\n温馨提示:重新下载需要大量的数据流量,建议您使用WIFI接入互联网。</string>
+    <string name="unbindTip">请注意:您正在对该问号进行解绑操作！一旦您解除绑定，您已经订阅但尚未下载的内容及本地已下载的内容将被清空。当使用该文号绑定其他设备时，您可以重新下载您已经购买的内容。温馨提示:重新下载需要大量的数据流量,建议您使用WIFI接入互联网。</string>
+    <string name="unbindTip_dialog">解除绑定将删除所有数据,您确认解除吗？</string>
+    <string name="unbingSucc">用户成功解绑</string>
+    <string name="downManager">下载管理</string>
+    <string name="downing">正在下载</string>
+    <string name="downDeleted">已删除</string>
+    <string name="downAgain">重新下载</string>
+    <string name="abouthelp">关于帮助</string>
+    <string name="selectAll">全选</string>
+    <string name="inverse">反选</string>
+    <string name="down">下载</string>
+    <string name="pause">暂停</string>
+    <string name="delete">删除</string>
+    <string name="multi_headtab_online">在线音乐</string>
+    <string name="multi_headtab_local">本地管理</string>
+    <string name="multi_headtab_down">下载管理</string>
+    <string name="search_text_hint">请输入歌曲名或歌手名</string>
+    <string name="cgScTip1">\u0020\u0020\u0020请输入搜索关键字</string>
+    <string name="palyerpopinfo">当前正在播放其他歌曲，继续会将其中断并播放选中的歌曲</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="noSDCARD">没有发现外部存储，请安装SD卡后再使用本软件。</string>
+    <string name="noSDCARDmem">外部存储已满，请清理SD卡</string>
+    <string name="noSDCARDmemConfirm">继续使用本软件可能会自动退出,继续吗?</string>
+    <string name="dwStateStoped">停止</string>
+    <string name="dwStateStoping">停止中</string>
+    <string name="dwStateDowning">正在下载</string>
+    <string name="dwStateCover">下载封面</string>
+    <string name="dwStateWaiting">等待</string>
+    <string name="dwStateConneting">连接中</string>
+    <string name="dwStateError">错误</string>
+    <string name="current_play">当前播放</string>
+    <string name="loading">加载中…</string>
+    <string name="release_to_refresh">松开可以刷新</string>
+
+    <!-- 本地音乐管理 -->
+    <string name="allsongs">全部歌曲</string>
+    <string name="songers">按歌手分类</string>
+    <string name="albums">按专辑分类</string>
+    <string name="style">按风格分类</string>
+    <string name="year">按日期分类</string>
+    <string name="result_query_allsongs">您还没有下载任何歌曲</string>
+    <string name="result_query_other">您还没有下载任何相关的歌曲</string>
+    <string name="seldownloaditem">请选择要删除条目！</string>
+    <string name="isHavePlay">您删除的歌曲中包含正在播放的歌曲，不能删除！</string>
+    <string name="downloadconfirm">确定要删除选定的条目吗?</string>
+    <string name="dwConfirm">确认删除吗？</string>
+    <string name="diskSize">存储设备剩余容量</string>
+    <!-- 当前播放 -->
+    <string-array name="playStatus">
+        <item></item>
+        <item>正在连接</item>
+        <item>正在缓冲</item>
+        <item>播放中</item>
+        <item>暂停</item>
+        <item>停止</item>
+        <item>网络错误</item>
+        <item>错误</item>
+    </string-array>
+
+    <!-- 账号管理 -->
+    <string name="MyAccountID">我的文号：</string>
+    <string name="MyAccountName">我的昵称：</string>
+    <string name="MyAccountEmail">我的邮箱：</string>
+    <string name="MyAccountPhoneNum">我的手机：</string>
+    <string name="MyAccountModifyInfo">修改个人信息</string>
+    <string name="MyAccountModifyPwd">修改密码</string>
+    <string name="MyAccountInfo">用户信息</string>
+    <string name="MyAccountUnbind">解除绑定</string>
+    <string name="RegisterInfo">注册信息</string>
+    <string name="RegisterUserbind">用户绑定</string>
+    <string name="RegisterUserid">*用户文号：</string>
+    <string name="MyUserid">*我的文号：</string>
+    <string name="RegisterChecked">检验</string>
+    <string name="OldPWD">*旧密码输入：</string>
+    <string name="InputEmail">请输入邮箱地址</string>
+    <string name="InputPhone">请输入手机号</string>
+    <string name="InputCheckCode">请输入验证码(右下按钮)</string>
+    <string name="UpdatePwd">密码输入：</string>
+    <string name="ModifyNewPwd">*新密码输入：</string>
+    <string name="ModifyReNewPWD">*新密码确认：</string>
+    <string name="RegisterPWD">*密码输入：</string>
+    <string name="RegisterREPWD">*密码确认：</string>
+    <string name="RegisterEmail">邮箱地址：</string>
+    <string name="RegisterPhoneNum">手机号码：</string>
+    <string name="RegisterCheckCode">*验证码：</string>
+    <string name="Register">注册</string>
+    <string name="RegisterReset">重置</string>
+    <string name="RegisterUseriddescribe">(由英文字母、数字、以及划线组成，长度4—20位)</string>
+    <string name="RegisterUserpwddescribe">(由英文字母、数字、以及划线组成，长度4—12位)</string>
+    <string name="RegisterUseridInputrule">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_</string>
+    <string name="BindingexistsUserID">绑定已有用户</string>
+    <string name="Useridrepeat">文号重复</string>
+    <string name="PhoneError">手机号码填写错误</string>
+    <string name="EmailError">邮箱地址填写错误</string>
+    <string name="SureInputUserName">请输入用户昵称</string>
+    <string name="SureInputUserNameLength">用户昵称不要超过12个字符</string>
+    <string name="SureInputPWD">请输入密码</string>
+
+    <!-- 收藏管理 -->
+    <string name="FavoritesCancel">取消收藏</string>
+    <string name="FavoritesDate">收藏日期：</string>
+    <string name="noSDCARDmema">外部存储已满，请清理SD卡。</string>
+    <string name="Servicetel">客服电话：   010–63076070</string>
+    <string name="copyright">Copyright c 2011–2012 xinhuapinmei</string>
+    <!-- 分享 -->
+    <string name="shareBtn">分享</string>
+     <string name="renren_sdk_submit">确定</string>
+    <string name="renren_sdk_cancel">取消</string>
+    <string name="renren_sdk_status_hint">你正在干嘛？</string>
+    <string name="renren_sdk_status_publish_success">发布成功</string>
+    <string name="renren_sdk_status_publish_failed">发布失败</string>
+    <string name="renren_sdk_status_publish">发布</string>
+    <string name="renren_sdk_status_cancel">取消</string>
+    <string name="renren_sdk_long_status">状态长度的字数上限为</string>
+    <string name="renren_sdk_publish_status_hint">发布中，请稍后</string>
+    <string name="renren_sdk_object_init_error">程序重新初始化失败</string>
+    <string name="renren_sdk_publish_null_status_alert">您还未输入内容，请输入后再试</string>
+    
+       <string name="head_right_btn_songstext">分享</string>
+    <string name="shareTo">分享到</string>
+    <string name="sharing">正在发送</string>
+    
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="news_message">新闻行情</string>
+    <string name="price_message">价格行情</string>
+    <string name="boar_message">种猪信息</string>
+    <string name="medicinal_message">兽药信息</string>
+    <string name="fodder_message">饲料信息</string>
+    <string name="device_message">设备信息</string>
+    <string name="expert_answer">专家答疑</string>
+    <string name="other">其它</string>
+    <string name="near_dealer">我附近的经销商</string>
+    <string name="near_pig_farm">我附近的种猪场</string>
+    <string name="today_price">今日价格</string>
+    <string name="sigin">会员注册</string>
+
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="footerblack">#ffffffff</color>
+    <color name="header_color">#1E000000</color>
+    <color name="text_color">#ffffffff</color>
+    <color name="fresh_color">#ff000000</color>
+    <color name="text_color_F5">#fff5f5f5</color>
+    <color name="text_color_gray">#ff8c8c8e</color>
+    <color name="text_color_black">#ff000000</color>
+    <color name="text_color_gray_black">#cc000000</color>
+    <color name="text_color_green">#ff69b23f</color>
+    <color name="text_color_blue">#ff009bfd</color>
+    <color name="text_color_yellow">#ffdf9902</color>
+    <color name="background_transparent">#00000000</color>
+    <color name="background_half_transparent">#80000000</color>
+    <color name="background_incomplete_transparent">#01000000</color>
+    <color name="background_black">#ff000000</color>
+    <color name="background_light_black">#aa000000</color>
+    <color name="background_gray">#bb969696</color>
+    <color name="background_web_gray">#ff969696</color>
+    <color name="background_green">#e0bde7a4</color>
+    <color name="background_white">#ffffffff</color>
+    <color name="background_gray_white">#ffe5e5e5</color>
+    <color name="background_light_gray_white">#fff2f2f2</color>
+    <color name="background_web_light_gray">#ffeeeeee</color>
+    <color name="background_light_green">#aadfffdf</color>
+    <color name="dragndrop_background">#ff969696</color>
+    <color name="unfocused">#fffbfbfb</color>
+    <color name="selected">#ffe9f0f9</color>
+    <!-- 多媒体 -->
+    <color name="btn_color_white">#ffffffff</color>
+    <color name="btn_color_title">#ff000000</color>
+    <color name="buttonColor">#ffffffff</color>
+    <color name="titleColor">#ffffcb99</color>
+    <!-- 帮助activity半透明背景 -->
+    <drawable name="translucent_background">#65000000</drawable>
+    <drawable name="translucent_btn_background">#00000000</drawable>
+
+</resources>

@@ -1,0 +1,304 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0000FF" >
+
+    <LinearLayout
+        android:id="@+id/lg01"
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:layout_below="@id/lg01"
+        android:layout_marginTop="40dip"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip" >
+
+        <LinearLayout
+            android:id="@+id/newsMsg"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/news" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/news_message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/priceMsg"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/price" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/price_message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/boarMsg"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/boar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/boar_message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/medicinalMsg"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/medicial" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/medicinal_message" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lg02"
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:layout_below="@id/lg01"
+        android:layout_marginTop="10dip"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip" >
+
+        <LinearLayout
+            android:id="@+id/fodderMsg"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/foddler" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/fodder_message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/deviceMsg"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/device" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/device_message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/expertMsg"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/expert" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/expert_answer" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/other"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/other" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:text="@string/other" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lg03"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/lg02"
+        android:layout_marginBottom="40dip"
+        android:layout_marginTop="10dip"
+        android:orientation="vertical"
+        android:paddingLeft="30dip"
+        android:paddingRight="20dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="25dip"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="200dip"
+                android:layout_height="25dip"
+                android:layout_marginTop="5dip"
+                android:text="@string/near_dealer"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/nearDealer"
+                android:layout_width="42dip"
+                android:layout_height="42dp"
+                android:layout_marginLeft="8dip"
+                android:src="@drawable/arrow_left"
+                android:contentDescription="@string/app_name"
+                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="25dip"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="200dip"
+                android:layout_height="25dip"
+                android:layout_marginTop="5dip"
+                android:text="@string/near_pig_farm"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/nearPigFarm"
+                android:layout_width="42dip"
+                android:layout_height="42dp"
+                android:layout_marginLeft="8dip"
+                android:src="@drawable/arrow_left"
+                android:contentDescription="@string/app_name"
+                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="25dip"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="200dip"
+                android:layout_height="25dip"
+                android:layout_marginTop="5dip"
+                android:text="@string/today_price"
+                android:src="@drawable/arrow_left"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/todayPrice"
+                android:layout_width="42dip"
+                android:layout_height="42dp"
+                android:layout_marginLeft="8dip"
+                android:src="@drawable/arrow_left"
+                android:contentDescription="@string/app_name"
+               />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="25dip"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="200dip"
+                android:layout_height="25dip"
+                android:layout_marginTop="5dip"
+                android:text="@string/sigin"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/sigin"
+                android:layout_width="42dip"
+                android:layout_height="42dp"
+                android:layout_marginLeft="8dip"
+                android:src="@drawable/arrow_left"
+                android:contentDescription="@string/app_name"
+                 />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

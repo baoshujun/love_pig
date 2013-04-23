@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="menu_item_margin">5dip</dimen>
+    <dimen name="menu_height">35dip</dimen>
+    <dimen name="title_left_logo_margin">15dip</dimen>
+    <dimen name="title_left_btn_margin">10dip</dimen>
+    <dimen name="title_right_btn_margin">10dip</dimen>
+    <dimen name="fenlei_item_width">120dip</dimen>
+    <dimen name="fenlei_item_height">50dip</dimen>
+    <dimen name="news_ad_height">150dip</dimen>
+    <dimen name="news_ad_txt_size">20sp</dimen>
+    <dimen name="more_item_height">80dip</dimen>
+    <dimen name="more_item_margin_right">30dip</dimen>
+    <dimen name="more_item_margin_left">10dip</dimen>
+
+    <!-- modified by zengsonghai (shopping model) start -->
+    <dimen name="fenlei_title_height">50dip</dimen>
+    <dimen name="shopping_searchEdit_height">50dip</dimen>
+    <dimen name="shopping_searchBtn_left">10dip</dimen>
+    <dimen name="shopping_searchBtn_right">10dip</dimen>
+    <dimen name="shopping_searchEdit_left">10dip</dimen>
+    <dimen name="shopping_searchEditPading_left">40dip</dimen>
+    <dimen name="viewFlipper_left_margin">20dip</dimen>
+    <dimen name="flipperlayoutHeight">295dip</dimen>
+    <dimen name="viewFlipper01Height">280dip</dimen>
+    <dimen name="CoverFlowlayoutImageHeight">310dip</dimen>
+    <dimen name="CoverFlowlayoutHeight">430dip</dimen>
+    <dimen name="CoverFlowlayoutWidth">1024dip</dimen>
+    <dimen name="ImageViewFlipperWidth">135dip</dimen>
+    <dimen name="ImageViewFlipperWidthSpace">15dip</dimen>
+    <dimen name="ImageViewFlipperHeight">15dip</dimen>
+    <dimen name="galleryWidth">330dip</dimen>
+    <dimen name="galleryHeight">530dip</dimen>
+    <dimen name="gallery_margin_top">50dip</dimen>
+    <dimen name="tushu_news_ad_height">100dip</dimen>
+    <dimen name="tushu_news_ad_txt_size">20sp</dimen>
+    <dimen name="tushu_margin_top">10dip</dimen>
+    <dimen name="tushu_margin_bottom">10dip</dimen>
+    <dimen name="tushu_margin_left">10dip</dimen>
+    <dimen name="tushu_margin_right">10dip</dimen>
+    <dimen name="tushu_image_width">150dip</dimen>
+    <dimen name="tushu_image_height">220dip</dimen>
+    <dimen name="tushu_info_detail_width">748dip</dimen>
+    <dimen name="tushu_info_detail_height">549dip</dimen>
+    <dimen name="tushu_viewStub_height">210dip</dimen>
+    <dimen name="tushu_info_viewStub_width">120dip</dimen>
+    <dimen name="tushu_info_viewStub_height">50dip</dimen>
+    <dimen name="tushu_info_viewStub_margin_top">20dip</dimen>
+    <dimen name="comment_edit_height">127dip</dimen>
+    <dimen name="member_home_descr_height">150dip</dimen>
+    <dimen name="frined_list_height">150dip</dimen>
+    <dimen name="comment_ratingbar_margin_top">10dip</dimen>
+    <dimen name="tushu_give_image_width">100dip</dimen>
+    <dimen name="tushu_give_image_height">150dip</dimen>
+    <dimen name="tushu_purchase_width">668dip</dimen>
+    <dimen name="tushu_purchase_height">420dip</dimen>
+    <dimen name="tushu_listViewImage_width">75dip</dimen>
+    <dimen name="tushu_listViewImage_height">90dip</dimen>
+    <dimen name="shopping_listViewItem_height">140dip</dimen>
+    <dimen name="tushu_purchase_btn_width">120dip</dimen>
+    <dimen name="tushu_purchase_btn_height">50dip</dimen>
+    <dimen name="ImageViewFlipperRightWidth">200dip</dimen>
+    <dimen name="viewFlipper600Height">280dip</dimen>
+    <dimen name="CoverFlowlayout600Height">430dip</dimen>
+    <dimen name="scroll_btn_margin">15dip</dimen>
+    <dimen name="tushu_image_width600">150dip</dimen>
+    <dimen name="tushu_image_height600">220dip</dimen>
+    <dimen name="tushu_viewStub_height600">210dip</dimen>
+    <dimen name="tushu_viewStub_heightDialog600">210dip</dimen>
+    <dimen name="tushu_info_viewStub_margin_top600">20dip</dimen>
+    <dimen name="tushu_info_viewStub_height600">50dip</dimen>
+    <dimen name="tushu_info_detail_width600">748dip</dimen>
+    <dimen name="tushu_info_detail_height600">549dip</dimen>
+    <!-- modified by zengsonghai (shopping model) end -->
+
+
+    <!-- 下拉刷新及加载更多 -->
+    <dimen name="updatebar_height">62dip</dimen>
+    <dimen name="updatebar_content_height">60dip</dimen>
+    <dimen name="updatebar_padding">10dip</dimen>
+    <dimen name="footer_height">50dip</dimen>
+    <!-- 当前播放 -->
+    <dimen name="playoutmiddle_height">629dp</dimen>
+    <dimen name="playoutmiddle_width">768dp</dimen>
+    <dimen name="pgallery_width_height">350dp</dimen>
+    <dimen name="downloadbtn_width_height">60dp</dimen>
+    <dimen name="downloadbtn_layout_margin_top">759dp</dimen>
+    <dimen name="seekbar_margintop">849dp</dimen>
+    <dimen name="playoutctrl_margintop">909dp</dimen>
+    <dimen name="playoutctrl_margin_left_right">256dp</dimen>
+    <!-- 用户相关 -->
+    <dimen name="user_edit_width">251dip</dimen>
+    <dimen name="user_edit_heigth">40dip</dimen>
+    <dimen name="user_layout_padding">70dip</dimen>
+    <!-- 下载管理 -->
+    <dimen name="download_height">80dp</dimen>
+    <!-- 在线新闻 -->
+    <dimen name="News_Topstories_height">200dip</dimen>
+    <dimen name="News_Topstories_width">1024dip</dimen>
+
+    <!-- 多媒体 -->
+    <dimen name="headtab_height">60dip</dimen>
+    <dimen name="download_progress_withd">700dip</dimen>
+    <!-- 信息发送界面 -->
+    <dimen name="more_message_send_content_height">400dip</dimen>
+    <dimen name="more_message_send_content_width">500dip</dimen>
+    <!-- 俩个按钮时每个按钮的宽度 -->
+    <dimen name="fenlei_item_width_two">233dip</dimen>
+    <!-- 底部提示消息 -->
+    <dimen name="tip_right_textview_margin">20dip</dimen>
+    <dimen name="tip_textview_margin_bottom">40dp</dimen>
+    <!-- 商城列表标题宽度 -->
+    <dimen name="shopp_list_item_width">280dp</dimen>
+    <!-- *************************一下为新增的  ***********************bao.shujun******************** -->
+    <dimen name="news_l_item_thume_w">160dip</dimen>
+    <dimen name="news_l_item_thume_h">110dip</dimen>
+    <dimen name="news_l_item_thume_margin_l">15dip</dimen>
+    <dimen name="news_l_item_jiant_margin_r">45dip</dimen>
+    <dimen name="news_l_item_jiant_margin_w">30dip</dimen>
+    <dimen name="news_l_item_jiant_margin_h">30dip</dimen>
+    <dimen name="news_l_item_jiant_w">30dip</dimen>
+    <dimen name="news_l_item_jiant_h">30dip</dimen>
+    <dimen name="news_l_item_title_magin">15dip</dimen>
+    <dimen name="news_l_item_content_size">18sp</dimen>
+    <dimen name="news_l_item_title_size">20sp</dimen>
+    <dimen name="news_title_size">20sp</dimen>
+    <dimen name="news_button_text_size">18sp</dimen>
+    <dimen name="news_detail_title_size">20sp</dimen>
+    <dimen name="news_details_img_height">300dip</dimen>
+    <dimen name="news_detail_content_size">18sp</dimen>
+    <dimen name="dialog_w">400dip</dimen>
+    <dimen name="dialog_h">200dip</dimen>
+    <dimen name="dialog_title_margiin_l">40dip</dimen>
+    <dimen name="dialog_title_margiin_t">20dip</dimen>
+    <dimen name="dialog_title_size">22sp</dimen>
+    <dimen name="dialog_title_w">280dip</dimen>
+    <dimen name="dialog_scrol_h">65dip</dimen>
+    <dimen name="dialog_message_text_size">20sp</dimen>
+    <dimen name="dialog_edit_msg_h">65dip</dimen>
+    <dimen name="dialog_big_edit_msg_h">75dip</dimen>
+    <dimen name="dialog_big_edit_msg_margin">30dip</dimen>
+    <dimen name="shop_fenye_btn_text_size">18sp</dimen>
+    <dimen name="shop_fenye_btn_h">40dip</dimen>
+    <dimen name="shop_fenye_tip_text_sz">16sp</dimen>
+    <dimen name="shop_fenye_input_h">40dp</dimen>
+    <dimen name="shop_fenye_input_w">80dp</dimen>
+    <dimen name="shop_list_item_btn_h">40dip</dimen>
+    <dimen name="shop_list_item_btn_text_sz">18sp</dimen>
+    <dimen name="shop_detail_oprate_magin_t"> 18dip</dimen>
+    <dimen name="multi_online_search_text_sz">19sp</dimen>
+    <dimen name="multi_down_list_item_magin_t">5dip</dimen>
+    <dimen name="multi_down_list_item_magin_l">30dip</dimen>
+    <dimen name="multi_down_list_item_sta_magin_t">5dip</dimen>
+    <dimen name="multi_online_list_item_h">60dp</dimen>
+    <dimen name="multi_down_bottom_margin_left">20dip</dimen>
+    <dimen name="multi_online_list_item_magin_t">0dip</dimen>
+    <dimen name="multi_list_item_artist_magin_t">0dip</dimen>
+    <dimen name="shop_main_categ_name_size">24sp</dimen>
+    <dimen name="play_seekbar_padding">10dp</dimen>
+    <dimen name="play_downbtn_w_h">60dp</dimen>
+    <dimen name="more_user_info_text_lay_w">507dip</dimen>
+    <dimen name="multi_down_list_item_h">80dp</dimen>
+    <dimen name="seekbar_h">22dp</dimen>
+    <dimen name="seekbar_width">710dp</dimen>
+    <dimen name="bookshelf_down_item_name_w">280dp</dimen>
+    <dimen name="top_menu_w">420dp</dimen>
+    <dimen name="news_l_item_h">160dp</dimen>
+    <dimen name="title_left_btn_w">120dp</dimen>
+    <dimen name="more_recharge_yibao_text_w">40dp</dimen>
+    <dimen name="shop_detail_viewstub_margin_b">0dp</dimen>
+    <dimen name="multi_down_progress_magin_top">15dip</dimen>
+    <dimen name="seekbar_margin_l">15dp</dimen>
+    <dimen name="play_time_w">90dp</dimen>
+    <dimen name="play_margin_l">43dp</dimen>
+    <dimen name="play_time_sz">14sp</dimen>
+    <dimen name="main_bottom_msg_sz">20sp</dimen>
+    <dimen name="head_title_margin_l">120sp</dimen>
+    <dimen name="multi_online_list_item_margin_l">25dip</dimen>
+    <dimen name="more_modify_pwd_text_margin_t">10dp</dimen>
+    <dimen name="play_play_btun_h">35dp</dimen>
+    <dimen name="more_sub_item_margin_l">10dip</dimen>
+    <dimen name="more_sub_item_margin_r">5dp</dimen>
+    <dimen name="news_detai_title_margin_t">10dip</dimen>
+    <dimen name="news_detai_title_time_margin_b">10dp</dimen>
+    <dimen name="news_detai_title_time_margin_t">5dip</dimen>
+    <dimen name="shop_main_cate_text_margin_t">-7dp</dimen>
+    <dimen name="shop_detai_text_margin_t">16dip</dimen>
+    <dimen name="shop_detai_p_text_margin_t"> 10dip</dimen>
+    <dimen name="more_user_acc_text_h">40dip</dimen>
+    <dimen name="more_user_acc_text_marg_t">10dip</dimen>
+    <dimen name="shop_lib_borrow_list_m_t">0dip</dimen>
+    <dimen name="shop_botm_pg_tz">16sp</dimen>
+    <dimen name="more_user_regis_text_w">125dp</dimen>
+    <dimen name="shopping_ad_margin_t">0dp</dimen>
+    <dimen name="aboultpadding">20dip</dimen>
+    <dimen name="aboulttextsize">20sp</dimen>
+    <dimen name="more_send_friend_list_h">300dp</dimen>
+    <dimen name="fling_x">100dp</dimen>
+    <dimen name="fling_y">100dp</dimen>
+    <dimen name="one_dp">1dp</dimen>
+    <dimen name="share_input_h">120dp</dimen>
+   
+</resources>

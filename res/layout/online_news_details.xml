@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/titlelayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleLayout"
+         >
+
+        <TextView
+            android:id="@+id/onlinedetailstitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginTop="@dimen/news_detai_title_margin_t"
+            android:gravity="center"
+            android:textColor="@color/btn_color_title"
+            android:textSize="@dimen/news_detail_title_size" />
+
+        <TextView
+            android:id="@+id/onlinedetailstime"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/onlinedetailstitle"
+            android:layout_marginTop="@dimen/news_detai_title_time_margin_t"
+            android:gravity="center"
+            android:paddingBottom="@dimen/news_detai_title_time_margin_b"
+            android:textColor="@color/btn_color_title" />
+    </RelativeLayout>
+
+    <!-- <com.audiocn.widget.TlcyScrollView -->
+
+    <ScrollView
+        android:id="@+id/onlinescrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/titlelayout"
+        android:layout_marginLeft="15dip"
+        android:fadeScrollbars="true" >
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dip">
+
+            <ImageView
+                android:id="@+id/onlinedetailsimg"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/news_details_img_height"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/onlinedetails"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/onlinedetailsimg"
+                android:layout_marginTop="15dip"
+                android:textColor="@color/btn_color_title"
+                android:textSize="@dimen/news_detail_content_size" />
+            <Button 
+        android:id="@+id/shareBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:layout_below="@id/onlinedetails"
+        android:text="@string/shareBtn"
+       />
+        </RelativeLayout>
+    </ScrollView>
+   
+    <ImageButton
+        android:id="@+id/onlinepreviousnews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/onlinenextnews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+</RelativeLayout>
