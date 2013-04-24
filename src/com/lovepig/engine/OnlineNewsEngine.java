@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 
-import com.lovepig.main.Application;
 import com.lovepig.main.Configs;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
@@ -165,7 +164,7 @@ public class OnlineNewsEngine extends BaseEngine {
                     manager.SaveNews(rs.newslist);
                 }
                 if (rs.code.equals("hasnews") && !isStop) {
-                    //manager.SetLatestNews(rs.newslist);
+                    // manager.SetLatestNews(rs.newslist);
                 }
                 return rs;
             }
@@ -175,7 +174,7 @@ public class OnlineNewsEngine extends BaseEngine {
         protected void onPostExecute(NewsState result) {
             if (!isStop && result != null) {
                 if (result.code.equals("hasnews")) {
-                     manager.SetLatestNews(result.newslist);
+                    manager.SetLatestNews(result.newslist);
                     // manager.SaveNews();
                     manager.getNewsComplete(0);
                     manager.ShowDetail();
@@ -286,7 +285,7 @@ public class OnlineNewsEngine extends BaseEngine {
                     news.time = newsarray[i].getString("createTime");
                     news.title = newsarray[i].getString("title").replace("\r", "").replace("\n", "");
                     news.intro = newsarray[i].getString("intro");
-                    news.details = newsarray[i].getString("content").replace("\r", "") ;
+                    news.details = newsarray[i].getString("content").replace("\r", "");
                     news.commentNum = newsarray[i].getInt("commentSize");
                     news.isTop = newsarray[i].getInt("isTop") == 1;
                     if (news.intro != null) {// 简介段首自动缩进
@@ -313,21 +312,21 @@ public class OnlineNewsEngine extends BaseEngine {
                     if (newsarray[i].has("commentSize")) {
                         news.commentSize = newsarray[i].getInt("commentSize");
                     }
-                    if(news.isTop){
-                        if(newsState.newslist.size() > 0){
-                            if(newsState.newslist.get(0).topNews == null){
-                                news.topNews =  new ArrayList<NewsModel>();
+                    if (news.isTop) {
+                        if (newsState.newslist.size() > 0) {
+                            if (newsState.newslist.get(0).topNews == null) {
+                                news.topNews = new ArrayList<NewsModel>();
                                 news.topNews.add(news);
-                                newsState.newslist.add(0,news);
-                            }else{
-                                newsState.newslist.get(0).topNews.add(news); 
+                                newsState.newslist.add(0, news);
+                            } else {
+                                newsState.newslist.get(0).topNews.add(news);
                             }
-                        }else{
-                            news.topNews =  new ArrayList<NewsModel>();
+                        } else {
+                            news.topNews = new ArrayList<NewsModel>();
                             news.topNews.add(news);
                             newsState.newslist.add(news);
                         }
-                    }else{
+                    } else {
                         newsState.newslist.add(news);
                     }
                     LogInfo.LogOut("OnlineNewsEngine", "name:" + news.id);
@@ -390,10 +389,11 @@ public class OnlineNewsEngine extends BaseEngine {
                         news.intro = "        " + news.intro;
                         news.intro = news.intro.replaceAll("\n", "\n        ");
                     }
-//                    if (news.details != null) {// 所有段首自动缩进
-//                        news.details = "        " + news.details;
-//                        news.details = news.details.replaceAll("\n", "\n        ");
-//                    }
+                    // if (news.details != null) {// 所有段首自动缩进
+                    // news.details = "        " + news.details;
+                    // news.details = news.details.replaceAll("\n",
+                    // "\n        ");
+                    // }
                     if (newsarray[i].has("publisher")) {
                         news.publisher = newsarray[i].getString("publisher");
                     }
@@ -496,10 +496,10 @@ public class OnlineNewsEngine extends BaseEngine {
                 Json json = new Json(response);
                 switch (json.getInt("result")) {
                 case 0:// 失败
-                    
+
                     return "发表评论失败";
                 case 1:// 成功
-                    manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SENT_COMMENT_SUC,json.getString("time")));
+                    manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SENT_COMMENT_SUC, json.getString("time")));
                     return "ok";
 
                 case 2:// 审核中
@@ -507,22 +507,22 @@ public class OnlineNewsEngine extends BaseEngine {
                 default:
                     break;
                 }
-              return msg;
+                return msg;
             }
 
         });
-        httpEngine.httpRequestNewThread(1, Configs.sentNewsCommentsAction+params);
+        httpEngine.httpRequestNewThread(1, Configs.sentNewsCommentsAction + params);
 
     }
 
-    public void getNewsComments(int firstNum,int newSId) {
+    public void getNewsComments(int firstNum, int newSId) {
         if (httpEngine != null) {
             httpEngine.cancelRequest();
         }
         // 判断一下网络是否可用
 
         httpEngine = new HttpEngine(manager);
-        Json json=new Json(0);
+        Json json = new Json(0);
         json.put("newsId", newSId);
         json.put("firstSize", firstNum);
         json.put("maxSize", 20);
@@ -555,30 +555,95 @@ public class OnlineNewsEngine extends BaseEngine {
             public String onParseHttp(String response) {
                 String msg = null;
                 Json json = new Json(response);
-                ArrayList<NewsCommentModel> datas=new ArrayList<NewsCommentModel>();
+                ArrayList<NewsCommentModel> datas = new ArrayList<NewsCommentModel>();
                 switch (json.getInt("result")) {
                 case 0:// 失败
                     return "获取评论失败";
                 case 1:// 成功
-                    int count=json.getInt("count");
-                    Json[] jsonArray=json.getJsonArray("comments");
-                    if(jsonArray.length>0){
-                        for(int i=0;i<jsonArray.length;i++){
+                    int count = json.getInt("count");
+                    Json[] jsonArray = json.getJsonArray("comments");
+                    if (jsonArray.length > 0) {
+                        for (int i = 0; i < jsonArray.length; i++) {
                             datas.add(new NewsCommentModel(count).parserJsonForComments(jsonArray[i]));
-                            
+
                         }
                     }
-                    manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SENT_COMMENT_LIST,count,0,datas));
+                    manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SENT_COMMENT_LIST, count, 0, datas));
                     return "ok";
                 default:
                     break;
                 }
-              return msg;
+                return msg;
             }
 
         });
-        httpEngine.httpRequestNewThread(1, Configs.getNewsComment+params);
+        httpEngine.httpRequestNewThread(1, Configs.getNewsComment + params);
+
+    }
+
+    /**
+     * [{"id":86905,"title":"别尔哥罗德市枪击案嫌犯被捕",
+     * "content":"　　4月24日，俄罗斯警务部门经过两昼夜的全力搜捕",
+     * "createTime":"2013-04-24 16:30","publisher":"新华社",
+     * "intro":"4月24日，俄罗斯警务嫌犯", "picUrl":
+     * "http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg"
+     * ,"picInfo":"
+     * ","bigPic":"http://59.151.123.134:9999/NewsPicture/BigPicture
+     * /c4943cde-0e56-4376-b676-a5b6c1883971.jpg","commentSize":0,"isTop":0},
+     * {"id":86901,"title":"孟加拉国首都一大楼倒塌",
+     * "content":"　　新华社达卡4月24日电\n　　新华社/法新 \r\n","createTime":"2013-04-24 16:22",
+     * "publisher":"新华社","intro":"孟加拉国卫生部长哈克24日说，首都达卡郊区当 。 \r\n", "picUrl":
+     * "http://59.151.123.134:9999/NewsPicture/SmallPicture/156fbd87-1843-4e08-8c94-56c6d85d7e67.jpg"
+     * ,"picInfo":"", "bigPic":
+     * "http://59.151.123.134:9999/NewsPicture/BigPicture/dfdb98ce-e300-4eab-bbbb-ddcb8ca7899f.jpg"
+     * ,"commentSize":0,"isTop":0}, {"id":86899,"title":"法国通过同性恋婚姻法案",
+     * "content":"　　新华社巴黎4月23日专电（记者郑斌）法　　新华社/美联 ",
+     * "createTime":"2013-04-24 15:57"
+     * ,"publisher":"新华社","intro":"法国国民议会（议会下院）23日投票通过了同性恋婚姻及收养子女法案。", "picUrl":
+     * "http://59.151.123.134:9999/NewsPicture/SmallPicture/47dd3e57-8955-4299-a8e4-f9a8e75a37e8.jpg"
+     * ,"picInfo":"", "bigPic":
+     * "http://59.151.123.134:9999/NewsPicture/BigPicture/0501288b-9431-43e9-bcbf-cf382ad6fe98.jpg"
+     * ,"commentSize":0,"isTop":0}]
+     * 
+     * @return
+     */
+    public ArrayList<NewsModel> getData() {
+        ArrayList<NewsModel> datas=new ArrayList<NewsModel>();
         
+        NewsModel news = new NewsModel();
+        news.id = 86905;
+        news.time = "2013-04-24 16:30";
+        news.title = "别尔哥罗德市枪击案嫌犯被捕";
+        news.intro ="别尔哥罗德市枪击案嫌犯被捕";
+        news.details = "别尔哥罗德市枪击案嫌犯被捕";
+        news.commentNum = 21;
+        news.isTop =true;
+        news.intro = "别尔哥罗德市枪击案嫌犯被捕"; 
+        
+        news.publisher ="别尔哥罗德市枪击案嫌犯被捕"; ;
+        news.picurl ="http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
+        news.picintro =  "别尔哥罗德市枪击案嫌犯被捕";
+        news.bigpicurl = "http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
+        news.commentSize = 4;
+        datas.add(news);
+        NewsModel news1 = new NewsModel();
+        news1.id = 86906;
+        news1.time = "2013-04-24 16:30";
+        news1.title = "别尔哥罗德市枪击案嫌犯被捕";
+        news1.intro ="别尔哥罗德市枪击案嫌犯被捕";
+        news1.details = "别尔哥罗德市枪击案嫌犯被捕";
+        news1.commentNum = 21;
+        news1.isTop =false;
+        news1.intro = "别尔哥罗德市枪击案嫌犯被捕"; 
+        
+        news1.publisher ="别尔哥罗德市枪击案嫌犯被捕"; ;
+        news1.picurl ="http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
+        news1.picintro =  "别尔哥罗德市枪击案嫌犯被捕";
+        news1.bigpicurl = "http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
+        news1.commentSize = 4;
+        NewsModel news2 =news1;
+        datas.add(news2);
+        return datas;
     }
 
 }

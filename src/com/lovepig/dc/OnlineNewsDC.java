@@ -11,12 +11,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.pivot.BaseDC;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.widget.TlcyGallery;
 import com.lovepig.widget.TlcyGallery.TlcyGalleryListener;
+import com.lovepig.widget.TlcyListLayout;
 
 public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGalleryListener {
     TlcyGallery tlcyGallery;
@@ -24,11 +26,12 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
     TextView title;
     String[] indexString;
     private int index;
-//    OnlineNewsAdapter adapter;
+    OnlineNewsAdapter adapter;
     
     ListView listView;
     OnlineNewsManager manager;
     TextView timeText;
+    private TlcyListLayout pulldownview;
 
     public OnlineNewsDC(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
@@ -58,9 +61,10 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
             hou.setVisibility(INVISIBLE);
         }
         tlcyGallery.setOnItemClickListener(this);
-
-//        adapter = new OnlineNewsAdapter(manager, listView, pulldownview);
-//        listView.setAdapter(adapter);
+        pulldownview = (TlcyListLayout) findViewById(R.id.pulldownview);
+//        pulldownview.setRefreshListener(this);
+        adapter = new OnlineNewsAdapter(manager, listView, pulldownview);
+        listView.setAdapter(adapter);
         listView.setFocusable(false);
            listView.setOnItemClickListener(this);
         setLoadMoreButton(false);

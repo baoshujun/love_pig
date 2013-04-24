@@ -17,7 +17,7 @@ public class LogInfo {
 		    if(stack.length > 1){
 		        StackTraceElement s = stack[1];  
 		        String[] names= s.getClassName().split("\\.");
-		        Log.d(names[names.length-1]+":"+s.getLineNumber(), info);
+		        Log.d("XHPM",names[names.length-1]+":"+s.getLineNumber()+ info);
 		    }else{
 		        Log.d("XHPM", info);
 		    }

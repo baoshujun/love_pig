@@ -3,7 +3,7 @@
     android:id="@+id/titleLayout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/title" >
+    android:background="#facfff" >
 
     <RelativeLayout
         android:id="@+id/leftBtnLayout"
@@ -36,7 +36,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/title_left_logo_margin"
             android:contentDescription="@null"
-            android:src="@drawable/logo"
+            android:src="@drawable/ic_launcher"
             android:visibility="gone" />
     </RelativeLayout>
 

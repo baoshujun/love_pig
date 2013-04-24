@@ -118,7 +118,7 @@ public class TlcyGallery extends HorizontalScrollView implements OnClickListener
                     layout.addView(button, new LinearLayout.LayoutParams(getItemWidth(), (int) getResources().getDimension(heightDimenId)));
                     if(i != texts.length-1){
                         ImageView im = new ImageView(context);
-//                        im.setBackgroundResource(R.drawable.fenlei_sp);
+                        im.setBackgroundResource(R.drawable.fenlei_sp);
                         layout.addView(im,new LinearLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.one_dp), LinearLayout.LayoutParams.WRAP_CONTENT));
                     }
                     // ((LinearLayout.LayoutParams)button.getLayoutParams()).weight=1;

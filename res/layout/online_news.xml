@@ -3,19 +3,18 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-     <include
+    <include
         android:id="@+id/head"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         layout="@layout/commtitle" />
-
 
     <RelativeLayout
         android:id="@+id/galleryLayout"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/fenlei_item_height"
         android:layout_below="@id/head"
-         >
+        android:background="#1d953f" >
 
         <ImageView
             android:id="@+id/galleryLeft"
@@ -27,7 +26,7 @@
             android:src="@drawable/jiantou_qian_1"
             android:visibility="visible" />
 
-        <com.audiocn.widget.TlcyGallery
+        <com.lovepig.widget.TlcyGallery
             android:id="@+id/gallery1"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/fenlei_item_height"
@@ -36,7 +35,7 @@
             android:layout_toRightOf="@+id/galleryLeft"
             android:fadingEdge="none"
             android:scrollbars="none" >
-        </com.audiocn.widget.TlcyGallery>
+        </com.lovepig.widget.TlcyGallery>
 
         <ImageView
             android:id="@+id/galleryRight"
@@ -49,7 +48,7 @@
             android:visibility="visible" />
     </RelativeLayout>
 
-    <com.audiocn.widget.TlcyListLayout
+    <com.lovepig.widget.TlcyListLayout
         android:id="@+id/pulldownview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -61,6 +60,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
         </ListView>
-    </com.audiocn.widget.TlcyListLayout>
+    </com.lovepig.widget.TlcyListLayout>
 
 </RelativeLayout>

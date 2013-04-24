@@ -3,19 +3,18 @@ package com.lovepig.manager;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import android.os.Message;
 import android.widget.ViewAnimator;
 import com.lovepig.dc.OnlineNewsDC;
 import com.lovepig.dc.OnlineNewsDetailsDC;
 import com.lovepig.engine.OnlineNewsEngine;
-import com.lovepig.main.Configs;
 import com.lovepig.main.R;
 import com.lovepig.model.GalleryModel;
 import com.lovepig.model.NewsCommentModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
+import com.lovepig.utils.LogInfo;
 
 public class OnlineNewsManager extends BaseManager {
     public static final int DEFAULT_NEW_LENGTH = 20;// 默认取20条新闻
@@ -39,7 +38,7 @@ public class OnlineNewsManager extends BaseManager {
 
     private OnlineNewsDC mainDC;
     private OnlineNewsDetailsDC detailsDC;
-    private OnlineNewsEngine engine;
+    public OnlineNewsEngine engine;
     private int TypeID = -1;// 新闻栏目的ID
     private int Loading_For_Detail_Flag;// -1 表示获取最新 大于0表示加载更多
     private int TypeIndex;// 当前选择的新闻栏目
@@ -476,7 +475,8 @@ public class OnlineNewsManager extends BaseManager {
     @Override
     public void initData() {
         try {
-         
+            mainDC.UpdateGallery(new String[]{"国内","国际","国际","国际","国际","国际","国际","国际"}, TypeIndex);
+            //sendMessage(obtainMessage(STATE_GALLERY_GETDATA_FIRST, TypeIndex, 0));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -506,6 +506,7 @@ public class OnlineNewsManager extends BaseManager {
             detailsDC = new OnlineNewsDetailsDC(context, R.layout.online_news_details, this);
         }
         dcEngine.setMainDC(mainDC);
+        LogInfo.LogOut("11111111111111");
         return super.getMainDC();
     }
 

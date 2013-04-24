@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import com.lovepig.manager.MainManager;
 import com.lovepig.manager.OnlineNewsManager;
+import com.lovepig.manager.PigManager;
 import com.lovepig.pivot.BaseActivity;
 
 
 public class Application extends BaseActivity {
     public static Application application;
     public static OnlineNewsManager onlineNewsManager;
+    public static PigManager pigManager;
     
     
     
@@ -26,6 +28,7 @@ public class Application extends BaseActivity {
         Configs.initTypeAndVsersion(application);
                 mainManager = new MainManager(application);
         onlineNewsManager = new OnlineNewsManager(application);
+        pigManager= new PigManager(application);
         setContentView(mainManager.getLayout());
         dcEngineContener = mainManager.getContainer();
         currentManager = mainManager;

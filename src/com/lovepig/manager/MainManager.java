@@ -35,7 +35,9 @@ public class MainManager extends BaseManager {
            
             break;
         case R.id.menu_shop://商城被点击
-            
+            if(!(Application.application.currentManager instanceof PigManager)){
+                Application.application.setMainManager(Application.pigManager);
+            }
             break;
         case R.id.menu_book_shelf:  
            

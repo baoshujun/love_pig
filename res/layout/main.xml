@@ -12,7 +12,7 @@
         android:layout_height="@dimen/menu_height"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|center"
-        android:background="@drawable/tab_bg"
+        android:background="#1d953f"
         android:gravity="center_vertical" >
 
         <ImageView
