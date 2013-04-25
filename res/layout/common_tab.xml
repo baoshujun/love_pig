@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:padding="2dip"
+    >
+    <Button 
+        android:id="@+id/leftBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="48dip"
+        android:text="左边按钮"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        />
+    <Button 
+        android:id="@+id/middleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="48dip"
+        android:text="中间按钮"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        />
+    <Button 
+        android:id="@+id/rightBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="48dip"
+        android:text="右边按钮"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        />
+
+</LinearLayout>
