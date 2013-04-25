@@ -326,5 +326,6 @@
     <string name="near_pig_farm">我附近的种猪场</string>
     <string name="today_price">今日价格</string>
     <string name="sigin">会员注册</string>
+    <string name="Price">价格</string>
 
 </resources>
