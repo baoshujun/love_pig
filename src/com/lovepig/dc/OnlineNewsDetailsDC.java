@@ -3,7 +3,6 @@ package com.lovepig.dc;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -14,9 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.lovepig.engine.ImageEngine;
-import com.lovepig.main.Application;
 import com.lovepig.main.Configs;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
@@ -30,7 +27,7 @@ import com.lovepig.widget.OnFlingListener;
 public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
     int pos;
     Context context;
-    Button mBackBtn, shareBtn, rightBtn;// 返回
+    Button mBackBtn;// shareBtn, rightBtn;// 返回
     TextView mTitle;// 新闻标题
     TextView mTimeProvenance;// 时间和出处
     TextView mDetails;// 新闻详情
@@ -41,7 +38,7 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
     // TlcyScrollView scrollView;
     ScrollView scrollView;
     private NewsModel currentModel;
-    private ShareModel shareModel;
+  //  private ShareModel shareModel;
     public boolean isFromDetail = false;
 
     public OnlineNewsDetailsDC(Context context1, int layoutId, OnlineNewsManager manager) {
@@ -53,15 +50,15 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
         mBackBtn = (Button) findViewById(R.id.leftBtn);
         mBackBtn.setVisibility(View.VISIBLE);
         mBackBtn.setText(R.string.onlinenews_back);
-        rightBtn = (Button) findViewById(R.id.rightBtn);
-        rightBtn.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_ENTER_COMMENT_DC, pos, 0));
-
-            }
-        });
+//        rightBtn = (Button) findViewById(R.id.rightBtn);
+//        rightBtn.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//               // mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_ENTER_COMMENT_DC, pos, 0));
+//
+//            }
+//        });
         mBackBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,23 +73,23 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
         mPreviousNews.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
-                    l = System.currentTimeMillis();
-                    pos--;
-                    mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 2));
-                }
+//                if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
+//                    l = System.currentTimeMillis();
+//                    pos--;
+//                    mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 2));
+//                }
             }
         });
         mNextNews = (ImageButton) findViewById(R.id.onlinenextnews);
         mNextNews.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Math.abs(System.currentTimeMillis() - l) > t) {
-                    l = System.currentTimeMillis();
-                    pos++;
-                    mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 1));
-                    LogInfo.LogOut("下一篇被点击");
-                }
+//                if (Math.abs(System.currentTimeMillis() - l) > t) {
+//                    l = System.currentTimeMillis();
+//                    pos++;
+//                    mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 1));
+//                    LogInfo.LogOut("下一篇被点击");
+//                }
 
             }
         });
@@ -108,17 +105,17 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
             }
         });
 
-        shareBtn = (Button) findViewById(R.id.shareBtn);
-        shareBtn.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                currentModel = mManager.news.get(pos);
-                shareModel = new ShareModel(currentModel.title, "http://www.baidu.com", currentModel.picurl);
-                constructNewsUrl(shareModel);
-               
-            }
-        });
+//        shareBtn = (Button) findViewById(R.id.shareBtn);
+//        shareBtn.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                currentModel = mManager.news.get(pos);
+//                shareModel = new ShareModel(currentModel.title, "http://www.baidu.com", currentModel.iconPath);
+//                constructNewsUrl(shareModel);
+//               
+//            }
+//        });
 
     }
 
@@ -136,7 +133,7 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
         postDelayed(new Runnable() {
             @Override
             public void run() {
-                setChangeLine(mManager.news.get(pos).details);
+               // setChangeLine(mManager.news.get(pos).details);
             }
         }, 50);
     }
@@ -184,7 +181,7 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
         if (pos < mManager.news.size()) {
             final NewsModel news = mManager.news.get(pos);
             mTitle.setText(news.title);
-            mTimeProvenance.setText(news.time + (TextUtils.isEmpty(news.publisher) ? "" : "    来源: " + news.publisher));
+            mTimeProvenance.setText(news.createTime + (TextUtils.isEmpty(news.editor) ? "" : "    来源: " + news.editor));
             LogInfo.LogOut("字数:" + (news.details == null ? 0 : news.details.length()));
             mDetails.setText("");
             postDelayed(new Runnable() {
@@ -193,11 +190,11 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
                     setChangeLine(news.details);
                 }
             }, 50);
-            if (TextUtils.isEmpty(news.bigpicurl)) {
+            if (TextUtils.isEmpty(news.imgPath)) {
                 mNewsImage.setVisibility(GONE);
             } else {
                 mNewsImage.setVisibility(VISIBLE);
-                ImageEngine.setImageBitmap(news.bigpicurl, mNewsImage, R.drawable.news_detail_head, -1);
+                ImageEngine.setImageBitmap(news.imgPath, mNewsImage, R.drawable.ic_launcher, -1);
             }
             setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
         } else {
@@ -212,6 +209,9 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
         StringBuffer buffer = new StringBuffer();
         int detailwidth = mDetails.getWidth();
         LogInfo.LogOut("mDetails.getWidth()=" + mDetails.getWidth());
+        if (str==null) {
+			return;
+		}
         char[] chars = str.toCharArray();
         for (int i = 0; i < chars.length; i++) {
             tmpbuffer.append(chars[i]);
@@ -288,8 +288,8 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
     }
 
     public void setCommentBtnText(String text) {
-        rightBtn.setVisibility(VISIBLE);
-        rightBtn.setText(text);
+//        rightBtn.setVisibility(VISIBLE);
+//        rightBtn.setText(text);
     }
 
     @Override
@@ -306,5 +306,39 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
         ShowNews(currentId);
 
     }
+    /**
+     * 设置新闻
+     * 
+     * @param index
+     */
+    public void ShowNewsDetail(NewsModel model) {
+       
+
+        scrollView.scrollTo(0, 0);
+        scrollView.smoothScrollTo(0, 0);
+       
+        LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
+
+        final NewsModel news = model;
+        mTitle.setText(news.title);
+        mTimeProvenance.setText(news.createTime + (TextUtils.isEmpty(news.editor) ? "" : "    来源: " + news.editor));
+        LogInfo.LogOut("字数:" + (news.content == null ? 0 : news.content.length()));
+        mDetails.setText("");
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setChangeLine(news.content);
+            }
+        }, 50);
+        if (TextUtils.isEmpty(news.imgPath)) {
+            mNewsImage.setVisibility(GONE);
+        } else {
+            mNewsImage.setVisibility(VISIBLE);
+            ImageEngine.setImageBitmap(news.imgPath, mNewsImage, R.drawable.ic_launcher, -1);
+        }
+        setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
+    
+    }
+
 
 }

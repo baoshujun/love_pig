@@ -3,7 +3,7 @@
     android:id="@+id/titleLayout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#facfff" >
+    android:background="#ffffff" >
 
     <RelativeLayout
         android:id="@+id/leftBtnLayout"
@@ -24,10 +24,7 @@
             android:padding="0dip"
             android:singleLine="true"
             android:text="@string/back"
-            android:textColor="@color/backbotton"
-            android:textSize="@dimen/news_button_text_size"
             android:visibility="gone" />
-        <!-- android:textSize="@dimen/news_button_text_size" -->
 
         <ImageView
             android:id="@+id/logoImg"
@@ -66,7 +63,6 @@
                 android:gravity="center"
                 android:singleLine="true"
                 android:text="@string/app_name"
-                android:textAppearance="@style/font_white_dialog"
                 android:textSize="@dimen/news_l_item_title_size" >
             </TextView>
         </LinearLayout>
@@ -101,8 +97,6 @@
             android:maxWidth="120dp"
             android:padding="0dip"
             android:singleLine="true"
-            android:textColor="@color/backbotton"
-            android:textSize="@dimen/news_button_text_size"
             android:visibility="gone" />
     </RelativeLayout>
 

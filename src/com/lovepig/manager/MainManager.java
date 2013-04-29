@@ -34,23 +34,26 @@ public class MainManager extends BaseManager {
             }
            
             break;
-        case R.id.menu_shop://商城被点击
-            if(!(Application.application.currentManager instanceof PigManager)){
-                Application.application.setMainManager(Application.pigManager);
-            }
+        case R.id.menu_price://价格
+            
             break;
-        case R.id.menu_book_shelf:  
+        case R.id.menu_equipment:  //设备
            
           
             break;
-        case R.id.menu_multi_media:    
+        case R.id.menu_veterinary_drugs: // 兽医  
             
            
             break;
-        case R.id.menu_more: 
+        case R.id.menu_answer_questions: //答疑
           
            
           
+            break;
+        case R.id.menu_foodstuff: //食料
+            
+            
+            
             break;
         default:
             break;

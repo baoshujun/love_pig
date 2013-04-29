@@ -20,9 +20,13 @@ import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
 
 public class OnlineNewsEngine extends BaseEngine {
+	private static String GET_BY_CAT_ID="news/getByCatId?catId=23&userId=897";
+	private static String GET_NEWS="news/list?userId=223";
+	private static String GET_NEWS_DETAILS="news/detail?newsId=2";
     OnlineNewsManager manager;
     getNewsTask mGetNewsTask;
     getMoreNewsTask mGetMoreNewsTask;
+    getNewsDetailTask mGetNewsDetail;
     int RequestDataSize = 20;// 请求的数据条数
     // 获取评论引擎
     private HttpEngine httpEngine = null;
@@ -49,16 +53,86 @@ public class OnlineNewsEngine extends BaseEngine {
     public void refreshNews(int id, int type) {
         Json j = new Json(0);
         j.put("typeId", type);
-        // if(id==0){//获取新闻－－－update－－－３－２２－baoshujun----
-        // j.put("flag", "0");
-        // }else{//下拉刷新
-        // j.put("flag", "2");
-        // }
         j.put("flag", "0");
         j.put("id", id);
         j.put("size", RequestDataSize);
         mGetNewsTask = new getNewsTask();
         mGetNewsTask.execute(j.toString());
+    }
+    
+    /**
+     * 获取新闻详情
+     * 
+     * @param id
+     * @param type
+     */
+    public void fetchNewsDetail(int id, int type) {
+//        Json j = new Json(0);
+//        j.put("typeId", type);
+//        j.put("flag", "0");
+//        j.put("id", id);
+//        j.put("size", RequestDataSize);
+    	mGetNewsDetail = new getNewsDetailTask();
+        mGetNewsDetail.execute();
+    }
+    /**
+     * 获取最新详情
+     * 
+     * @author DCH
+     * 
+     */
+    class getNewsDetailTask extends AsyncTask<String, Void, NewsState> {
+        boolean isStop;
+
+        @Override
+        protected NewsState doInBackground(String... params) {
+            String result = httpRequestThisThread(1, GET_NEWS_DETAILS);
+            if (isStop) {
+                return null;
+            } else {
+            	LogInfo.LogOut("result:"+result);
+                NewsState rs = ParseHttp1(result, 0);
+//                if (rs.code.equals("hasnews") && !isStop) {
+//                    manager.SaveNews(rs.newslist);
+//                }
+                if (rs.code.equals("hasnews") && !isStop) {
+                    // manager.SetLatestNews(rs.newslist);
+                }
+                return rs;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(NewsState result) {
+            if (!isStop && result != null) {
+                if (result.code.equals("hasnews")) {
+//                    manager.SetLatestNews(result.newslist);
+//                    // manager.SaveNews();
+//                    manager.getNewsComplete(0);
+//                    manager.ShowDetail();
+//                    if (result.hasBtn != null) {
+//                        // 有更多按钮
+//                        manager.SetMoreBtn(true);
+//                    } else {
+//                        // 没有更多按钮
+//                        manager.SetMoreBtn(false);
+//                    }
+                   manager.showNewsDetails(result.newslist);
+                } else if (result.code.equals("neterror")) {
+                    // 网络错误
+                    manager.ShowNewsError("网络不可用,请检查您的网络！");
+                } else {
+                    // 服务器正常返回但没内容
+                    manager.ShowNewsError(result.code);
+                }
+            } else {
+            }
+        }
+
+        public void stop() {
+            isStop = true;
+            cancel(isStop);
+        }
     }
 
     /**
@@ -102,7 +176,7 @@ public class OnlineNewsEngine extends BaseEngine {
 
         @Override
         protected ArrayList<GalleryModel> doInBackground(String... params) {
-            return getGalleryItem(httpRequestThisThread(1, Configs.getNewsTypesAction + params[0]));
+            return getGalleryItem(httpRequestThisThread(1, GET_BY_CAT_ID));
         }
 
         @Override
@@ -115,22 +189,27 @@ public class OnlineNewsEngine extends BaseEngine {
      * 解析新闻类型列表
      */
     private ArrayList<GalleryModel> getGalleryItem(String result) {
-        ArrayList<GalleryModel> Gallery = null;
+        ArrayList<GalleryModel> gallery = null;
+        int count=0;
         if (result != null) {
             Json json = new Json(result);
-            if (json.getString("result").equals("1")) {
-                Gallery = new ArrayList<GalleryModel>();
+            if (json.getString("status").equals("1")) {
                 GalleryModel gModel;
-                Json[] Galleryarray = json.getJsonArray("newsTypes");
-                for (int i = 0; i < Galleryarray.length; i++) {
+                Json[] galleryarray = json.getJsonArray("news");
+                if (galleryarray==null||galleryarray.length==0) {
+					return gallery;
+				}
+                gallery = new ArrayList<GalleryModel>();
+                for (int i = 0; i < galleryarray.length; i++) {
                     gModel = new GalleryModel();
-                    gModel.typeid = Galleryarray[i].getInt("id");
-                    gModel.checked = Galleryarray[i].getInt("checked");
-                    gModel.indexNum = Galleryarray[i].getInt("indexNum");
-                    gModel.name = Galleryarray[i].getString("name");
-                    Gallery.add(gModel);
+                    gModel.typeid = galleryarray[i].getInt("id");
+                    gModel.checked = galleryarray[i].getInt("checked");
+                    gModel.indexNum = galleryarray[i].getInt("indexNum");
+                    gModel.name = galleryarray[i].getString("name");
+                    gallery.add(gModel);
+                    
                 }
-                Collections.sort(Gallery, new Comparator<GalleryModel>() {
+                Collections.sort(gallery, new Comparator<GalleryModel>() {
                     @Override
                     public int compare(GalleryModel object1, GalleryModel object2) {
                         if (object1.indexNum > object2.indexNum) {
@@ -141,7 +220,7 @@ public class OnlineNewsEngine extends BaseEngine {
                 });
             }
         }
-        return Gallery;
+        return gallery;
     }
 
     /**
@@ -155,14 +234,15 @@ public class OnlineNewsEngine extends BaseEngine {
 
         @Override
         protected NewsState doInBackground(String... params) {
-            String result = httpRequestThisThread(1, Configs.getNewsAction + params[0]);
+            String result = httpRequestThisThread(1, GET_NEWS);
             if (isStop) {
                 return null;
             } else {
+            	LogInfo.LogOut("result:"+result);
                 NewsState rs = ParseHttp1(result, 0);
-                if (rs.code.equals("hasnews") && !isStop) {
-                    manager.SaveNews(rs.newslist);
-                }
+//                if (rs.code.equals("hasnews") && !isStop) {
+//                    manager.SaveNews(rs.newslist);
+//                }
                 if (rs.code.equals("hasnews") && !isStop) {
                     // manager.SetLatestNews(rs.newslist);
                 }
@@ -268,7 +348,7 @@ public class OnlineNewsEngine extends BaseEngine {
         NewsState newsState = new NewsState();
         if (result != null) {
             Json json = new Json(result);
-            if (json.getString("result").equals("1")) {
+            if (json.getString("status").equals("1")) {
                 NewsModel news;
                 newsarray = json.getJsonArray("news");
                 int L = newsarray.length;
@@ -281,55 +361,56 @@ public class OnlineNewsEngine extends BaseEngine {
                 for (int i = 0; i < newsarray.length; i++) {
                     LogInfo.LogOut("news = " + newsarray.length);
                     news = new NewsModel();
-                    news.id = newsarray[i].getInt("id");
-                    news.time = newsarray[i].getString("createTime");
-                    news.title = newsarray[i].getString("title").replace("\r", "").replace("\n", "");
-                    news.intro = newsarray[i].getString("intro");
-                    news.details = newsarray[i].getString("content").replace("\r", "");
-                    news.commentNum = newsarray[i].getInt("commentSize");
-                    news.isTop = newsarray[i].getInt("isTop") == 1;
-                    if (news.intro != null) {// 简介段首自动缩进
-                        news.intro = "        " + news.intro;
-                        news.intro = news.intro.replaceAll("\n", "\n        ");
-                    }
-                    // if (news.details != null) {// 所有段首自动缩进
-                    // news.details = "        " + news.details;
-                    // news.details = news.details.replaceAll("\n",
-                    // "\n        ");
-                    // }
-                    if (newsarray[i].has("publisher")) {
-                        news.publisher = newsarray[i].getString("publisher");
-                    }
-                    if (newsarray[i].has("picUrl")) {
-                        news.picurl = newsarray[i].getString("picUrl");
-                    }
-                    if (newsarray[i].has("picInfo")) {
-                        news.picintro = newsarray[i].getString("picInfo");
-                    }
-                    if (newsarray[i].has("bigPic")) {
-                        news.bigpicurl = newsarray[i].getString("bigPic");
-                    }
-                    if (newsarray[i].has("commentSize")) {
-                        news.commentSize = newsarray[i].getInt("commentSize");
-                    }
-                    if (news.isTop) {
-                        if (newsState.newslist.size() > 0) {
-                            if (newsState.newslist.get(0).topNews == null) {
-                                news.topNews = new ArrayList<NewsModel>();
-                                news.topNews.add(news);
-                                newsState.newslist.add(0, news);
-                            } else {
-                                newsState.newslist.get(0).topNews.add(news);
-                            }
-                        } else {
-                            news.topNews = new ArrayList<NewsModel>();
-                            news.topNews.add(news);
-                            newsState.newslist.add(news);
-                        }
-                    } else {
+                    news.paserJson(newsarray[i]);
+//                    news.id = newsarray[i].getInt("id");
+//                    news.createTime = newsarray[i].getString("createTime");
+//                    news.title = newsarray[i].getString("title").replace("\r", "").replace("\n", "");
+//                    news.summary = newsarray[i].getString("intro");
+//                    news.details = newsarray[i].getString("content").replace("\r", "");
+//                    news.commentNum = newsarray[i].getInt("commentSize");
+//                    news.isTop = newsarray[i].getInt("isTop") == 1;
+//                    if (news.summary != null) {// 简介段首自动缩进
+//                        news.summary = "        " + news.summary;
+//                        news.summary = news.summary.replaceAll("\n", "\n        ");
+//                    }
+//                    // if (news.details != null) {// 所有段首自动缩进
+//                    // news.details = "        " + news.details;
+//                    // news.details = news.details.replaceAll("\n",
+//                    // "\n        ");
+//                    // }
+//                    if (newsarray[i].has("publisher")) {
+//                        news.editor = newsarray[i].getString("publisher");
+//                    }
+//                    if (newsarray[i].has("picUrl")) {
+//                        news.iconPath = newsarray[i].getString("picUrl");
+//                    }
+//                    if (newsarray[i].has("picInfo")) {
+//                        news.picintro = newsarray[i].getString("picInfo");
+//                    }
+//                    if (newsarray[i].has("bigPic")) {
+//                        news.imgPath = newsarray[i].getString("bigPic");
+//                    }
+//                    if (newsarray[i].has("commentSize")) {
+//                        news.commentSize = newsarray[i].getInt("commentSize");
+//                    }
+//                    if (news.isTop) {
+//                        if (newsState.newslist.size() > 0) {
+//                            if (newsState.newslist.get(0).topNews == null) {
+//                                news.topNews = new ArrayList<NewsModel>();
+//                                news.topNews.add(news);
+//                                newsState.newslist.add(0, news);
+//                            } else {
+//                                newsState.newslist.get(0).topNews.add(news);
+//                            }
+//                        } else {
+//                            news.topNews = new ArrayList<NewsModel>();
+//                            news.topNews.add(news);
+//                            newsState.newslist.add(news);
+//                        }
+//                    } else {
                         newsState.newslist.add(news);
-                    }
-                    LogInfo.LogOut("OnlineNewsEngine", "name:" + news.id);
+//                    }
+//                    LogInfo.LogOut("OnlineNewsEngine", "name:" + news.id);
                 }
             } else {
                 newsState.code = json.getString("msg");// 服务器正常返回，但没数据
@@ -371,7 +452,7 @@ public class OnlineNewsEngine extends BaseEngine {
         Json[] newsarray = null;
         if (response != null) {
             Json json = new Json(response);
-            if (json.getString("result").equals("1")) {
+            if (json.getString("status").equals("1")) {
                 lastnews = new ArrayList<NewsModel>();
                 NewsModel news;
                 newsarray = json.getJsonArray("news");
@@ -379,15 +460,15 @@ public class OnlineNewsEngine extends BaseEngine {
                     LogInfo.LogOut("news = " + newsarray.length);
                     news = new NewsModel();
                     news.id = newsarray[i].getInt("id");
-                    news.time = newsarray[i].getString("createTime");
+                    news.createTime = newsarray[i].getString("createTime");
                     news.title = newsarray[i].getString("title").replace("\r", "").replace("\n", "");
-                    news.intro = newsarray[i].getString("intro");
+                    news.summary = newsarray[i].getString("intro");
                     news.details = newsarray[i].getString("content");
                     news.commentNum = newsarray[i].getInt("commentSize");
                     news.isTop = newsarray[i].getInt("isTop") == 1;
-                    if (news.intro != null) {// 简介段首自动缩进
-                        news.intro = "        " + news.intro;
-                        news.intro = news.intro.replaceAll("\n", "\n        ");
+                    if (news.summary != null) {// 简介段首自动缩进
+                        news.summary = "        " + news.summary;
+                        news.summary = news.summary.replaceAll("\n", "\n        ");
                     }
                     // if (news.details != null) {// 所有段首自动缩进
                     // news.details = "        " + news.details;
@@ -395,16 +476,16 @@ public class OnlineNewsEngine extends BaseEngine {
                     // "\n        ");
                     // }
                     if (newsarray[i].has("publisher")) {
-                        news.publisher = newsarray[i].getString("publisher");
+                        news.editor = newsarray[i].getString("publisher");
                     }
                     if (newsarray[i].has("picUrl")) {
-                        news.picurl = newsarray[i].getString("picUrl");
+                        news.iconPath = newsarray[i].getString("picUrl");
                     }
                     if (newsarray[i].has("picInfo")) {
                         news.picintro = newsarray[i].getString("picInfo");
                     }
                     if (newsarray[i].has("bigPic")) {
-                        news.bigpicurl = newsarray[i].getString("bigPic");
+                        news.imgPath = newsarray[i].getString("bigPic");
                     }
                     if (newsarray[i].has("commentSize")) {
                         news.commentSize = newsarray[i].getInt("commentSize");
@@ -612,34 +693,34 @@ public class OnlineNewsEngine extends BaseEngine {
         
         NewsModel news = new NewsModel();
         news.id = 86905;
-        news.time = "2013-04-24 16:30";
+        news.createTime = "2013-04-24 16:30";
         news.title = "别尔哥罗德市枪击案嫌犯被捕";
-        news.intro ="别尔哥罗德市枪击案嫌犯被捕";
+        news.summary ="别尔哥罗德市枪击案嫌犯被捕";
         news.details = "别尔哥罗德市枪击案嫌犯被捕";
         news.commentNum = 21;
         news.isTop =true;
-        news.intro = "别尔哥罗德市枪击案嫌犯被捕"; 
+        news.summary = "别尔哥罗德市枪击案嫌犯被捕"; 
         
-        news.publisher ="别尔哥罗德市枪击案嫌犯被捕"; ;
-        news.picurl ="http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
+        news.editor ="别尔哥罗德市枪击案嫌犯被捕"; ;
+        news.iconPath ="http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
         news.picintro =  "别尔哥罗德市枪击案嫌犯被捕";
-        news.bigpicurl = "http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
+        news.imgPath = "http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
         news.commentSize = 4;
         datas.add(news);
         NewsModel news1 = new NewsModel();
         news1.id = 86906;
-        news1.time = "2013-04-24 16:30";
+        news1.createTime = "2013-04-24 16:30";
         news1.title = "别尔哥罗德市枪击案嫌犯被捕";
-        news1.intro ="别尔哥罗德市枪击案嫌犯被捕";
+        news1.summary ="别尔哥罗德市枪击案嫌犯被捕";
         news1.details = "别尔哥罗德市枪击案嫌犯被捕";
         news1.commentNum = 21;
         news1.isTop =false;
-        news1.intro = "别尔哥罗德市枪击案嫌犯被捕"; 
+        news1.summary = "别尔哥罗德市枪击案嫌犯被捕"; 
         
-        news1.publisher ="别尔哥罗德市枪击案嫌犯被捕"; ;
-        news1.picurl ="http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
+        news1.editor ="别尔哥罗德市枪击案嫌犯被捕"; ;
+        news1.iconPath ="http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
         news1.picintro =  "别尔哥罗德市枪击案嫌犯被捕";
-        news1.bigpicurl = "http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
+        news1.imgPath = "http://59.151.123.134:9999/NewsPicture/SmallPicture/7aaac2b2-3532-42c5-a87e-1c3265e585d7.jpg";
         news1.commentSize = 4;
         NewsModel news2 =news1;
         datas.add(news2);

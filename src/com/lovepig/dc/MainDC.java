@@ -6,37 +6,42 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.lovepig.main.R;
 import com.lovepig.pivot.BaseDC;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.LogInfo;
 
 public class MainDC extends BaseDC {
-	private Button toNews, toShop, toBookShelf, toMedia, toMore;
+	/**
+	 * 新闻，价格，兽药，食疗，设备，答疑
+	 * 
+	 */
+	private Button toNews, toPrice, toVeterinaryDrugs, toFoodStuff, toEquipment,toAnswerQuestions;
 	Animation goneAnimation, visibleAnimation;
 	LinearLayout menuLayout;
 	private TextView menuMoreTip;
+	private Context context;
 
 	public MainDC(Context context, int layoutId, BaseManager manger) {
 		super(context, layoutId, manger);
-//		toNews = (Button) findViewById(R.id.menu_news);
-//		toShop = (Button) findViewById(R.id.menu_shop);
-//		toBookShelf = (Button) findViewById(R.id.menu_book_shelf);
-//		toMedia = (Button) findViewById(R.id.menu_multi_media);
-//		toMore = (Button) findViewById(R.id.menu_more);
-//
-//		menuMoreTip = (TextView) findViewById(R.id.menu_more_tip);
-//
-//		toNews.setOnClickListener(this);
-//		toShop.setOnClickListener(this);
-//		toBookShelf.setOnClickListener(this);
-//		toMedia.setOnClickListener(this);
-//		toMore.setOnClickListener(this);
+		this.context=context;
+		toNews = (Button) findViewById(R.id.menu_news);
+		toVeterinaryDrugs = (Button) findViewById(R.id.menu_veterinary_drugs);
+		toPrice = (Button) findViewById(R.id.menu_price);
+		toAnswerQuestions = (Button) findViewById(R.id.menu_answer_questions);
+		toFoodStuff= (Button) findViewById(R.id.menu_foodstuff);
+		toEquipment = (Button) findViewById(R.id.menu_equipment);
+		menuMoreTip = (TextView) findViewById(R.id.menu_more_tip);
+
+		toNews.setOnClickListener(this);
+		toVeterinaryDrugs.setOnClickListener(this);
+		toPrice.setOnClickListener(this);
+		toFoodStuff.setOnClickListener(this);
+		toEquipment.setOnClickListener(this);
+		toAnswerQuestions.setOnClickListener(this);
 		goneAnimation = AnimationUtils.loadAnimation(context,
 				R.anim.push_right_out);
 		visibleAnimation = AnimationUtils.loadAnimation(context,
@@ -52,42 +57,33 @@ public class MainDC extends BaseDC {
 	}
 
 	public void viewReset(int id) {
+		toNews.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		toVeterinaryDrugs.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		toPrice.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		toFoodStuff.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		toEquipment.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		toAnswerQuestions.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		
 		switch (id) {
-//		case R.id.menu_news:
-//			toNews.setImageResource(R.drawable.tab_icon_news_3);
-//			toBookShelf.setImageResource(R.drawable.tab_icon_book);
-//			toShop.setImageResource(R.drawable.tab_icon_shop);
-//			toMedia.setImageResource(R.drawable.tab_icon_media);
-//			toMore.setImageResource(R.drawable.tab_icon_more);
-//			break;
-//		case R.id.menu_shop:
-//			toNews.setImageResource(R.drawable.tab_icon_news);
-//			toBookShelf.setImageResource(R.drawable.tab_icon_book);
-//			toShop.setImageResource(R.drawable.tab_icon_shop_3);
-//			toMedia.setImageResource(R.drawable.tab_icon_media);
-//			toMore.setImageResource(R.drawable.tab_icon_more);
-//			break;
-//		case R.id.menu_book_shelf:
-//			toNews.setImageResource(R.drawable.tab_icon_news);
-//			toBookShelf.setImageResource(R.drawable.tab_icon_book_3);
-//			toShop.setImageResource(R.drawable.tab_icon_shop);
-//			toMedia.setImageResource(R.drawable.tab_icon_media);
-//			toMore.setImageResource(R.drawable.tab_icon_more);
-//			break;
-//		case R.id.menu_multi_media:
-//			toNews.setImageResource(R.drawable.tab_icon_news);
-//			toBookShelf.setImageResource(R.drawable.tab_icon_book);
-//			toShop.setImageResource(R.drawable.tab_icon_shop);
-//			toMedia.setImageResource(R.drawable.tab_icon_media_3);
-//			toMore.setImageResource(R.drawable.tab_icon_more);
-//			break;
-//		case R.id.menu_more:
-//			toNews.setImageResource(R.drawable.tab_icon_news);
-//			toBookShelf.setImageResource(R.drawable.tab_icon_book);
-//			toShop.setImageResource(R.drawable.tab_icon_shop);
-//			toMedia.setImageResource(R.drawable.tab_icon_media);
-//			toMore.setImageResource(R.drawable.tab_icon_more_3);
-//			break;
+		case R.id.menu_news:
+			toNews.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+			break;
+		case R.id.menu_answer_questions:
+			toAnswerQuestions.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+			break;
+		case R.id.menu_equipment:
+			toEquipment.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+			break;
+		case R.id.menu_foodstuff:
+			toFoodStuff.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+			break;
+		case R.id.menu_price:
+			toPrice.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+			break;
+		case R.id.menu_veterinary_drugs:
+			toVeterinaryDrugs.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+			
+			break;
 		default:
 			break;
 		}
@@ -101,9 +97,7 @@ public class MainDC extends BaseDC {
 		return menuLayout.getVisibility() == VISIBLE;
 	}
 
-	// private void initMusicHeadD(){
-	//
-	// }
+	
 	public void setTipVisibility(int tipNum) {
 
 	}

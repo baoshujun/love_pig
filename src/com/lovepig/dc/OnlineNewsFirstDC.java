@@ -103,7 +103,7 @@ public class OnlineNewsFirstDC extends BaseDC {
                         dianLayout.addView(dianView[i]);
                     }
                     flipper.addView(newsView[i],newsView[i].getLayoutParams());
-                    ImageEngine.setImageBitmap(newsManager.topNews.get(i).picurl, newsView[i], R.drawable.news_detail_head, -1);
+                    ImageEngine.setImageBitmap(newsManager.topNews.get(i).iconPath, newsView[i], R.drawable.ic_launcher, -1);
                 }
             }
             flipper.setDisplayedChild(0);

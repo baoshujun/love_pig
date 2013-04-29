@@ -211,46 +211,32 @@ public class Configs {
 	public static int UPDATE_FLAG = 0;
 
 	public static final String HostName2[] = {
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://server8.audiocn.com:1433",
-			"http://server8.audiocn.com:1433" };// 音乐
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/" };// 音乐
 
 	public static final String HostName1[] = {
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://apk2.xinhuapinmei.com:8887",
-			"http://Server8.newbook.mobi:1433",
-			"http://Server8.newbook.mobi:1433" };// 音乐
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/",
+			"http://test.dreawin.com/pig-api/" };// 音乐
 
-	// public static final String HostName2[] = {
-	// "http://lijunhua2004.3322.org:8080", "http://lijunhua2004.3322.org:8080",
-	// "http://lijunhua2004.3322.org:8080", "http://lijunhua2004.3322.org:8080",
-	// "http://lijunhua2004.3322.org:8080", "http://lijunhua2004.3322.org:8080",
-	// "http://lijunhua2004.3322.org:8080", "http://lijunhua2004.3322.org:8080",
-	// "http://lijunhua2004.3322.org:8080", "http://server8.audiocn.com:1433",
-	// "http://server8.audiocn.com:1433", "http://192.168.1.44:8080" };// 音乐
-	//
-	// public static final String HostName1[] = {
-	// "http://lijunhua2004.3322.org:8080", "http://lijunhua2004.3322.org:8080",
-	// "http://lijunhua2004.3322.org:8080", "http://lijunhua2004.3322.org:8080",
-	// "http://lijunhua2004.3322.org:8080", "http://lijunhua2004.3322.org:8080",
-	// "http://lijunhua2004.3322.org:8080", "http://lijunhua2004.3322.org:8080",
-	// "http://lijunhua2004.3322.org:8080", "http://Server8.newbook.mobi:1433",
-	// "http://Server8.newbook.mobi:1433", "http://192.168.1.44:8080" };// 音乐
+	
 
 	public static String typeAndVsersion = null;
 	public static String oldtypeAndVsersion = null;

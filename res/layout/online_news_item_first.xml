@@ -19,7 +19,7 @@
             android:layout_height="fill_parent"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/news_detail_head" />
+            android:src="@drawable/ic_launcher" />
 
         <ImageView
             android:id="@+id/onlinepic2"
@@ -27,7 +27,7 @@
             android:layout_height="fill_parent"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/news_detail_head" />
+            android:src="@drawable/ic_launcher" />
 
         <ImageView
             android:id="@+id/onlinepic3"
@@ -35,7 +35,7 @@
             android:layout_height="fill_parent"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/news_detail_head" />
+            android:src="@drawable/ic_launcher" />
     </ViewFlipper>
 
     <LinearLayout

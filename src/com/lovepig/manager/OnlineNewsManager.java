@@ -94,26 +94,28 @@ public class OnlineNewsManager extends BaseManager {
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
             }
-            if (msg.arg1 >= news.size()) {
-                showLoading();
-                Loading_For_Detail_Flag = msg.arg1;
-                if(detailsDC!=null){
-                    detailsDC.isFromDetail=false;
-                    isComeFromTop = true;
-                }
-             
-                sendEmptyMessage(STATE_LOADMORE);
-            } else if (msg.arg1 < 0) {
-                showLoading();
-                Loading_For_Detail_Flag = -1;
-                if(detailsDC!=null){
-                    detailsDC.isFromDetail=false;
-                    isComeFromTop = true;
-                }
-                sendEmptyMessage(STATE_REFRESH);
-            } else {
-                detailsDC.ShowNews(msg.arg1);
-            }
+//            if (msg.arg1 >= news.size()) {
+//                showLoading();
+//                Loading_For_Detail_Flag = msg.arg1;
+//                if(detailsDC!=null){
+//                    detailsDC.isFromDetail=false;
+//                    isComeFromTop = true;
+//                }
+//             
+//                sendEmptyMessage(STATE_LOADMORE);
+//            } else if (msg.arg1 < 0) {
+//                showLoading();
+//                Loading_For_Detail_Flag = -1;
+//                if(detailsDC!=null){
+//                    detailsDC.isFromDetail=false;
+//                    isComeFromTop = true;
+//                }
+//                sendEmptyMessage(STATE_REFRESH);
+//            } else {
+//                detailsDC.ShowNews(msg.arg1);
+//            }
+            showLoading();
+            engine.fetchNewsDetail(0, 0);
             break;
         case STATE_UPDATE:
             // 如果msg.arg1为1则需要设置更多按钮
@@ -146,51 +148,52 @@ public class OnlineNewsManager extends BaseManager {
                 sendEmptyMessage(STATE_UPDATE_AFTER_DB);
             }
             break;
-        case STATE_GALLERY_CLICKED:
+        case STATE_GALLERY_CLICKED://新闻分类被点击
             engine.StopTask();
-            if (isGetGallry && mGallerys != null && mGallerys.size() > 0) {
-                final int tmpid = mGallerys.get(msg.arg1).typeid;
-                final int oldindexid = mGallerys.get(TypeIndex).typeid;
-                mainDC.onRefreshComplete(mGallerys.get(msg.arg1).mDate);
-                if (tmpid != TypeID) {
-                    TypeIndex = msg.arg1;
-                    if (!news.isEmpty()) {
-                        news.clear();
-                    }
-                    mainDC.UpdataData();
-                    mainDC.setLoadMoreButton(false);
-                    TypeID = tmpid;
-                    new Thread() {
-                        public void run() {
-                            if (news.size() <= 0) {
-                                sendEmptyMessage(STATE_REFRESH);
-                            } else {
-                                if (news.size() >= DEFAULT_NEW_LENGTH) {
-                                    sendMessage(obtainMessage(STATE_UPDATE, 1, 0));
-                                } else {
-                                    sendMessage(obtainMessage(STATE_UPDATE, 0, 0));
-                                }
-                            }
-                        }
-                    }.start();
-                } else {
-                    TypeID = tmpid;
-                    if (news.size() == 0) {
-                        mainDC.setLoadMoreButton(false);
-                        sendEmptyMessage(STATE_REFRESH);
-                    } else {
-                        // 点击同一个栏目时应保持原状
-                        // mainDC.setLoadMoreButton(false);
-                        // if (news.size() < DEFAULT_NEW_LENGTH) {
-                        sendMessage(obtainMessage(STATE_UPDATE, 0, 0));
-                        // } else {
-                        // sendMessage(obtainMessage(STATE_UPDATE, 1, 0));
-                        // }
-                    }
-                }
-            } else {
-                UpdateGrally();
-            }
+            engine.refreshNews(0, 0);
+//            if (isGetGallry && mGallerys != null && mGallerys.size() > 0) {
+//                final int tmpid = mGallerys.get(msg.arg1).typeid;
+//                final int oldindexid = mGallerys.get(TypeIndex).typeid;
+//                mainDC.onRefreshComplete(mGallerys.get(msg.arg1).mDate);
+//                if (tmpid != TypeID) {
+//                    TypeIndex = msg.arg1;
+//                    if (!news.isEmpty()) {
+//                        news.clear();
+//                    }
+//                    mainDC.UpdataData();
+//                    mainDC.setLoadMoreButton(false);
+//                    TypeID = tmpid;
+//                    new Thread() {
+//                        public void run() {
+//                            if (news.size() <= 0) {
+//                                sendEmptyMessage(STATE_REFRESH);
+//                            } else {
+//                                if (news.size() >= DEFAULT_NEW_LENGTH) {
+//                                    sendMessage(obtainMessage(STATE_UPDATE, 1, 0));
+//                                } else {
+//                                    sendMessage(obtainMessage(STATE_UPDATE, 0, 0));
+//                                }
+//                            }
+//                        }
+//                    }.start();
+//                } else {
+//                    TypeID = tmpid;
+//                    if (news.size() == 0) {
+//                        mainDC.setLoadMoreButton(false);
+//                        sendEmptyMessage(STATE_REFRESH);
+//                    } else {
+//                        // 点击同一个栏目时应保持原状
+//                        // mainDC.setLoadMoreButton(false);
+//                        // if (news.size() < DEFAULT_NEW_LENGTH) {
+//                        sendMessage(obtainMessage(STATE_UPDATE, 0, 0));
+//                        // } else {
+//                        // sendMessage(obtainMessage(STATE_UPDATE, 1, 0));
+//                        // }
+//                    }
+//                }
+//            } else {
+//                UpdateGrally();
+//            }
             break;
        
         case WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW:// 由顶部新闻进入新闻详情
@@ -246,7 +249,8 @@ public class OnlineNewsManager extends BaseManager {
      */
     public void getNewsComplete(int flag) {
         if (flag == 0) {
-            mainDC.onRefreshComplete(mGallerys.get(TypeIndex).mDate);
+        	mainDC.onRefreshComplete("123456");
+          //  mainDC.onRefreshComplete(mGallerys.get(TypeIndex).mDate);
         } else {
             mainDC.onLoadingComplete();
         }
@@ -292,6 +296,10 @@ public class OnlineNewsManager extends BaseManager {
     public void SaveNews(ArrayList<NewsModel> news) {
         GalleryModel model = mGallerys.get(TypeIndex);
         model.mDate = (new SimpleDateFormat("MM-dd HH:mm:ss").format(new Date()));
+        
+//        dbEngine.updateRefreshTimeByID(model.typeid, model.mDate);
+//        dbEngine.deleteNewsByTypeID(TypeID);
+//        dbEngine.saveNews(news, TypeID, news.size());
       
     }
 
@@ -418,8 +426,10 @@ public class OnlineNewsManager extends BaseManager {
                 mainDC.getNewsByType(TypeIndex);
             }
         } else {
-            showAlert(context.getString(R.string.netconnecterror));
-            dismissLoading();
+        	engine.refreshNews(0, 0);
+        	//context.getString(R.string.netconnecterror)
+            //showAlert("获取新闻栏目失败，只能显示默认的栏目！");
+           // dismissLoading();
         }
     }
 
@@ -475,8 +485,15 @@ public class OnlineNewsManager extends BaseManager {
     @Override
     public void initData() {
         try {
-            mainDC.UpdateGallery(new String[]{"国内","国际","国际","国际","国际","国际","国际","国际"}, TypeIndex);
-            //sendMessage(obtainMessage(STATE_GALLERY_GETDATA_FIRST, TypeIndex, 0));
+        	LogInfo.LogOut("newsManager-->typeIndex:"+TypeIndex);
+            mainDC.UpdateGallery(new String[]{ "综合新闻", "行业新闻", "访谈板块", "产品信息", "法律法规"}, TypeIndex);
+            sendMessage(obtainMessage(STATE_GALLERY_GETDATA_FIRST, TypeIndex, 0));
+            
+//                if (dbEngine != null) {
+//                    mainDC.UpdateGallery(initGrally(dbEngine.getNewsTypes(), 0), TypeIndex);
+//                    sendMessage(obtainMessage(STATE_GALLERY_GETDATA_FIRST, TypeIndex, 0));
+//                }
+           
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -513,4 +530,13 @@ public class OnlineNewsManager extends BaseManager {
     public void getNewsCommentModes(int firstNum, int id) {
         engine.getNewsComments(firstNum, id);
     }
+
+	public void showNewsDetails(ArrayList<NewsModel> newslist) {
+		dismissLoading();
+		if (newslist!=null&&newslist.size()>0) {
+			detailsDC.ShowNewsDetail(newslist.get(0));
+		}else {
+			showAlert("获取新闻详情失败！");
+		}
+	}
 }

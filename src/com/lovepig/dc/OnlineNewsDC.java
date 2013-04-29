@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,11 +19,12 @@ import com.lovepig.pivot.BaseDC;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.widget.MyGallery;
 import com.lovepig.widget.MyGallery.TlcyGalleryListener;
+import com.lovepig.widget.TlcyListLayout.OnRefreshListener;
 import com.lovepig.widget.TlcyListLayout;
 
-public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGalleryListener {
+public class OnlineNewsDC extends BaseDC implements OnItemClickListener, OnRefreshListener,  TlcyGalleryListener {
     MyGallery myGallery;
-    ImageView mainImage, qian, hou;
+    ImageView  qian, hou;
     TextView title;
     String[] indexString;
     private int index;
@@ -32,6 +34,7 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
     OnlineNewsManager manager;
     TextView timeText;
     private TlcyListLayout pulldownview;
+    private Button backBtn;
 
     public OnlineNewsDC(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
@@ -42,17 +45,18 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
         timeText.setVisibility(VISIBLE);
 
         myGallery = (MyGallery) findViewById(R.id.gallery1);
-        mainImage = (ImageView) findViewById(R.id.onlinepic);
         hou = (ImageView) findViewById(R.id.galleryLeft);
         qian = (ImageView) findViewById(R.id.galleryRight);
         hou.setOnClickListener(this);
         qian.setOnClickListener(this);
         
         listView = (ListView) findViewById(R.id.listView1);
-        findViewById(R.id.logoImg).setVisibility(VISIBLE);
+        backBtn=(Button) findViewById(R.id.leftBtn);
+        backBtn.setVisibility(VISIBLE);
+        backBtn.setOnClickListener(this);
 
-        indexString = new String[] { "即时", "时政", "国际", "文娱", "体育", "房屋" };
-        myGallery.setAdapter(R.layout.item, R.drawable.ic_launcher, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, indexString);
+        indexString = new String[] { "综合新闻", "行业新闻", "访谈板块", "产品信息", "法律法规"};
+        myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, indexString);
         if (!myGallery.isScroll()) {
             qian.setVisibility(GONE);
             hou.setVisibility(GONE);
@@ -62,16 +66,13 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
         }
         myGallery.setOnItemClickListener(this);
         pulldownview = (TlcyListLayout) findViewById(R.id.pulldownview);
-//        pulldownview.setRefreshListener(this);
+        pulldownview.setRefreshListener(this);
         adapter = new OnlineNewsAdapter(manager, listView, pulldownview);
         listView.setAdapter(adapter);
         listView.setFocusable(false);
            listView.setOnItemClickListener(this);
         setLoadMoreButton(false);
     }
-
-    
-
     /**
      * 更新新闻分类
      * 
@@ -83,7 +84,7 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
             LogInfo.LogOut("index:" + index);
             indexString = mGallery;
             this.index = index;
-            myGallery.setAdapter(R.layout.item, R.drawable.ic_launcher, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGallery);
+            myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGallery);
             LogInfo.LogOut("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx---tlcyGallery.isScroll() =" + myGallery.isScroll());
             if (!myGallery.isScroll()) {
                 hou.setVisibility(GONE);
@@ -109,7 +110,7 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
      * 更新界面数据
      */
     public void UpdataData() {
-//        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -133,7 +134,7 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
      * @param hasMoreBtn
      */
     public void setLoadMoreButton(boolean hasMoreBtn) {
-//        pulldownview.setLoadMoreButton(hasMoreBtn);
+        pulldownview.setLoadMoreButton(hasMoreBtn);
     }
 
     /**
@@ -142,8 +143,8 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
     public void onRefreshComplete(String mDate) {
         setUpdateTime(mDate);
         UpdataData();
-        //setLoadMoreButton(true);
-//        pulldownview.onRefreshComplete(mDate);
+        setLoadMoreButton(true);
+        pulldownview.onRefreshComplete(mDate);
     }
 
     /**
@@ -151,7 +152,7 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
      */
     public void onLoadingComplete() {
         UpdataData();
-//        pulldownview.onLoadMoreComplete();
+        pulldownview.onLoadMoreComplete();
 
     }
 
@@ -166,9 +167,9 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
      * 取消刷新
      */
     public void CancelRefresh() {
-//        pulldownview.onLoadMoreComplete();
+        pulldownview.onLoadMoreComplete();
     }
-
+   //新闻列表被点击
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
@@ -197,7 +198,7 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
             break;
         }
     }
-
+   //新闻分类被点击
     @Override
     public boolean onItemClick(int position) {
         if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
@@ -227,7 +228,17 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
     @Override
     public void onShow() {
         super.onShow();
-//        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
+	@Override
+	public void onLoadMore() {
+		
+		
+	}
+	@Override
+	public void onRefresh() {
+		
+		
+	}
     
 }

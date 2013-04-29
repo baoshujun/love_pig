@@ -36,5 +36,9 @@
     <!-- 帮助activity半透明背景 -->
     <drawable name="translucent_background">#65000000</drawable>
     <drawable name="translucent_btn_background">#00000000</drawable>
+    
+    <!-- 新添加的颜色，新闻模块 -->
+    <color name="bottom_btn_selected">#ffff00</color>
+     <color name="bottom_btn_no_selected">#ffffff</color>
 
 </resources>
