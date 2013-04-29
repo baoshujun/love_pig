@@ -29,7 +29,6 @@ public class Application extends BaseActivity {
 		currentManager = mainManager;
 		setMainManager(onlineNewsManager);
 		onlineNewsManager.initData();
-
 	}
 
 	@Override
