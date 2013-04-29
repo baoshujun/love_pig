@@ -26,7 +26,7 @@
             android:src="@drawable/jiantou_qian_1"
             android:visibility="visible" />
 
-        <com.lovepig.widget.TlcyGallery
+        <com.lovepig.widget.MyGallery
             android:id="@+id/gallery1"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/fenlei_item_height"
@@ -34,8 +34,7 @@
             android:layout_toLeftOf="@+id/galleryRight"
             android:layout_toRightOf="@+id/galleryLeft"
             android:fadingEdge="none"
-            android:scrollbars="none" >
-        </com.lovepig.widget.TlcyGallery>
+            android:scrollbars="none" />
 
         <ImageView
             android:id="@+id/galleryRight"

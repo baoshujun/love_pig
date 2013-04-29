@@ -16,12 +16,12 @@ import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.pivot.BaseDC;
 import com.lovepig.utils.LogInfo;
-import com.lovepig.widget.TlcyGallery;
-import com.lovepig.widget.TlcyGallery.TlcyGalleryListener;
+import com.lovepig.widget.MyGallery;
+import com.lovepig.widget.MyGallery.TlcyGalleryListener;
 import com.lovepig.widget.TlcyListLayout;
 
 public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGalleryListener {
-    TlcyGallery tlcyGallery;
+    MyGallery myGallery;
     ImageView mainImage, qian, hou;
     TextView title;
     String[] indexString;
@@ -41,7 +41,7 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
         timeText = (TextView) findViewById(R.id.timeText);
         timeText.setVisibility(VISIBLE);
 
-        tlcyGallery = (TlcyGallery) findViewById(R.id.gallery1);
+        myGallery = (MyGallery) findViewById(R.id.gallery1);
         mainImage = (ImageView) findViewById(R.id.onlinepic);
         hou = (ImageView) findViewById(R.id.galleryLeft);
         qian = (ImageView) findViewById(R.id.galleryRight);
@@ -52,15 +52,15 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
         findViewById(R.id.logoImg).setVisibility(VISIBLE);
 
         indexString = new String[] { "即时", "时政", "国际", "文娱", "体育", "房屋" };
-        tlcyGallery.setAdapter(R.layout.item, R.drawable.ic_launcher, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, indexString);
-        if (!tlcyGallery.isScroll()) {
+        myGallery.setAdapter(R.layout.item, R.drawable.ic_launcher, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, indexString);
+        if (!myGallery.isScroll()) {
             qian.setVisibility(GONE);
             hou.setVisibility(GONE);
         } else {
             qian.setVisibility(VISIBLE);
             hou.setVisibility(INVISIBLE);
         }
-        tlcyGallery.setOnItemClickListener(this);
+        myGallery.setOnItemClickListener(this);
         pulldownview = (TlcyListLayout) findViewById(R.id.pulldownview);
 //        pulldownview.setRefreshListener(this);
         adapter = new OnlineNewsAdapter(manager, listView, pulldownview);
@@ -83,16 +83,16 @@ public class OnlineNewsDC extends BaseDC implements OnItemClickListener,  TlcyGa
             LogInfo.LogOut("index:" + index);
             indexString = mGallery;
             this.index = index;
-            tlcyGallery.setAdapter(R.layout.item, R.drawable.ic_launcher, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGallery);
-            LogInfo.LogOut("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx---tlcyGallery.isScroll() =" + tlcyGallery.isScroll());
-            if (!tlcyGallery.isScroll()) {
+            myGallery.setAdapter(R.layout.item, R.drawable.ic_launcher, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGallery);
+            LogInfo.LogOut("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx---tlcyGallery.isScroll() =" + myGallery.isScroll());
+            if (!myGallery.isScroll()) {
                 hou.setVisibility(GONE);
                 qian.setVisibility(GONE);
             } else {
                 hou.setVisibility(INVISIBLE);
                 qian.setVisibility(VISIBLE);
             }
-            tlcyGallery.setSelected(index);
+            myGallery.setSelected(index);
         }
     }
 

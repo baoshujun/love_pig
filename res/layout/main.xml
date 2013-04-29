@@ -13,50 +13,57 @@
         android:background="#1d953f"
         android:gravity="center_vertical" >
 
-        <ImageView
+        <Button
             android:id="@+id/menu_news"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
-            android:contentDescription="@string/News"
-            android:src="@drawable/tab_icon_news_3" />
+            android:text="新闻"
+            />
 
-        <ImageView
+        <Button
             android:id="@+id/menu_shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
-            android:contentDescription="@string/Price"
-            android:src="@drawable/tab_icon_shop" />
+            android:text="价格" />
 
-        <ImageView
+        <Button
             android:id="@+id/menu_book_shelf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
-            android:contentDescription="@string/Shelf"
-            android:src="@drawable/tab_icon_book" />
+            android:text="兽药"
+            />
 
-        <ImageView
-            android:id="@+id/menu_multi_media"
+        <Button
+            android:id="@+id/foodstuff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
-            android:contentDescription="@string/Media"
-            android:src="@drawable/tab_icon_media" />
+            android:text="饲料"
+           />
 
-        <ImageView
-            android:id="@+id/menu_more"
+        <Button
+            android:id="@+id/equipment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
-            android:contentDescription="@string/More"
-            android:src="@drawable/tab_icon_more" />
+            android:text="设备"
+            />
+        <Button
+            android:id="@+id/menu_answer_questions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/menu_item_margin"
+            android:layout_weight="1"
+            android:text="答疑"
+            />
     </LinearLayout>
 
     <RelativeLayout
