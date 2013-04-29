@@ -43,15 +43,15 @@ public class MainManager extends BaseManager {
            
           
             break;
-        case R.id.menu_multi_media:    
-            
-           
-            break;
-        case R.id.menu_more: 
+//        case R.id.menu_multi_media:    
+//            
+//           
+//            break;
+//        case R.id.menu_more: 
           
            
           
-            break;
+//            break;
         default:
             break;
         }
