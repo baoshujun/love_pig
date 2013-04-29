@@ -39,14 +39,63 @@ public class Main extends Activity {
 		other = (LinearLayout) this.findViewById(R.id.other);
 	}
 
+	/**
+	 * newsMsg on Click event
+	 */
 	private void setOnclickEvent() {
-		newsMsg.setOnClickListener(new OnClickListener() {
+		commonClick(newsMsg, R.id.newsMsg);
+		
+	}
+
+	/**
+	 * 
+	 * @param id
+	 */
+	private void commonClick(LinearLayout lg, final int id) {
+		lg.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent it = new Intent();
-				it.setClass(Main.this, Application.class);
-				startActivity(it);
+				switch (id) {
+				case R.id.newsMsg:
+					commonIntent(Application.class);
+					break;
+				case R.id.priceMsg:
+					commonIntent(Application.class);
+					break;
+				case R.id.boarMsg:
+					commonIntent(Application.class);
+					break;
+				case R.id.medicinalMsg:
+					commonIntent(Application.class);
+					break;
+				case R.id.fodderMsg:
+					commonIntent(Application.class);
+					break;
+				case R.id.deviceMsg:
+					commonIntent(Application.class);
+					break;
+				case R.id.expertMsg:
+					commonIntent(Application.class);
+					break;
+				case R.id.other:
+					commonIntent(Application.class);
+					break;
+				default:
+					break;
+				}
 			}
 		});
 	}
+
+	/**
+	 * 封装一个调转
+	 * 
+	 * @param mClass
+	 */
+	private void commonIntent(Class mClass) {
+		Intent it = new Intent();
+		it.setClass(Main.this, mClass);
+		startActivity(it);
+	}
+
 }
