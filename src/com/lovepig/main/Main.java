@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class Main extends Activity {
@@ -16,6 +17,7 @@ public class Main extends Activity {
 	private LinearLayout deviceMsg;
 	private LinearLayout expertMsg;
 	private LinearLayout other;
+	private ImageView signIn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class Main extends Activity {
 		deviceMsg = (LinearLayout) this.findViewById(R.id.deviceMsg);
 		expertMsg = (LinearLayout) this.findViewById(R.id.expertMsg);
 		other = (LinearLayout) this.findViewById(R.id.other);
+		signIn = (ImageView)this.findViewById(R.id.sigin);
 	}
 
 	/**
@@ -44,7 +47,20 @@ public class Main extends Activity {
 	 */
 	private void setOnclickEvent() {
 		commonClick(newsMsg, R.id.newsMsg);
+		commonClick(priceMsg, R.id.priceMsg);
+		commonClick(boarMsg, R.id.boarMsg);
+		commonClick(medicialMsg, R.id.medicinalMsg);
+		commonClick(fodderMsg, R.id.fodderMsg);
+		commonClick(deviceMsg, R.id.deviceMsg);
+		commonClick(expertMsg, R.id.expertMsg);
+		commonClick(other, R.id.other);
 		
+		signIn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				commonIntent(SignIn.class);
+			}
+		});
 	}
 
 	/**

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs
+END
+WifiNearInfoItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs/WifiNearInfoItem.java
+END
+GpsLocationItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs/GpsLocationItem.java
+END
+AGpsLocationItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs/AGpsLocationItem.java
+END
+LocationAssistant.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs/LocationAssistant.java
+END
+CellNearItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs/CellNearItem.java
+END
+AllLbsItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs/AllLbsItem.java
+END
+WifiInfoItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs/WifiInfoItem.java
+END
+CellItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/6960/mario/trunk/client/Mario-V1I3/Mario-App/src/main/java/com/mobiscloud/mario/util/lbs/CellItem.java
+END

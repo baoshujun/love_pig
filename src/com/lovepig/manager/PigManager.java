@@ -45,7 +45,6 @@ public class PigManager extends BaseManager {
         if (mainDC == null) {
             mainDC = new PigDC(context, R.layout.pig, this);
             dcEngine.setMainDC(mainDC);
-
         }
         return super.getMainDC();
     }

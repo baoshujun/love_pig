@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
     <!-- 解决锁屏时，音乐停止播放的ｂｕｇ -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -36,6 +37,13 @@
         </activity>
         <activity
             android:name=".Application"
+            android:configChanges="keyboardHidden|orientation|locale|navigation"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
+        <activity
+            android:name=".SignIn"
             android:configChanges="keyboardHidden|orientation|locale|navigation"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
