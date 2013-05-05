@@ -3,7 +3,10 @@ package com.lovepig.manager;
 import java.util.ArrayList;
 
 import android.os.Message;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ViewAnimator;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.lovepig.dc.PriceDC;
 import com.lovepig.dc.PriceListViewAdapter;
@@ -21,8 +24,9 @@ import com.lovepig.utils.Utils;
  * @version 1.0 创建时间：May 5, 2013 3:34:29 PM
  * 
  */
-public class PriceManager extends BaseManager {
+public class PriceManager extends BaseManager implements OnItemClickListener {
 	private PriceDC priceDC;
+
 	private PriceEngine priceEngine;
 	private ArrayList<PriceModel> datas;
 	
@@ -45,9 +49,7 @@ public class PriceManager extends BaseManager {
 	}
 	}
 
-  public void onLisViewItemClicked(int positon){
-	  
-  }
+  
 	@Override
 	public ViewAnimator getMainDC() {
 		priceDC = new PriceDC(context, R.layout.price, this);
@@ -80,6 +82,12 @@ public class PriceManager extends BaseManager {
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> ListView, View itemView, int postion, long id) {
+		
+		
 	}
 	
 	

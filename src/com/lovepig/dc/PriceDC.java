@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.lovepig.main.R;
+import com.lovepig.manager.PriceManager;
 import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseDC;
 import com.lovepig.pivot.BaseManager;
@@ -21,7 +22,7 @@ import com.lovepig.pivot.BaseManager;
  * @version 1.0 创建时间：May 5, 2013 3:40:10 PM
  * 
  */
-public class PriceDC extends BaseDC implements OnItemClickListener {
+public class PriceDC extends BaseDC {
 	// livePig 生猪 piglet仔猪
 	private Button livePig, piglet;
 	private ListView priceListview;
@@ -37,15 +38,10 @@ public class PriceDC extends BaseDC implements OnItemClickListener {
 		priceListview = (ListView) findViewById(R.id.priceLv);
 		livePig.setOnClickListener(this);
 		piglet.setOnClickListener(this);
-		priceListview.setOnItemClickListener(this);
+		priceListview.setOnItemClickListener((PriceManager)manager);
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
-		
-
-	}
+	
 
 	public void setListViewAdapter(ArrayList<PriceModel> datas) {
 		adapter = new PriceListViewAdapter(datas, context);
