@@ -2,47 +2,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/news_l_item_h"
-    android:minHeight="@dimen/news_l_item_h"
-    android:background="@drawable/liebiao" >
-
-    <ImageView
-        android:id="@+id/onlinepic"
-        android:layout_width="@dimen/news_l_item_thume_w"
-        android:layout_height="@dimen/news_l_item_thume_h"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/news_l_item_thume_margin_l"
-        android:contentDescription="@null" />
+    android:background="@drawable/liebiao"
+    android:minHeight="@dimen/news_l_item_h" >
 
     <TextView
         android:id="@+id/onlinetitle"
-        android:layout_width="fill_parent"
+        android:layout_width="200dip"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/news_l_item_title_magin"
-        android:layout_toRightOf="@id/onlinepic"
+        android:layout_marginTop="@dimen/news_l_item_title_magin"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/online_item_title"
-        android:textSize="@dimen/news_l_item_title_size" />
+        android:text="标题标题标题标题标题"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/onlineinstro"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/onlinetitle"
         android:layout_marginLeft="@dimen/news_l_item_title_magin"
-        android:layout_marginTop="@dimen/news_l_item_title_magin"
-        android:layout_toRightOf="@+id/onlinepic"
         android:ellipsize="end"
-        android:lines="2"
-        android:textColor="@color/online_item_instro"
-        android:textSize="@dimen/news_l_item_content_size" />
+        android:lines="3"
+        android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容" />
+
+    <ImageView
+        android:id="@+id/onlinepic"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_launcher" />
 
     <ImageView
         android:id="@+id/jiantou"
         android:layout_width="@dimen/news_l_item_jiant_w"
         android:layout_height="@dimen/news_l_item_jiant_h"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/news_l_item_jiant_margin_r"
         android:background="@drawable/onlienews_item_jiantou"
         android:contentDescription="@null"
