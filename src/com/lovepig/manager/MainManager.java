@@ -41,7 +41,7 @@ public class MainManager extends BaseManager {
            
           
             break;
-<<<<<<< HEAD
+
         case R.id.menu_veterinary_drugs: // 兽医  
             
            
@@ -56,17 +56,8 @@ public class MainManager extends BaseManager {
             
             
             break;
-=======
-//        case R.id.menu_multi_media:    
-//            
-//           
-//            break;
-//        case R.id.menu_more: 
-          
-           
-          
-//            break;
->>>>>>> origin/master
+
+
         default:
             break;
         }
