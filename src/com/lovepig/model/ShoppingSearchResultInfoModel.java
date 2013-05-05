@@ -2,7 +2,7 @@ package com.lovepig.model;
 
 import java.io.Serializable;
 
-public class ShoppingSearchResultInfoModel extends ShopingInfoModel implements Serializable {
+public class ShoppingSearchResultInfoModel extends PriceModel implements Serializable {
     private static final long serialVersionUID = 1L;
     
 

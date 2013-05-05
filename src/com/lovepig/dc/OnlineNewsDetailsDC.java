@@ -31,8 +31,8 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
     TextView mTitle;// 新闻标题
     TextView mTimeProvenance;// 时间和出处
     TextView mDetails;// 新闻详情
-    ImageButton mPreviousNews;// 上一篇新闻
-    ImageButton mNextNews;// 下一篇新闻
+//    ImageButton mPreviousNews;// 上一篇新闻
+//    ImageButton mNextNews;// 下一篇新闻
     ImageView mNewsImage;// 新闻图片
     OnlineNewsManager mManager;
     // TlcyScrollView scrollView;
@@ -69,30 +69,30 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
         mTitle = (TextView) findViewById(R.id.onlinedetailstitle);
         mTimeProvenance = (TextView) findViewById(R.id.onlinedetailstime);
         mDetails = (TextView) findViewById(R.id.onlinedetails);
-        mPreviousNews = (ImageButton) findViewById(R.id.onlinepreviousnews);
-        mPreviousNews.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
-//                    l = System.currentTimeMillis();
-//                    pos--;
-//                    mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 2));
-//                }
-            }
-        });
-        mNextNews = (ImageButton) findViewById(R.id.onlinenextnews);
-        mNextNews.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (Math.abs(System.currentTimeMillis() - l) > t) {
-//                    l = System.currentTimeMillis();
-//                    pos++;
-//                    mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 1));
-//                    LogInfo.LogOut("下一篇被点击");
-//                }
-
-            }
-        });
+//        mPreviousNews = (ImageButton) findViewById(R.id.onlinepreviousnews);
+//        mPreviousNews.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
+////                    l = System.currentTimeMillis();
+////                    pos--;
+////                    mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 2));
+////                }
+//            }
+//        });
+//        mNextNews = (ImageButton) findViewById(R.id.onlinenextnews);
+//        mNextNews.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                if (Math.abs(System.currentTimeMillis() - l) > t) {
+////                    l = System.currentTimeMillis();
+////                    pos++;
+////                    mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 1));
+////                    LogInfo.LogOut("下一篇被点击");
+////                }
+//
+//            }
+//        });
         mNewsImage = (ImageView) findViewById(R.id.onlinedetailsimg);
         /**
          * 新闻图片点击放大
@@ -243,36 +243,36 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
 
     float eventStartX, eventStartY;
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        // && (Math.abs(System.currentTimeMillis() - l) > t)
-        LogInfo.LogOut("OnlineNewsAdapter", "onTouch..............x:" + getResources().getDimension(R.dimen.fling_x) + "y:" + getResources().getDimension(R.dimen.fling_y));
-        if (v == scrollView) {
-            l = System.currentTimeMillis();
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                eventStartX = event.getX();
-                eventStartY = event.getY();
-            } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-                LogInfo.LogOut("OnlineNewsAdapter",
-                        "onTouch.........eventStartX - event.getX():" + (eventStartX - event.getX()) + "event.getY() - eventStartY:" + Math.abs(event.getY() - eventStartY));
-                if (eventStartX - event.getX() > getResources().getDimension(R.dimen.fling_x)
-                        && Math.abs(event.getY() - eventStartY) < getResources().getDimension(R.dimen.fling_y)) {
-                    onFling(1);
-                } else if (event.getX() - eventStartX > getResources().getDimension(R.dimen.fling_x)
-                        && Math.abs(event.getY() - eventStartY) < getResources().getDimension(R.dimen.fling_y)) {
-                    onFling(2);
-                } else if (Math.abs(event.getX() - eventStartX) < getResources().getDimension(R.dimen.fling_x)
-                        && event.getY() - eventStartY > getResources().getDimension(R.dimen.fling_y)) {
-                    onFling(3);
-                } else if (Math.abs(event.getX() - eventStartX) < getResources().getDimension(R.dimen.fling_x)
-                        && eventStartY - event.getY() > getResources().getDimension(R.dimen.fling_y)) {
-                    onFling(4);
-                }
-            }
-        }
-        return super.onTouch(v, event);
-
-    }
+//    @Override
+//    public boolean onTouch(View v, MotionEvent event) {
+//        // && (Math.abs(System.currentTimeMillis() - l) > t)
+//        LogInfo.LogOut("OnlineNewsAdapter", "onTouch..............x:" + getResources().getDimension(R.dimen.fling_x) + "y:" + getResources().getDimension(R.dimen.fling_y));
+//        if (v == scrollView) {
+//            l = System.currentTimeMillis();
+//            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                eventStartX = event.getX();
+//                eventStartY = event.getY();
+//            } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+//                LogInfo.LogOut("OnlineNewsAdapter",
+//                        "onTouch.........eventStartX - event.getX():" + (eventStartX - event.getX()) + "event.getY() - eventStartY:" + Math.abs(event.getY() - eventStartY));
+//                if (eventStartX - event.getX() > getResources().getDimension(R.dimen.fling_x)
+//                        && Math.abs(event.getY() - eventStartY) < getResources().getDimension(R.dimen.fling_y)) {
+//                    onFling(1);
+//                } else if (event.getX() - eventStartX > getResources().getDimension(R.dimen.fling_x)
+//                        && Math.abs(event.getY() - eventStartY) < getResources().getDimension(R.dimen.fling_y)) {
+//                    onFling(2);
+//                } else if (Math.abs(event.getX() - eventStartX) < getResources().getDimension(R.dimen.fling_x)
+//                        && event.getY() - eventStartY > getResources().getDimension(R.dimen.fling_y)) {
+//                    onFling(3);
+//                } else if (Math.abs(event.getX() - eventStartX) < getResources().getDimension(R.dimen.fling_x)
+//                        && eventStartY - event.getY() > getResources().getDimension(R.dimen.fling_y)) {
+//                    onFling(4);
+//                }
+//            }
+//        }
+//        return super.onTouch(v, event);
+//
+//    }
 
     @Override
     public void onFling(int to) {

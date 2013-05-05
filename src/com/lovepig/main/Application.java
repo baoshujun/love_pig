@@ -5,12 +5,14 @@ import android.view.KeyEvent;
 import com.lovepig.manager.MainManager;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.manager.PigManager;
+import com.lovepig.manager.PriceManager;
 import com.lovepig.pivot.BaseActivity;
 
 public class Application extends BaseActivity {
 	public static Application application;
 	public static OnlineNewsManager onlineNewsManager;
 	public static PigManager pigManager;
+	public static PriceManager priceManager;
 
 	long timeForAnimator;
 	public MainManager mainManager;
@@ -20,15 +22,17 @@ public class Application extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		application = this;
+		int tabID = getIntent().getIntExtra("tabID", -1);
 		Configs.initTypeAndVsersion(application);
 		mainManager = new MainManager(application);
 		onlineNewsManager = new OnlineNewsManager(application);
 		pigManager = new PigManager(application);
+		priceManager = new PriceManager(application);
 		setContentView(mainManager.getLayout());
 		dcEngineContener = mainManager.getContainer();
 		currentManager = mainManager;
-		setMainManager(onlineNewsManager);
-		onlineNewsManager.initData();
+		mainManager.onClicked(tabID);
+		
 	}
 
 	@Override
