@@ -4,7 +4,7 @@ import org.json.JSONStringer;
 import android.app.Activity;
 import android.content.Context;
 
-import com.lovepig.model.ShoppingAdvertsModel;
+import com.lovepig.model.DevicesModel;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.utils.Utils;
@@ -243,7 +243,7 @@ public class Configs {
 	/**
 	 * 商城广告
 	 */
-	public static ShoppingAdvertsModel infoModel;
+	public static DevicesModel infoModel;
 	/**
 	 * 栏目根目录
 	 */

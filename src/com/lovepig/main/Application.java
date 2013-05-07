@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import com.lovepig.manager.MainManager;
 import com.lovepig.manager.OnlineNewsManager;
-import com.lovepig.manager.PigManager;
+import com.lovepig.manager.FoodstuffManager;
 import com.lovepig.manager.PriceManager;
 import com.lovepig.pivot.BaseActivity;
 
 public class Application extends BaseActivity {
 	public static Application application;
 	public static OnlineNewsManager onlineNewsManager;
-	public static PigManager pigManager;
+	public static FoodstuffManager pigManager;
 	public static PriceManager priceManager;
 
 	long timeForAnimator;
@@ -26,7 +26,7 @@ public class Application extends BaseActivity {
 		Configs.initTypeAndVsersion(application);
 		mainManager = new MainManager(application);
 		onlineNewsManager = new OnlineNewsManager(application);
-		pigManager = new PigManager(application);
+		pigManager = new FoodstuffManager(application);
 		priceManager = new PriceManager(application);
 		setContentView(mainManager.getLayout());
 		dcEngineContener = mainManager.getContainer();

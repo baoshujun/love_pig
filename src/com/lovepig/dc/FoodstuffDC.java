@@ -4,16 +4,20 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 import com.lovepig.main.R;
-import com.lovepig.manager.PigManager;
+import com.lovepig.manager.FoodstuffManager;
 import com.lovepig.pivot.BaseDC;
-
-public class PigDC extends BaseDC  {
+/**
+ *
+ * @author Administrator
+ *
+ */
+public class FoodstuffDC extends BaseDC  {
      
-    PigManager manager;
+    FoodstuffManager manager;
     private TextView title;
     
     
-    public PigDC(Context context, int layoutId, PigManager manager) {
+    public FoodstuffDC(Context context, int layoutId, FoodstuffManager manager) {
         super(context, layoutId, manager);
         this.manager = manager;
         title = (TextView) findViewById(R.id.title);
