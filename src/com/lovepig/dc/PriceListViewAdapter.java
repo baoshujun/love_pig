@@ -1,10 +1,6 @@
 package com.lovepig.dc;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.lovepig.main.R;
-import com.lovepig.model.PriceModel;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.lovepig.main.R;
+import com.lovepig.model.PriceModel;
 
 public class PriceListViewAdapter extends BaseAdapter {
 	private ArrayList<PriceModel> list;

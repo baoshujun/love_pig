@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/priceTime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="2013-05-05"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/priceCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priceTime"
+        android:layout_marginTop="10dip"
+        android:text="北京市"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/priceCity"
+        android:layout_marginLeft="10dip"
+        android:layout_toRightOf="@id/priceCity" >
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生猪价格(元/斤)" />
+
+        <TextView
+            android:id="@+id/breedName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/type"
+            android:text="大三元" />
+
+        <TextView
+            android:id="@+id/priceArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/type"
+            android:layout_below="@id/type"
+            android:layout_marginTop="10dip"
+            android:text="朝阳区" />
+
+        <TextView
+            android:id="@+id/priceNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/priceArea"
+            android:layout_below="@id/type"
+            android:layout_marginLeft="20dip"
+            android:layout_toRightOf="@id/priceArea"
+            android:textColor="#FF0000"
+            android:text="13元" />
+    </RelativeLayout>
+
+</RelativeLayout>

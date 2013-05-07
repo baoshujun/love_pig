@@ -41,13 +41,12 @@ public class MainManager extends BaseManager {
         case R.id.priceMsg:
         	  if(!(Application.application.currentManager instanceof PriceManager)){
                   Application.application.setMainManager(Application.priceManager);
+                  Application.priceManager.initData();
                   mainDC.viewReset(R.id.menu_price);
               }
             break;
         case R.id.menu_equipment:
         case R.id.deviceMsg://设备
-       
-           
           
             break;
 
@@ -58,7 +57,6 @@ public class MainManager extends BaseManager {
             break;
         case R.id.menu_answer_questions: 
         case R.id.expertMsg://答疑
-          
            
           
             break;
@@ -67,7 +65,6 @@ public class MainManager extends BaseManager {
             
             
             break;
-
 
         default:
             break;

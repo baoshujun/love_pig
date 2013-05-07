@@ -1,13 +1,10 @@
 package com.lovepig.engine;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import android.os.AsyncTask;
 
 import com.lovepig.manager.PriceManager;
-import com.lovepig.model.GalleryModel;
 import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.pivot.BaseManager;
@@ -29,17 +26,17 @@ public class PriceEngine extends BaseEngine {
 
 	public PriceEngine(BaseManager manager) {
 		super(manager);
-		priceManager = (PriceManager) manager;
+		if(priceManager != null){
+			priceManager = (PriceManager) manager;	
+		}
 	}
 
 	/**
-	 * 获取新闻详情
 	 * 
 	 * @param id
 	 * @param type
 	 */
 	public void fetchPrice() {
-
 		getPriceTask = new GetPriceTask();
 		getPriceTask.execute();
 	}

@@ -3,9 +3,6 @@ package com.lovepig.dc;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -40,8 +37,6 @@ public class PriceDC extends BaseDC {
 		piglet.setOnClickListener(this);
 		priceListview.setOnItemClickListener((PriceManager)manager);
 	}
-
-	
 
 	public void setListViewAdapter(ArrayList<PriceModel> datas) {
 		adapter = new PriceListViewAdapter(datas, context);

@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ViewAnimator;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ViewAnimator;
 
 import com.lovepig.dc.PriceDC;
-import com.lovepig.dc.PriceListViewAdapter;
+import com.lovepig.dc.PriceDetailDC;
 import com.lovepig.engine.PriceEngine;
 import com.lovepig.main.R;
 import com.lovepig.model.PriceModel;
@@ -26,34 +26,40 @@ import com.lovepig.utils.Utils;
  */
 public class PriceManager extends BaseManager implements OnItemClickListener {
 	private PriceDC priceDC;
+	private PriceDetailDC detailDC;
 
 	private PriceEngine priceEngine;
 	private ArrayList<PriceModel> datas;
-	
 
 	public PriceManager(BaseActivity c) {
 		super(c);
-		priceEngine=new PriceEngine(this);
+		priceEngine = new PriceEngine(this);
+	}
+
+	@Override
+	public void initData() {
+		super.initData();
+		
 	}
 
 	@Override
 	public void handleMessage(Message msg) {
-       switch (msg.what) {
-	case 1:
-		datas=(ArrayList<PriceModel>)msg.obj;
-		priceDC.setListViewAdapter(datas);
-		break;
+		switch (msg.what) {
+		case 1:
+			datas = (ArrayList<PriceModel>) msg.obj;
+			priceDC.setListViewAdapter(datas);
+			break;
 
-	default:
-		break;
-	}
+		default:
+			break;
+		}
 	}
 
-  
 	@Override
 	public ViewAnimator getMainDC() {
 		priceDC = new PriceDC(context, R.layout.price, this);
 		dcEngine.setMainDC(priceDC);
+		detailDC = new PriceDetailDC(context, R.layout.price_detail, this);
 		return super.getMainDC();
 	}
 
@@ -63,17 +69,16 @@ public class PriceManager extends BaseManager implements OnItemClickListener {
 		super.onClicked(id);
 		switch (id) {
 		case R.id.leftBtn:
-			//（1）判断是否联网
-			if(Utils.isNetworkValidate(context)){
-				//a.获取数据
-				
+			// （1）判断是否联网
+			if (Utils.isNetworkValidate(context)) {
+				// a.获取数据
 				priceEngine.fetchPrice();
-				//b.删除本地数据库
-				//c.save 数据
-				//d.显示页面
-                				
+				// b.删除本地数据库
+				// c.save 数据
+				// d.显示页面
+
 			} else {
-				//a.显示本地数据
+				// a.显示本地数据
 			}
 			break;
 		case R.id.rightBtn:
@@ -85,11 +90,10 @@ public class PriceManager extends BaseManager implements OnItemClickListener {
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> ListView, View itemView, int postion, long id) {
-		
-		
+	public void onItemClick(AdapterView<?> ListView, View itemView,
+			int postion, long id) {
+		enterSubDC(detailDC);
+
 	}
-	
-	
 
 }

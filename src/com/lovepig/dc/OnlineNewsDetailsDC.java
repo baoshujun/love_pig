@@ -6,13 +6,12 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.lovepig.engine.ImageEngine;
 import com.lovepig.main.Configs;
 import com.lovepig.main.R;
