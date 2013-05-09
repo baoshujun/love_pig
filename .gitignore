@@ -1,1 +1,7 @@
-“bin/”
+bin/
+gen/
+.gitignore
+.DS_Store
+/.project
+lint.xml
+.settings*
