@@ -1,47 +1,72 @@
 package com.lovepig.main;
 
+import java.io.File;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
+
+import com.lovepig.manager.FoodstuffManager;
 import com.lovepig.manager.MainManager;
 import com.lovepig.manager.OnlineNewsManager;
-import com.lovepig.manager.FoodstuffManager;
 import com.lovepig.manager.PriceManager;
 import com.lovepig.pivot.BaseActivity;
 
 public class Application extends BaseActivity {
-	public static Application application;
-	public static OnlineNewsManager onlineNewsManager;
-	public static FoodstuffManager pigManager;
-	public static PriceManager priceManager;
+    public static Application application;
+    public static OnlineNewsManager onlineNewsManager;
+    public static FoodstuffManager pigManager;
+    public static PriceManager priceManager;
 
-	long timeForAnimator;
-	public MainManager mainManager;
+    long timeForAnimator;
+    public MainManager mainManager;
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		application = this;
-		int tabID = getIntent().getIntExtra("tabID", -1);
-		Configs.initTypeAndVsersion(application);
-		mainManager = new MainManager(application);
-		onlineNewsManager = new OnlineNewsManager(application);
-		pigManager = new FoodstuffManager(application);
-		priceManager = new PriceManager(application);
-		setContentView(mainManager.getLayout());
-		dcEngineContener = mainManager.getContainer();
-		currentManager = mainManager;
-		mainManager.onClicked(tabID);
-		
-	}
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        application = this;
+        int tabID = getIntent().getIntExtra("tabID", -1);
+        mainManager = new MainManager(application);
+        onlineNewsManager = new OnlineNewsManager(application);
+        pigManager = new FoodstuffManager(application);
+        priceManager = new PriceManager(application);
+        setContentView(mainManager.getLayout());
+        dcEngineContener = mainManager.getContainer();
+        currentManager = mainManager;
+        mainManager.onClicked(tabID);
+        new InitDataTask().execute();
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			finish();
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+    }
+
+    class InitDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                // 创建文件目录，现在主要用于放数据库文件
+                File file = new File(Configs.lovePigPath);
+                if (!file.isDirectory()) {
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                    file.mkdirs();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

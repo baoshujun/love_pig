@@ -8,14 +8,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ViewAnimator;
 
-import com.lovepig.dc.PriceDC;
-import com.lovepig.dc.PriceDetailDC;
 import com.lovepig.engine.PriceEngine;
 import com.lovepig.main.R;
 import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Utils;
+import com.lovepig.view.PriceView;
+import com.lovepig.view.PriceDetailView;
 
 /**
  * @author greenboy1
@@ -25,8 +25,8 @@ import com.lovepig.utils.Utils;
  * 
  */
 public class PriceManager extends BaseManager implements OnItemClickListener {
-	private PriceDC priceDC;
-	private PriceDetailDC detailDC;
+	private PriceView priceDC;
+	private PriceDetailView detailDC;
 
 	private PriceEngine priceEngine;
 	private ArrayList<PriceModel> datas;
@@ -42,14 +42,21 @@ public class PriceManager extends BaseManager implements OnItemClickListener {
 		
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	public void handleMessage(Message msg) {
 		switch (msg.what) {
+		case -1:
+            fetchPriceListData();
+            break;
+		case 0:
+            showAlert("联网超时，获取数据失败！");
+            break;   
 		case 1:
 			datas = (ArrayList<PriceModel>) msg.obj;
 			priceDC.setListViewAdapter(datas);
 			break;
-
+		
 		default:
 			break;
 		}
@@ -57,9 +64,9 @@ public class PriceManager extends BaseManager implements OnItemClickListener {
 
 	@Override
 	public ViewAnimator getMainDC() {
-		priceDC = new PriceDC(context, R.layout.price, this);
+		priceDC = new PriceView(context, R.layout.price, this);
 		dcEngine.setMainDC(priceDC);
-		detailDC = new PriceDetailDC(context, R.layout.price_detail, this);
+		detailDC = new PriceDetailView(context, R.layout.price_detail, this);
 		return super.getMainDC();
 	}
 
@@ -69,17 +76,7 @@ public class PriceManager extends BaseManager implements OnItemClickListener {
 		super.onClicked(id);
 		switch (id) {
 		case R.id.leftBtn:
-			// （1）判断是否联网
-			if (Utils.isNetworkValidate(context)) {
-				// a.获取数据
-				priceEngine.fetchPrice();
-				// b.删除本地数据库
-				// c.save 数据
-				// d.显示页面
-
-			} else {
-				// a.显示本地数据
-			}
+			fetchPriceListData();
 			break;
 		case R.id.rightBtn:
 			showAlert("222");
@@ -88,6 +85,22 @@ public class PriceManager extends BaseManager implements OnItemClickListener {
 			break;
 		}
 	}
+
+    /**
+     * 
+     */
+    protected void fetchPriceListData() {
+        // （1）判断是否联网
+        if (Utils.isNetworkValidate(context)) {
+        	// a.获取数据
+        	priceEngine.fetchPrice();
+        	// b.删除本地数据库
+        	// c.save 数据
+        	// d.显示页面
+        } else {
+        	// a.显示本地数据
+        }
+    }
 
 	@Override
 	public void onItemClick(AdapterView<?> ListView, View itemView,

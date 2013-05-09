@@ -1,8 +1,8 @@
-package com.lovepig.dc;
+package com.lovepig.view;
 
 import android.content.Context;
 
-import com.lovepig.pivot.BaseDC;
+import com.lovepig.pivot.BaseView;
 import com.lovepig.pivot.BaseManager;
 
 /**
@@ -12,9 +12,9 @@ import com.lovepig.pivot.BaseManager;
  * @version 1.0 创建时间：May 5, 2013 6:38:40 PM
  * 
  */
-public class PriceDetailDC extends BaseDC {
+public class PriceDetailView extends BaseView {
 
-	public PriceDetailDC(Context context, int layoutId, BaseManager manager) {
+	public PriceDetailView(Context context, int layoutId, BaseManager manager) {
 		super(context, layoutId, manager);
 	}
 

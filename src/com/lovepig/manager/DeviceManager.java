@@ -8,8 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ViewAnimator;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.lovepig.dc.PriceDC;
-import com.lovepig.dc.PriceListViewAdapter;
 import com.lovepig.engine.DeviceEngine;
 import com.lovepig.engine.PriceEngine;
 import com.lovepig.main.R;
@@ -17,13 +15,15 @@ import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Utils;
+import com.lovepig.view.PriceView;
+import com.lovepig.view.PriceListViewAdapter;
 
 /**
  * 
  * 
  */
 public class DeviceManager extends BaseManager implements OnItemClickListener {
-    private PriceDC priceDC;
+    private PriceView priceDC;
 
     private DeviceEngine devicesEngine;
     private ArrayList<PriceModel> datas;
@@ -60,7 +60,7 @@ public class DeviceManager extends BaseManager implements OnItemClickListener {
 
     @Override
     public ViewAnimator getMainDC() {
-        priceDC = new PriceDC(context, R.layout.price, this);
+        priceDC = new PriceView(context, R.layout.price, this);
         dcEngine.setMainDC(priceDC);
         return super.getMainDC();
     }

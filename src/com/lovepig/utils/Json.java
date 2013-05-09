@@ -13,10 +13,9 @@ public class Json {
 	 */
 	public Json(int apiVersion){
 		try {
-			JSONObject common=new JSONObject(Configs.typeAndVsersion);
-			common.put("apiversion",apiVersion);
+			
 			root=new JSONObject();
-			root.put("common", common);
+			 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

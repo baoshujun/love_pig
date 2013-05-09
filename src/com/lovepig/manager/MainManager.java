@@ -4,18 +4,18 @@ import android.os.Message;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.lovepig.dc.MainDC;
 import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
+import com.lovepig.view.MainView;
 
 public class MainManager extends BaseManager {
     public final static int MSG_WHAT_HAVE_NEW_INFO = 0;
-    MainDC mainDC;
+    MainView mainDC;
     public MainManager(BaseActivity c) {
         super(c);
-        mainDC = new MainDC(context, R.layout.main, this);
+        mainDC = new MainView(context, R.layout.main, this);
     }
 
     @Override
