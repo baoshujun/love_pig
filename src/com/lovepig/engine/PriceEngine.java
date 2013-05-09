@@ -24,10 +24,10 @@ public class PriceEngine extends BaseEngine {
 	private boolean isStop;
 	private PriceManager priceManager;
 
-	public PriceEngine(BaseManager manager) {
+	public PriceEngine(PriceManager manager) {
 		super(manager);
-		if(priceManager != null){
-			priceManager = (PriceManager) manager;	
+		if(priceManager == null){
+			this.priceManager =  manager;	
 		}
 	}
 
@@ -52,7 +52,6 @@ public class PriceEngine extends BaseEngine {
 
 		@Override
 		protected void onPreExecute() {
-
 			super.onPreExecute();
 			priceManager.showLoading();
 		}
@@ -65,7 +64,7 @@ public class PriceEngine extends BaseEngine {
 			} else {
 				Json json = new Json(result);
 				if (json.getString("status").equals("1")) {
-					Json[] arrays = json.getJsonArray("news");
+					Json[] arrays = json.getJsonArray("prices");
 
 					ArrayList<PriceModel> datas = new ArrayList<PriceModel>();
 					for (int i = 0; i < arrays.length; i++) {

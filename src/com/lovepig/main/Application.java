@@ -2,6 +2,8 @@ package com.lovepig.main;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+
+import com.lovepig.manager.BoarManager;
 import com.lovepig.manager.MainManager;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.manager.FoodstuffManager;
@@ -13,6 +15,7 @@ public class Application extends BaseActivity {
 	public static OnlineNewsManager onlineNewsManager;
 	public static FoodstuffManager pigManager;
 	public static PriceManager priceManager;
+	public static BoarManager boarManager;
 
 	long timeForAnimator;
 	public MainManager mainManager;
@@ -27,7 +30,11 @@ public class Application extends BaseActivity {
 		mainManager = new MainManager(application);
 		onlineNewsManager = new OnlineNewsManager(application);
 		pigManager = new FoodstuffManager(application);
+		//加载价格
 		priceManager = new PriceManager(application);
+		//加载兽药
+		boarManager = new BoarManager(application);
+		
 		setContentView(mainManager.getLayout());
 		dcEngineContener = mainManager.getContainer();
 		currentManager = mainManager;

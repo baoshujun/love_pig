@@ -17,7 +17,7 @@ import com.lovepig.main.Configs;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsModel;
-import com.lovepig.model.ShareModel;
+import com.lovepig.model.BoarCateModel;
 import com.lovepig.pivot.BaseDC;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
@@ -118,10 +118,9 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
 
     }
 
-    private void constructNewsUrl(ShareModel shareModel) {
+    private void constructNewsUrl(BoarCateModel shareModel) {
         Json json = new Json();
         json.put("id", currentModel.id);
-        shareModel.newsUrl = Configs.HostName1[1] + Configs.getNewsShareContent + json.toString();
 
     }
 
