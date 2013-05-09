@@ -1,4 +1,4 @@
-package com.lovepig.dc;
+package com.lovepig.view;
 
 import java.util.ArrayList;
 
@@ -13,17 +13,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.lovepig.engine.ImageEngine;
-import com.lovepig.main.Configs;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsModel;
-import com.lovepig.model.BoarCateModel;
-import com.lovepig.pivot.BaseDC;
+import com.lovepig.model.ShareModel;
+import com.lovepig.pivot.BaseView;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.widget.OnFlingListener;
 
-public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
+public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     int pos;
     Context context;
     Button mBackBtn;// shareBtn, rightBtn;// 返回
@@ -40,7 +39,7 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
   //  private ShareModel shareModel;
     public boolean isFromDetail = false;
 
-    public OnlineNewsDetailsDC(Context context1, int layoutId, OnlineNewsManager manager) {
+    public OnlineNewsDetailsView(Context context1, int layoutId, OnlineNewsManager manager) {
         super(context1, layoutId, manager);
         this.context = context1;
         this.mManager = manager;
@@ -118,9 +117,10 @@ public class OnlineNewsDetailsDC extends BaseDC implements OnFlingListener {
 
     }
 
-    private void constructNewsUrl(BoarCateModel shareModel) {
+    private void constructNewsUrl(ShareModel shareModel) {
         Json json = new Json();
         json.put("id", currentModel.id);
+//        shareModel.newsUrl = Configs.HostName1[1] + Configs.getNewsShareContent + json.toString();
 
     }
 

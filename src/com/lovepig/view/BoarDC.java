@@ -1,4 +1,4 @@
-package com.lovepig.dc;
+package com.lovepig.view;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,8 @@ import com.lovepig.manager.BoarManager;
 import com.lovepig.model.BoarAreaModel;
 import com.lovepig.model.BoarBrandModel;
 import com.lovepig.model.BoarCateModel;
-import com.lovepig.pivot.BaseDC;
 import com.lovepig.pivot.BaseManager;
+import com.lovepig.pivot.BaseView;
 
 /**
  * @author greenboy1
@@ -22,7 +22,7 @@ import com.lovepig.pivot.BaseManager;
  * @version 1.0 创建时间：May 7, 2013 11:47:39 PM
  * 
  */
-public class BoarDC extends BaseDC {
+public class BoarDC extends BaseView {
 	// categorization 分类 brand 品牌 area 地区
 	private Button categorization, brand, area;
 	private ListView cateListview;

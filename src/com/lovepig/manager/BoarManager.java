@@ -8,8 +8,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ViewAnimator;
 
-import com.lovepig.dc.BoarDC;
-import com.lovepig.dc.BoarDetailDC;
 import com.lovepig.engine.BoarEngine;
 import com.lovepig.main.R;
 import com.lovepig.model.BoarAreaModel;
@@ -18,6 +16,8 @@ import com.lovepig.model.BoarCateModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Utils;
+import com.lovepig.view.BoarDC;
+import com.lovepig.view.BoarDetailDC;
 
 /**
  * @author greenboy1

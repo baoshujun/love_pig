@@ -1,8 +1,7 @@
 package com.lovepig.model;
 
-import java.io.Serializable;
 
-public class PriceModel extends ShoppingTushuTitleModel implements Serializable {
+public class PriceModel   {
 	private static final long serialVersionUID = 1L;
 	public String id;
 	public String price;

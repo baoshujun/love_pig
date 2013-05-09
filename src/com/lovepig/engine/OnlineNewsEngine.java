@@ -293,12 +293,12 @@ public class OnlineNewsEngine extends BaseEngine {
 
         @Override
         protected NewsState doInBackground(String... params) {
-            String result = httpRequestThisThread(1, Configs.getNewsAction + params[0]);
-            if (isStop) {
+//            String result = httpRequestThisThread(1, Configs.getNewsAction + params[0]);
+//            if (isStop) {
                 return null;
-            } else {
-                return ParseHttp1(result, 1);
-            }
+//            } else {
+//                return ParseHttp1(result, 1);
+//            }
         }
 
         @Override
@@ -426,12 +426,12 @@ public class OnlineNewsEngine extends BaseEngine {
 
         @Override
         protected ArrayList<NewsModel> doInBackground(String... params) {
-            String result = httpRequestThisThread(1, Configs.getNewsAction + params[0]);
-            if (isStop) {
+//            String result = httpRequestThisThread(1, Configs.getNewsAction + params[0]);
+//            if (isStop) {
                 return null;
-            } else {
-                return ParseHttp(result, 0);
-            }
+//            } else {
+//                return ParseHttp(result, 0);
+//            }
         }
 
         @Override
@@ -508,12 +508,13 @@ public class OnlineNewsEngine extends BaseEngine {
 
         @Override
         protected ArrayList<NewsModel> doInBackground(String... params) {
-            String result = httpRequestThisThread(1, Configs.getNewsAction + params[0]);
-            if (isStop) {
-                return null;
-            } else {
-                return ParseHttp(result, 1);
-            }
+//            String result = httpRequestThisThread(1, Configs.getNewsAction + params[0]);
+//            if (isStop) {
+//                return null;
+//            } else {
+//                return ParseHttp(result, 1);
+//            }
+            return null;
         }
 
         @Override
@@ -592,7 +593,7 @@ public class OnlineNewsEngine extends BaseEngine {
             }
 
         });
-        httpEngine.httpRequestNewThread(1, Configs.sentNewsCommentsAction + params);
+//        httpEngine.httpRequestNewThread(1, Configs.sentNewsCommentsAction + params);
 
     }
 
@@ -658,7 +659,7 @@ public class OnlineNewsEngine extends BaseEngine {
             }
 
         });
-        httpEngine.httpRequestNewThread(1, Configs.getNewsComment + params);
+//        httpEngine.httpRequestNewThread(1, Configs.getNewsComment + params);
 
     }
 

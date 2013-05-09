@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import android.os.Message;
 import android.widget.ViewAnimator;
-import com.lovepig.dc.OnlineNewsDC;
-import com.lovepig.dc.OnlineNewsDetailsDC;
 import com.lovepig.engine.OnlineNewsEngine;
 import com.lovepig.main.R;
 import com.lovepig.model.GalleryModel;
@@ -15,6 +13,8 @@ import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.LogInfo;
+import com.lovepig.view.OnlineNewsView;
+import com.lovepig.view.OnlineNewsDetailsView;
 
 public class OnlineNewsManager extends BaseManager {
     public static final int DEFAULT_NEW_LENGTH = 20;// 默认取20条新闻
@@ -36,8 +36,8 @@ public class OnlineNewsManager extends BaseManager {
     public static final int STATE_SENT_COMMENT_LIST = 13;// 发表评论
     public static final int WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW = 14;// 由top新闻进入新闻详情
 
-    private OnlineNewsDC mainDC;
-    private OnlineNewsDetailsDC detailsDC;
+    private OnlineNewsView mainDC;
+    private OnlineNewsDetailsView detailsDC;
     public OnlineNewsEngine engine;
     private int TypeID = -1;// 新闻栏目的ID
     private int Loading_For_Detail_Flag;// -1 表示获取最新 大于0表示加载更多
@@ -89,7 +89,7 @@ public class OnlineNewsManager extends BaseManager {
             break;
         case STATE_SHOWNEWS:
             if (detailsDC == null) {
-                detailsDC = new OnlineNewsDetailsDC(context, R.layout.online_news_details, this);
+                detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
             }
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
@@ -198,7 +198,7 @@ public class OnlineNewsManager extends BaseManager {
        
         case WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW:// 由顶部新闻进入新闻详情
             if (detailsDC == null) {
-                detailsDC = new OnlineNewsDetailsDC(context, R.layout.online_news_details, this);
+                detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
             }
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
@@ -517,10 +517,10 @@ public class OnlineNewsManager extends BaseManager {
     @Override
     public ViewAnimator getMainDC() {
         if (mainDC == null) {
-            mainDC = new OnlineNewsDC(context, R.layout.online_news, this);
+            mainDC = new OnlineNewsView(context, R.layout.online_news, this);
         }
         if (detailsDC == null) {
-            detailsDC = new OnlineNewsDetailsDC(context, R.layout.online_news_details, this);
+            detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
         }
         dcEngine.setMainDC(mainDC);
         LogInfo.LogOut("11111111111111");

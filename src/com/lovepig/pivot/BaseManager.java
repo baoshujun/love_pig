@@ -14,7 +14,7 @@ import com.lovepig.widget.TlcyDialog.TlcyDialogListener;
 public abstract class BaseManager extends Handler {
 
     public BaseActivity context;
-    public DCEngine dcEngine;
+    public ViewEngine dcEngine;
     public static final int MSG_ENTER_IN_END = 1000;
     public static final int MSG_ENTER_OUT_END = 1001;
     public static final int MSG_BACK_IN_END = 1002;
@@ -24,29 +24,29 @@ public abstract class BaseManager extends Handler {
 
     public BaseManager(BaseActivity c) {
         this.context = c;
-        dcEngine = new DCEngine(c);
+        dcEngine = new ViewEngine(c);
     }
 
     /**
      * 返回当前正在显示的DC,非baseDC则返回null
      * 
-     * @author Li Hongjun
+     * @author  
      */
-    public BaseDC getNowShownDC() {
+    public BaseView getNowShownDC() {
         return dcEngine.getNowDC();
     }
 
     /**
      * 必须在子类中实现,在主线程中调用,接受消息
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public abstract void handleMessage(Message msg);
 
     /**
      * 在子线程中调用,做耗时的事情
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public void initData() {
     };
@@ -54,7 +54,7 @@ public abstract class BaseManager extends Handler {
     /**
      * 如果DC中的点击事件,需要更改数据等,则直接调用此方法,应在子类中重写
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public void onClicked(int id) {
 
@@ -101,7 +101,7 @@ public abstract class BaseManager extends Handler {
     /**
      * 模块内界面前进跳转
      */
-    public void enterSubDC(BaseDC dc) {
+    public void enterSubDC(BaseView dc) {
         if (dcEngine.notAnimition()) {
             dcEngine.showDC(dc, 0, this, this);
         }
@@ -110,7 +110,7 @@ public abstract class BaseManager extends Handler {
     /**
      * 模块内界面返回跳转
      */
-    public void backSubDC(BaseDC dc) {
+    public void backSubDC(BaseView dc) {
         if (dcEngine.notAnimition()) {
             dcEngine.showDC(dc, 2, this, this);
         }

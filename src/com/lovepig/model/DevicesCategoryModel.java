@@ -5,7 +5,7 @@ import com.lovepig.utils.Json;
 /**
  *
  */
-public class DevicesCategoryModel extends Model {
+public class DevicesCategoryModel {
     /**
      *  
      */
