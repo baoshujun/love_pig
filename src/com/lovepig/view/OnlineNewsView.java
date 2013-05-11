@@ -55,7 +55,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         backBtn.setVisibility(VISIBLE);
         backBtn.setOnClickListener(this);
 
-        indexString = new String[] { "综合新闻", "行业新闻", "访谈板块", "产品信息", "法律法规"};
+        indexString = new String[] { "头条", "行业", "企业", "市场", "会讯"};
         myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, indexString);
         if (!myGallery.isScroll()) {
             qian.setVisibility(GONE);
@@ -237,8 +237,6 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
 	}
 	@Override
 	public void onRefresh() {
-		
-		
 	}
     
 }
