@@ -1,1 +1,6 @@
-“bin/”
+﻿"bin/"
+"*.class"
+"*.apk"
+"gen/"
+".settings/"
+"proguard/"
