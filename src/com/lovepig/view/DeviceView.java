@@ -1,15 +1,18 @@
-package com.lovepig.dc;
+package com.lovepig.view;
 
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.lovepig.main.R;
 import com.lovepig.manager.PriceManager;
 import com.lovepig.model.PriceModel;
-import com.lovepig.pivot.BaseDC;
+import com.lovepig.pivot.BaseView;
 import com.lovepig.pivot.BaseManager;
 
 /**
@@ -19,13 +22,13 @@ import com.lovepig.pivot.BaseManager;
  * @version 1.0 创建时间：May 5, 2013 3:40:10 PM
  * 
  */
-public class PriceDC extends BaseDC {
+public class DeviceView extends BaseView {
 	// livePig 生猪 piglet仔猪
 	private Button livePig, piglet;
 	private ListView priceListview;
 	private PriceListViewAdapter adapter;
 
-	public PriceDC(Context context, int layoutId, BaseManager manager) {
+	public DeviceView(Context context, int layoutId, BaseManager manager) {
 		super(context, layoutId, manager);
 		livePig = (Button) findViewById(R.id.leftBtn);
 		piglet = (Button) findViewById(R.id.rightBtn);
@@ -37,6 +40,8 @@ public class PriceDC extends BaseDC {
 		piglet.setOnClickListener(this);
 		priceListview.setOnItemClickListener((PriceManager)manager);
 	}
+
+	
 
 	public void setListViewAdapter(ArrayList<PriceModel> datas) {
 		adapter = new PriceListViewAdapter(datas, context);

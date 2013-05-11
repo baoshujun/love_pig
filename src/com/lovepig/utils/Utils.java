@@ -27,35 +27,18 @@ import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
 import android.text.format.Formatter;
 
-import com.lovepig.main.Configs;
 import com.lovepig.main.R;
-import com.lovepig.model.ItemModel;
 
 /**
  * 这里是工具类
  * 
- * @author Li Hongjun
+ * @author  
  */
 public class Utils {
     private static String imei = null;
     private static String imsi = null;
 
-    /**
-     * 根据id生成文件绝对路径
-     * 
-     * @author Li Hongjun
-     */
-    public static String buildFinalFilePath(String id, String url) {
-        if (url != null && url.startsWith(Configs.xhpmMusicPath)) {
-            return url;
-        } else {
-            if ("-1".equals(id)) {
-                return url;
-            } else {
-                return Configs.xhpmMusicPath + id + "." + buildFileType(url);
-            }
-        }
-    }
+     
 
     /**
      * 获取SD卡路径,一般为/sdcard
@@ -69,7 +52,7 @@ public class Utils {
     /**
      * 1为简体,2为繁体,3为英文,4为其他 2011-3-1
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static int getLocalLanguage() {
         String country = Locale.getDefault().getCountry();
@@ -90,7 +73,7 @@ public class Utils {
     /**
      * 获取手机IMEI 2010-5-6
      * 
-     * @author Li Hongjun
+     *  
      */
     public static String getIMEI(Context context) {
         if (imei == null || imei.equals("")) {
@@ -109,18 +92,7 @@ public class Utils {
                     LogInfo.LogOut("imei<-酷派手机专用获取IMEI号:" + imei);
                 } catch (Exception e) {
                     imei = tm.getDeviceId();
-                    // imei="&customid=4000071";
-                    // imei="862020980392117";
-                    // imei = "000000000000001";
-                    if(imei!=null){
-                        Configs.setIMEI(context, imei);
-                    }
-                    LogInfo.LogOut("imei<-tm.getDeviceId():" + imei);
-                    if (imei == null) {
-                        //imei = android.provider.Settings.Secure.getString(context.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-                        imei =Configs.getIMEI(context);
-                        LogInfo.LogOut("imei<-android.provider.Settings.Secure.getString:" + imei);
-                    }
+                    
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -152,7 +124,7 @@ public class Utils {
     /**
      * 获取sim卡串号 2010-5-10
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getIMSI(Context context) {
         if (imsi == null || imsi.equals("")) {
@@ -173,7 +145,7 @@ public class Utils {
     /**
      * 获取手机号 2010-5-6
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getPhoneNumber(Context c) {
         try {
@@ -188,7 +160,7 @@ public class Utils {
     /**
      * 获取屏幕宽度
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static int getScreenWidth(Activity context) {
         if (context == null) {
@@ -201,7 +173,7 @@ public class Utils {
     /**
      * 获取屏幕高度
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static int getScreenHeight(Activity context) {
         if (context == null) {
@@ -214,7 +186,7 @@ public class Utils {
     /**
      * 获取媒体音量 2010-5-27
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static int getMusicVolume(Context c) {
         try {
@@ -229,7 +201,7 @@ public class Utils {
     /**
      * 获取系统固件版本,如1.5 2010-5-6
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getOSVersion() {
         // 2.1_update1太长,服务端存储太小,暂时改用SDK号
@@ -240,7 +212,7 @@ public class Utils {
     /**
      * 获取api版本,如1.5对应的3 2010-5-6
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getSDKVersion() {
         return Build.VERSION.SDK;
@@ -249,7 +221,7 @@ public class Utils {
     /**
      * 获取手机型号 2010-5-6
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getMobileModel() {
         return Build.MODEL.replaceAll(" ", "");
@@ -258,7 +230,7 @@ public class Utils {
     /**
      * 构造app版本信息 2010-5-10
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getAppVersion() {
         return "Android" + getSDKVersion() + "V5";
@@ -267,7 +239,7 @@ public class Utils {
     /**
      * 判断是否装载的SDcard 2010-4-14
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean isSDCard() {
         return Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
@@ -276,7 +248,7 @@ public class Utils {
     /**
      * sd卡是否还有剩余空间
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean isSDCardFree() {
         if (isSDCard()) {
@@ -299,7 +271,7 @@ public class Utils {
     /**
      * sd卡是否还有剩余空间
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static long getSDCardFree() {
         if (isSDCard()) {
@@ -354,7 +326,7 @@ public class Utils {
     /**
      * 返回20100416010101格式的时间 2010-4-16
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String returnNowTime() {
         Date date = new Date();
@@ -371,7 +343,7 @@ public class Utils {
     /**
      * 将1970格式的时间转换成可读时间yyyyMMddkkmmss 2010-5-25
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static long return1970_to_Time(long time) {
         Date date = new Date(time);
@@ -387,7 +359,7 @@ public class Utils {
     /**
      * 对time1和time2进行比较,如果time1在time2之前,则为true 2010-4-20
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean returnCompare(String time1, String time2) {
         boolean rs = false;
@@ -405,7 +377,7 @@ public class Utils {
     /**
      * 对yyyy-MM-dd格式的日期,计算两个日期之间的天数 2010-11-2
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static int returnCalculateDays(String fromDay, String toDay) {
         try {
@@ -422,7 +394,7 @@ public class Utils {
     /**
      * 对时间进行更改,将time 调整secds秒钟,secds为正时向后延迟,secds为负时向前提前 2010-4-20
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String returnChangeTime(String time, int secds) {
         String timeString = time;
@@ -441,7 +413,7 @@ public class Utils {
     /**
      * 删除文件 2010-4-19
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static void deleteFile(String fileAllPathAndName) {
         try {
@@ -461,7 +433,7 @@ public class Utils {
     /**
      * 判断音频文件是否存在 2010-4-29
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean isFileExist(String path) {
         if (path == null) {
@@ -510,7 +482,7 @@ public class Utils {
     /**
      * 获取mac和mp3格式的id3v1的发行年
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getId3V1Year(File f) {
         String unkown = "-1";
@@ -543,7 +515,7 @@ public class Utils {
     /**
      * 获取mac和mp3格式的id3v1的风格
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getId3V1Genre(File f, Context context) {
         String unkown = "-1";
@@ -575,7 +547,7 @@ public class Utils {
     /**
      * 判断是否是mac格式文件
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean isREC(String path) {
         if (path == null) {
@@ -588,7 +560,7 @@ public class Utils {
     /**
      * 判断是否是mac格式文件
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean isMAC(String path) {
         if (path == null) {
@@ -601,7 +573,7 @@ public class Utils {
     /**
      * 判断是否是amr格式文件
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean isAMR(String path) {
         if (path == null) {
@@ -614,7 +586,7 @@ public class Utils {
     /**
      * 判断是否是mp3格式文件
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean isMP3(String path) {
         if (path == null) {
@@ -627,7 +599,7 @@ public class Utils {
     /**
      * 判断是否是mp3格式文件
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean isMP4(String path) {
         if (path == null) {
@@ -640,7 +612,7 @@ public class Utils {
     /**
      * 判断是否是amr格式文件
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static boolean is3GP(String path) {
         if (path == null) {
@@ -653,7 +625,7 @@ public class Utils {
     /**
      * 生成文件下载临时地址
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String buildFinalFileTempPathDown(String realPath) {
         return realPath.substring(0, realPath.lastIndexOf('.')) + ".tmp";
@@ -662,7 +634,7 @@ public class Utils {
     /**
      * 生成文件播放临时地址
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String buildFinalFileTempPathListen(String realPath) {
         return realPath.substring(0, realPath.lastIndexOf('.')) + ".tmp2";
@@ -671,7 +643,7 @@ public class Utils {
     /**
      * 生成文件类型 2010-5-10
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String buildFileType(String fileUrl) {
         String type = null;
@@ -729,7 +701,7 @@ public class Utils {
     /**
      * 获取已经下载的文件长度,用与断点续传 2010-4-28
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static long getTempFileLength(String path) {
         if (path == null) {
@@ -747,7 +719,7 @@ public class Utils {
     /**
      * 删除下载临时文件 2010-4-19
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static void deleteTempFile(String path) {
         if (path == null) {
@@ -763,7 +735,7 @@ public class Utils {
     /**
      * 格式化秒数 如36000秒-->10:00:00 2010-5-10
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String formatSeconds(long secs) {
         String string = "00:00";
@@ -799,7 +771,7 @@ public class Utils {
     /**
      * 格式化秒数 如10:00:00.000-->36000 毫秒数去掉 2010-5-10
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static long formatSeconds(String secs) {
         long time = 0;
@@ -825,7 +797,7 @@ public class Utils {
     /**
      * 获取本机语言类型 2010-4-22
      * 
-     * @author Li Hongjun
+     * @author  
      */
     public static String getLocal() {
         Locale locale = Locale.getDefault();
@@ -993,45 +965,7 @@ public class Utils {
             mNM.cancel(R.layout.main);
         }
     }
-
-    // public static Activity getTopActivity(Context context){
-    // ActivityManager am =
-    // (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-    // List<RunningTaskInfo> list =am.getRunningTasks(20);
-    // for(RunningTaskInfo info : list){
-    // if(info.topActivity.getClassName().equals(Application.class.getName())){
-    // return Application.application;
-    // }else
-    // if(info.topActivity.getClassName().equals(SpaceActivity.class.getName())){
-    // return SpaceActivity.application;
-    // }
-    // }
-    // return null;
-    // }
-
-    // <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-    // />
-
-    // 在AndroidManifest.xml里面配置一下就可以了。加入这一行android:screenOrientation="landscape"。
-    // 例如（landscape是横向，portrait是纵向）：
-
-    /*
-     * <supports-screens android:largeScreens="true"
-     * android:normalScreens="true" android:smallScreens="true"
-     * android:resizable="true" android:anyDensity="true" />
-     */
-    /**
-     * /mnt/sdcard/XHPM/music/3_1805_ro.txt
-     */
-    public static String getFileRoPath(ItemModel m) {
-        return new StringBuffer(Configs.tlcyRoPath).append(String.valueOf(m.type)).append("_").append(String.valueOf(m.deliverId)).append("_").append(buildFileNameandType(m.urlRo)).toString();
-    }
-    /**
-     * /mnt/sdcard/XHPM/music/3_1805_co.txt
-     */
-    public static String getFileCoPath(ItemModel m) {
-        return new StringBuffer(Configs.tlcyCoPath).append(String.valueOf(m.type)).append("_").append(String.valueOf(m.deliverId)).append("_").append(buildFileNameandType(m.url)).toString();
-    }
+     
     @SuppressWarnings("rawtypes")
     public static boolean isNotEmptyArrayList(ArrayList arrayList){
         return arrayList!=null&&arrayList.size()>0;

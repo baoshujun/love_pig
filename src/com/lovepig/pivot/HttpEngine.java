@@ -62,14 +62,6 @@ public class HttpEngine {
             if (isStop) {
                 return "ok";
             }
-           
-//            if (!Configs.isCheckin) {
-//                return "网络连接超时！";
-//            }
-            if (Configs.userid == null) {
-                // 通知主线程,设置登陆界面
-                return "nologin";
-            }
             rString = httpRequestThisThread(server, params[1]);
             if (isStop) {
                 return "ok";
@@ -82,11 +74,11 @@ public class HttpEngine {
                     LogInfo.LogOut("json:解析出错！");
                     return "json:解析出错！";
                 }
-                
-            }else{
+
+            } else {
                 return "网络连接超时！";
             }
-           
+
         }
 
         public void stop() {

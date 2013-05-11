@@ -1,4 +1,7 @@
-package com.lovepig.dc;
+package com.lovepig.view;
+/**
+ * 种猪根据品牌分类的adapter
+ */
 
 import java.util.ArrayList;
 
@@ -10,15 +13,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.lovepig.main.R;
-import com.lovepig.model.PriceModel;
+import com.lovepig.model.BoarBrandModel;
 
-public class PriceListViewAdapter extends BaseAdapter {
-	private ArrayList<PriceModel> list;
+public class BoarBrandAdapter extends BaseAdapter {
+	private ArrayList<BoarBrandModel> list;
 	private Context context;
 	private LayoutInflater inflater = null;
 	private static int currentPostion = -1;
 
-	public PriceListViewAdapter(ArrayList<PriceModel> list, Context context) {
+	public BoarBrandAdapter(ArrayList<BoarBrandModel> list, Context context) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -51,7 +54,7 @@ public class PriceListViewAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.text.setText(list.get(position).cityName);
+		holder.text.setText(list.get(position).brandName);
 		return convertView;
 	}
 
