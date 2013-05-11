@@ -486,7 +486,7 @@ public class OnlineNewsManager extends BaseManager {
     public void initData() {
         try {
         	LogInfo.LogOut("newsManager-->typeIndex:"+TypeIndex);
-            mainDC.UpdateGallery(new String[]{ "综合新闻", "行业新闻", "访谈板块", "产品信息", "法律法规"}, TypeIndex);
+            mainDC.UpdateGallery(new String[]{ "头条", "行业", "企业", "市场", "会讯"}, TypeIndex);
             sendMessage(obtainMessage(STATE_GALLERY_GETDATA_FIRST, TypeIndex, 0));
             
 //                if (dbEngine != null) {
