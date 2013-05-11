@@ -8,109 +8,86 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal" >
+        android:layout_marginTop="30.0dp"
+        android:orientation="vertical"
+        android:paddingLeft="50.0dp"
+        android:paddingRight="50.0dp" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="用户账号："
-            android:textColor="#000000"
-            android:textSize="25dp" />
-
-        <EditText
-            android:id="@+id/name"
-            android:singleLine="true"
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:orientation="horizontal" >
+            <EditText
+                android:id="@+id/login_edit_account"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/login_ib_expend"
+                android:inputType="textNoSuggestions"
+                android:maxLength="25"
+                android:paddingLeft="55.0dp"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="#334D06" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="用户密码："
-            android:textColor="#000000"
-            android:textSize="25dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5.0dp"
+                android:paddingLeft="2.0dp"
+                android:text="帐号"
+                android:textColor="#999999"
+                android:textSize="18.0dp" />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/pwd"
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
-            android:singleLine="true"
-            />
-    </LinearLayout>
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:orientation="horizontal" >
+            <EditText
+                android:id="@+id/login_edit_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:maxLength="20"
+                android:paddingLeft="55.0dp"
+                android:password="true"
+                android:text=""
+                android:textColor="#334D06" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="确认密码："
-            android:textColor="#000000"
-            android:textSize="25dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5.0dp"
+                android:paddingLeft="2.0dp"
+                android:text="密码"
+                android:textColor="#999999"
+                android:textSize="18.0dp" />
+        </RelativeLayout>
 
-        <EditText
-            android:id="@+id/pwd"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
-            android:singleLine="true"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="联系方式："
-            android:textColor="#000000"
-            android:textSize="25dp" />
-
-        <EditText
-            android:id="@+id/tel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
-            android:singleLine="true"
-            />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:paddingLeft="20dip"
-        android:paddingRight="20dip"
-        >
         <Button
-            android:id="@+id/zhuce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:text="注册"
-            android:textSize="20sp" />
+            android:id="@+id/button_login"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="fill"
+            android:layout_marginTop="20.0dp"
+            android:text="登录" >
+        </Button>
+
         <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:layout_alignParentRight="true"
-            android:text="登陆"
-            android:textSize="20sp" />
-    </RelativeLayout>
+            android:id="@+id/button_register"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="fill"
+            android:layout_marginTop="20.0dp"
+            android:text="注册" >
+        </Button>
+    </LinearLayout>
 
 </LinearLayout>
