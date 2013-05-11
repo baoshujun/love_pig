@@ -15,7 +15,7 @@
     <dimen name="more_item_margin_left">10dip</dimen>
 
     <!-- modified by zengsonghai (shopping model) start -->
-    <dimen name="fenlei_title_height">42dip</dimen>
+    <dimen name="fenlei_title_height">50dip</dimen>
     <dimen name="shopping_searchEdit_height">50dip</dimen>
     <dimen name="shopping_searchBtn_left">10dip</dimen>
     <dimen name="shopping_searchBtn_right">10dip</dimen>
@@ -166,7 +166,7 @@
     <dimen name="bookshelf_down_item_name_w">280dp</dimen>
     <dimen name="top_menu_w">420dp</dimen>
     <dimen name="news_l_item_h">160dp</dimen>
-    <dimen name="title_left_btn_w">60dp</dimen>
+    <dimen name="title_left_btn_w">120dp</dimen>
     <dimen name="more_recharge_yibao_text_w">40dp</dimen>
     <dimen name="shop_detail_viewstub_margin_b">0dp</dimen>
     <dimen name="multi_down_progress_magin_top">15dip</dimen>
