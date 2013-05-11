@@ -20,6 +20,7 @@ public class Location extends Application {
 	public TextView mTv;
 	public NotifyLister mNotifyer=null;
 	public Vibrator mVibrator01;
+	
 	public static String TAG = "LocTestDemo";
 	
 	@Override
@@ -30,9 +31,9 @@ public class Location extends Application {
 		mLocationClient.registerLocationListener( myListener );
 //		locationClient.registerLocationListener( listener );
 //		LocationClient.registerLocationListener( locListener );
-		//Î»ÖÃÌáÐÑÏà¹Ø´úÂë
+		//Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½
 //		mNotifyer = new NotifyLister();
-//		mNotifyer.SetNotifyLocation(40.047883,116.312564,3000,"gps");//4¸ö²ÎÊý´ú±íÒªÎ»ÖÃÌáÐÑµÄµãµÄ×ø±ê£¬¾ßÌåº¬ÒåÒÀ´ÎÎª£ºÎ³¶È£¬¾­¶È£¬¾àÀë·¶Î§£¬×ø±êÏµÀàÐÍ(gcj02,gps,bd09,bd09ll)
+//		mNotifyer.SetNotifyLocation(40.047883,116.312564,3000,"gps");//4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÎ»ï¿½ï¿½ï¿½ï¿½ï¿½ÑµÄµï¿½ï¿½ï¿½ï¿½ê£¬ï¿½ï¿½ï¿½åº¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Î³ï¿½È£ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ë·¶Î§ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½(gcj02,gps,bd09,bd09ll)
 //		mLocationClient.registerNotify(mNotifyer);
 		
 		super.onCreate(); 
@@ -40,7 +41,7 @@ public class Location extends Application {
 	}
 	
 	/**
-	 * ÏÔÊ¾×Ö·û´®
+	 * ï¿½ï¿½Ê¾ï¿½Ö·ï¿½
 	 * @param str
 	 */
 	public void logMsg(String str) {
@@ -54,7 +55,7 @@ public class Location extends Application {
 	}
 	
 	/**
-	 * ¼àÌýº¯Êý£¬ÓÖÐÂÎ»ÖÃµÄÊ±ºò£¬¸ñÊ½»¯³É×Ö·û´®£¬Êä³öµ½ÆÁÄ»ÖÐ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ãµï¿½Ê±ï¿½ò£¬¸ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½
 	 */
 	public class MyLocationListenner implements BDLocationListener {
 		@Override
@@ -78,11 +79,11 @@ public class Location extends Application {
 				sb.append("\nsatellite : ");
 				sb.append(location.getSatelliteNumber());
 			} else if (location.getLocType() == BDLocation.TypeNetWorkLocation){
-//				sb.append("\nÊ¡£º");
+//				sb.append("\nÊ¡ï¿½ï¿½");
 //				sb.append(location.getProvince());
-//				sb.append("\nÊÐ£º");
+//				sb.append("\nï¿½Ð£ï¿½");
 //				sb.append(location.getCity());
-//				sb.append("\nÇø/ÏØ£º");
+//				sb.append("\nï¿½ï¿½/ï¿½Ø£ï¿½");
 //				sb.append(location.getDistrict());
 				sb.append("\naddr : ");
 				sb.append(location.getAddrStr());
