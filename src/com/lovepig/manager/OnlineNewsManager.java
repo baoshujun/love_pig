@@ -8,12 +8,14 @@ import android.widget.ViewAnimator;
 import com.lovepig.engine.OnlineNewsEngine;
 import com.lovepig.engine.database.OnlineNewsDBEngine;
 import com.lovepig.main.R;
+import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.model.NewsCommentModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.LogInfo;
+import com.lovepig.utils.Utils;
 import com.lovepig.view.OnlineNewsView;
 import com.lovepig.view.OnlineNewsDetailsView;
 
@@ -67,6 +69,12 @@ public class OnlineNewsManager extends BaseManager {
     public void handleMessage(Message msg) {
         switch (msg.what) {
         case STATE_REFRESH:
+        	if (!Utils.isNetworkValidate(context)) {
+        		news=dbEngine.getOnlineNews(mGallerys.get(typeIndex).id);
+        		getNewsComplete(1);
+        		SetMoreBtn(false);
+				return;
+			}
         	showLoading();
             if (news != null && news.size() > 0) {
                 engine.refreshNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,news.get(news.size()-1).id);
@@ -94,7 +102,7 @@ public class OnlineNewsManager extends BaseManager {
                 back();
             }
             break;
-        case STATE_SHOWNEWS:
+        case STATE_SHOWNEWS://获取新闻详情页面
             if (detailsDC == null) {
                 detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
             }
@@ -108,7 +116,6 @@ public class OnlineNewsManager extends BaseManager {
 //                    detailsDC.isFromDetail=false;
 //                    isComeFromTop = true;
 //                }
-//             
 //                sendEmptyMessage(STATE_LOADMORE);
 //            } else if (msg.arg1 < 0) {
 //                showLoading();
@@ -122,7 +129,7 @@ public class OnlineNewsManager extends BaseManager {
 //                detailsDC.ShowNews(msg.arg1);
 //            }
             showLoading();
-            engine.fetchNewsDetail(0, 0);
+            engine.fetchNewsDetail(1, 0);
             break;
         case STATE_UPDATE:
             // 如果msg.arg1为1则需要设置更多按钮
@@ -178,7 +185,13 @@ public class OnlineNewsManager extends BaseManager {
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
             }
-            detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj, msg.arg1, msg.arg2);
+            int index=msg.arg1;
+            ArrayList<NewsModel> tops=(ArrayList<NewsModel>) msg.obj;
+           if (tops!=null&&index<tops.size()) {
+			   showLoading();
+		   }
+            
+            //detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj, msg.arg1, msg.arg2);
             break;
         default:
             break;
@@ -502,10 +515,10 @@ public class OnlineNewsManager extends BaseManager {
         engine.getNewsComments(firstNum, id);
     }
 
-	public void showNewsDetails(ArrayList<NewsModel> newslist) {
+	public void showNewsDetails(NewsDetailModel ndm) {
 		dismissLoading();
-		if (newslist!=null&&newslist.size()>0) {
-			detailsDC.ShowNewsDetail(newslist.get(0));
+		if (ndm!=null) {
+			detailsDC.ShowNewsDetail(ndm);
 		}else {
 			showAlert("获取新闻详情失败！");
 		}

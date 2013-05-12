@@ -173,6 +173,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
    //新闻列表被点击
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    	LogInfo.LogOut("position:"+position);
         if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
             l = System.currentTimeMillis();
             manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, position, 0));

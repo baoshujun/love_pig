@@ -7,10 +7,12 @@ import java.util.Comparator;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsCommentModel;
+import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseEngine;
@@ -21,7 +23,7 @@ import com.lovepig.utils.LogInfo;
 public class OnlineNewsEngine extends BaseEngine {
 	public static int NEWS_LIMIT_LENGTH = 20;
 	private static String GET_NEWS = "news/list?";
-	private static String GET_NEWS_DETAILS = "news/detail?newsId=2";
+	private static String GET_NEWS_DETAILS = "news/detail?newsId=";
 	OnlineNewsManager manager;
 	getNewsTask mGetNewsTask;
 	getMoreNewsTask mGetMoreNewsTask;
@@ -29,6 +31,7 @@ public class OnlineNewsEngine extends BaseEngine {
 	int RequestDataSize = 20;// 请求的数据条数
 	// 获取评论引擎
 	private HttpEngine httpEngine = null;
+	private int catId;
 
 	public OnlineNewsEngine(OnlineNewsManager manager) {
 		super(manager);
@@ -53,6 +56,7 @@ public class OnlineNewsEngine extends BaseEngine {
 	 *            ：上次获取新闻的做大id，第一次传0
 	 */
 	public void refreshNews(int catId, int limit, int maxId) {
+		this.catId=catId;
 		StringBuilder mStrBuilder = new StringBuilder("catId=");
 		mStrBuilder.append(catId).append("&limit=").append(limit)
 				.append("&maxId=").append(maxId);
@@ -72,6 +76,7 @@ public class OnlineNewsEngine extends BaseEngine {
 		// j.put("flag", "0");
 		// j.put("id", id);
 		// j.put("size", RequestDataSize);
+		GET_NEWS_DETAILS += id;
 		mGetNewsDetail = new getNewsDetailTask();
 		mGetNewsDetail.execute();
 	}
@@ -82,20 +87,17 @@ public class OnlineNewsEngine extends BaseEngine {
 	 * @author DCH
 	 * 
 	 */
-	class getNewsDetailTask extends AsyncTask<String, Void, NewsState> {
+	class getNewsDetailTask extends AsyncTask<String, Void, NewsDetailState> {
 		boolean isStop;
 
 		@Override
-		protected NewsState doInBackground(String... params) {
+		protected NewsDetailState doInBackground(String... params) {
 			String result = httpRequestThisThread(1, GET_NEWS_DETAILS);
 			if (isStop) {
 				return null;
 			} else {
 				LogInfo.LogOut("result:" + result);
-				NewsState rs = ParseHttp1(result, 0);
-				// if (rs.code.equals("hasnews") && !isStop) {
-				// manager.SaveNews(rs.newslist);
-				// }
+				NewsDetailState rs = ParseHttp2(result, 0);
 				if (rs.code.equals("hasnews") && !isStop) {
 					// manager.SetLatestNews(rs.newslist);
 				}
@@ -104,7 +106,7 @@ public class OnlineNewsEngine extends BaseEngine {
 		}
 
 		@Override
-		protected void onPostExecute(NewsState result) {
+		protected void onPostExecute(NewsDetailState result) {
 			if (!isStop && result != null) {
 				if (result.code.equals("hasnews")) {
 					// manager.SetLatestNews(result.newslist);
@@ -118,7 +120,7 @@ public class OnlineNewsEngine extends BaseEngine {
 					// // 没有更多按钮
 					// manager.SetMoreBtn(false);
 					// }
-					manager.showNewsDetails(result.newslist);
+					manager.showNewsDetails(result.newsDetail);
 				} else if (result.code.equals("neterror")) {
 					// 网络错误
 					manager.ShowNewsError("网络不可用,请检查您的网络！");
@@ -143,6 +145,7 @@ public class OnlineNewsEngine extends BaseEngine {
 	 * @param type
 	 */
 	public void moreNews(int catId, int limit, int maxId) {
+		this.catId=catId;
 		StringBuilder mStrBuilder = new StringBuilder("catId=");
 		mStrBuilder.append(catId).append("&limit=").append(limit)
 				.append("&maxId=").append(maxId);
@@ -240,6 +243,7 @@ public class OnlineNewsEngine extends BaseEngine {
 				return null;
 			} else {
 				LogInfo.LogOut("result:" + result);
+				manager.dbEngine.deleteNewsByTypeID(catId);
 				NewsState rs = ParseHttp1(result, 0);
 				if (rs.code.equals("hasnews") && !isStop) {
 					manager.SaveNews(rs.newslist);
@@ -365,6 +369,7 @@ public class OnlineNewsEngine extends BaseEngine {
 					LogInfo.LogOut("news = " + newsarray.length);
 					news = new NewsModel();
 					news.paserJson(newsarray[i]);
+					manager.dbEngine.saveNews(news, catId);
                    if (news.top==1) {
                 	   topList.add(news);
 				   }else{
@@ -383,6 +388,35 @@ public class OnlineNewsEngine extends BaseEngine {
 			newsState.code = "neterror";// 网络异常
 		}
 		return newsState;
+	}
+	
+	/**
+	 * 解析新闻详情信息
+	 * @param result
+	 * @param flag
+	 * @return
+	 */
+	private NewsDetailState ParseHttp2(String result, int flag) {
+		NewsDetailState newsDetailState = new NewsDetailState();
+		if (result != null) {
+			Json json = new Json(result);
+			if (json.getInt("status") == 1) {
+				NewsDetailModel news;
+				NewsDetailModel ndm =new NewsDetailModel();
+				String temp = json.getString("detail");
+				if (temp != null) {
+					newsDetailState.code = "hasnews";// 有新闻
+				}
+				NewsDetailModel model=new NewsDetailModel();
+				model.paserJson(new Json(temp));
+				newsDetailState.newsDetail = model;
+			} else {
+				newsDetailState.code = json.getString("msg");// 服务器正常返回，但没数据
+			}
+		} else {
+			newsDetailState.code = "neterror";// 网络异常
+		}
+		return newsDetailState;
 	}
 
 	class getNewsTask1 extends AsyncTask<String, Void, ArrayList<NewsModel>> {
@@ -506,6 +540,12 @@ public class OnlineNewsEngine extends BaseEngine {
 
 	class NewsState {
 		public ArrayList<NewsModel> newslist = new ArrayList<NewsModel>();// 新闻数据
+		public String code;// hasnews 表示有新闻 neterror 表示网络异常
+		public String hasBtn;// hasmore 表示有更多按钮
+	}
+	
+	class NewsDetailState {
+		public NewsDetailModel newsDetail = new NewsDetailModel();// 新闻数据
 		public String code;// hasnews 表示有新闻 neterror 表示网络异常
 		public String hasBtn;// hasmore 表示有更多按钮
 	}

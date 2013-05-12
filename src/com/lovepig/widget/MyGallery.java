@@ -1,7 +1,9 @@
 package com.lovepig.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
@@ -190,13 +192,12 @@ public class MyGallery extends HorizontalScrollView implements OnClickListener {
         for (int i = 0; i < childNum; i++) {
             button=(Button) layout.getChildAt(2*i);
             if (i == selected) {
-                //button.setBackgroundResource(bg);
-                //button.setPadding(0, 0, 0, 0);//不加这句无法使用9png
+                button.setTextColor(Color.YELLOW);
+                
                 button.getPaint().setFakeBoldText(true);
-                // scrollBy(layout.getChildAt(i).getRight(), 0);
             } else {
-               // button.setBackgroundResource(0);
                 button.getPaint().setFakeBoldText(false);
+                button.setTextColor(Color.WHITE);
             }
             if(i != childNum - 1){
                 imageView = (ImageView) layout.getChildAt(2*i+1);

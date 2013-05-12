@@ -1,17 +1,18 @@
 
 package com.lovepig.model;
 
-import java.util.ArrayList;
-
 import com.lovepig.utils.Json;
-public class NewsModel {
+public class NewsDetailModel {
 	public String title;// 标题
 	public String summary;// 简介
-	public int order;
+	public String order;
 	public int id;
-	public int top;
 	public String iconPath;//新闻图片
-    public ArrayList<NewsModel> topNews;//头条列表
+	public String content;
+	public String subTitle;
+	public String imgUrl;
+	public String cTime;
+	public String cFrom;
     
     @Override
     public int hashCode() {
@@ -28,7 +29,7 @@ public class NewsModel {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        NewsModel other = (NewsModel) obj;
+        NewsDetailModel other = (NewsDetailModel) obj;
         if (id != other.id)
             return false;
         return true;
@@ -40,17 +41,17 @@ public class NewsModel {
      * 
      *
      */
-    public NewsModel paserJson(Json json){
-    	 
-    	this.id = json.getInt("id");
+    public NewsDetailModel paserJson(Json json){
+//    	this.id = json.getInt("id");
     	this.summary= json.getString("summary");
     	this.iconPath = json.getString("iconUri");
-    	this.order=json.getInt("order");
+    	this.order=json.getString("order");
     	this.title = json.getString("titile");
-    	this.top= json.getInt("top");
-    	 
-        
-         
+    	this.content = json.getString("content");
+    	this.subTitle = json.getString("subTitle");
+    	this.cTime = json.getString("cTime");
+    	this.imgUrl = json.getString("imgUri");
+    	this.cFrom = json.getString("from");
     	return this;
     }
 }

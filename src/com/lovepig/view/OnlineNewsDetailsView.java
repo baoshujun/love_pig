@@ -6,15 +6,18 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.lovepig.engine.ImageEngine;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
+import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.model.ShareModel;
 import com.lovepig.pivot.BaseView;
@@ -25,6 +28,7 @@ import com.lovepig.widget.OnFlingListener;
 public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     int pos;
     Context context;
+    RelativeLayout headRelativeLayout;
     Button mBackBtn;// shareBtn, rightBtn;// 返回
     TextView mTitle;// 新闻标题
     TextView mTimeProvenance;// 时间和出处
@@ -35,7 +39,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     OnlineNewsManager mManager;
     // TlcyScrollView scrollView;
     ScrollView scrollView;
-    private NewsModel currentModel;
+    private NewsDetailModel currentModel;
   //  private ShareModel shareModel;
     public boolean isFromDetail = false;
 
@@ -47,7 +51,9 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         scrollView.setOnTouchListener(this);
         mBackBtn = (Button) findViewById(R.id.leftBtn);
         mBackBtn.setVisibility(View.VISIBLE);
-        mBackBtn.setText(R.string.onlinenews_back);
+        mBackBtn.setText("返回");
+        headRelativeLayout = (RelativeLayout)findViewById(R.id.leftBtnLayout);
+        headRelativeLayout.setVisibility(View.VISIBLE);
 //        rightBtn = (Button) findViewById(R.id.rightBtn);
 //        rightBtn.setOnClickListener(new OnClickListener() {
 //
@@ -305,38 +311,44 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
 
     }
     /**
-     * 设置新闻
+     * 设置新闻详情
      * 
      * @param index
      */
-    public void ShowNewsDetail(NewsModel model) {
-       
-
-//        scrollView.scrollTo(0, 0);
-//        scrollView.smoothScrollTo(0, 0);
-//       
-//        LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
-//
-//        final NewsModel news = model;
+    public void ShowNewsDetail(NewsDetailModel model) {
+        scrollView.scrollTo(0, 0);
+        scrollView.smoothScrollTo(0, 0);
+        LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
+        final NewsDetailModel news = model;
 //        mTitle.setText(news.title);
-//        mTimeProvenance.setText(news.createTime + (TextUtils.isEmpty(news.editor) ? "" : "    来源: " + news.editor));
-//        LogInfo.LogOut("字数:" + (news.content == null ? 0 : news.content.length()));
-//        mDetails.setText("");
-//        postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                setChangeLine(news.content);
-//            }
-//        }, 50);
-//        if (TextUtils.isEmpty(news.imgPath)) {
-//            mNewsImage.setVisibility(GONE);
-//        } else {
-//            mNewsImage.setVisibility(VISIBLE);
-//            ImageEngine.setImageBitmap(news.imgPath, mNewsImage, R.drawable.ic_launcher, -1);
-//        }
+        mTitle.setText("新闻标题");
+        mTimeProvenance.setText(news.cTime + (TextUtils.isEmpty(news.cFrom) ? "" : "    来源: " + news.cFrom));
+        LogInfo.LogOut("字数:" + (news.content == null ? 0 : news.content.length()));
+        mDetails.setText("");
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setChangeLine(news.content);
+            }
+        }, 50);
+        if (TextUtils.isEmpty(news.imgUrl)) {
+            mNewsImage.setVisibility(GONE);
+        } else {
+            mNewsImage.setVisibility(VISIBLE);
+            ImageEngine.setImageBitmap(news.imgUrl, mNewsImage, R.drawable.ic_launcher, -1);
+        }
 //        setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
-    
     }
-
-
+    
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+    
+    
+    
 }

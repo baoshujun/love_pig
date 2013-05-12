@@ -26,7 +26,6 @@ public class DBEngine {
             try {
                 LogInfo.LogOut(TAG + " open db error and create db start ");
                 db = SQLiteDatabase.openOrCreateDatabase(Configs.lovePigPath + Configs.DATABASE_NAME, null);
-                createOnlineNewsTypes();
                 createOnlineNews();
                 db.setVersion(1);
                 LogInfo.LogOut(TAG + " open db error and create db end");
@@ -36,53 +35,33 @@ public class DBEngine {
         }
     }
 
-    /**
-     * 在线新闻类型
-     * 
-     * @return
-     */
-    private static boolean createOnlineNewsTypes() {
-        try {
-            db.execSQL("CREATE TABLE onlinenewstypes (" + "newstype_id INTEGER PRIMARY KEY, " + // 新闻类型ID
-                    "newstype_index INTEGER, " + // 新闻类型排序
-                    "newstype_checked INTEGER, " + // 新闻类型是否被选中
-                    "newstype_name TEXT, " + // 新闻类型名称
-                    "newstype_date TEXT" + // 新闻类型最后更新时间
-                    ");");
-            LogInfo.LogOut(TAG + " Create Table audios ok");
-            return true;
-        } catch (Exception e) {
-            LogInfo.LogOut(TAG + " Create Table audios err,table exists." + e.getMessage());
-        }
-        return false;
-    }
+   
 
     /**
      * 在线新闻
-     * 
+     * public String title;// 标题
+	public String summary;// 简介
+	public String order;
+	public int id;
+	public int top;
+	public String iconPath;//新闻图片
      * @return
      */
     private static boolean createOnlineNews() {
         try {
-            db.execSQL("CREATE TABLE onlinenews (" + "news_id INTEGER, " + // 新闻ID
-                    "news_pos INTEGER ," + // 新闻序号
-                    "news_name TEXT ," + // 视频名称
-                    "news_time TEXT ," + // 新闻发布时间
-                    "news_publisher TEXT ," + // 新闻来源
-                    "news_intro TEXT ," + // 新闻简介
-                    "news_details TEXT ," + // 新闻内容
-                    "news_picpath TEXT ," + // 新闻图片地址
-                    "news_bigpicpath TEXT ," + // 新闻图片地址
-                    "news_picintro TEXT ," + // 新闻图片简介
-                    "news_typeid INTEGER," + // 新闻类型
-                    "news_istop INTEGER," + // 新闻头条
-                    "news_commentnum INTEGER," + // 新闻评论
-                    "primary key(news_id,news_typeid)" + // 新闻类型
+            db.execSQL("CREATE TABLE onlinenews (" + "table_id INTEGER PRIMARY KEY autoincrement, " + //表id
+                    "id INTEGER ," + // 新闻序号
+                    "title TEXT ," + // 视频名称
+                    "newsOrder INTEGER ," + // 新闻发布时间
+                    "top INTEGER ," + // 新闻来源
+                    "iconPath TEXT ," + // 新闻简介
+                    "summary TEXT ," + // 新闻内容
+                    "catId INTEGER" + // 新闻来源
                     ");");
             LogInfo.LogOut(TAG + " Create Table audios ok");
             return true;
         } catch (Exception e) {
-            LogInfo.LogOut(TAG + " Create Table audios err,table exists." + e.getMessage());
+            LogInfo.LogOut(TAG + " Create Table onlinenews err,table exists." + e.getMessage());
         }
         return false;
     }
