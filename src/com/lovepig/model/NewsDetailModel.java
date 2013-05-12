@@ -46,7 +46,7 @@ public class NewsDetailModel {
     	this.summary= json.getString("summary");
     	this.iconPath = json.getString("iconUri");
     	this.order=json.getString("order");
-    	this.title = json.getString("titile");
+    	this.title = json.getString("title");
     	this.content = json.getString("content");
     	this.subTitle = json.getString("subTitle");
     	this.cTime = json.getString("cTime");

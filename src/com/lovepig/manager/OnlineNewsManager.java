@@ -190,7 +190,7 @@ public class OnlineNewsManager extends BaseManager {
            if (tops!=null&&index<tops.size()) {
 			   showLoading();
 		   }
-            
+           engine.fetchNewsDetail(1, 0);
             //detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj, msg.arg1, msg.arg2);
             break;
         default:

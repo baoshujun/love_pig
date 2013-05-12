@@ -321,7 +321,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
         final NewsDetailModel news = model;
 //        mTitle.setText(news.title);
-        mTitle.setText("新闻标题");
+        mTitle.setText(news.title);
         mTimeProvenance.setText(news.cTime + (TextUtils.isEmpty(news.cFrom) ? "" : "    来源: " + news.cFrom));
         LogInfo.LogOut("字数:" + (news.content == null ? 0 : news.content.length()));
         mDetails.setText("");

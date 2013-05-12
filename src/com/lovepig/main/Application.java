@@ -69,7 +69,20 @@ public class Application extends BaseActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			finish();
+			 if (currentManager != null && !currentManager.backOnKeyDown()) {
+	                if (managerStack.size() > 0) {
+	                    managerStack.pop();
+	                }
+	                if (managerStack.size() > 0) {
+	                    if (managerStack.size() > 1) {// 二级或者三级四级manger
+	                        setSubManager(managerStack.pop());
+	                    } else {
+	                        setMainManager(managerStack.pop());
+	                    }
+	                } else {
+	                	finish();
+	                }
+	            }
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
