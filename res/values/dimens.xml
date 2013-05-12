@@ -165,7 +165,7 @@
     <dimen name="seekbar_width">710dp</dimen>
     <dimen name="bookshelf_down_item_name_w">280dp</dimen>
     <dimen name="top_menu_w">420dp</dimen>
-    <dimen name="news_l_item_h">160dp</dimen>
+    <dimen name="news_l_item_h">100dp</dimen>
     <dimen name="title_left_btn_w">120dp</dimen>
     <dimen name="more_recharge_yibao_text_w">40dp</dimen>
     <dimen name="shop_detail_viewstub_margin_b">0dp</dimen>

@@ -4,9 +4,6 @@ package com.lovepig.model;
 import java.util.ArrayList;
 
 import com.lovepig.utils.Json;
-
-
-
 public class NewsModel {
 	public String title;// 标题
 	public String summary;// 简介
@@ -56,5 +53,4 @@ public class NewsModel {
          
     	return this;
     }
-  
 }
