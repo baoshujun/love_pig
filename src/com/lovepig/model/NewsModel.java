@@ -7,7 +7,7 @@ import com.lovepig.utils.Json;
 public class NewsModel {
 	public String title;// 标题
 	public String summary;// 简介
-	public String order;
+	public int order;
 	public int id;
 	public int top;
 	public String iconPath;//新闻图片
@@ -45,7 +45,7 @@ public class NewsModel {
     	this.id = json.getInt("id");
     	this.summary= json.getString("summary");
     	this.iconPath = json.getString("iconUri");
-    	this.order=json.getString("order");
+    	this.order=json.getInt("order");
     	this.title = json.getString("titile");
     	this.top= json.getInt("top");
     	 

@@ -14,6 +14,7 @@ import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.LogInfo;
+import com.lovepig.utils.Utils;
 import com.lovepig.view.OnlineNewsView;
 import com.lovepig.view.OnlineNewsDetailsView;
 
@@ -67,6 +68,12 @@ public class OnlineNewsManager extends BaseManager {
     public void handleMessage(Message msg) {
         switch (msg.what) {
         case STATE_REFRESH:
+        	if (!Utils.isNetworkValidate(context)) {
+        		news=dbEngine.getOnlineNews(mGallerys.get(typeIndex).id);
+        		getNewsComplete(1);
+        		SetMoreBtn(false);
+				return;
+			}
         	showLoading();
             if (news != null && news.size() > 0) {
                 engine.refreshNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,news.get(news.size()-1).id);
@@ -178,7 +185,13 @@ public class OnlineNewsManager extends BaseManager {
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
             }
-            detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj, msg.arg1, msg.arg2);
+            int index=msg.arg1;
+            ArrayList<NewsModel> tops=(ArrayList<NewsModel>) msg.obj;
+           if (tops!=null&&index<tops.size()) {
+			   showLoading();
+		   }
+            
+            //detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj, msg.arg1, msg.arg2);
             break;
         default:
             break;

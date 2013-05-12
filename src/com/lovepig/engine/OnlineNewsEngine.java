@@ -29,6 +29,7 @@ public class OnlineNewsEngine extends BaseEngine {
 	int RequestDataSize = 20;// 请求的数据条数
 	// 获取评论引擎
 	private HttpEngine httpEngine = null;
+	private int catId;
 
 	public OnlineNewsEngine(OnlineNewsManager manager) {
 		super(manager);
@@ -53,6 +54,7 @@ public class OnlineNewsEngine extends BaseEngine {
 	 *            ：上次获取新闻的做大id，第一次传0
 	 */
 	public void refreshNews(int catId, int limit, int maxId) {
+		this.catId=catId;
 		StringBuilder mStrBuilder = new StringBuilder("catId=");
 		mStrBuilder.append(catId).append("&limit=").append(limit)
 				.append("&maxId=").append(maxId);
@@ -143,6 +145,7 @@ public class OnlineNewsEngine extends BaseEngine {
 	 * @param type
 	 */
 	public void moreNews(int catId, int limit, int maxId) {
+		this.catId=catId;
 		StringBuilder mStrBuilder = new StringBuilder("catId=");
 		mStrBuilder.append(catId).append("&limit=").append(limit)
 				.append("&maxId=").append(maxId);
@@ -240,6 +243,7 @@ public class OnlineNewsEngine extends BaseEngine {
 				return null;
 			} else {
 				LogInfo.LogOut("result:" + result);
+				manager.dbEngine.deleteNewsByTypeID(catId);
 				NewsState rs = ParseHttp1(result, 0);
 				if (rs.code.equals("hasnews") && !isStop) {
 					manager.SaveNews(rs.newslist);
@@ -365,6 +369,7 @@ public class OnlineNewsEngine extends BaseEngine {
 					LogInfo.LogOut("news = " + newsarray.length);
 					news = new NewsModel();
 					news.paserJson(newsarray[i]);
+					manager.dbEngine.saveNews(news, catId);
                    if (news.top==1) {
                 	   topList.add(news);
 				   }else{
