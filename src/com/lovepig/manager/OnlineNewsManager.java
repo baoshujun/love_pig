@@ -158,50 +158,16 @@ public class OnlineNewsManager extends BaseManager {
             break;
         case STATE_GALLERY_CLICKED://新闻分类被点击
             engine.StopTask();
-//            engine.refreshNews(0, 0);
-//            if (isGetGallry && mGallerys != null && mGallerys.size() > 0) {
-//                final int tmpid = mGallerys.get(msg.arg1).typeid;
-//                final int oldindexid = mGallerys.get(TypeIndex).typeid;
-//                mainDC.onRefreshComplete(mGallerys.get(msg.arg1).mDate);
-//                if (tmpid != TypeID) {
-//                    TypeIndex = msg.arg1;
-//                    if (!news.isEmpty()) {
-//                        news.clear();
-//                    }
-//                    mainDC.UpdataData();
-//                    mainDC.setLoadMoreButton(false);
-//                    TypeID = tmpid;
-//                    new Thread() {
-//                        public void run() {
-//                            if (news.size() <= 0) {
-//                                sendEmptyMessage(STATE_REFRESH);
-//                            } else {
-//                                if (news.size() >= DEFAULT_NEW_LENGTH) {
-//                                    sendMessage(obtainMessage(STATE_UPDATE, 1, 0));
-//                                } else {
-//                                    sendMessage(obtainMessage(STATE_UPDATE, 0, 0));
-//                                }
-//                            }
-//                        }
-//                    }.start();
-//                } else {
-//                    TypeID = tmpid;
-//                    if (news.size() == 0) {
-//                        mainDC.setLoadMoreButton(false);
-//                        sendEmptyMessage(STATE_REFRESH);
-//                    } else {
-//                        // 点击同一个栏目时应保持原状
-//                        // mainDC.setLoadMoreButton(false);
-//                        // if (news.size() < DEFAULT_NEW_LENGTH) {
-//                        sendMessage(obtainMessage(STATE_UPDATE, 0, 0));
-//                        // } else {
-//                        // sendMessage(obtainMessage(STATE_UPDATE, 1, 0));
-//                        // }
-//                    }
-//                }
-//            } else {
-//                UpdateGrally();
-//            }
+            int position=msg.arg1;
+            if (position!=typeIndex||news==null||news.size()==0) {
+            	if (news!=null) {
+					news.clear();
+				}
+            	mainDC.UpdataData();
+            	showLoading();
+				typeIndex=position;
+            	engine.refreshNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,0);;
+			}
             break;
        
         case WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW:// 由顶部新闻进入新闻详情
