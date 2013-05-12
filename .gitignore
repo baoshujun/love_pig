@@ -1,11 +1,9 @@
-<<<<<<< HEAD
-﻿"bin/"
+"bin/"
 "*.class"
 "*.apk"
 "gen/"
 ".settings/"
 "proguard/"
-=======
 bin/
 gen/
 .gitignore
@@ -13,4 +11,3 @@ gen/
 /.project
 lint.xml
 .settings*
->>>>>>> origin/master

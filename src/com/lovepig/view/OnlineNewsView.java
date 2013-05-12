@@ -28,7 +28,7 @@ import com.lovepig.widget.TlcyListLayout;
 public class OnlineNewsView extends BaseView implements OnItemClickListener, OnRefreshListener,  TlcyGalleryListener {
     MyGallery myGallery;
     ImageView  qian, hou;
-//    TextView title;
+    TextView title;
     ArrayList<NewsGalleryModel> mNewsGalleryModels;
     String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};;
     private int index;
@@ -43,8 +43,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     public OnlineNewsView(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
         this.manager = manager;
-//        title = (TextView) findViewById(R.id.title);
-//        title.setText(context.getString(R.string.News));
+        title = (TextView) findViewById(R.id.title);
+        title.setText(context.getString(R.string.News));
         timeText = (TextView) findViewById(R.id.timeText);
         timeText.setVisibility(VISIBLE);
 
