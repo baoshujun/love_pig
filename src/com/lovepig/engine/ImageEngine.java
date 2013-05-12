@@ -95,7 +95,7 @@ public class ImageEngine {
      * 获取已经下载到本地的原始图片文件  参数为url,非path
      */
     public static File loadLocalFile(String url) {
-        File cacheDir = new File(Configs.tlcyImagePath);
+        File cacheDir = new File(Configs.lovePigImagePath);
         String urlConvert = MD5.md5Upper(url);
         File file = new File(cacheDir, urlConvert);
         return file;
@@ -218,7 +218,7 @@ public class ImageEngine {
             mImageView.setImageResource(defaultDrawable);
             return;
         }
-        File cacheDir = new File(Configs.tlcyImagePath);
+        File cacheDir = new File(Configs.lovePigImagePath);
         String urlConvert = MD5.md5Upper(mUrl);
         File file = new File(cacheDir, urlConvert);
         ImageObj obj = new ImageObj();
@@ -389,7 +389,7 @@ public class ImageEngine {
      * @param bitmap
      */
     private void saveBitmapToLocal(String url, Bitmap bitmap) {
-        File cacheDir = new File(Configs.tlcyImagePath);
+        File cacheDir = new File(Configs.lovePigImagePath);
         if (!cacheDir.exists()) {
             cacheDir.mkdirs();
         }
@@ -420,7 +420,7 @@ public class ImageEngine {
     private Bitmap findScaleBitmap() {
         Bitmap bitmap = null;
         try {
-            File cacheDir = new File(Configs.tlcyImagePath);
+            File cacheDir = new File(Configs.lovePigImagePath);
             String urlConvert = MD5.md5Upper(mUrl + SCALE);
             File file = new File(cacheDir, urlConvert);
             if (file.exists() && file.length() > 0) {// 小图已经存在
@@ -489,7 +489,7 @@ public class ImageEngine {
      */
     private Bitmap getBitmapFromLocal(String url) {
         Bitmap bitmap = null;
-        File cacheDir = new File(Configs.tlcyImagePath);
+        File cacheDir = new File(Configs.lovePigImagePath);
         // String urlConvert = XmlBase64.encode(url.getBytes());
         String urlConvert = MD5.md5Upper(url);
         File file = new File(cacheDir, urlConvert);
@@ -504,7 +504,7 @@ public class ImageEngine {
      * 程序 每次启动时执行,按周期清除缓存
      */
     private static void clearCache() {
-        File cacheDir = new File(Configs.tlcyImagePath);
+        File cacheDir = new File(Configs.lovePigImagePath);
         if (cacheDir.exists()) {
             File[] fileList = cacheDir.listFiles();
             long week = 7 * 24 * 60 * 60 * 1000;// 缓存一周

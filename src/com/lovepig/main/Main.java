@@ -58,7 +58,7 @@ public class Main extends Activity {
 		signIn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				commonIntent(SignIn.class);
+				commonIntent(SignIn.class,-1);
 			}
 		});
 	}
@@ -73,28 +73,28 @@ public class Main extends Activity {
 			public void onClick(View v) {
 				switch (id) {
 				case R.id.newsMsg:
-					commonIntent(Application.class);
+					commonIntent(Application.class,R.id.newsMsg);
 					break;
 				case R.id.priceMsg:
-					commonIntent(Application.class);
+					commonIntent(Application.class,R.id.priceMsg);
 					break;
 				case R.id.boarMsg:
-					commonIntent(Application.class);
+					commonIntent(Application.class,R.id.boarMsg);
 					break;
 				case R.id.medicinalMsg:
-					commonIntent(Application.class);
+					commonIntent(Application.class,R.id.medicinalMsg);
 					break;
 				case R.id.fodderMsg:
-					commonIntent(Application.class);
+					commonIntent(Application.class,R.id.fodderMsg);
 					break;
 				case R.id.deviceMsg:
-					commonIntent(Application.class);
+					commonIntent(Application.class,R.id.deviceMsg);
 					break;
 				case R.id.expertMsg:
-					commonIntent(Application.class);
+					commonIntent(Application.class,R.id.expertMsg);
 					break;
 				case R.id.other:
-					commonIntent(Application.class);
+					commonIntent(Application.class,R.id.other);
 					break;
 				default:
 					break;
@@ -108,9 +108,10 @@ public class Main extends Activity {
 	 * 
 	 * @param mClass
 	 */
-	private void commonIntent(Class mClass) {
+	private void commonIntent(Class mClass,int tabID) {
 		Intent it = new Intent();
 		it.setClass(Main.this, mClass);
+		it.putExtra("tabID", tabID);
 		startActivity(it);
 	}
 

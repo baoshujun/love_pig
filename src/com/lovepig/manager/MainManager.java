@@ -4,18 +4,18 @@ import android.os.Message;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.lovepig.dc.MainDC;
 import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
+import com.lovepig.view.MainView;
 
 public class MainManager extends BaseManager {
     public final static int MSG_WHAT_HAVE_NEW_INFO = 0;
-    MainDC mainDC;
+    MainView mainDC;
     public MainManager(BaseActivity c) {
         super(c);
-        mainDC = new MainDC(context, R.layout.main, this);
+        mainDC = new MainView(context, R.layout.main, this);
     }
 
     @Override
@@ -29,25 +29,36 @@ public class MainManager extends BaseManager {
     public void onClicked(int id) {
         switch (id) {
         case R.id.menu_news:
+        case R.id.newsMsg: 	
             if(!(Application.application.currentManager instanceof OnlineNewsManager)){
                 Application.application.setMainManager(Application.onlineNewsManager);
+        		Application.onlineNewsManager.initData();
+        		mainDC.viewReset(R.id.menu_news);
             }
            
             break;
         case R.id.menu_price://价格
-            
+        case R.id.priceMsg:
+        	  if(!(Application.application.currentManager instanceof PriceManager)){
+                  Application.application.setMainManager(Application.priceManager);
+                  Application.priceManager.initData();
+                  mainDC.viewReset(R.id.menu_price);
+              }
             break;
-        case R.id.menu_equipment:  //设备
-           
+        case R.id.menu_equipment:
+        case R.id.deviceMsg://设备
           
             break;
-<<<<<<< HEAD
-        case R.id.menu_veterinary_drugs: // 兽医  
-            
-           
+
+        case R.id.menu_veterinary_drugs:
+        case R.id.boarMsg: //兽药 
+        	 if(!(Application.application.currentManager instanceof BoarManager)){
+                 Application.application.setMainManager(Application.boarManager);
+                 Application.boarManager.initData();
+             }
             break;
-        case R.id.menu_answer_questions: //答疑
-          
+        case R.id.menu_answer_questions: 
+        case R.id.expertMsg://答疑
            
           
             break;
@@ -56,17 +67,7 @@ public class MainManager extends BaseManager {
             
             
             break;
-=======
-//        case R.id.menu_multi_media:    
-//            
-//           
-//            break;
-//        case R.id.menu_more: 
-          
-           
-          
-//            break;
->>>>>>> origin/master
+
         default:
             break;
         }

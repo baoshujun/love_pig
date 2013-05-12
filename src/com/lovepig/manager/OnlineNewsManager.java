@@ -5,21 +5,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import android.os.Message;
 import android.widget.ViewAnimator;
-import com.lovepig.dc.OnlineNewsDC;
-import com.lovepig.dc.OnlineNewsDetailsDC;
 import com.lovepig.engine.OnlineNewsEngine;
+import com.lovepig.engine.database.OnlineNewsDBEngine;
 import com.lovepig.main.R;
-import com.lovepig.model.GalleryModel;
+import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.model.NewsCommentModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.LogInfo;
+import com.lovepig.view.OnlineNewsView;
+import com.lovepig.view.OnlineNewsDetailsView;
 
 public class OnlineNewsManager extends BaseManager {
     public static final int DEFAULT_NEW_LENGTH = 20;// 默认取20条新闻
     public ArrayList<NewsModel> news = new ArrayList<NewsModel>();
-    public ArrayList<GalleryModel> mGallerys = new ArrayList<GalleryModel>();
+    public ArrayList<NewsGalleryModel> mGallerys = new ArrayList<NewsGalleryModel>();
     public static final int STATE_REFRESH = 1;// 刷新获取最新新闻
     public static final int STATE_LOADMORE = 2;// 加载更多
     public static final int STATE_DETAILSBACK = 3;// 详情页面返回
@@ -36,24 +37,30 @@ public class OnlineNewsManager extends BaseManager {
     public static final int STATE_SENT_COMMENT_LIST = 13;// 发表评论
     public static final int WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW = 14;// 由top新闻进入新闻详情
 
-    private OnlineNewsDC mainDC;
-    private OnlineNewsDetailsDC detailsDC;
+    private OnlineNewsView mainDC;
+    private OnlineNewsDetailsView detailsDC;
     public OnlineNewsEngine engine;
     private int TypeID = -1;// 新闻栏目的ID
     private int Loading_For_Detail_Flag;// -1 表示获取最新 大于0表示加载更多
-    private int TypeIndex;// 当前选择的新闻栏目
+    private int typeIndex;// 当前选择的新闻栏目
     private boolean isGetGallry = false;
     private NewsCommentModel sendingModel;
     public int isTop;// 记录是否有头条新闻
     public ArrayList<NewsModel> topNews = new ArrayList<NewsModel>();
     public boolean isComeFromTop = false;
     public NewsModel headModel = new NewsModel();
+    
+    public OnlineNewsDBEngine dbEngine;
 
     public OnlineNewsManager(BaseActivity c) {
         super(c);
         if (engine == null) {
             engine = new OnlineNewsEngine(this);
         }
+        
+        if (dbEngine==null) {
+        	dbEngine=new OnlineNewsDBEngine();
+		}
     }
 
     @SuppressWarnings("unchecked")
@@ -61,15 +68,16 @@ public class OnlineNewsManager extends BaseManager {
     public void handleMessage(Message msg) {
         switch (msg.what) {
         case STATE_REFRESH:
+        	showLoading();
             if (news != null && news.size() > 0) {
-                engine.refreshNews(news.get(0).id, TypeID);
+                engine.refreshNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,news.get(news.size()-1).id);
             } else {
-                engine.refreshNews(0, TypeID);
+                engine.refreshNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,0);
             }
             break;
         case STATE_LOADMORE:
             try {
-                engine.moreNews(news.get(news.size() - 1).id, TypeID);
+                engine.moreNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,news.get(news.size()-1).id);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -89,7 +97,7 @@ public class OnlineNewsManager extends BaseManager {
             break;
         case STATE_SHOWNEWS:
             if (detailsDC == null) {
-                detailsDC = new OnlineNewsDetailsDC(context, R.layout.online_news_details, this);
+                detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
             }
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
@@ -135,7 +143,7 @@ public class OnlineNewsManager extends BaseManager {
         case STATE_GALLERY_GETDATA_FIRST:
             showLoading();
             if (mGallerys != null && mGallerys.size() > 0) {
-                int tmpid = mGallerys.get(msg.arg1).typeid;
+                int tmpid = mGallerys.get(msg.arg1).id;
                 mainDC.onRefreshComplete(mGallerys.get(msg.arg1).mDate);
                 mainDC.setLoadMoreButton(false);
                 TypeID = tmpid;
@@ -150,7 +158,7 @@ public class OnlineNewsManager extends BaseManager {
             break;
         case STATE_GALLERY_CLICKED://新闻分类被点击
             engine.StopTask();
-            engine.refreshNews(0, 0);
+//            engine.refreshNews(0, 0);
 //            if (isGetGallry && mGallerys != null && mGallerys.size() > 0) {
 //                final int tmpid = mGallerys.get(msg.arg1).typeid;
 //                final int oldindexid = mGallerys.get(TypeIndex).typeid;
@@ -198,7 +206,7 @@ public class OnlineNewsManager extends BaseManager {
        
         case WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW:// 由顶部新闻进入新闻详情
             if (detailsDC == null) {
-                detailsDC = new OnlineNewsDetailsDC(context, R.layout.online_news_details, this);
+                detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
             }
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
@@ -249,6 +257,7 @@ public class OnlineNewsManager extends BaseManager {
      */
     public void getNewsComplete(int flag) {
         if (flag == 0) {
+        	dismissLoading();
         	mainDC.onRefreshComplete("123456");
           //  mainDC.onRefreshComplete(mGallerys.get(TypeIndex).mDate);
         } else {
@@ -294,7 +303,7 @@ public class OnlineNewsManager extends BaseManager {
      * 保存最新新闻，更新时间
      */
     public void SaveNews(ArrayList<NewsModel> news) {
-        GalleryModel model = mGallerys.get(TypeIndex);
+        NewsGalleryModel model = mGallerys.get(typeIndex);
         model.mDate = (new SimpleDateFormat("MM-dd HH:mm:ss").format(new Date()));
         
 //        dbEngine.updateRefreshTimeByID(model.typeid, model.mDate);
@@ -312,10 +321,10 @@ public class OnlineNewsManager extends BaseManager {
     public void onLaterNews(ArrayList<NewsModel> laterNews) {
         try {
             if (laterNews != null) {// 下拉获取新闻，新闻列表始终保持20条
-                mGallerys.get(TypeIndex).mDate = (new SimpleDateFormat("MM-dd HH:mm:ss").format(new Date()));
+                mGallerys.get(typeIndex).mDate = (new SimpleDateFormat("MM-dd HH:mm:ss").format(new Date()));
                 news = laterNews;
                 if (mainDC != null) {
-                    mainDC.onRefreshComplete(mGallerys.get(TypeIndex).mDate);
+                    mainDC.onRefreshComplete(mGallerys.get(typeIndex).mDate);
                 }
                 if (news.size() < DEFAULT_NEW_LENGTH) {
                     mainDC.onLoadingNoMore();
@@ -416,54 +425,54 @@ public class OnlineNewsManager extends BaseManager {
      * 
      * @param mGallery
      */
-    public void getGrally(ArrayList<GalleryModel> mGallery) {
-        if (mGallery != null) {
-            String[] mString = initGrally(mGallery, 1);
-            if (mainDC != null && mString != null) {
-                mainDC.UpdateGallery(mString, TypeIndex);
-               
-                isGetGallry = true;
-                mainDC.getNewsByType(TypeIndex);
-            }
-        } else {
-        	engine.refreshNews(0, 0);
-        	//context.getString(R.string.netconnecterror)
-            //showAlert("获取新闻栏目失败，只能显示默认的栏目！");
-           // dismissLoading();
-        }
+    public void getGrally(ArrayList<NewsGalleryModel> mGallery) {
+//        if (mGallery != null) {
+//            String[] mString = initGrally(mGallery, 1);
+//            if (mainDC != null && mString != null) {
+//                mainDC.UpdateGallery(mString, TypeIndex);
+//               
+//                isGetGallry = true;
+//                mainDC.getNewsByType(TypeIndex);
+//            }
+//        } else {
+//        	engine.refreshNews(0, 0);
+//        	//context.getString(R.string.netconnecterror)
+//            //showAlert("获取新闻栏目失败，只能显示默认的栏目！");
+//           // dismissLoading();
+//        }
     }
 
     /**
      * @param flag
      *            0为从本地数据库读取types,1为从网络获取types
      */
-    private String[] initGrally(ArrayList<GalleryModel> program, int flag) {
+    private String[] initGrally(ArrayList<NewsGalleryModel> program, int flag) {
         String[] mString = null;
-        int L = 0;
-        if (program != null && program.size() > 0) {
-            if (flag == 1) {
-                for (GalleryModel m : mGallerys) {
-                    for (GalleryModel m1 : program) {
-                        if (m.typeid == m1.typeid) {
-                            m1.mDate = m.mDate;
-                            break;
-                        }
-                    }
-                }
-            }
-            mGallerys = program;
-            L = mGallerys.size();
-            mString = new String[L];
-            GalleryModel m = null;
-            for (int i = 0; i < L; i++) {
-                m = mGallerys.get(i);
-                mString[i] = m.name;
-                if (m.checked == 1) {// 从数据库中查询数据
-                    TypeIndex = i;
-                    TypeID = m.typeid;
-                }
-            }
-        }
+//        int L = 0;
+//        if (program != null && program.size() > 0) {
+////            if (flag == 1) {
+////                for (NewsGalleryModel m : mGallerys) {
+////                    for (NewsGalleryModel m1 : program) {
+////                        if (m.typeid == m1.typeid) {
+////                            m1.mDate = m.mDate;
+////                            break;
+////                        }
+////                    }
+////                }
+//           }
+//            mGallerys = program;
+//            L = mGallerys.size();
+//            mString = new String[L];
+//            NewsGalleryModel m = null;
+//            for (int i = 0; i < L; i++) {
+//                m = mGallerys.get(i);
+//                mString[i] = m.name;
+//                if (m.checked == 1) {// 从数据库中查询数据
+//                    typeIndex = i;
+//                    TypeID = m.typeid;
+//                }
+//            }
+//        }
         return mString;
     }
 
@@ -485,15 +494,10 @@ public class OnlineNewsManager extends BaseManager {
     @Override
     public void initData() {
         try {
-        	LogInfo.LogOut("newsManager-->typeIndex:"+TypeIndex);
-            mainDC.UpdateGallery(new String[]{ "综合新闻", "行业新闻", "访谈板块", "产品信息", "法律法规"}, TypeIndex);
-            sendMessage(obtainMessage(STATE_GALLERY_GETDATA_FIRST, TypeIndex, 0));
-            
-//                if (dbEngine != null) {
-//                    mainDC.UpdateGallery(initGrally(dbEngine.getNewsTypes(), 0), TypeIndex);
-//                    sendMessage(obtainMessage(STATE_GALLERY_GETDATA_FIRST, TypeIndex, 0));
-//                }
-           
+        	LogInfo.LogOut("newsManager-->typeIndex:"+typeIndex);
+        	mGallerys=engine.getNewsGalleryModels();
+            mainDC.UpdateGallery(mGallerys, typeIndex);
+            sendMessage(obtainMessage(STATE_REFRESH, typeIndex, 0));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -517,10 +521,10 @@ public class OnlineNewsManager extends BaseManager {
     @Override
     public ViewAnimator getMainDC() {
         if (mainDC == null) {
-            mainDC = new OnlineNewsDC(context, R.layout.online_news, this);
+            mainDC = new OnlineNewsView(context, R.layout.online_news, this);
         }
         if (detailsDC == null) {
-            detailsDC = new OnlineNewsDetailsDC(context, R.layout.online_news_details, this);
+            detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
         }
         dcEngine.setMainDC(mainDC);
         LogInfo.LogOut("11111111111111");

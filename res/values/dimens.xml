@@ -2,12 +2,12 @@
 <resources>
 
     <dimen name="menu_item_margin">5dip</dimen>
-    <dimen name="menu_height">35dip</dimen>
+    <dimen name="menu_height">42dip</dimen>
     <dimen name="title_left_logo_margin">15dip</dimen>
     <dimen name="title_left_btn_margin">10dip</dimen>
     <dimen name="title_right_btn_margin">10dip</dimen>
-    <dimen name="fenlei_item_width">120dip</dimen>
-    <dimen name="fenlei_item_height">50dip</dimen>
+    <dimen name="fenlei_item_width">60dip</dimen>
+    <dimen name="fenlei_item_height">42dip</dimen>
     <dimen name="news_ad_height">150dip</dimen>
     <dimen name="news_ad_txt_size">20sp</dimen>
     <dimen name="more_item_height">80dip</dimen>
