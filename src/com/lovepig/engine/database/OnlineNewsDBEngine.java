@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.SQLException;
 
-import com.lovepig.model.GalleryModel;
+import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.utils.LogInfo;
 
@@ -15,14 +15,14 @@ public class OnlineNewsDBEngine extends DBEngine {
      * 
      * @param gm
      */
-    public void saveType(ArrayList<GalleryModel> l) {
+    public void saveType(ArrayList<NewsGalleryModel> l) {
         String sql = "insert into onlinenewstypes(newstype_id,newstype_index,newstype_checked,newstype_name,newstype_date) values(?,?,?,?,?)";
         db.beginTransaction();
         try {
-            GalleryModel gm;
+            NewsGalleryModel gm;
             for (int i = 0; i < l.size(); i++) {
                 gm = l.get(i);
-                db.execSQL(sql, new String[] { String.valueOf(gm.typeid), String.valueOf(gm.indexNum), String.valueOf(gm.checked), gm.name, gm.mDate });
+                db.execSQL(sql, new String[] { String.valueOf(gm.id), String.valueOf(gm.indexNum), String.valueOf(gm.checked), gm.name, gm.mDate });
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,10 +61,10 @@ public class OnlineNewsDBEngine extends DBEngine {
      * 
      * @param list
      */
-    public void Delete_News_Outof_NewsType(ArrayList<GalleryModel> list) {
+    public void Delete_News_Outof_NewsType(ArrayList<NewsGalleryModel> list) {
         StringBuffer sb = new StringBuffer();
-        for (GalleryModel m : list) {
-            sb.append(m.typeid);
+        for (NewsGalleryModel m : list) {
+            sb.append(m.id);
             sb.append(",");
         }
         String typeids = sb.toString().substring(0, sb.toString().lastIndexOf(","));
@@ -80,16 +80,16 @@ public class OnlineNewsDBEngine extends DBEngine {
      * 
      * @return
      */
-    public ArrayList<GalleryModel> getNewsTypes() {
-        ArrayList<GalleryModel> programs = new ArrayList<GalleryModel>();
+    public ArrayList<NewsGalleryModel> getNewsTypes() {
+        ArrayList<NewsGalleryModel> programs = new ArrayList<NewsGalleryModel>();
         try {
             String sql = "select newstype_id,newstype_index,newstype_checked,newstype_name,newstype_date from onlinenewstypes order by newstype_index";
             Cursor cursor = db.rawQuery(sql, null);
-            GalleryModel lm;
+            NewsGalleryModel lm;
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
-                    lm = new GalleryModel();
-                    lm.typeid = cursor.getInt(cursor.getColumnIndex("newstype_id"));
+                    lm = new NewsGalleryModel();
+                    lm.id = cursor.getInt(cursor.getColumnIndex("newstype_id"));
                     lm.indexNum = cursor.getInt(cursor.getColumnIndex("newstype_index"));
                     lm.checked = cursor.getInt(cursor.getColumnIndex("newstype_checked"));
                     lm.name = cursor.getString(cursor.getColumnIndex("newstype_name"));
@@ -124,7 +124,7 @@ public class OnlineNewsDBEngine extends DBEngine {
                     lm = new NewsModel();
                     lm.id = cursor.getInt(cursor.getColumnIndex("news_id"));
                     lm.title = cursor.getString(cursor.getColumnIndex("news_name"));
-                    lm.details = cursor.getString(cursor.getColumnIndex("news_details"));
+//                    lm.details = cursor.getString(cursor.getColumnIndex("news_details"));
                 }
             }
             cursor.close();
