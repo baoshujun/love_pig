@@ -84,7 +84,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         if (mGallery != null) {
             LogInfo.LogOut("index:" + index);
             mNewsGalleryModels = mGallery;
-            this.index = index;
+			this.index = index;
             myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGalleryStr);
             LogInfo.LogOut("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx---tlcyGallery.isScroll() =" + myGallery.isScroll());
             if (!myGallery.isScroll()) {
@@ -215,6 +215,10 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         }
     }
 
+	public void setMyGallerySelected(int index) {
+		 UpdateGallery(mNewsGalleryModels, index);
+
+	}
     @Override
     public void onState(int state) {
         if (state == 1) {

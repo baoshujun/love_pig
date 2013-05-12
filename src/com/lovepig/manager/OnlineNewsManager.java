@@ -43,7 +43,6 @@ public class OnlineNewsManager extends BaseManager {
     private int TypeID = -1;// 新闻栏目的ID
     private int Loading_For_Detail_Flag;// -1 表示获取最新 大于0表示加载更多
     private int typeIndex;// 当前选择的新闻栏目
-    private boolean isGetGallry = false;
     private NewsCommentModel sendingModel;
     public int isTop;// 记录是否有头条新闻
     public ArrayList<NewsModel> topNews = new ArrayList<NewsModel>();
@@ -163,6 +162,8 @@ public class OnlineNewsManager extends BaseManager {
             	if (news!=null) {
 					news.clear();
 				}
+            	
+            	SetMoreBtn(false);
             	mainDC.UpdataData();
             	showLoading();
 				typeIndex=position;
@@ -380,7 +381,7 @@ public class OnlineNewsManager extends BaseManager {
      * @return
      */
     public boolean isGalleryNull() {
-        if (isGetGallry && mGallerys != null && mGallerys.size() > 0) {
+        if ( mGallerys != null && mGallerys.size() > 0) {
             return false;
         }
         return true;
