@@ -5,18 +5,16 @@ import java.util.ArrayList;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ViewAnimator;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ViewAnimator;
 
 import com.lovepig.engine.DeviceEngine;
-import com.lovepig.engine.PriceEngine;
 import com.lovepig.main.R;
 import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Utils;
 import com.lovepig.view.PriceView;
-import com.lovepig.view.PriceListViewAdapter;
 
 /**
  * 

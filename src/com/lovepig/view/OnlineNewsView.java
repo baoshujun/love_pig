@@ -1,6 +1,7 @@
 package com.lovepig.view;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
@@ -13,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
+import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.pivot.BaseView;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.widget.MyGallery;
@@ -26,7 +29,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     MyGallery myGallery;
     ImageView  qian, hou;
     TextView title;
-    String[] indexString;
+    ArrayList<NewsGalleryModel> mNewsGalleryModels;
+    String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};;
     private int index;
     OnlineNewsAdapter adapter;
     
@@ -54,9 +58,6 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         backBtn=(Button) findViewById(R.id.leftBtn);
         backBtn.setVisibility(VISIBLE);
         backBtn.setOnClickListener(this);
-
-        indexString = new String[] { "综合新闻", "行业新闻", "访谈板块", "产品信息", "法律法规"};
-        myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, indexString);
         if (!myGallery.isScroll()) {
             qian.setVisibility(GONE);
             hou.setVisibility(GONE);
@@ -79,12 +80,12 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
      * @param mGallery
      * @param index
      */
-    public void UpdateGallery(String[] mGallery, int index) {
+    public void UpdateGallery(ArrayList<NewsGalleryModel> mGallery, int index) {
         if (mGallery != null) {
             LogInfo.LogOut("index:" + index);
-            indexString = mGallery;
-            this.index = index;
-            myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGallery);
+            mNewsGalleryModels = mGallery;
+			this.index = index;
+            myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGalleryStr);
             LogInfo.LogOut("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx---tlcyGallery.isScroll() =" + myGallery.isScroll());
             if (!myGallery.isScroll()) {
                 hou.setVisibility(GONE);
@@ -172,6 +173,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
    //新闻列表被点击
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    	LogInfo.LogOut("position:"+position);
         if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
             l = System.currentTimeMillis();
             manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, position, 0));
@@ -180,7 +182,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
-        UpdateGallery(indexString, index);
+        UpdateGallery(mNewsGalleryModels, index);
         super.onConfigurationChanged(newConfig);
     }
 
@@ -193,6 +195,9 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         case R.id.galleryRight:
             // tlcyGallery.scrollRight();
             break;
+        case R.id.leftBtn:
+        	Application.application.finish();
+        	break;
         default:
             super.onClicked(v);
             break;
@@ -211,6 +216,10 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         }
     }
 
+	public void setMyGallerySelected(int index) {
+		 UpdateGallery(mNewsGalleryModels, index);
+
+	}
     @Override
     public void onState(int state) {
         if (state == 1) {
@@ -232,13 +241,11 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     }
 	@Override
 	public void onLoadMore() {
-		
+		manager.sendEmptyMessage(OnlineNewsManager.STATE_LOADMORE);
 		
 	}
 	@Override
 	public void onRefresh() {
-		
-		
 	}
     
 }

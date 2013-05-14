@@ -1,1 +1,13 @@
-“bin/”
+"bin/"
+"*.class"
+"*.apk"
+"gen/"
+".settings/"
+"proguard/"
+bin/
+gen/
+.gitignore
+.DS_Store
+/.project
+lint.xml
+.settings*

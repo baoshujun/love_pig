@@ -7,13 +7,14 @@
         android:id="@+id/head"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         layout="@layout/commtitle" />
 
     <RelativeLayout
+        android:layout_below="@id/head"
         android:id="@+id/galleryLayout"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/fenlei_item_height"
-        android:layout_below="@id/head"
         android:background="#1d953f" >
 
         <ImageView

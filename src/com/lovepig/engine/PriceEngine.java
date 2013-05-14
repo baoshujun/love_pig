@@ -24,12 +24,12 @@ public class PriceEngine extends BaseEngine {
     private GetPriceTask getPriceTask;
     private PriceManager priceManager;
 
-    public PriceEngine(BaseManager manager) {
-        super(manager);
-        if (manager != null) {
-            priceManager = (PriceManager) manager;
-        }
-    }
+	public PriceEngine(PriceManager manager) {
+		super(manager);
+		if(priceManager == null){
+			this.priceManager =  manager;	
+		}
+	}
 
     /**
      * 
@@ -52,24 +52,23 @@ public class PriceEngine extends BaseEngine {
 
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute();
             priceManager.showLoading();
         }
 
-        @Override
-        protected Void doInBackground(String... params) {
-            String result = httpRequestThisThread(1, GET_URL_PRICE_LIST);
-            if (isStop) {
-                return null;
-            } else {
-                if (TextUtils.isEmpty(result)) {//联网失败result=null
+		@Override
+		protected Void doInBackground(String... params) {
+			String result = httpRequestThisThread(1, GET_URL_PRICE_LIST);
+			if (isStop) {
+				return null;
+			} else {
+			if (TextUtils.isEmpty(result)) {//联网失败result=null
                     priceManager.sendEmptyMessage(0); 
                     return null;
-                }
-                Json json = new Json(result);
-                if (json.getString("status").equals("1")) {
-                    Json[] arrays = json.getJsonArray("news");
+                    }
+				Json json = new Json(result);
+				if (json.getString("status").equals("1")) {
+					Json[] arrays = json.getJsonArray("prices");
 
                     ArrayList<PriceModel> datas = new ArrayList<PriceModel>();
                     for (int i = 0; i < arrays.length; i++) {

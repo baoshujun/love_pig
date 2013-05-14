@@ -6,16 +6,18 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.lovepig.engine.ImageEngine;
-import com.lovepig.main.Configs;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
+import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.model.ShareModel;
 import com.lovepig.pivot.BaseView;
@@ -26,6 +28,7 @@ import com.lovepig.widget.OnFlingListener;
 public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     int pos;
     Context context;
+    RelativeLayout headRelativeLayout;
     Button mBackBtn;// shareBtn, rightBtn;// 返回
     TextView mTitle;// 新闻标题
     TextView mTimeProvenance;// 时间和出处
@@ -36,7 +39,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     OnlineNewsManager mManager;
     // TlcyScrollView scrollView;
     ScrollView scrollView;
-    private NewsModel currentModel;
+    private NewsDetailModel currentModel;
   //  private ShareModel shareModel;
     public boolean isFromDetail = false;
 
@@ -48,7 +51,9 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         scrollView.setOnTouchListener(this);
         mBackBtn = (Button) findViewById(R.id.leftBtn);
         mBackBtn.setVisibility(View.VISIBLE);
-        mBackBtn.setText(R.string.onlinenews_back);
+        mBackBtn.setText("返回");
+        headRelativeLayout = (RelativeLayout)findViewById(R.id.leftBtnLayout);
+        headRelativeLayout.setVisibility(View.VISIBLE);
 //        rightBtn = (Button) findViewById(R.id.rightBtn);
 //        rightBtn.setOnClickListener(new OnClickListener() {
 //
@@ -143,62 +148,62 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
      * @param index
      */
     public void ShowNews(int index) {
-        if (isFromDetail) {
-            isFromDetail=false;
-        } else {
-            // 把头条新闻加入到新闻list中
-            if (mManager.isTop == 1) {// 又头条新闻
-                int addIndex = mManager.topNews.size();
-                for (int j = 0; j < mManager.topNews.size(); j++) {
-                    if (mManager.news.contains(mManager.topNews.get(j))) {
-                        LogInfo.LogOut("OnlineNewsAdapter", "mManager.topNews.get(i))" + mManager.topNews.get(j).title);
-                        mManager.news.remove(mManager.topNews.get(j));
-                        addIndex--;
-                    }
-                }
-                for (int i = mManager.topNews.size() - 1; i >= 0; i--) {
-                    mManager.news.add(0, mManager.topNews.get(i));
-                }
-                // 判断是否是从头条中进入
-                if (mManager.isComeFromTop) {
-                    mManager.isComeFromTop = false;
-                    LogInfo.LogOut("OnlineNewsAdapter", "mManager.isComeFromTop = false " + pos);
-                } else {
-                    index += addIndex;
-                }
-            }
-        }
-
-        if (index >= mManager.news.size()) {
-            index = mManager.news.size() - 1;
-        }
-
-        scrollView.scrollTo(0, 0);
-        scrollView.smoothScrollTo(0, 0);
-        pos = index;
-        LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
-        if (pos < mManager.news.size()) {
-            final NewsModel news = mManager.news.get(pos);
-            mTitle.setText(news.title);
-            mTimeProvenance.setText(news.createTime + (TextUtils.isEmpty(news.editor) ? "" : "    来源: " + news.editor));
-            LogInfo.LogOut("字数:" + (news.details == null ? 0 : news.details.length()));
-            mDetails.setText("");
-            postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setChangeLine(news.details);
-                }
-            }, 50);
-            if (TextUtils.isEmpty(news.imgPath)) {
-                mNewsImage.setVisibility(GONE);
-            } else {
-                mNewsImage.setVisibility(VISIBLE);
-                ImageEngine.setImageBitmap(news.imgPath, mNewsImage, R.drawable.ic_launcher, -1);
-            }
-            setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
-        } else {
-            mManager.back();
-        }
+//        if (isFromDetail) {
+//            isFromDetail=false;
+//        } else {
+//            // 把头条新闻加入到新闻list中
+//            if (mManager.isTop == 1) {// 又头条新闻
+//                int addIndex = mManager.topNews.size();
+//                for (int j = 0; j < mManager.topNews.size(); j++) {
+//                    if (mManager.news.contains(mManager.topNews.get(j))) {
+//                        LogInfo.LogOut("OnlineNewsAdapter", "mManager.topNews.get(i))" + mManager.topNews.get(j).title);
+//                        mManager.news.remove(mManager.topNews.get(j));
+//                        addIndex--;
+//                    }
+//                }
+//                for (int i = mManager.topNews.size() - 1; i >= 0; i--) {
+//                    mManager.news.add(0, mManager.topNews.get(i));
+//                }
+//                // 判断是否是从头条中进入
+//                if (mManager.isComeFromTop) {
+//                    mManager.isComeFromTop = false;
+//                    LogInfo.LogOut("OnlineNewsAdapter", "mManager.isComeFromTop = false " + pos);
+//                } else {
+//                    index += addIndex;
+//                }
+//            }
+//        }
+//
+//        if (index >= mManager.news.size()) {
+//            index = mManager.news.size() - 1;
+//        }
+//
+//        scrollView.scrollTo(0, 0);
+//        scrollView.smoothScrollTo(0, 0);
+//        pos = index;
+//        LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
+//        if (pos < mManager.news.size()) {
+//            final NewsModel news = mManager.news.get(pos);
+//            mTitle.setText(news.title);
+//            mTimeProvenance.setText(news.createTime + (TextUtils.isEmpty(news.editor) ? "" : "    来源: " + news.editor));
+//            LogInfo.LogOut("字数:" + (news.details == null ? 0 : news.details.length()));
+//            mDetails.setText("");
+//            postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    setChangeLine(news.details);
+//                }
+//            }, 50);
+//            if (TextUtils.isEmpty(news.imgPath)) {
+//                mNewsImage.setVisibility(GONE);
+//            } else {
+//                mNewsImage.setVisibility(VISIBLE);
+//                ImageEngine.setImageBitmap(news.imgPath, mNewsImage, R.drawable.ic_launcher, -1);
+//            }
+//            setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
+//        } else {
+//            mManager.back();
+//        }
     }
 
     private void setChangeLine(String str) {
@@ -297,7 +302,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         // setCommentBtnText("评论"+mManager.news.get(pos).commentSize);
         if (pos < mManager.news.size()) {
             NewsModel news = mManager.news.get(pos);
-            setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
+//            setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
         }
     }
 
@@ -306,21 +311,18 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
 
     }
     /**
-     * 设置新闻
+     * 设置新闻详情
      * 
      * @param index
      */
-    public void ShowNewsDetail(NewsModel model) {
-       
-
+    public void ShowNewsDetail(NewsDetailModel model) {
         scrollView.scrollTo(0, 0);
         scrollView.smoothScrollTo(0, 0);
-       
         LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
-
-        final NewsModel news = model;
+        final NewsDetailModel news = model;
+//        mTitle.setText(news.title);
         mTitle.setText(news.title);
-        mTimeProvenance.setText(news.createTime + (TextUtils.isEmpty(news.editor) ? "" : "    来源: " + news.editor));
+        mTimeProvenance.setText(news.cTime + (TextUtils.isEmpty(news.cFrom) ? "" : "    来源: " + news.cFrom));
         LogInfo.LogOut("字数:" + (news.content == null ? 0 : news.content.length()));
         mDetails.setText("");
         postDelayed(new Runnable() {
@@ -329,15 +331,24 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
                 setChangeLine(news.content);
             }
         }, 50);
-        if (TextUtils.isEmpty(news.imgPath)) {
+        if (TextUtils.isEmpty(news.imgUrl)) {
             mNewsImage.setVisibility(GONE);
         } else {
             mNewsImage.setVisibility(VISIBLE);
-            ImageEngine.setImageBitmap(news.imgPath, mNewsImage, R.drawable.ic_launcher, -1);
+            ImageEngine.setImageBitmap(news.imgUrl, mNewsImage, R.drawable.ic_launcher, -1);
         }
-        setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
-    
+//        setCommentBtnText((news.commentNum > 0 ? news.commentNum : "") + "评论");
     }
-
-
+    
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+    
+    
+    
 }

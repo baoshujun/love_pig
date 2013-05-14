@@ -52,8 +52,10 @@ public class MainManager extends BaseManager {
 
         case R.id.menu_veterinary_drugs:
         case R.id.boarMsg: //兽药 
-            
-           
+        	 if(!(Application.application.currentManager instanceof BoarManager)){
+                 Application.application.setMainManager(Application.boarManager);
+                 Application.boarManager.initData();
+             }
             break;
         case R.id.menu_answer_questions: 
         case R.id.expertMsg://答疑

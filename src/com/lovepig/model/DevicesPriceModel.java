@@ -4,7 +4,6 @@ import com.lovepig.utils.Json;
 
 
 public class DevicesPriceModel {
-
     /**
      * 编号
      */

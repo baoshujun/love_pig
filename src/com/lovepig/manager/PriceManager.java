@@ -36,11 +36,6 @@ public class PriceManager extends BaseManager implements OnItemClickListener {
 		priceEngine = new PriceEngine(this);
 	}
 
-	@Override
-	public void initData() {
-		super.initData();
-		
-	}
 
 	@SuppressWarnings("unchecked")
     @Override
