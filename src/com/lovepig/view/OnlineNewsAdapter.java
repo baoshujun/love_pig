@@ -90,7 +90,7 @@ public class OnlineNewsAdapter extends BaseAdapter {
 //                syncImageLoader.imageLoader(viewHolder.img, news.picurl, R.drawable.news_detail_head, position);
             } else {
                 if (URLUtil.isHttpUrl(news.iconPath)) {
-                    syncImageLoader.imageLoader(viewHolder.img, news.iconPath, R.drawable.ic_launcher, position);
+                    syncImageLoader.imageLoaderScale(viewHolder.img, news.iconPath, R.drawable.ic_launcher, position);
                 } else {
                     viewHolder.img.setImageResource(R.drawable.ic_launcher);
                     //viewHolder.img.setVisibility(View.GONE);
