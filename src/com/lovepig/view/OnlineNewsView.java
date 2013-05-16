@@ -33,7 +33,6 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};;
     private int index;
     OnlineNewsAdapter adapter;
-    TlcyListLayout pulldownview;
     ListView listView;
     OnlineNewsManager manager;
     TextView timeText;

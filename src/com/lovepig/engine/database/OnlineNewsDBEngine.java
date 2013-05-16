@@ -84,41 +84,6 @@ public class OnlineNewsDBEngine extends DBEngine {
 	}
 
 	/**
-	 * 读取新闻类型
-	 * 
-	 * @return
-	 */
-	public ArrayList<NewsGalleryModel> getNewsTypes() {
-		ArrayList<NewsGalleryModel> programs = new ArrayList<NewsGalleryModel>();
-		try {
-			String sql = "select newstype_id,newstype_index,newstype_checked,newstype_name,newstype_date from onlinenewstypes order by newstype_index";
-			Cursor cursor = db.rawQuery(sql, null);
-			NewsGalleryModel lm;
-			if (cursor.getCount() > 0) {
-				while (cursor.moveToNext()) {
-					lm = new NewsGalleryModel();
-					lm.id = cursor.getInt(cursor.getColumnIndex("newstype_id"));
-					lm.indexNum = cursor.getInt(cursor
-							.getColumnIndex("newstype_index"));
-					lm.checked = cursor.getInt(cursor
-							.getColumnIndex("newstype_checked"));
-					lm.name = cursor.getString(cursor
-							.getColumnIndex("newstype_name"));
-					lm.mDate = cursor.getString(cursor
-							.getColumnIndex("newstype_date"));
-					programs.add(lm);
-					LogInfo.LogOut("getNewsTypes-->name:" + lm.name
-							+ " lm.checked:" + lm.checked);
-				}
-			}
-			cursor.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return programs;
-	}
-
-	/**
 	 * 读取新闻
 	 * 
 	 * @param newstype

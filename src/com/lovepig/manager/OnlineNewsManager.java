@@ -50,7 +50,7 @@ public class OnlineNewsManager extends BaseManager {
     public ArrayList<NewsModel> topNews = new ArrayList<NewsModel>();
     public boolean isComeFromTop = false;
     public NewsModel headModel = new NewsModel();
-    
+
     public OnlineNewsDBEngine dbEngine;
 
     public OnlineNewsManager(BaseActivity c) {
@@ -58,10 +58,10 @@ public class OnlineNewsManager extends BaseManager {
         if (engine == null) {
             engine = new OnlineNewsEngine(this);
         }
-        
-        if (dbEngine==null) {
-        	dbEngine=new OnlineNewsDBEngine();
-		}
+
+        if (dbEngine == null) {
+            dbEngine = new OnlineNewsDBEngine();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -69,22 +69,22 @@ public class OnlineNewsManager extends BaseManager {
     public void handleMessage(Message msg) {
         switch (msg.what) {
         case STATE_REFRESH:
-        	if (!Utils.isNetworkValidate(context)) {
-        		news=dbEngine.getOnlineNews(mGallerys.get(typeIndex).id);
-        		getNewsComplete(1);
-        		SetMoreBtn(false);
-				return;
-			}
-        	showLoading();
+            if (!Utils.isNetworkValidate(context)) {
+                news = dbEngine.getOnlineNews(mGallerys.get(typeIndex).id);
+                getNewsComplete(1);
+                SetMoreBtn(false);
+                return;
+            }
+            showLoading();
             if (news != null && news.size() > 0) {
-                engine.refreshNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,news.get(news.size()-1).id);
+                engine.refreshNews(mGallerys.get(typeIndex).id, OnlineNewsEngine.NEWS_LIMIT_LENGTH, news.get(news.size() - 1).id);
             } else {
-                engine.refreshNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,0);
+                engine.refreshNews(mGallerys.get(typeIndex).id, OnlineNewsEngine.NEWS_LIMIT_LENGTH, 0);
             }
             break;
         case STATE_LOADMORE:
             try {
-                engine.moreNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,news.get(news.size()-1).id);
+                engine.moreNews(mGallerys.get(typeIndex).id, OnlineNewsEngine.NEWS_LIMIT_LENGTH, news.get(news.size() - 1).id);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -102,32 +102,32 @@ public class OnlineNewsManager extends BaseManager {
                 back();
             }
             break;
-        case STATE_SHOWNEWS://获取新闻详情页面
+        case STATE_SHOWNEWS:// 获取新闻详情页面
             if (detailsDC == null) {
                 detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
             }
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
             }
-//            if (msg.arg1 >= news.size()) {
-//                showLoading();
-//                Loading_For_Detail_Flag = msg.arg1;
-//                if(detailsDC!=null){
-//                    detailsDC.isFromDetail=false;
-//                    isComeFromTop = true;
-//                }
-//                sendEmptyMessage(STATE_LOADMORE);
-//            } else if (msg.arg1 < 0) {
-//                showLoading();
-//                Loading_For_Detail_Flag = -1;
-//                if(detailsDC!=null){
-//                    detailsDC.isFromDetail=false;
-//                    isComeFromTop = true;
-//                }
-//                sendEmptyMessage(STATE_REFRESH);
-//            } else {
-//                detailsDC.ShowNews(msg.arg1);
-//            }
+            // if (msg.arg1 >= news.size()) {
+            // showLoading();
+            // Loading_For_Detail_Flag = msg.arg1;
+            // if(detailsDC!=null){
+            // detailsDC.isFromDetail=false;
+            // isComeFromTop = true;
+            // }
+            // sendEmptyMessage(STATE_LOADMORE);
+            // } else if (msg.arg1 < 0) {
+            // showLoading();
+            // Loading_For_Detail_Flag = -1;
+            // if(detailsDC!=null){
+            // detailsDC.isFromDetail=false;
+            // isComeFromTop = true;
+            // }
+            // sendEmptyMessage(STATE_REFRESH);
+            // } else {
+            // detailsDC.ShowNews(msg.arg1);
+            // }
             showLoading();
             engine.fetchNewsDetail(1, 0);
             break;
@@ -162,22 +162,28 @@ public class OnlineNewsManager extends BaseManager {
                 sendEmptyMessage(STATE_UPDATE_AFTER_DB);
             }
             break;
-        case STATE_GALLERY_CLICKED://新闻分类被点击
+        case STATE_GALLERY_CLICKED:// 新闻分类被点击
             engine.StopTask();
-            int position=msg.arg1;
-            if (position!=typeIndex||news==null||news.size()==0) {
-            	if (news!=null) {
-					news.clear();
-				}
-            	
-            	SetMoreBtn(false);
-            	mainDC.UpdataData();
-            	showLoading();
-				typeIndex=position;
-            	engine.refreshNews(mGallerys.get(typeIndex).id,OnlineNewsEngine.NEWS_LIMIT_LENGTH,0);;
-			}
+            int position = msg.arg1;
+            if (position != typeIndex || news == null || news.size() == 0) {
+                if (news != null) {
+                    news.clear();
+                }
+
+                SetMoreBtn(false);
+                mainDC.UpdataData();
+                if (!Utils.isNetworkValidate(context)) {
+                    news = dbEngine.getOnlineNews(mGallerys.get(typeIndex).id);
+                    mainDC.UpdataData();
+                    return;
+                }
+                showLoading();
+                typeIndex = position;
+                engine.refreshNews(mGallerys.get(typeIndex).id, OnlineNewsEngine.NEWS_LIMIT_LENGTH, 0);
+                ;
+            }
             break;
-       
+
         case WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW:// 由顶部新闻进入新闻详情
             if (detailsDC == null) {
                 detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
@@ -185,13 +191,14 @@ public class OnlineNewsManager extends BaseManager {
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
             }
-            int index=msg.arg1;
-            ArrayList<NewsModel> tops=(ArrayList<NewsModel>) msg.obj;
-           if (tops!=null&&index<tops.size()) {
-			   showLoading();
-		   }
-           engine.fetchNewsDetail(1, 0);
-            //detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj, msg.arg1, msg.arg2);
+            int index = msg.arg1;
+            ArrayList<NewsModel> tops = (ArrayList<NewsModel>) msg.obj;
+            if (tops != null && index < tops.size()) {
+                showLoading();
+            }
+            engine.fetchNewsDetail(1, 0);
+            // detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj,
+            // msg.arg1, msg.arg2);
             break;
         default:
             break;
@@ -237,9 +244,9 @@ public class OnlineNewsManager extends BaseManager {
      */
     public void getNewsComplete(int flag) {
         if (flag == 0) {
-        	dismissLoading();
-        	mainDC.onRefreshComplete("123456");
-          //  mainDC.onRefreshComplete(mGallerys.get(TypeIndex).mDate);
+            dismissLoading();
+            mainDC.onRefreshComplete("123456");
+            // mainDC.onRefreshComplete(mGallerys.get(TypeIndex).mDate);
         } else {
             mainDC.onLoadingComplete();
         }
@@ -285,11 +292,11 @@ public class OnlineNewsManager extends BaseManager {
     public void SaveNews(ArrayList<NewsModel> news) {
         NewsGalleryModel model = mGallerys.get(typeIndex);
         model.mDate = (new SimpleDateFormat("MM-dd HH:mm:ss").format(new Date()));
-        
-//        dbEngine.updateRefreshTimeByID(model.typeid, model.mDate);
-//        dbEngine.deleteNewsByTypeID(TypeID);
-//        dbEngine.saveNews(news, TypeID, news.size());
-      
+
+        // dbEngine.updateRefreshTimeByID(model.typeid, model.mDate);
+        // dbEngine.deleteNewsByTypeID(TypeID);
+        // dbEngine.saveNews(news, TypeID, news.size());
+
     }
 
     // ------------即将删除-----------------
@@ -394,7 +401,7 @@ public class OnlineNewsManager extends BaseManager {
      * @return
      */
     public boolean isGalleryNull() {
-        if ( mGallerys != null && mGallerys.size() > 0) {
+        if (mGallerys != null && mGallerys.size() > 0) {
             return false;
         }
         return true;
@@ -406,20 +413,20 @@ public class OnlineNewsManager extends BaseManager {
      * @param mGallery
      */
     public void getGrally(ArrayList<NewsGalleryModel> mGallery) {
-//        if (mGallery != null) {
-//            String[] mString = initGrally(mGallery, 1);
-//            if (mainDC != null && mString != null) {
-//                mainDC.UpdateGallery(mString, TypeIndex);
-//               
-//                isGetGallry = true;
-//                mainDC.getNewsByType(TypeIndex);
-//            }
-//        } else {
-//        	engine.refreshNews(0, 0);
-//        	//context.getString(R.string.netconnecterror)
-//            //showAlert("获取新闻栏目失败，只能显示默认的栏目！");
-//           // dismissLoading();
-//        }
+        // if (mGallery != null) {
+        // String[] mString = initGrally(mGallery, 1);
+        // if (mainDC != null && mString != null) {
+        // mainDC.UpdateGallery(mString, TypeIndex);
+        //
+        // isGetGallry = true;
+        // mainDC.getNewsByType(TypeIndex);
+        // }
+        // } else {
+        // engine.refreshNews(0, 0);
+        // //context.getString(R.string.netconnecterror)
+        // //showAlert("获取新闻栏目失败，只能显示默认的栏目！");
+        // // dismissLoading();
+        // }
     }
 
     /**
@@ -428,31 +435,31 @@ public class OnlineNewsManager extends BaseManager {
      */
     private String[] initGrally(ArrayList<NewsGalleryModel> program, int flag) {
         String[] mString = null;
-//        int L = 0;
-//        if (program != null && program.size() > 0) {
-////            if (flag == 1) {
-////                for (NewsGalleryModel m : mGallerys) {
-////                    for (NewsGalleryModel m1 : program) {
-////                        if (m.typeid == m1.typeid) {
-////                            m1.mDate = m.mDate;
-////                            break;
-////                        }
-////                    }
-////                }
-//           }
-//            mGallerys = program;
-//            L = mGallerys.size();
-//            mString = new String[L];
-//            NewsGalleryModel m = null;
-//            for (int i = 0; i < L; i++) {
-//                m = mGallerys.get(i);
-//                mString[i] = m.name;
-//                if (m.checked == 1) {// 从数据库中查询数据
-//                    typeIndex = i;
-//                    TypeID = m.typeid;
-//                }
-//            }
-//        }
+        // int L = 0;
+        // if (program != null && program.size() > 0) {
+        // // if (flag == 1) {
+        // // for (NewsGalleryModel m : mGallerys) {
+        // // for (NewsGalleryModel m1 : program) {
+        // // if (m.typeid == m1.typeid) {
+        // // m1.mDate = m.mDate;
+        // // break;
+        // // }
+        // // }
+        // // }
+        // }
+        // mGallerys = program;
+        // L = mGallerys.size();
+        // mString = new String[L];
+        // NewsGalleryModel m = null;
+        // for (int i = 0; i < L; i++) {
+        // m = mGallerys.get(i);
+        // mString[i] = m.name;
+        // if (m.checked == 1) {// 从数据库中查询数据
+        // typeIndex = i;
+        // TypeID = m.typeid;
+        // }
+        // }
+        // }
         return mString;
     }
 
@@ -474,8 +481,8 @@ public class OnlineNewsManager extends BaseManager {
     @Override
     public void initData() {
         try {
-        	LogInfo.LogOut("newsManager-->typeIndex:"+typeIndex);
-        	mGallerys=engine.getNewsGalleryModels();
+            LogInfo.LogOut("newsManager-->typeIndex:" + typeIndex);
+            mGallerys = engine.getNewsGalleryModels();
             mainDC.UpdateGallery(mGallerys, typeIndex);
             sendMessage(obtainMessage(STATE_REFRESH, typeIndex, 0));
         } catch (Exception e) {
@@ -515,12 +522,12 @@ public class OnlineNewsManager extends BaseManager {
         engine.getNewsComments(firstNum, id);
     }
 
-	public void showNewsDetails(NewsDetailModel ndm) {
-		dismissLoading();
-		if (ndm!=null) {
-			detailsDC.ShowNewsDetail(ndm);
-		}else {
-			showAlert("获取新闻详情失败！");
-		}
-	}
+    public void showNewsDetails(NewsDetailModel ndm) {
+        dismissLoading();
+        if (ndm != null) {
+            detailsDC.ShowNewsDetail(ndm);
+        } else {
+            showAlert("获取新闻详情失败！");
+        }
+    }
 }
