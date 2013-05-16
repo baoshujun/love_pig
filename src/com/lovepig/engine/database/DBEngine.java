@@ -3,6 +3,7 @@ package com.lovepig.engine.database;
 import java.io.File;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import com.lovepig.main.Configs;
 import com.lovepig.utils.LogInfo;
@@ -17,15 +18,15 @@ public class DBEngine {
 
     public static void create() {
         try {
-            File file = new File(Configs.lovePigPath);
+            File file = new File("/data/data/com.lovepig.main/databases/");
             if (!file.isDirectory()) {
                 file.mkdirs();
             }
-            db = SQLiteDatabase.openDatabase(Configs.lovePigPath + Configs.DATABASE_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+            db = SQLiteDatabase.openDatabase("/data/data/com.lovepig.main/databases/" + Configs.DATABASE_NAME, null, SQLiteDatabase.OPEN_READWRITE);
         } catch (Exception e) {
             try {
                 LogInfo.LogOut(TAG + " open db error and create db start ");
-                db = SQLiteDatabase.openOrCreateDatabase(Configs.lovePigPath + Configs.DATABASE_NAME, null);
+                db = SQLiteDatabase.openOrCreateDatabase("/data/data/com.lovepig.main/databases/"  + Configs.DATABASE_NAME, null);
                 createOnlineNews();
                 db.setVersion(1);
                 LogInfo.LogOut(TAG + " open db error and create db end");

@@ -42,7 +42,6 @@ public class Application extends BaseActivity {
 		currentManager = mainManager;
 		mainManager.onClicked(tabID);
 		new InitDataTask().execute();
-		
 	}
 	
 	  class InitDataTask extends AsyncTask<Void, Void, Void> {

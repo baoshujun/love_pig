@@ -41,16 +41,12 @@ public class NewsModel {
      *
      */
     public NewsModel paserJson(Json json){
-    	 
     	this.id = json.getInt("id");
     	this.summary= json.getString("summary");
     	this.iconPath = json.getString("iconUri");
     	this.order=json.getInt("order");
-    	this.title = json.getString("titile");
+    	this.title = json.getString("title");
     	this.top= json.getInt("top");
-    	 
-        
-         
     	return this;
     }
 }
