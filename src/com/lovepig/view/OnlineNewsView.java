@@ -33,7 +33,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};;
     private int index;
     OnlineNewsAdapter adapter;
-    
+    TlcyListLayout pulldownview;
     ListView listView;
     OnlineNewsManager manager;
     TextView timeText;
@@ -53,7 +53,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         qian = (ImageView) findViewById(R.id.galleryRight);
         hou.setOnClickListener(this);
         qian.setOnClickListener(this);
-        
+        pulldownview = (TlcyListLayout) findViewById(R.id.pulldownview);
+        pulldownview.setRefreshListener(this);
         listView = (ListView) findViewById(R.id.listView1);
         backBtn=(Button) findViewById(R.id.leftBtn);
         backBtn.setVisibility(VISIBLE);
@@ -66,14 +67,29 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
             hou.setVisibility(INVISIBLE);
         }
         myGallery.setOnItemClickListener(this);
-        pulldownview = (TlcyListLayout) findViewById(R.id.pulldownview);
-        pulldownview.setRefreshListener(this);
+      
         adapter = new OnlineNewsAdapter(manager, listView, pulldownview);
         listView.setAdapter(adapter);
         listView.setFocusable(false);
            listView.setOnItemClickListener(this);
         setLoadMoreButton(false);
     }
+
+    @Override
+    public void onLoadMore() {
+        manager.sendEmptyMessage(OnlineNewsManager.STATE_LOADMORE);
+    }
+
+    @Override
+    public void onRefresh() {
+        if (manager.isGalleryNull()) {
+            CancelRefresh();
+           // manager.UpdateGrally();
+        } else {
+            //manager.sendEmptyMessage(OnlineNewsManager.STATE_REFRESH);
+        }
+    }
+
     /**
      * 更新新闻分类
      * 
@@ -144,7 +160,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     public void onRefreshComplete(String mDate) {
         setUpdateTime(mDate);
         UpdataData();
-        setLoadMoreButton(true);
+       // setLoadMoreButton(true);
         pulldownview.onRefreshComplete(mDate);
     }
 
@@ -239,13 +255,6 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         super.onShow();
         adapter.notifyDataSetChanged();
     }
-	@Override
-	public void onLoadMore() {
-		manager.sendEmptyMessage(OnlineNewsManager.STATE_LOADMORE);
-		
-	}
-	@Override
-	public void onRefresh() {
-	}
+	
     
 }

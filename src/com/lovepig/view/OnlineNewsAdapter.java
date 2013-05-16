@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.lovepig.engine.ListViewImageEngine;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
@@ -22,6 +21,7 @@ public class OnlineNewsAdapter extends BaseAdapter {
     private ListView mListView;
     ListViewImageEngine syncImageLoader;
     TlcyListLayout mTlcyListLayout;
+
     public OnlineNewsAdapter(OnlineNewsManager m, ListView listView, TlcyListLayout mTlcyListLayout) {
         manager = m;
         layoutInflater = LayoutInflater.from(manager.context);
@@ -32,7 +32,7 @@ public class OnlineNewsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-       
+
         return manager.news.size();
     }
 
@@ -63,7 +63,7 @@ public class OnlineNewsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
         ViewHolder viewHolder;
-        LogInfo.LogOut("OnlineNewsAdapter", "OnlineNewsAdapter-->getView:"+manager.news.size());
+        LogInfo.LogOut("OnlineNewsAdapter", "OnlineNewsAdapter-->getView:" + manager.news.size());
         NewsModel news = manager.news.get(position);
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -82,18 +82,20 @@ public class OnlineNewsAdapter extends BaseAdapter {
             view.setFocusable(true);
             view.requestFocus();
         }
-        if(position == 0){
-            ((OnlineNewsFirstView)view).initData(news);
-        }else{
+        if (position == 0) {
+            ((OnlineNewsFirstView) view).initData(news);
+        } else {
             viewHolder.img.setVisibility(View.VISIBLE);
             if (position == 0) {
-//                syncImageLoader.imageLoader(viewHolder.img, news.picurl, R.drawable.news_detail_head, position);
+                // syncImageLoader.imageLoader(viewHolder.img, news.picurl,
+                // R.drawable.news_detail_head, position);
             } else {
                 if (URLUtil.isHttpUrl(news.iconPath)) {
+                    
                     syncImageLoader.imageLoaderScale(viewHolder.img, news.iconPath, R.drawable.ic_launcher, position);
                 } else {
                     viewHolder.img.setImageResource(R.drawable.ic_launcher);
-                    //viewHolder.img.setVisibility(View.GONE);
+                    // viewHolder.img.setVisibility(View.GONE);
                 }
             }
 

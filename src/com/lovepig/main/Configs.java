@@ -12,7 +12,7 @@ public class Configs {
     /**
      * 图片存储
      */
-    public static String lovePigImagePath = lovePigPath + "Image/";
+//    public static String lovePigImagePath = lovePigPath + "Image/";
     public static String lovePigImageCache = lovePigPath + "Cache/";
     public static final String DATABASE_NAME = "content.db";// 数据库名
 
