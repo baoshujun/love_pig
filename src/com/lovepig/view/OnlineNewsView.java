@@ -30,7 +30,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     ImageView  qian, hou;
     TextView title;
     ArrayList<NewsGalleryModel> mNewsGalleryModels;
-    String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};;
+    String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};
     private int index;
     OnlineNewsAdapter adapter;
     

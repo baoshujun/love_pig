@@ -180,7 +180,7 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        Utils.updateNotify(this, getClass());// 此处getClass为子类的class
+//        Utils.updateNotify(this, getClass());// 此处getClass为子类的class
         isShowing = true;
         if (toDialog != null) {
             toDialog.show();
@@ -190,7 +190,7 @@ public abstract class BaseActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        Utils.updateNotify(this, null);// 取消标题
+//        Utils.updateNotify(this, null);// 取消标题
         // unbindRemoteService();
         super.onDestroy();
     }
