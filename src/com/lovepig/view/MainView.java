@@ -19,7 +19,8 @@ public class MainView extends BaseView {
 	 * 新闻，价格，兽药，食疗，设备，答疑
 	 * 
 	 */
-	private Button toNews, toPrice, toVeterinaryDrugs, toFoodStuff, toEquipment,toAnswerQuestions;
+//	private Button toNews, toPrice, toVeterinaryDrugs, toFoodStuff, toEquipment,toAnswerQuestions;
+	private Button toNews,toBoar,toPigFactory;
 	Animation goneAnimation, visibleAnimation;
 	LinearLayout menuLayout;
 	private TextView menuMoreTip;
@@ -29,19 +30,23 @@ public class MainView extends BaseView {
 		super(context, layoutId, manger);
 		this.context=context;
 		toNews = (Button) findViewById(R.id.menu_news);
-		toVeterinaryDrugs = (Button) findViewById(R.id.menu_veterinary_drugs);
-		toPrice = (Button) findViewById(R.id.menu_price);
-		toAnswerQuestions = (Button) findViewById(R.id.menu_answer_questions);
-		toFoodStuff= (Button) findViewById(R.id.menu_foodstuff);
-		toEquipment = (Button) findViewById(R.id.menu_equipment);
+		toBoar = (Button) findViewById(R.id.menu_boar);
+		toPigFactory = (Button) findViewById(R.id.menu_pig_factory);
+//		toVeterinaryDrugs = (Button) findViewById(R.id.menu_veterinary_drugs);
+//		toPrice = (Button) findViewById(R.id.menu_price);
+//		toAnswerQuestions = (Button) findViewById(R.id.menu_answer_questions);
+//		toFoodStuff= (Button) findViewById(R.id.menu_foodstuff);
+//		toEquipment = (Button) findViewById(R.id.menu_equipment);
 		menuMoreTip = (TextView) findViewById(R.id.menu_more_tip);
 
 		toNews.setOnClickListener(this);
-		toVeterinaryDrugs.setOnClickListener(this);
-		toPrice.setOnClickListener(this);
-		toFoodStuff.setOnClickListener(this);
-		toEquipment.setOnClickListener(this);
-		toAnswerQuestions.setOnClickListener(this);
+		toBoar.setOnClickListener(this);
+		toPigFactory.setOnClickListener(this);
+//		toVeterinaryDrugs.setOnClickListener(this);
+//		toPrice.setOnClickListener(this);
+//		toFoodStuff.setOnClickListener(this);
+//		toEquipment.setOnClickListener(this);
+//		toAnswerQuestions.setOnClickListener(this);
 		goneAnimation = AnimationUtils.loadAnimation(context,
 				R.anim.push_right_out);
 		visibleAnimation = AnimationUtils.loadAnimation(context,
@@ -58,32 +63,33 @@ public class MainView extends BaseView {
 
 	public void viewReset(int id) {
 		toNews.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
-		toVeterinaryDrugs.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
-		toPrice.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
-		toFoodStuff.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
-		toEquipment.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
-		toAnswerQuestions.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		toBoar.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		toPigFactory.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+//		toVeterinaryDrugs.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+//		toPrice.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+//		toFoodStuff.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+//		toEquipment.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+//		toAnswerQuestions.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
 		
 		switch (id) {
 		case R.id.menu_news:
 			toNews.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
 			break;
-		case R.id.menu_answer_questions:
-			toAnswerQuestions.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+		case R.id.menu_boar:
+			toBoar.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
 			break;
-		case R.id.menu_equipment:
-			toEquipment.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+		case R.id.menu_pig_factory:
+			toPigFactory.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
 			break;
-		case R.id.menu_foodstuff:
-			toFoodStuff.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
-			break;
-		case R.id.menu_price:
-			toPrice.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
-			break;
-		case R.id.menu_veterinary_drugs:
-			toVeterinaryDrugs.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
-			
-			break;
+//		case R.id.menu_foodstuff:
+//			toFoodStuff.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+//			break;
+//		case R.id.menu_price:
+//			toPrice.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+//			break;
+//		case R.id.menu_veterinary_drugs:
+//			toVeterinaryDrugs.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+//			break;
 		default:
 			break;
 		}

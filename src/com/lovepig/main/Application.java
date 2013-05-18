@@ -21,13 +21,12 @@ public class Application extends BaseActivity {
 
 	long timeForAnimator;
 	public MainManager mainManager;
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		application = this;
-		int tabID = getIntent().getIntExtra("tabID", -1);
+//		int tabID = getIntent().getIntExtra("tabID", -1);
 //		Configs.initTypeAndVsersion(application);
 		mainManager = new MainManager(application);
 		onlineNewsManager = new OnlineNewsManager(application);
@@ -40,7 +39,7 @@ public class Application extends BaseActivity {
 		setContentView(mainManager.getLayout());
 		dcEngineContener = mainManager.getContainer();
 		currentManager = mainManager;
-		mainManager.onClicked(tabID);
+		mainManager.onClicked(R.id.menu_news);
 		new InitDataTask().execute();
 	}
 	

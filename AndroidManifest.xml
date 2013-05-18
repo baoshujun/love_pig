@@ -23,7 +23,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".Main"
+            android:name=".Application"
             android:configChanges="keyboardHidden|orientation|locale|navigation"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -35,13 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Application"
-            android:configChanges="keyboardHidden|orientation|locale|navigation"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-        </activity>
+        
         <activity
             android:name=".SignIn"
             android:configChanges="keyboardHidden|orientation|locale|navigation"

@@ -24,26 +24,26 @@
             android:textColor="@color/bottom_btn_selected" />
 
         <Button
-            android:id="@+id/menu_price"
+            android:id="@+id/menu_boar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="价格"
+            android:text="种猪"
             android:textColor="@color/bottom_btn_no_selected" />
 
         <Button
-            android:id="@+id/menu_veterinary_drugs"
+            android:id="@+id/menu_pig_factory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="兽药"
+            android:text="附近猪厂"
             android:textColor="@color/bottom_btn_no_selected" />
 
-        <Button
+      <!--   <Button
             android:id="@+id/menu_foodstuff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,15 +51,16 @@
             android:background="@android:color/transparent"
             android:textColor="@color/bottom_btn_no_selected" 
             android:layout_weight="1"
-            android:text="饲料" />
+            android:text="附近猪厂" /> -->
 
-        <Button
+  <!--       <Button
             android:id="@+id/menu_equipment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
             android:background="@android:color/transparent"
+            android:visibility=""
             android:text="设备"
             android:textColor="@color/bottom_btn_no_selected" />
 
@@ -71,7 +72,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="答疑"
-            android:textColor="@color/bottom_btn_no_selected" />
+            android:textColor="@color/bottom_btn_no_selected" /> -->
     </LinearLayout>
 
     <RelativeLayout

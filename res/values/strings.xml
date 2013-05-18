@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">爱养猪</string>
+    <string name="app_name">猪讯</string>
     <string name="pull_to_refresh">下拉可以刷新</string>
     <string name="tap_to_refresh">点击刷新</string>
     <string name="load_to_refresh">更多</string>
