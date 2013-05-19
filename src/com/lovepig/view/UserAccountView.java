@@ -15,7 +15,7 @@ public class UserAccountView extends BaseView {
     Button mBackBtn;
     Button mModifyInfoBtn;
     Button mModifyPwdBtn;
-    Button mUnBindBtn;
+//    Button mUnBindBtn;
     TextView mUser_ID;
     TextView mUser_Name;
     TextView mUser_Email;
@@ -32,7 +32,7 @@ public class UserAccountView extends BaseView {
         mBackBtn.setText(R.string.More);
         mModifyInfoBtn = (Button) findViewById(R.id.account_modifyinfo);
         mModifyPwdBtn = (Button) findViewById(R.id.account_modifypwd);
-        mUnBindBtn = (Button) findViewById(R.id.account_unbind);
+//        mUnBindBtn = (Button) findViewById(R.id.account_unbind);
 
         mBackBtn.setVisibility(View.VISIBLE);
 
@@ -44,7 +44,7 @@ public class UserAccountView extends BaseView {
         mBackBtn.setOnClickListener(this);
         mModifyInfoBtn.setOnClickListener(this);
         mModifyPwdBtn.setOnClickListener(this);
-        mUnBindBtn.setOnClickListener(this);
+//        mUnBindBtn.setOnClickListener(this);
     }
 
     public void setUserInfo() {

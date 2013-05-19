@@ -95,7 +95,7 @@
     <string name="addfriends">添加好友</string>
     <string name="addMyFriend">加好友</string>
     <string name="currfriends">当前好友</string>
-    <string name="user_Id">文号：</string>
+    <string name="user_Id">名称：</string>
     <string name="user_name">昵称：</string>
     <string name="prePage">上一页</string>
     <string name="nextPage">下一页</string>
@@ -186,11 +186,12 @@
     <string name="mybook_empty_list_tip">您还没下载任何内容！</string>
     <!-- 多媒体 -->
     <string name=" multi_media">多媒体</string>
-    <!-- 在线新闻 -->
     <string name="user_info">个人信息</string>
+    <!-- 在线新闻 -->
+    
     <string name="onlinenews_back">在线新闻</string>
-    <string name="unbindTip_buyong">您正在对该问号进行解绑操作！请注意:\n1.您已经订阅但尚未下载的内容及本地已下载的内容将被清空。\n2.当使用该文号绑定其他设备时，您可以重新下载您已经购买的内容。\n温馨提示:重新下载需要大量的数据流量,建议您使用WIFI接入互联网。</string>
-    <string name="unbindTip">请注意:您正在对该问号进行解绑操作！一旦您解除绑定，您已经订阅但尚未下载的内容及本地已下载的内容将被清空。当使用该文号绑定其他设备时，您可以重新下载您已经购买的内容。温馨提示:重新下载需要大量的数据流量,建议您使用WIFI接入互联网。</string>
+    <string name="unbindTip_buyong">您正在对该问号进行解绑操作！请注意:\n1.您已经订阅但尚未下载的内容及本地已下载的内容将被清空。\n2.当使用该名称绑定其他设备时，您可以重新下载您已经购买的内容。\n温馨提示:重新下载需要大量的数据流量,建议您使用WIFI接入互联网。</string>
+    <string name="unbindTip">请注意:您正在对该问号进行解绑操作！一旦您解除绑定，您已经订阅但尚未下载的内容及本地已下载的内容将被清空。当使用该名称绑定其他设备时，您可以重新下载您已经购买的内容。温馨提示:重新下载需要大量的数据流量,建议您使用WIFI接入互联网。</string>
     <string name="unbindTip_dialog">解除绑定将删除所有数据,您确认解除吗？</string>
     <string name="unbingSucc">用户成功解绑</string>
     <string name="downManager">下载管理</string>
@@ -251,7 +252,7 @@
     </string-array>
 
     <!-- 账号管理 -->
-    <string name="MyAccountID">我的文号：</string>
+    <string name="MyAccountID">我的账号：</string>
     <string name="MyAccountName">我的昵称：</string>
     <string name="MyAccountEmail">我的邮箱：</string>
     <string name="MyAccountPhoneNum">我的手机：</string>
@@ -261,8 +262,8 @@
     <string name="MyAccountUnbind">解除绑定</string>
     <string name="RegisterInfo">注册信息</string>
     <string name="RegisterUserbind">用户绑定</string>
-    <string name="RegisterUserid">*用户文号：</string>
-    <string name="MyUserid">*我的文号：</string>
+    <string name="RegisterUserid">*用户名：</string>
+    <string name="MyUserid">*我的名称：</string>
     <string name="RegisterChecked">检验</string>
     <string name="OldPWD">*旧密码输入：</string>
     <string name="InputEmail">请输入邮箱地址</string>
@@ -282,7 +283,7 @@
     <string name="RegisterUserpwddescribe">(由英文字母、数字、以及划线组成，长度4—12位)</string>
     <string name="RegisterUseridInputrule">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_</string>
     <string name="BindingexistsUserID">绑定已有用户</string>
-    <string name="Useridrepeat">文号重复</string>
+    <string name="Useridrepeat">名称重复</string>
     <string name="PhoneError">手机号码填写错误</string>
     <string name="EmailError">邮箱地址填写错误</string>
     <string name="SureInputUserName">请输入用户昵称</string>

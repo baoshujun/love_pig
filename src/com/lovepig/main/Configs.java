@@ -76,8 +76,7 @@ public class Configs {
     public static String u_ShowPopStr = "";// 服务器连接信息
     public static String u_Url = "";// 升级地址
     public static String u_Discribe;
-    public static boolean isCheckin;// 是否已经鉴权
-    public static String userid = null;// 用户文号
+    public static String userid = "123";// 用户名字
     public static String readerUrl = null;// 阅读器下载地址
     public static String readerpackageName = "com.founder.readerforrd";// 阅读器包名称
     public static int readerVersionCode = -1;// 阅读器版本号

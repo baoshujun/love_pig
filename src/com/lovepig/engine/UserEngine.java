@@ -15,8 +15,8 @@ public class UserEngine extends BaseEngine {
     RegisterUserTask mRegisterUserTask;// 用户注册
     UpdateUserInfoTask mUpdateUserInfoTask;// 修改用户信息
     ModifyPWDTask mModifyPWDTask;// 修改密码
-    ToBindTask mToBindTask;// 用户绑定
-    UnbindTask mUnbindTask;// 解除绑定
+//    ToBindTask mToBindTask;// 用户绑定
+//    UnbindTask mUnbindTask;// 解除绑定
     CheckUserIdTask checkUserIdTask;
 
     public UserEngine(UserManager manager) {
@@ -99,36 +99,36 @@ public class UserEngine extends BaseEngine {
      * 
      * @param j
      */
-    public void UnBinding(Json j) {
-        stopUnbindTask();
-        mUnbindTask = new UnbindTask();
-        mUnbindTask.execute(j.toString());
-    }
+//    public void UnBinding(Json j) {
+//        stopUnbindTask();
+//        mUnbindTask = new UnbindTask();
+//        mUnbindTask.execute(j.toString());
+//    }
 
-    public void stopUnbindTask() {
-        if (mUnbindTask != null) {
-            mUnbindTask.Stop();
-            mUnbindTask = null;
-        }
-    }
+//    public void stopUnbindTask() {
+//        if (mUnbindTask != null) {
+//            mUnbindTask.Stop();
+//            mUnbindTask = null;
+//        }
+//    }
 
     /**
      * 用户绑定
      * 
      * @param j
      */
-    public void ToBinding(Json j) {
-        stopToBiinding();
-        mToBindTask = new ToBindTask();
-        mToBindTask.execute(j.toString());
-    }
+//    public void ToBinding(Json j) {
+//        stopToBiinding();
+//        mToBindTask = new ToBindTask();
+//        mToBindTask.execute(j.toString());
+//    }
 
-    public void stopToBiinding() {
-        if (mToBindTask != null) {
-            mToBindTask.Stop();
-            mToBindTask = null;
-        }
-    }
+//    public void stopToBiinding() {
+//        if (mToBindTask != null) {
+//            mToBindTask.Stop();
+//            mToBindTask = null;
+//        }
+//    }
 
     /**
      * 获取用戶信息
@@ -142,7 +142,7 @@ public class UserEngine extends BaseEngine {
         @Override
         protected String doInBackground(Void... params) {
             Application.checkUserManager.checkUser();
-            if (iStop || !Configs.isCheckin) {
+            if (iStop ) {
                 return null;
             } else if (Configs.userid == null) {
                 return "regist";
@@ -204,12 +204,12 @@ public class UserEngine extends BaseEngine {
 
         @Override
         protected String doInBackground(String... params) {
-            if (!Configs.isCheckin) {
+//            if (!Configs.isCheckin) {
                 Application.checkUserManager.checkUser();
-            }
-            if (!Configs.isCheckin) {
-                return null;
-            }
+//            }
+//            if (!Configs.isCheckin) {
+//                return null;
+//            }
             return httpRequestThisThread(1, Configs.RegisterUserAction + params[0]);
         }
 
@@ -328,44 +328,44 @@ public class UserEngine extends BaseEngine {
      * @author DCH
      * 
      */
-    class UnbindTask extends AsyncTask<String, Void, String> {
-        boolean iStop;
-
-        @Override
-        protected String doInBackground(String... params) {
-            String result = httpRequestThisThread(1, Configs.UnbindingAction + params[0]);
-            if (result != null) {
-                Json j = new Json(result);
-                if (j.getInt("result") == 1) {
-                    Configs.userid = null;
-                    Configs.updateUidToTypeAndVsersion(null, null, -1);
-                    Configs.setSpecial(manager.context, false);
-                    Application.application.mainManager.sendEmptyMessage(1);
-                    manager.sendEmptyMessage(UserManager.STATE_UNBINDSUCESS);
-                    Application.application.mainManager.sendMessage(Application.application.mainManager.obtainMessage(MainManager.MSG_WHAT_HAVE_NEW_INFO, 0, 0));
-                    // 清楚所有与用户有关的数据
-//                    Application.bookshelfManager.clearDataBases();
-                } else {
-                    manager.sendMessage(manager.obtainMessage(UserManager.STATE_UNBINDFAIL, j.getString("msg")));
-                }
-            } else {
-                manager.sendEmptyMessage(UserManager.STATE_UNBINDFAIL);
-            }
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-        }
-
-        public void Stop() {
-            iStop = true;
-            cancel(iStop);
-        }
-    }
+//    class UnbindTask extends AsyncTask<String, Void, String> {
+//        boolean iStop;
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            String result = httpRequestThisThread(1, Configs.UnbindingAction + params[0]);
+//            if (result != null) {
+//                Json j = new Json(result);
+//                if (j.getInt("result") == 1) {
+//                    Configs.userid = null;
+//                    Configs.updateUidToTypeAndVsersion(null, null, -1);
+//                    Configs.setSpecial(manager.context, false);
+//                    Application.application.mainManager.sendEmptyMessage(1);
+//                    manager.sendEmptyMessage(UserManager.STATE_UNBINDSUCESS);
+//                    Application.application.mainManager.sendMessage(Application.application.mainManager.obtainMessage(MainManager.MSG_WHAT_HAVE_NEW_INFO, 0, 0));
+//                    // 清楚所有与用户有关的数据
+////                    Application.bookshelfManager.clearDataBases();
+//                } else {
+//                    manager.sendMessage(manager.obtainMessage(UserManager.STATE_UNBINDFAIL, j.getString("msg")));
+//                }
+//            } else {
+//                manager.sendEmptyMessage(UserManager.STATE_UNBINDFAIL);
+//            }
+//
+//            return result;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            super.onPostExecute(result);
+//
+//        }
+//
+//        public void Stop() {
+//            iStop = true;
+//            cancel(iStop);
+//        }
+//    }
 
     /**
      * 用户绑定
@@ -373,55 +373,55 @@ public class UserEngine extends BaseEngine {
      * @author DCH
      * 
      */
-    class ToBindTask extends AsyncTask<String, Void, String> {
-        boolean iStop;
-
-        @Override
-        protected String doInBackground(String... params) {
-            if (!Configs.isCheckin) {
-                Application.checkUserManager.checkUser();
-            }
-            if (!Configs.isCheckin) {
-                return null;
-            }
-            return httpRequestThisThread(1, Configs.TobindingAction + params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if (iStop) {
-                return;
-            }
-            boolean isSpecial = false;
-            if (result != null) {
-                Json j = new Json(result);
-                if (j.getInt("result") == 1) {
-                    Configs.userid = j.getString("userId");
-                    Configs.readerUrl = j.getString("reader");
-                    Configs.mUser_Name = j.getString("userName");
-                    Configs.mUser_Email = j.getString("mail");
-                    Configs.mUser_PhoneNum = j.getString("phone");
-                    Configs.isChangededPWD = j.getInt("checkedPWD");
-                    if (j.getInt("special") == 1) {
-                        isSpecial = true;
-                    }
-                    Configs.setSpecial(manager.context, isSpecial);
-                    Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
-                    manager.sendEmptyMessage(UserManager.STATE_TOBINDSUCESS);
-                } else if (j.getInt("result") == 0) {
-                    manager.sendMessage(manager.obtainMessage(UserManager.STATE_TOBINDFAIL, j.getString("msg")));
-                }
-            } else {
-                manager.sendEmptyMessage(UserManager.STATE_TOBINDFAIL);
-            }
-        }
-
-        public void Stop() {
-            iStop = true;
-            cancel(iStop);
-        }
-    }
+//    class ToBindTask extends AsyncTask<String, Void, String> {
+//        boolean iStop;
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+////            if (!Configs.isCheckin) {
+////                Application.checkUserManager.checkUser();
+////            }
+////            if (!Configs.isCheckin) {
+////                return null;
+////            }
+//            return httpRequestThisThread(1, Configs.TobindingAction + params[0]);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            super.onPostExecute(result);
+//            if (iStop) {
+//                return;
+//            }
+//            boolean isSpecial = false;
+//            if (result != null) {
+//                Json j = new Json(result);
+//                if (j.getInt("result") == 1) {
+//                    Configs.userid = j.getString("userId");
+//                    Configs.readerUrl = j.getString("reader");
+//                    Configs.mUser_Name = j.getString("userName");
+//                    Configs.mUser_Email = j.getString("mail");
+//                    Configs.mUser_PhoneNum = j.getString("phone");
+//                    Configs.isChangededPWD = j.getInt("checkedPWD");
+//                    if (j.getInt("special") == 1) {
+//                        isSpecial = true;
+//                    }
+//                    Configs.setSpecial(manager.context, isSpecial);
+//                    Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
+//                    manager.sendEmptyMessage(UserManager.STATE_TOBINDSUCESS);
+//                } else if (j.getInt("result") == 0) {
+//                    manager.sendMessage(manager.obtainMessage(UserManager.STATE_TOBINDFAIL, j.getString("msg")));
+//                }
+//            } else {
+//                manager.sendEmptyMessage(UserManager.STATE_TOBINDFAIL);
+//            }
+//        }
+//
+//        public void Stop() {
+//            iStop = true;
+//            cancel(iStop);
+//        }
+//    }
 
     public void checkUserAccount(String userAccount) {
         stopCheckUserId();

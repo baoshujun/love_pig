@@ -85,7 +85,7 @@ public class UserInfoView extends BaseView implements OnItemClickListener {
                 showAlert("网络不可用,请检查您的网络！");
                 return;
             }
-            if (position != 0 && position != 7 && Configs.isCheckin&&Configs.userid==null) {
+            if (position != 0 && position != 7 &&Configs.userid==null) {
                 Application.userManager.ToBindOrRegister(R.string.More);
                 return;
             }

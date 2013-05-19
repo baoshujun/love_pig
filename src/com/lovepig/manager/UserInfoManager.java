@@ -14,7 +14,7 @@ import com.lovepig.view.UserInfoView;
 
 public class UserInfoManager extends BaseManager {
 
-    UserInfoView moreDC;
+    UserInfoView userInfoView;
 //    private MoreMsgMng messageProcessManager;
 //    private MoreUserFriendMng userFriendProcessManager;
 //    private UserReChargeManager userReChargeManager;
@@ -27,19 +27,19 @@ public class UserInfoManager extends BaseManager {
     public void handleMessage(Message msg) {
         switch (msg.what) {
         case 1:// 获取到消息更新界面
-            if (moreDC != null && getNowShownDC() == moreDC) {
-                moreDC.notifyDataSetChanged();
+            if (userInfoView != null && getNowShownDC() == userInfoView) {
+                userInfoView.notifyDataSetChanged();
             }
             break;
         case 3:
-            moreManageFunctionProcess(msg);
+            userInfoManageFunctionProcess(msg);
             break;
         default:
             break;
         }
     }
 
-    private void moreManageFunctionProcess(Message msg) {
+    private void userInfoManageFunctionProcess(Message msg) {
         Button button = (Button) msg.obj;
         switch (msg.arg1) {
         case 0:
@@ -112,11 +112,11 @@ public class UserInfoManager extends BaseManager {
 
     @Override
     public ViewAnimator getMainDC() {
-        if (moreDC == null) {
-            moreDC = new UserInfoView(context, R.layout.user_info, this);
-            dcEngine.setMainDC(moreDC);
+        if (userInfoView == null) {
+            userInfoView = new UserInfoView(context, R.layout.user_info, this);
+            dcEngine.setMainDC(userInfoView);
         }
-        moreDC.notifyDataSetChanged();
+        userInfoView.notifyDataSetChanged();
         return super.getMainDC();
     }
 }

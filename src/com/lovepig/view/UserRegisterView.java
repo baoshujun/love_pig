@@ -25,12 +25,12 @@ public class UserRegisterView extends BaseView {
     EditText mUserRepwdET;
     EditText mUserEmailET;
     EditText mUserPhoneNumET;
-    EditText mUserCheckCodeET;
+//    EditText mUserCheckCodeET;
     Button mUserBindBtn;
     Button mUserRegisterBtn;
     Button mUserResetBtn;
     Button mCheckUseridBtn;
-    Button registerCheckcodeImage;
+//    Button registerCheckcodeImage;
     Button mBackBtn;
     TextView mTitlem;
 
@@ -50,7 +50,7 @@ public class UserRegisterView extends BaseView {
         mUserRepwdET = (EditText) findViewById(R.id.register_repwd_edit);
         mUserEmailET = (EditText) findViewById(R.id.register_email_edit);
         mUserPhoneNumET = (EditText) findViewById(R.id.register_phone_edit);
-        mUserCheckCodeET = (EditText) findViewById(R.id.register_checkcode_edit);
+//        mUserCheckCodeET = (EditText) findViewById(R.id.register_checkcode_edit);
         mCheckUseridBtn = (Button) findViewById(R.id.register_userid_checked_btn);
         mUserBindBtn = (Button) findViewById(R.id.rightBtn);
         mUserBindBtn.setText(R.string.RegisterUserbind);
@@ -61,8 +61,8 @@ public class UserRegisterView extends BaseView {
         mUserBindBtn.setOnClickListener(this);
         mUserRegisterBtn.setOnClickListener(this);
         mUserResetBtn.setOnClickListener(this);
-        registerCheckcodeImage = (Button) findViewById(R.id.register_checkcode_image);
-        registerCheckcodeImage.setOnClickListener(this);
+//        registerCheckcodeImage = (Button) findViewById(R.id.register_checkcode_image);
+//        registerCheckcodeImage.setOnClickListener(this);
 
     }
 
@@ -77,21 +77,21 @@ public class UserRegisterView extends BaseView {
 
     @Override
     public void onClicked(View v) {
-        if (v.getId() == R.id.register_checkcode_image) {
-            setVeriCode();
-        }
+//        if (v.getId() == R.id.register_checkcode_image) {
+//            setVeriCode();
+//        }
         super.onClicked(v);
     }
 
     public boolean checkDataintegrity() {
         LogInfo.LogOut(mUseridET.getText().toString());
         if (mUseridET.getText().toString().length() < 4) {
-            showToast("用户文号应为4-20位");
+            showToast("用户名号应为4-20位");
             return false;
         } else {
             try {
                 Integer.parseInt(mUseridET.getText().toString());
-                showToast("用户文号不能为纯数字");
+                showToast("用户名不能为纯数字");
                 return false;
             } catch (Exception e) {
 
@@ -130,13 +130,13 @@ public class UserRegisterView extends BaseView {
                 return false;
             }
         }
-        if (!mUserCheckCodeET.getText().toString().equals(registerCheckcode.replace(" ", ""))) {
-            LogInfo.LogOut(mUserCheckCodeET.getText().toString().trim() + "-------------" + registerCheckcode.trim());
-            showToast("验证码不正确");
-            return false;
-        } else {
-            setVeriCode();
-        }
+//        if (!mUserCheckCodeET.getText().toString().equals(registerCheckcode.replace(" ", ""))) {
+//            LogInfo.LogOut(mUserCheckCodeET.getText().toString().trim() + "-------------" + registerCheckcode.trim());
+//            showToast("验证码不正确");
+//            return false;
+//        } else {
+//            setVeriCode();
+//        }
         return true;
     }
 
@@ -159,7 +159,7 @@ public class UserRegisterView extends BaseView {
         mUserRepwdET.setText("");
         mUserEmailET.setText("");
         mUserPhoneNumET.setText("");
-        mUserCheckCodeET.setText("");
+//        mUserCheckCodeET.setText("");
         mUseridET.requestFocusFromTouch();
     }
 
@@ -172,7 +172,7 @@ public class UserRegisterView extends BaseView {
 
     public void setVeriCode() {
         registerCheckcode = Utils.generateRandomVeriCode();
-        registerCheckcodeImage.setText(registerCheckcode);
+//        registerCheckcodeImage.setText(registerCheckcode);
     }
 
     public String getUserAccount() {

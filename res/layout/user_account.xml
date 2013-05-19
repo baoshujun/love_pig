@@ -185,7 +185,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/news_l_item_content_size" />
 
-                <Button
+               <!--  <Button
                     android:id="@+id/account_unbind"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                     android:background="@drawable/button"
                     android:text="@string/MyAccountUnbind"
                     android:textColor="@color/text_color"
-                    android:textSize="@dimen/news_l_item_content_size" />
+                    android:textSize="@dimen/news_l_item_content_size" /> -->
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

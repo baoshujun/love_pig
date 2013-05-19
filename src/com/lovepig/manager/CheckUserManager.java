@@ -80,11 +80,11 @@ public class CheckUserManager extends BaseManager {
      * 鉴权,可在多个线程同时调用,只鉴权一次
      */
     public synchronized void checkUser() {
-        if (Configs.isCheckin) {
+//        if (Configs.isCheckin) {
             // 已经在其他线程鉴权完毕
-        } else {
+//        } else {
             engine.checkUser();
-        }
+//        }
     }
 
     /**

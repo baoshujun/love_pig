@@ -101,7 +101,7 @@ public class CheckUserEngine extends BaseEngine {
 
             }
 
-            Configs.isCheckin = true;
+//            Configs.isCheckin = true;
             timingPolling();
         }
     }
