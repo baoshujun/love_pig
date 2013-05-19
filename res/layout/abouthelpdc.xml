@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/titleLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <ScrollView
+        android:id="@+id/proscrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/titleLayout"
+        android:fadeScrollbars="true" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/aboultimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/logo" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:paddingBottom="@dimen/aboultpadding"
+                android:paddingTop="@dimen/aboultpadding"
+                android:src="@drawable/sqlit_line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="phone"
+                android:text="@string/Servicetel"
+                android:textColor="@color/btn_color_title"
+                android:textSize="@dimen/aboulttextsize"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:paddingBottom="@dimen/aboultpadding"
+                android:paddingTop="@dimen/aboultpadding"
+                android:src="@drawable/sqlit_line" />
+
+            <TextView
+                android:id="@+id/abouthelp_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:layout_marginRight="15dip" 
+                android:layout_marginLeft="15dip" 
+                android:textAppearance="@style/font_black_middle"
+                android:textSize="@dimen/aboulttextsize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:text="@string/copyright"
+                android:textColor="#330000"
+                android:textSize="@dimen/aboulttextsize" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

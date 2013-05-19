@@ -12,7 +12,6 @@ import com.lovepig.utils.LogInfo;
 public class OnlineNewsDBEngine extends DBEngine {
 	/**
 	 * 保存新闻类型
-	 * 
 	 * @param gm
 	 */
 	public void saveType(ArrayList<NewsGalleryModel> l) {

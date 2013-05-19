@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/updateuserinfo_titleLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <ImageView
+        android:id="@+id/fenLeiBg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/updateuserinfo_titleLayout"
+        android:background="@drawable/fenlei_bg"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/belowTitleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fenLeiBg" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="false"
+            android:textColor="@color/online_item_title"
+            android:textSize="20sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/belowTitleLayout"
+        android:layout_marginTop="10dp" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/updateuserinfo_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <RelativeLayout
+                    android:id="@+id/updateuserinfo_user_text_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/updateuserinfo_userid_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/user_edit_heigth"
+                        android:gravity="center_vertical"
+                        android:text="@string/MyAccountID"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <TextView
+                        android:id="@+id/updateuserinfo_name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/user_edit_heigth"
+                        android:layout_below="@+id/updateuserinfo_userid_text"
+                        android:layout_marginTop="10dip"
+                        android:gravity="center_vertical"
+                        android:text="@string/MyAccountName"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <TextView
+                        android:id="@+id/updateuserinfo_email_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/user_edit_heigth"
+                        android:layout_below="@+id/updateuserinfo_name_text"
+                        android:layout_marginTop="10dip"
+                        android:gravity="center_vertical"
+                        android:text="@string/RegisterEmail"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <TextView
+                        android:id="@+id/updateuserinfo_phone_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/user_edit_heigth"
+                        android:layout_below="@+id/updateuserinfo_email_text"
+                        android:layout_marginTop="10dip"
+                        android:gravity="center_vertical"
+                        android:text="@string/RegisterPhoneNum"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <TextView
+                        android:id="@+id/updateuserinfo_pwd_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/user_edit_heigth"
+                        android:layout_below="@+id/updateuserinfo_phone_text"
+                        android:layout_marginTop="10dip"
+                        android:gravity="center_vertical"
+                        android:text="@string/UpdatePwd"
+                        android:textAppearance="@style/font_mauve_middle" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/updateuserinfo_edit_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:layout_toRightOf="@+id/updateuserinfo_user_text_layout" >
+
+                    <TextView
+                        android:id="@+id/updateuserinfo_userid"
+                        android:layout_width="@dimen/user_edit_width"
+                        android:layout_height="@dimen/user_edit_heigth"
+                        android:background="@drawable/input"
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/font_mauve_middle"
+                        android:textSize="15sp" />
+
+                    <!-- 用户昵称编辑框 -->
+
+                    <EditText
+                        android:id="@+id/updateuserinfo_name"
+                        style="@style/myEditText"
+                        android:layout_below="@+id/updateuserinfo_userid"
+                        android:layout_marginTop="10dip"
+                        android:gravity="center_vertical"
+                        android:hint="请输入昵称"
+                        android:singleLine="true"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <!-- 用户邮箱编辑框 -->
+
+                    <EditText
+                        android:id="@+id/updateuserinfo_email"
+                        style="@style/myEditText"
+                        android:layout_below="@+id/updateuserinfo_name"
+                        android:layout_marginTop="10dip"
+                        android:gravity="center_vertical"
+                        android:hint="请输入邮箱"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <!-- 用户手机编辑框 -->
+
+                    <EditText
+                        android:id="@+id/updateuserinfo_phone"
+                        style="@style/myEditText"
+                        android:layout_below="@+id/updateuserinfo_email"
+                        android:layout_marginTop="10dip"
+                        android:gravity="center_vertical"
+                        android:hint="请输入手机号"
+                        android:maxLength="11"
+                        android:singleLine="true"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <!-- 用户密码编辑框 -->
+
+                    <EditText
+                        android:id="@+id/updateuserinfo_pwd"
+                        style="@style/myEditText"
+                        android:layout_below="@+id/updateuserinfo_phone"
+                        android:layout_marginTop="10dip"
+                        android:gravity="center_vertical"
+                        android:hint="请输入密码"
+                        android:inputType="textPassword"
+                        android:maxLength="12"
+                        android:singleLine="true"
+                        android:textAppearance="@style/font_mauve_middle" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/updateuserinfo_layout"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/updateuserinfo_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button"
+                    android:text="@string/OK"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/updateuserinfo_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_toRightOf="@+id/updateuserinfo_ok"
+                    android:background="@drawable/button"
+                    android:text="@string/CANCEL"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

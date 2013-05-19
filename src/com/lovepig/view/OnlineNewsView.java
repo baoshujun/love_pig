@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Message;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -38,7 +41,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     OnlineNewsManager manager;
     TextView timeText;
     private TlcyListLayout pulldownview;
-    private Button backBtn;
+    private Button backBtn,selfInfo;
 
     public OnlineNewsView(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
@@ -73,6 +76,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         listView.setFocusable(false);
            listView.setOnItemClickListener(this);
         setLoadMoreButton(false);
+        selfInfo = (Button)this.findViewById(R.id.rightBtn);
+		selfInfo.setOnClickListener(this);
     }
     /**
      * 更新新闻分类
@@ -198,6 +203,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         case R.id.leftBtn:
         	Application.application.finish();
         	break;
+        case R.id.rightBtn:
+        	manager.sendMessage(manager.obtainMessage(R.id.rightBtn));
         default:
             super.onClicked(v);
             break;

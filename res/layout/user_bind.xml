@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/user_bind_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <ImageView
+        android:id="@+id/fenLeiBg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_bind_title"
+        android:background="@drawable/fenlei_bg"
+        android:contentDescription="@null"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fenLeiBg"
+        android:layout_marginTop="10dip"
+        android:gravity="center" >
+
+        <RelativeLayout
+            android:id="@+id/binduser_id_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/binduser_id_text"
+                style="@style/myRegisterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:text="@string/RegisterUserid" />
+            <!-- 用户文号编辑框 -->
+
+            <EditText
+                android:id="@+id/binduser_id_edit"
+                style="@style/myEditText"
+                android:layout_alignBottom="@+id/binduser_id_text"
+                android:layout_toRightOf="@+id/binduser_id_text"
+                android:digits="@string/RegisterUseridInputrule"
+                android:hint=""
+                android:maxLength="20"
+                android:singleLine="false" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/binduser_pwd_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/binduser_id_layout"
+            android:layout_marginTop="10dip" >
+
+            <TextView
+                android:id="@+id/binduser_pwd_text"
+                style="@style/myRegisterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:text="@string/RegisterPWD" />
+            <!-- 用户密码编辑框 -->
+
+            <EditText
+                android:id="@+id/binduser_pwd_edit"
+                style="@style/myEditText"
+                android:layout_alignBottom="@+id/binduser_pwd_text"
+                android:layout_toRightOf="@+id/binduser_pwd_text"
+                android:hint=""
+                android:inputType="textPassword"
+                android:maxLength="12"
+                android:singleLine="false" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/binduser_pwd_layout"
+            android:layout_marginLeft="50dip"
+            android:layout_marginTop="10dip"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/binduser_ok_btn"
+                android:layout_width="88dip"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:gravity="center"
+                android:text="@string/OK"
+                android:textColor="@color/text_color" />
+
+            <Button
+                android:id="@+id/binduser_cancel_btn"
+                android:layout_width="88dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@+id/binduser_ok_btn"
+                android:background="@drawable/button"
+                android:gravity="center"
+                android:text="@string/CANCEL"
+                android:textColor="@color/text_color" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

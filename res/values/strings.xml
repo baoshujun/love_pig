@@ -25,9 +25,9 @@
     <string name="billings">充值中心</string>
     <string name="subscribes">订阅管理</string>
     <string name="friends">好友管理</string>
-    <string name="messages">消息管理</string>
-    <string name="favorites">收藏管理</string>
-    <string name="downloads">下载管理</string>
+    <string name="messages">消息列表</string>
+    <string name="favorites">收藏列表</string>
+    <string name="downloads">版本更新</string>
     <string name="back">返回</string>
     <string name="points">…</string>
     <string name="failedgetdata">获取数据失败！</string>
@@ -187,6 +187,7 @@
     <!-- 多媒体 -->
     <string name=" multi_media">多媒体</string>
     <!-- 在线新闻 -->
+    <string name="user_info">个人信息</string>
     <string name="onlinenews_back">在线新闻</string>
     <string name="unbindTip_buyong">您正在对该问号进行解绑操作！请注意:\n1.您已经订阅但尚未下载的内容及本地已下载的内容将被清空。\n2.当使用该文号绑定其他设备时，您可以重新下载您已经购买的内容。\n温馨提示:重新下载需要大量的数据流量,建议您使用WIFI接入互联网。</string>
     <string name="unbindTip">请注意:您正在对该问号进行解绑操作！一旦您解除绑定，您已经订阅但尚未下载的内容及本地已下载的内容将被清空。当使用该文号绑定其他设备时，您可以重新下载您已经购买的内容。温馨提示:重新下载需要大量的数据流量,建议您使用WIFI接入互联网。</string>

@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import com.lovepig.manager.PriceManager;
 import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseEngine;
-import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
 

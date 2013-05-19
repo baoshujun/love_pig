@@ -21,12 +21,12 @@
             android:layout_height="34dp"
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/title_left_btn_margin"
-            android:gravity="center"
+            android:gravity="left"
             android:maxWidth="120dp"
             android:padding="0dip"
             android:singleLine="true"
             android:text="@string/back"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/logoImg"
@@ -42,9 +42,8 @@
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="@dimen/fenlei_title_height"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="@dimen/head_title_margin_l"
-        android:layout_marginRight="@dimen/head_title_margin_l"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:scrollbars="none" >
 
         <!-- 不加此layout则textView的首字母显示不出来 -->
@@ -59,10 +58,9 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/fenlei_title_height"
-                android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="@string/app_name"
                 android:textSize="@dimen/news_l_item_title_size" >
@@ -89,7 +87,6 @@
 
         <Button
             android:id="@+id/rightBtn"
-            style="@style/right_button"
             android:layout_width="@dimen/title_left_btn_w"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -99,7 +96,9 @@
             android:maxWidth="120dp"
             android:padding="0dip"
             android:singleLine="true"
-            android:visibility="gone" />
+            android:text="个人信息"
+            android:textSize="@dimen/news_l_item_title_size"
+            android:visibility="visible" />
     </RelativeLayout>
 
 </RelativeLayout>

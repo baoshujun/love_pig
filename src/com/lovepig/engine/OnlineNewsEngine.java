@@ -375,7 +375,6 @@ public class OnlineNewsEngine extends BaseEngine {
 				   }else{
 					   newsState.newslist.add(news);
 				   }
-
 				  }
 				NewsModel model=new NewsModel();
 				model.top=1;

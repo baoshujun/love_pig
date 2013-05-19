@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import android.os.Message;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 import com.lovepig.engine.OnlineNewsEngine;
 import com.lovepig.engine.database.OnlineNewsDBEngine;
+import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsGalleryModel;
@@ -193,6 +195,14 @@ public class OnlineNewsManager extends BaseManager {
            engine.fetchNewsDetail(1, 0);
             //detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj, msg.arg1, msg.arg2);
             break;
+        case R.id.rightBtn://个人信息被点击
+        	Toast.makeText(context, "hahhah", Toast.LENGTH_SHORT).show();
+        	if(!(Application.application.currentManager instanceof UserInfoManager)){
+                Application.application.setMainManager(Application.userInfoManager);
+                Application.userInfoManager.initData();
+//                mainDC.viewReset(R.id.rightBtn);
+            }
+        	break;
         default:
             break;
         }

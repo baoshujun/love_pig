@@ -5,11 +5,17 @@ import java.io.File;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Window;
+
+import com.lovepig.manager.AboutManager;
 import com.lovepig.manager.BoarManager;
+import com.lovepig.manager.CheckUserManager;
+import com.lovepig.manager.FoodstuffManager;
 import com.lovepig.manager.MainManager;
 import com.lovepig.manager.OnlineNewsManager;
-import com.lovepig.manager.FoodstuffManager;
 import com.lovepig.manager.PriceManager;
+import com.lovepig.manager.UserInfoManager;
+import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseActivity;
 
 public class Application extends BaseActivity {
@@ -18,6 +24,10 @@ public class Application extends BaseActivity {
 	public static FoodstuffManager pigManager;
 	public static PriceManager priceManager;
 	public static BoarManager boarManager;
+	public static UserManager userManager;
+	public static UserInfoManager userInfoManager;
+    public static CheckUserManager checkUserManager;
+    public static AboutManager aboutManager;
 
 	long timeForAnimator;
 	public MainManager mainManager;
@@ -30,13 +40,16 @@ public class Application extends BaseActivity {
 //		Configs.initTypeAndVsersion(application);
 		mainManager = new MainManager(application);
 		onlineNewsManager = new OnlineNewsManager(application);
+		userInfoManager = new UserInfoManager(application);
+		userManager = new UserManager(application);
+		aboutManager = new AboutManager(application);
 		pigManager = new FoodstuffManager(application);
 		//加载价格
 		priceManager = new PriceManager(application);
 		//加载兽药
 		boarManager = new BoarManager(application);
-		
 		setContentView(mainManager.getLayout());
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.commtitle); 
 		dcEngineContener = mainManager.getContainer();
 		currentManager = mainManager;
 		mainManager.onClicked(R.id.menu_news);

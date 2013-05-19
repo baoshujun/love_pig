@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <RelativeLayout
+        android:id="@+id/belowTitleLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleLayout"
+        android:background="@drawable/fenlei_bg" 
+        android:visibility="gone">
+
+<!--         <TextView -->
+<!--             android:id="@+id/name" -->
+<!--             android:layout_width="200dp" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_alignParentLeft="true" -->
+<!--             android:layout_centerVertical="true" -->
+<!--             android:layout_marginLeft="10dip" -->
+<!--             android:text="图书名字" -->
+<!--             android:textAppearance="@style/font_mauve_middle" /> -->
+<!--         android:textAppearance="@style/font_mauve_middle" -->
+
+<!--         <TextView -->
+<!--             android:id="@+id/behavior" -->
+<!--             android:layout_width="150dp" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_centerVertical="true" -->
+<!--             android:layout_marginLeft="10dp" -->
+<!--             android:layout_toRightOf="@id/name" -->
+<!--             android:maxWidth="150dip" -->
+<!--             android:text="方式" -->
+<!--             android:textAppearance="@style/font_mauve_middle" /> -->
+
+<!--         <TextView -->
+<!--             android:id="@+id/price" -->
+<!--             android:layout_width="150dp" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_centerVertical="true" -->
+<!--             android:layout_marginLeft="10dip" -->
+<!--             android:layout_toRightOf="@id/behavior" -->
+<!--              android:text="价钱" -->
+<!--             android:textAppearance="@style/font_mauve_middle" /> -->
+
+<!--         <TextView -->
+<!--             android:id="@+id/time" -->
+<!--             android:text="时间" -->
+<!--             android:layout_width="200dp" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_alignParentRight="true" -->
+<!--             android:layout_centerVertical="true" -->
+<!--             android:layout_marginRight="10dp" -->
+<!--             android:textAppearance="@style/font_mauve_middle" /> -->
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/resumList"
+        style="@style/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/belowTitleLayout" >
+    </ListView>
+
+</RelativeLayout>

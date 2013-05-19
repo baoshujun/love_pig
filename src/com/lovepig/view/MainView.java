@@ -20,7 +20,7 @@ public class MainView extends BaseView {
 	 * 
 	 */
 //	private Button toNews, toPrice, toVeterinaryDrugs, toFoodStuff, toEquipment,toAnswerQuestions;
-	private Button toNews,toBoar,toPigFactory;
+	private Button toNews,toBoar,toPigFactory,toUserInfo;
 	Animation goneAnimation, visibleAnimation;
 	LinearLayout menuLayout;
 	private TextView menuMoreTip;
@@ -42,6 +42,7 @@ public class MainView extends BaseView {
 		toNews.setOnClickListener(this);
 		toBoar.setOnClickListener(this);
 		toPigFactory.setOnClickListener(this);
+		
 //		toVeterinaryDrugs.setOnClickListener(this);
 //		toPrice.setOnClickListener(this);
 //		toFoodStuff.setOnClickListener(this);

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/titleLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <ImageView
+        android:id="@+id/fenLeiBg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleLayout"
+        android:background="@drawable/fenlei_bg"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/belowTitleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fenLeiBg" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="false"
+            android:textColor="@color/online_item_title"
+            android:textSize="20sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@id/belowTitleLayout"
+        >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+             >
+
+            <RelativeLayout
+                android:id="@+id/account_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/account_userid_layout"
+                    android:layout_width="@dimen/more_user_info_text_lay_w"
+                    android:background="@drawable/input"
+                    android:layout_height="@dimen/more_user_acc_text_h"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/more_user_acc_text_marg_t"
+                    
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/MyAccountID"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <TextView
+                        android:id="@+id/account_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dip"
+                        android:textAppearance="@style/font_mauve_middle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/account_name_layout"
+                    android:layout_width="@dimen/more_user_info_text_lay_w"
+                    android:layout_height="@dimen/more_user_acc_text_h"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/account_userid_layout"
+                    android:layout_marginTop="@dimen/more_user_acc_text_marg_t"
+                    android:background="@drawable/input"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/MyAccountName"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <TextView
+                        android:id="@+id/account_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dip"
+                        android:textAppearance="@style/font_mauve_middle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/account_email_layout"
+                    android:layout_width="@dimen/more_user_info_text_lay_w"
+                    android:layout_height="@dimen/more_user_acc_text_h"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/account_name_layout"
+                    android:layout_marginTop="@dimen/more_user_acc_text_marg_t"
+                    android:background="@drawable/input"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/MyAccountEmail"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <TextView
+                        android:id="@+id/account_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dip"
+                        android:textAppearance="@style/font_mauve_middle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/account_phone_layout"
+                    android:layout_width="@dimen/more_user_info_text_lay_w"
+                    android:layout_height="@dimen/more_user_acc_text_h"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/account_email_layout"
+                    android:layout_marginTop="@dimen/more_user_acc_text_marg_t"
+                    android:background="@drawable/input"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/MyAccountPhoneNum"
+                        android:textAppearance="@style/font_mauve_middle" />
+
+                    <TextView
+                        android:id="@+id/account_phone_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dip"
+                        android:textAppearance="@style/font_mauve_middle" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/account_info"
+                android:layout_marginTop="@dimen/more_user_acc_text_marg_t"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/account_modifyinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:padding="5dp"
+                    android:text="@string/MyAccountModifyInfo"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/news_l_item_content_size" />
+
+                <Button
+                    android:id="@+id/account_modifypwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:background="@drawable/button"
+                    android:text="@string/MyAccountModifyPwd"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/news_l_item_content_size" />
+
+                <Button
+                    android:id="@+id/account_unbind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:background="@drawable/button"
+                    android:text="@string/MyAccountUnbind"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/news_l_item_content_size" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
