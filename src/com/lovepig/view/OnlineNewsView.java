@@ -22,22 +22,22 @@ import com.lovepig.pivot.BaseView;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.widget.MyGallery;
 import com.lovepig.widget.MyGallery.TlcyGalleryListener;
-import com.lovepig.widget.TlcyListLayout.OnRefreshListener;
 import com.lovepig.widget.TlcyListLayout;
+import com.lovepig.widget.TlcyListLayout.OnRefreshListener;
 
 public class OnlineNewsView extends BaseView implements OnItemClickListener, OnRefreshListener,  TlcyGalleryListener {
     MyGallery myGallery;
     ImageView  qian, hou;
     TextView title;
     ArrayList<NewsGalleryModel> mNewsGalleryModels;
-    String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};;
+    String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};
     private int index;
     OnlineNewsAdapter adapter;
     ListView listView;
     OnlineNewsManager manager;
     TextView timeText;
     private TlcyListLayout pulldownview;
-    private Button backBtn;
+    private Button backBtn,selfInfo;
 
     public OnlineNewsView(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
@@ -72,6 +72,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         listView.setFocusable(false);
            listView.setOnItemClickListener(this);
         setLoadMoreButton(false);
+        selfInfo = (Button)this.findViewById(R.id.rightBtn);
+		selfInfo.setOnClickListener(this);
     }
 
     @Override
@@ -213,6 +215,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         case R.id.leftBtn:
         	Application.application.finish();
         	break;
+        case R.id.rightBtn:
+        	manager.sendMessage(manager.obtainMessage(R.id.rightBtn));
         default:
             super.onClicked(v);
             break;

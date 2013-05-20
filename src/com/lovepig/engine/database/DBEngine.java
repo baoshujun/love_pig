@@ -59,7 +59,7 @@ public class DBEngine {
                     "summary TEXT ," + // 新闻内容
                     "catId INTEGER" + // 新闻来源
                     ");");
-            LogInfo.LogOut(TAG + " Create Table audios ok");
+            LogInfo.LogOut(TAG + " Create Table onlinenews ok");
             return true;
         } catch (Exception e) {
             LogInfo.LogOut(TAG + " Create Table onlinenews err,table exists." + e.getMessage());

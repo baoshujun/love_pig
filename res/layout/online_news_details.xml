@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent" >
 
     <include
+        android:id="@+id/titleLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         layout="@layout/commtitle" />
-
-    <RelativeLayout
-        android:id="@+id/titlelayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/titleLayout" >
-    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/onlinescrollview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/titlelayout"
+        android:layout_below="@id/titleLayout"
         android:layout_marginLeft="15dip"
         android:fadeScrollbars="true" >
 
@@ -35,8 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dip"
                 android:layout_marginRight="15dip"
-                android:text="@string/ multi_media"
                 android:gravity="center_horizontal"
+                android:text="@string/ multi_media"
                 android:textSize="@dimen/news_detail_title_size" />
 
             <TextView
@@ -45,8 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/onlinedetailstitle"
                 android:gravity="center_horizontal"
-                android:text="@string/abouthelp"
-                />
+                android:text="@string/abouthelp" />
 
             <ImageView
                 android:id="@+id/onlinedetailsimg"
@@ -75,22 +67,32 @@
         </RelativeLayout>
     </ScrollView>
 
-    <ImageButton
-        android:id="@+id/onlinepreviousnews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="@null"
+    <RelativeLayout
+        android:id="@+id/menuBgLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:visibility="gone" />
 
-    <ImageButton
-        android:id="@+id/onlinenextnews"
+    <LinearLayout
+        android:id="@+id/menuLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="@null"
-        android:visibility="gone" />
+        android:layout_below="@id/titleLayout"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/favoritBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="收藏" />
+
+        <Button
+            android:id="@+id/fontSizeBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="字体大小" />
+    </LinearLayout>
 
 </RelativeLayout>

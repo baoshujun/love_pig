@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/more_item_height"
+    android:background="@drawable/liebiao" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/more_item_margin_left"
+        android:text="@string/More"
+        android:textColor="@color/online_item_title"
+        android:textSize="@dimen/news_l_item_title_size" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/more_item_margin_right"
+        android:contentDescription="@string/More"
+        android:src="@drawable/jiantou_hou_1" />
+
+    <ImageView
+        android:id="@+id/messageInfoTip"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/biaoqian1"
+        android:visibility="gone" />
+
+</RelativeLayout>

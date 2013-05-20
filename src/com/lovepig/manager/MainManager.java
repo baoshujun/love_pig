@@ -37,36 +37,41 @@ public class MainManager extends BaseManager {
             }
            
             break;
-        case R.id.menu_price://价格
+        case R.id.menu_boar://种猪
         case R.id.priceMsg:
         	  if(!(Application.application.currentManager instanceof PriceManager)){
                   Application.application.setMainManager(Application.priceManager);
                   Application.priceManager.initData();
-                  mainDC.viewReset(R.id.menu_price);
+                  mainDC.viewReset(R.id.menu_boar);
               }
             break;
-        case R.id.menu_equipment:
+        case R.id.menu_pig_factory://附近猪场
+        	break;
         case R.id.deviceMsg://设备
           
             break;
 
-        case R.id.menu_veterinary_drugs:
-        case R.id.boarMsg: //兽药 
-        	 if(!(Application.application.currentManager instanceof BoarManager)){
-                 Application.application.setMainManager(Application.boarManager);
-                 Application.boarManager.initData();
+//        case R.id.menu_veterinary_drugs:
+//        case R.id.boarMsg: //兽药 
+//        	 if(!(Application.application.currentManager instanceof BoarManager)){
+//                 Application.application.setMainManager(Application.boarManager);
+//                 Application.boarManager.initData();
+//             }
+//            break;
+//        case R.id.menu_answer_questions: 
+//        case R.id.expertMsg://答疑
+//          
+//            break;
+//        case R.id.menu_foodstuff: //食料
+//            
+//            break;
+        case R.id.rightBtn:
+        	 if(!(Application.application.currentManager instanceof UserInfoManager)){
+                 Application.application.setMainManager(Application.userInfoManager);
+                 Application.userInfoManager.initData();
+                 mainDC.viewReset(R.id.rightBtn);
              }
-            break;
-        case R.id.menu_answer_questions: 
-        case R.id.expertMsg://答疑
-           
-          
-            break;
-        case R.id.menu_foodstuff: //食料
-            
-            
-            
-            break;
+        break;
 
         default:
             break;

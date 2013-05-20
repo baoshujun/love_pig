@@ -141,7 +141,7 @@ public class OnlineNewsEngine extends BaseEngine {
 	/**
 	 * 加载更多新闻
 	 * 
-	 * @param id
+	 * @param fontSize
 	 * @param type
 	 */
 	public void moreNews(int catId, int limit, int maxId) {
@@ -375,7 +375,6 @@ public class OnlineNewsEngine extends BaseEngine {
 				   }else{
 					   newsState.newslist.add(news);
 				   }
-
 				  }
 				NewsModel model=new NewsModel();
 				model.top=1;

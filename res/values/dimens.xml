@@ -15,7 +15,7 @@
     <dimen name="more_item_margin_left">10dip</dimen>
 
     <!-- modified by zengsonghai (shopping model) start -->
-    <dimen name="fenlei_title_height">50dip</dimen>
+    <dimen name="fenlei_title_height">42dip</dimen>
     <dimen name="shopping_searchEdit_height">50dip</dimen>
     <dimen name="shopping_searchBtn_left">10dip</dimen>
     <dimen name="shopping_searchBtn_right">10dip</dimen>

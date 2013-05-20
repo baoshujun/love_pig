@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/userunbind_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <ImageView
+        android:id="@+id/fenLeiBg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userunbind_title"
+        android:background="@drawable/fenlei_bg"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/belowTitleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fenLeiBg" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="false"
+            android:textColor="@color/online_item_title"
+            android:textSize="20sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/userunbind_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/belowTitleLayout"
+        android:layout_marginTop="10dip"
+        android:gravity="center" >
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/userunbind_text_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/userunbind_userid_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/user_edit_heigth"
+                android:gravity="center_vertical"
+                android:text="@string/MyUserid"
+                android:textAppearance="@style/font_mauve_middle" />
+
+            <TextView
+                android:id="@+id/userunbind_pwd_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/user_edit_heigth"
+                android:layout_below="@+id/userunbind_userid_text"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:text="@string/RegisterPWD"
+                android:textAppearance="@style/font_mauve_middle" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/passwdLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_toRightOf="@+id/userunbind_text_layout"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/userunbind_userid"
+                android:layout_width="@dimen/user_edit_width"
+                android:layout_height="@dimen/user_edit_heigth"
+                android:background="@drawable/input"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/font_mauve_middle" />
+
+            <EditText
+                android:id="@+id/userunbind_pwd"
+                style="@style/myEditText"
+                android:layout_below="@+id/userunbind_userid"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:maxLength="12"
+                android:singleLine="false"
+                android:textAppearance="@style/font_mauve_middle" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/btnLayoutId"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userunbind_layout"
+        android:layout_marginTop="10dip"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/userunbind_ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:text="@string/OK"
+            android:textColor="@color/text_color"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/userunbind_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@+id/userunbind_ok_btn"
+            android:background="@drawable/button"
+            android:text="@string/CANCEL"
+            android:textColor="@color/text_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLayoutId"
+        android:layout_margin="10dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/unbindTip"
+        android:textColor="@color/online_item_title"
+        android:textSize="18sp" />
+
+</RelativeLayout>

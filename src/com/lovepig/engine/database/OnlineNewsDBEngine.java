@@ -12,7 +12,6 @@ import com.lovepig.utils.LogInfo;
 public class OnlineNewsDBEngine extends DBEngine {
 	/**
 	 * 保存新闻类型
-	 * 
 	 * @param gm
 	 */
 	public void saveType(ArrayList<NewsGalleryModel> l) {
@@ -129,7 +128,7 @@ public class OnlineNewsDBEngine extends DBEngine {
 	/**
 	 * 更新新闻类型选中
 	 * 
-	 * @param id
+	 * @param fontSize
 	 */
 	public void updateTypeCheckedByID(int id1, int id2) {
 		db.beginTransaction();

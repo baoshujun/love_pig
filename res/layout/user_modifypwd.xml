@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/user_modifypwd_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <ImageView
+        android:id="@+id/fenLeiBg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_modifypwd_title"
+        android:background="@drawable/fenlei_bg"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/belowTitleLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fenLeiBg" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="false"
+            android:textColor="@color/online_item_title"
+            android:textSize="20sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/user_modifypwd_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/belowTitleLayout"
+        android:layout_marginTop="10dp"
+        android:gravity="center" >
+
+        <RelativeLayout
+            android:id="@+id/user_modifypwd_userid_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_modifypwd_title"
+            android:layout_marginTop="@dimen/more_modify_pwd_text_margin_t" >
+
+            <TextView
+                android:id="@+id/user_modifypwd_userid_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/user_edit_heigth"
+                android:text="@string/MyUserid"
+                android:textAppearance="@style/font_mauve_middle" />
+
+            <TextView
+                android:id="@+id/user_modifypwd_oldpwd_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/user_edit_heigth"
+                android:layout_below="@+id/user_modifypwd_userid_text"
+                android:layout_marginTop="10dip"
+                android:text="@string/OldPWD"
+                android:textAppearance="@style/font_mauve_middle" />
+
+            <TextView
+                android:id="@+id/user_modifypwd_newpwd_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/user_edit_heigth"
+                android:layout_below="@+id/user_modifypwd_oldpwd_text"
+                android:layout_marginTop="10dip"
+                android:text="@string/ModifyNewPwd"
+                android:textAppearance="@style/font_mauve_middle" />
+
+            <TextView
+                android:id="@+id/user_modifypwd_renewpwd_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/user_edit_heigth"
+                android:layout_below="@+id/user_modifypwd_newpwd_text"
+                android:layout_marginTop="10dip"
+                android:text="@string/ModifyReNewPWD"
+                android:textAppearance="@style/font_mauve_middle" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/user_modifypwd_oldpwd_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:layout_toRightOf="@id/user_modifypwd_userid_layout" >
+
+            <TextView
+                android:id="@+id/user_modifypwd_userid"
+                android:layout_width="@dimen/user_edit_width"
+                android:layout_height="@dimen/user_edit_heigth"
+                android:background="@drawable/input"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/font_mauve_middle" />
+
+            <EditText
+                android:id="@+id/user_modifypwd_oldpwd"
+                style="@style/myEditText"
+                android:layout_below="@+id/user_modifypwd_userid"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:maxLength="12"
+                android:singleLine="false"
+                android:textAppearance="@style/font_mauve_middle" />
+
+            <EditText
+                android:id="@+id/user_modifypwd_newpwd"
+                style="@style/myEditText"
+                android:layout_below="@+id/user_modifypwd_oldpwd"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:maxLength="12"
+                android:singleLine="false"
+                android:textAppearance="@style/font_mauve_middle" />
+
+            <EditText
+                android:id="@+id/user_modifypwd_renewpwd"
+                style="@style/myEditText"
+                android:layout_below="@+id/user_modifypwd_newpwd"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:maxLength="12"
+                android:singleLine="false"
+                android:textAppearance="@style/font_mauve_middle" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_modifypwd_layout"
+        android:layout_marginTop="10dip"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/user_modifypwd_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button"
+            android:text="@string/OK"
+            android:textColor="@color/text_color"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/user_modifypwd_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@+id/user_modifypwd_ok"
+            android:background="@drawable/button"
+            android:text="@string/CANCEL"
+            android:textColor="@color/text_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>
