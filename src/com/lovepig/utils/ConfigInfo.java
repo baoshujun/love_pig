@@ -14,6 +14,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
+import com.lovepig.main.Application;
 import com.lovepig.main.Configs;
 
 /**
@@ -84,7 +85,7 @@ public class ConfigInfo {
 
     // Create SharedPreferences Object.
     private static SharedPreferences getcfg() {
-        return null;
+        return Application.application.getSharedPreferences("ctfInfo", 0);
     }
 
     // get the editable SharedPreferences Object.

@@ -20,16 +20,16 @@ import com.lovepig.utils.MD5;
 import com.lovepig.utils.Utils;
 
 public class UserRegisterView extends BaseView {
-    EditText mUseridET;// 用户文号
+    EditText mUseridET;// 用户名
     EditText mUserpwdET;//
     EditText mUserRepwdET;
     EditText mUserEmailET;
     EditText mUserPhoneNumET;
 //    EditText mUserCheckCodeET;
-    Button mUserBindBtn;
+//    Button mUserBindBtn;
     Button mUserRegisterBtn;
     Button mUserResetBtn;
-    Button mCheckUseridBtn;
+//    Button mCheckUseridBtn;
 //    Button registerCheckcodeImage;
     Button mBackBtn;
     TextView mTitlem;
@@ -51,14 +51,14 @@ public class UserRegisterView extends BaseView {
         mUserEmailET = (EditText) findViewById(R.id.register_email_edit);
         mUserPhoneNumET = (EditText) findViewById(R.id.register_phone_edit);
 //        mUserCheckCodeET = (EditText) findViewById(R.id.register_checkcode_edit);
-        mCheckUseridBtn = (Button) findViewById(R.id.register_userid_checked_btn);
-        mUserBindBtn = (Button) findViewById(R.id.rightBtn);
-        mUserBindBtn.setText(R.string.RegisterUserbind);
-        mUserBindBtn.setVisibility(VISIBLE);
+//        mCheckUseridBtn = (Button) findViewById(R.id.register_userid_checked_btn);
+//        mUserBindBtn = (Button) findViewById(R.id.rightBtn);
+//        mUserBindBtn.setText(R.string.RegisterUserbind);
+//        mUserBindBtn.setVisibility(VISIBLE);
         mUserRegisterBtn = (Button) findViewById(R.id.register_register_btn);
         mUserResetBtn = (Button) findViewById(R.id.register_register_reset_btn);
-        mCheckUseridBtn.setOnClickListener(this);
-        mUserBindBtn.setOnClickListener(this);
+//        mCheckUseridBtn.setOnClickListener(this);
+//        mUserBindBtn.setOnClickListener(this);
         mUserRegisterBtn.setOnClickListener(this);
         mUserResetBtn.setOnClickListener(this);
 //        registerCheckcodeImage = (Button) findViewById(R.id.register_checkcode_image);

@@ -13,7 +13,7 @@ public class Location extends Application {
 	public LocationClient mLocationClient = null;
 //	public LocationClient locationClient = null;
 //	public LocationClient LocationClient = null;
-	private String mData;  
+	private String mData; 
 	public MyLocationListenner myListener = new MyLocationListenner();
 //	public MyLocationListenner listener = new MyLocationListenner();
 //	public MyLocationListenner locListener = new MyLocationListenner();
