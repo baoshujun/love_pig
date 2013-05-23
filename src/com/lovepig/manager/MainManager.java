@@ -65,11 +65,11 @@ public class MainManager extends BaseManager {
 //        case R.id.menu_foodstuff: //食料
 //            
 //            break;
-        case R.id.rightBtn:
+        case R.id.menu_user_info:
         	 if(!(Application.application.currentManager instanceof UserInfoManager)){
                  Application.application.setMainManager(Application.userInfoManager);
                  Application.userInfoManager.initData();
-                 mainDC.viewReset(R.id.rightBtn);
+                 mainDC.viewReset(R.id.menu_user_info);
              }
         break;
 

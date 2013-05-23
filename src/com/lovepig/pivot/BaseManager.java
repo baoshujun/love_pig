@@ -8,6 +8,9 @@ import android.os.Message;
 import android.widget.ViewAnimator;
 
 import com.lovepig.main.R;
+import com.lovepig.manager.UserInfoManager;
+import com.lovepig.manager.UserManager;
+import com.lovepig.view.UserInfoView;
 import com.lovepig.widget.TlcyDialog;
 import com.lovepig.widget.TlcyDialog.TlcyDialogListener;
 

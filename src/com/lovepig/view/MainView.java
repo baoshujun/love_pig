@@ -32,6 +32,7 @@ public class MainView extends BaseView {
 		toNews = (Button) findViewById(R.id.menu_news);
 		toBoar = (Button) findViewById(R.id.menu_boar);
 		toPigFactory = (Button) findViewById(R.id.menu_pig_factory);
+		toUserInfo = (Button) findViewById(R.id.menu_user_info);
 //		toVeterinaryDrugs = (Button) findViewById(R.id.menu_veterinary_drugs);
 //		toPrice = (Button) findViewById(R.id.menu_price);
 //		toAnswerQuestions = (Button) findViewById(R.id.menu_answer_questions);
@@ -42,12 +43,7 @@ public class MainView extends BaseView {
 		toNews.setOnClickListener(this);
 		toBoar.setOnClickListener(this);
 		toPigFactory.setOnClickListener(this);
-		
-//		toVeterinaryDrugs.setOnClickListener(this);
-//		toPrice.setOnClickListener(this);
-//		toFoodStuff.setOnClickListener(this);
-//		toEquipment.setOnClickListener(this);
-//		toAnswerQuestions.setOnClickListener(this);
+		toUserInfo.setOnClickListener(this);
 		goneAnimation = AnimationUtils.loadAnimation(context,
 				R.anim.push_right_out);
 		visibleAnimation = AnimationUtils.loadAnimation(context,
@@ -66,6 +62,7 @@ public class MainView extends BaseView {
 		toNews.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
 		toBoar.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
 		toPigFactory.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
+		toUserInfo.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
 //		toVeterinaryDrugs.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
 //		toPrice.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
 //		toFoodStuff.setTextColor(context.getResources().getColor(R.color.bottom_btn_no_selected));
@@ -82,9 +79,9 @@ public class MainView extends BaseView {
 		case R.id.menu_pig_factory:
 			toPigFactory.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
 			break;
-//		case R.id.menu_foodstuff:
-//			toFoodStuff.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
-//			break;
+		case R.id.menu_user_info:
+			toUserInfo.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
+			break;
 //		case R.id.menu_price:
 //			toPrice.setTextColor(context.getResources().getColor(R.color.bottom_btn_selected));
 //			break;

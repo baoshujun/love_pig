@@ -43,6 +43,15 @@
             android:background="@android:color/transparent"
             android:text="附近猪厂"
             android:textColor="@color/bottom_btn_no_selected" />
+        <Button
+            android:id="@+id/menu_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/menu_item_margin"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="个人信息"
+            android:textColor="@color/bottom_btn_no_selected" />
 
       <!--   <Button
             android:id="@+id/menu_foodstuff"

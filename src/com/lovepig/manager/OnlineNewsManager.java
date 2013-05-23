@@ -18,8 +18,10 @@ import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.utils.Utils;
+import com.lovepig.view.MainView;
 import com.lovepig.view.OnlineNewsView;
 import com.lovepig.view.OnlineNewsDetailsView;
+import com.lovepig.view.UserInfoView;
 
 public class OnlineNewsManager extends BaseManager {
     public static final int DEFAULT_NEW_LENGTH = 20;// 默认取20条新闻
@@ -204,11 +206,14 @@ public class OnlineNewsManager extends BaseManager {
             break;
         case R.id.rightBtn://个人信息被点击
         	Toast.makeText(context, "hahhah", Toast.LENGTH_SHORT).show();
-        	if(!(Application.application.currentManager instanceof UserInfoManager)){
-                Application.application.setMainManager(Application.userInfoManager);
-                Application.userInfoManager.initData();
-//                mainDC.viewReset(R.id.rightBtn);
-            }
+//        	UserInfoView userInfoView = new UserInfoView(context, R.layout.user_info, this);
+//        	enterSubDC(userInfoView);
+//        	if(!(Application.application.currentManager instanceof UserInfoManager)){
+//                Application.application.setSubManager(Application.userInfoManager);
+//                Application.userInfoManager.initData();
+////                mainDC.viewReset(R.id.rightBtn);
+////                sendMessage(obtainMessage(R.id.rightBtn));
+//            }
         	break;
         default:
             break;
