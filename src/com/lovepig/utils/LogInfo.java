@@ -7,7 +7,7 @@ import com.lovepig.main.Configs;
 /**
  * 这里记录调试日志
  * 
- * @author Li Hongjun
+ * 
  */
 public class LogInfo {
 	public static void LogOut(String info) {
@@ -17,9 +17,9 @@ public class LogInfo {
 		    if(stack.length > 1){
 		        StackTraceElement s = stack[1];  
 		        String[] names= s.getClassName().split("\\.");
-		        Log.d("XHPM",names[names.length-1]+":"+s.getLineNumber()+ info);
+		        Log.d("love",names[names.length-1]+":"+s.getLineNumber()+ info);
 		    }else{
-		        Log.d("XHPM", info);
+		        Log.d("love", info);
 		    }
 		}
 	}

@@ -202,14 +202,17 @@ public class OnlineNewsManager extends BaseManager {
             // detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj,
             // msg.arg1, msg.arg2);
             break;
-        case R.id.rightBtn://个人信息被点击
-        	Toast.makeText(context, "hahhah", Toast.LENGTH_SHORT).show();
-        	if(!(Application.application.currentManager instanceof UserInfoManager)){
-                Application.application.setMainManager(Application.userInfoManager);
-                Application.userInfoManager.initData();
-//                mainDC.viewReset(R.id.rightBtn);
-            }
-        	break;
+        case R.id.rightBtn:// 个人信息被点击
+//            Toast.makeText(context, "hahhah", Toast.LENGTH_SHORT).show();
+//            if (!(Application.application.currentManager instanceof UserInfoManager)) {
+//                Application.application.setMainManager(Application.userInfoManager);
+//                Application.userInfoManager.initData();
+//                // mainDC.viewReset(R.id.rightBtn);
+//            }
+            
+            Application.application.setSubManager(Application.userInfoManager);
+            Application.userInfoManager.initData();
+            break;
         default:
             break;
         }
@@ -540,9 +543,9 @@ public class OnlineNewsManager extends BaseManager {
             showAlert("获取新闻详情失败！");
         }
     }
-    
-    public boolean isHiddenMenu(){
-        if (detailsDC!=null) {
+
+    public boolean isHiddenMenu() {
+        if (detailsDC != null) {
             return detailsDC.isBack();
         }
         return false;

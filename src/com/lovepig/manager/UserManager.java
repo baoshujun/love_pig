@@ -15,7 +15,6 @@ import com.lovepig.view.UserAccountView;
 import com.lovepig.view.UserModiyPWView;
 import com.lovepig.view.UserRegisterView;
 import com.lovepig.view.UserUpdateUserInfoView;
-import com.lovepig.widget.TlcyDialog.TlcyDialogListener;
 
 public class UserManager extends BaseManager {
 	public static final int STATE_MODIFYINFO = 0;// 修改用户信息

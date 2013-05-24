@@ -44,6 +44,7 @@ public class OnlineNewsDBEngine extends DBEngine {
 	 */
 
 	public void saveNews(NewsModel m, int catId) {
+	    LogInfo.LogOut("saveNews.................");
 		String sql = "insert into onlinenews(id,title,newsOrder,top,iconPath,summary,catId) values(?,?,?,?,?,?,?)";
 		db.beginTransaction();
 		try {
@@ -90,6 +91,7 @@ public class OnlineNewsDBEngine extends DBEngine {
 	 * @return
 	 */
 	public ArrayList<NewsModel> getOnlineNews(int catId) {
+	    LogInfo.LogOut("getOnlineNews.................");
 		ArrayList<NewsModel> programs = new ArrayList<NewsModel>();
 		ArrayList<NewsModel> tops = new ArrayList<NewsModel>();
 		try {
@@ -110,6 +112,7 @@ public class OnlineNewsDBEngine extends DBEngine {
 					lm.summary = cursor.getString(cursor
 							.getColumnIndex("summary"));
 
+					 LogInfo.LogOut("getOnlineNews................."+lm.title);
 					if (lm.top == 1) {
 						tops.add(lm);
 					} else {
