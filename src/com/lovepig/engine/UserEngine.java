@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import com.lovepig.main.Application;
 import com.lovepig.main.Configs;
-import com.lovepig.manager.MainManager;
 import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.utils.Json;
@@ -15,8 +14,6 @@ public class UserEngine extends BaseEngine {
     RegisterUserTask mRegisterUserTask;// 用户注册
     UpdateUserInfoTask mUpdateUserInfoTask;// 修改用户信息
     ModifyPWDTask mModifyPWDTask;// 修改密码
-//    ToBindTask mToBindTask;// 用户绑定
-//    UnbindTask mUnbindTask;// 解除绑定
     CheckUserIdTask checkUserIdTask;
 
     public UserEngine(UserManager manager) {
@@ -205,12 +202,12 @@ public class UserEngine extends BaseEngine {
         @Override
         protected String doInBackground(String... params) {
 //            if (!Configs.isCheckin) {
-                Application.checkUserManager.checkUser();
+//                Application.checkUserManager.checkUser();
 //            }
 //            if (!Configs.isCheckin) {
 //                return null;
 //            }
-            return httpRequestThisThread(1, Configs.RegisterUserAction + params[0]);
+            return httpRequestThisThread(1, Configs.RegisterUser + params[0]);
         }
 
         @Override

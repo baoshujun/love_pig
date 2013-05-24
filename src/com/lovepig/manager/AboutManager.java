@@ -45,7 +45,7 @@ public class AboutManager extends BaseManager {
 	@Override
 	public ViewAnimator getMainDC() {
 		if (mainDC == null) {
-			mainDC = new AboutView(context, R.layout.abouthelpdc, this);
+			mainDC = new AboutView(context, R.layout.about, this);
 		}
 		dcEngine.setMainDC(mainDC);
 		return super.getMainDC();

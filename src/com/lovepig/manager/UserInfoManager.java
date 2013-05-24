@@ -76,14 +76,8 @@ public class UserInfoManager extends BaseManager {
 //            userFriendProcessManager.sendEmptyMessage(MoreUserFriendMng.MSG_WHAT_FETCH_FRIENDS_LIST);
             // context.setSubManager(userFriendProcessManager);
             break;
-        case 4:// 消息
-            if (!Utils.isNetworkValidate(context)) {
-                showAlert("网络不可用,请检查您的网络！");
-                return;
-            }
-//            messageProcessManager = new MoreMsgMng(context);
-//            messageProcessManager.sendMessage(messageProcessManager.obtainMessage(3, 0, 0));
-            // context.setSubManager(messageProcessManager);
+        case 4:// 关于帮助
+        	Application.application.setSubManager(Application.aboutManager);
             break;
         case 5:// 收藏
             if (!Utils.isNetworkValidate(context)) {
@@ -95,9 +89,6 @@ public class UserInfoManager extends BaseManager {
             break;
         case 6:// 重新下载
 //            Application.application.setSubManager(Application.downloadProductManager);
-            break;
-        case 7:// 关于帮助
-            Application.application.setSubManager(Application.aboutManager);
             break;
         default:
             if (button == null) {

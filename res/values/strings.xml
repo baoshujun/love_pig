@@ -294,8 +294,8 @@
     <string name="FavoritesCancel">取消收藏</string>
     <string name="FavoritesDate">收藏日期：</string>
     <string name="noSDCARDmema">外部存储已满，请清理SD卡。</string>
-    <string name="Servicetel">客服电话：   010–63076070</string>
-    <string name="copyright">Copyright c 2011–2012 xinhuapinmei</string>
+    <string name="Servicetel">客服电话：   010–999999999</string>
+    <string name="copyright">Copyright c 2013–2014 猪讯</string>
     <!-- 分享 -->
     <string name="shareBtn">分享</string>
      <string name="renren_sdk_submit">确定</string>

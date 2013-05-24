@@ -1,12 +1,8 @@
 package com.lovepig.engine;
 
-import java.util.ArrayList;
 
-import android.text.TextUtils;
 
-import com.lovepig.main.Application;
 import com.lovepig.main.Configs;
-import com.lovepig.manager.MainManager;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.ConfigInfo;

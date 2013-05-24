@@ -168,7 +168,7 @@ public class Configs {
     public static final String getCommentAction = "/xhs/getComment.action";// 获取用户评价
     public static final String accountAction = "/xhs/account.action";// 用户信息
     public static final String UserInfoaccountAction = "/xhs/getAccount.action";// 用户信息
-    public static final String RegisterUserAction = "/xhs/register.action";// 注册用户
+    public static final String RegisterUser = "/user/register";// 注册用户
     public static final String CheckUsernameAction = "/xhs/checkUsername.action";// 验证用户文号
     public static final String UpdateUserInfoAction = "/xhs/changeAccount.action";// 修改用户信息
     public static final String ModifyUserPwdAction = "/xhs/changePassword.action";// 修改密码
