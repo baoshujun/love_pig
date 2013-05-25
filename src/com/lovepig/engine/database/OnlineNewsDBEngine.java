@@ -252,6 +252,44 @@ public class OnlineNewsDBEngine extends DBEngine {
         }
         return programs;
     }
+    
+    /**
+     * 读取新闻详情
+     * 
+     */
+    public ArrayList<NewsDetailModel> getNewsDetail() {
+        LogInfo.LogOut("getOnlineNews.................");
+        ArrayList<NewsDetailModel> programs = new ArrayList<NewsDetailModel>();
+        try {
+            String sql = "select news_id,title,newsOrder,summary,iconUri,content,cTime,imgUri,newsfrom,subTitle from newsdetail ";
+
+            Cursor cursor = db.rawQuery(sql, null);
+            NewsDetailModel lm;
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    lm = new NewsDetailModel();
+                    lm.id = cursor.getInt(cursor.getColumnIndex("news_id"));
+                    lm.title = cursor.getString(cursor.getColumnIndex("title"));
+                    lm.order = cursor.getString(cursor.getColumnIndex("newsOrder"));
+                    lm.iconPath = cursor.getString(cursor.getColumnIndex("iconUri"));
+                    lm.summary = cursor.getString(cursor.getColumnIndex("summary"));
+                    lm.content = cursor.getString(cursor.getColumnIndex("content"));
+                    lm.cTime = cursor.getString(cursor.getColumnIndex("cTime"));
+                    lm.imgUrl = cursor.getString(cursor.getColumnIndex("imgUri"));
+                    lm.cFrom = cursor.getString(cursor.getColumnIndex("newsfrom"));
+                    lm.subTitle = cursor.getString(cursor.getColumnIndex("subTitle"));
+
+                    LogInfo.LogOut("getOnlineNews................." + lm.title);
+                    programs.add(lm);
+                }
+
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return programs;
+    }
     /**
      * 根据新闻id删除新闻详情
      * 

@@ -5,18 +5,27 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ViewAnimator;
 
+import com.lovepig.engine.OnlineNewsEngine;
+import com.lovepig.engine.database.OnlineNewsDBEngine;
 import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Utils;
+import com.lovepig.view.FavoriteView;
 import com.lovepig.view.UserInfoView;
 
 public class UserInfoManager extends BaseManager {
     UserInfoView userInfoView;
+    FavoriteView fv;
+    BaseActivity  mBaseActivity;
+    OnlineNewsDBEngine engine;
 
     public UserInfoManager(BaseActivity c) {
         super(c);
+        this.mBaseActivity=c;
+        engine=new OnlineNewsDBEngine();
+        
     }
 
     @Override
@@ -48,10 +57,9 @@ public class UserInfoManager extends BaseManager {
             Application.userManager.EnterUserManager(R.string.user_info);
             break;
         case 1:// 充值中心
-            if (!Utils.isNetworkValidate(context)) {
-                showAlert("网络不可用,请检查您的网络！");
-                return;
-            }
+           fv=new FavoriteView(mBaseActivity,R.layout.favorite_layout, this);
+           enterSubDC(fv);
+           fv.setDatas(engine.getNewsDetail());
 
             break;
 

@@ -7,7 +7,6 @@ import java.util.Comparator;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
@@ -16,6 +15,7 @@ import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseEngine;
+import com.lovepig.pivot.BaseManager;
 import com.lovepig.pivot.HttpEngine;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
@@ -37,6 +37,7 @@ public class OnlineNewsEngine extends BaseEngine {
 		super(manager);
 		this.manager = manager;
 	}
+		
 
 	/**
 	 * 更新（获取）新闻类型
@@ -692,5 +693,7 @@ public class OnlineNewsEngine extends BaseEngine {
 
 		return mNewsGallerModels;
 	}
+	
+	
 
 }
