@@ -20,17 +20,13 @@ import com.lovepig.utils.MD5;
 import com.lovepig.utils.Utils;
 
 public class UserRegisterView extends BaseView {
-    EditText mUseridET;// 用户文号
+    EditText mUseridET;// 用户名
     EditText mUserpwdET;//
     EditText mUserRepwdET;
     EditText mUserEmailET;
     EditText mUserPhoneNumET;
-//    EditText mUserCheckCodeET;
-    Button mUserBindBtn;
     Button mUserRegisterBtn;
     Button mUserResetBtn;
-    Button mCheckUseridBtn;
-//    Button registerCheckcodeImage;
     Button mBackBtn;
     TextView mTitlem;
 
@@ -43,27 +39,17 @@ public class UserRegisterView extends BaseView {
         mBackBtn.setText("返回");
         mBackBtn.setVisibility(View.VISIBLE);
         mBackBtn.setOnClickListener(this);
-        ((TextView)findViewById(R.id.title)).setText(context.getString(R.string.RegisterInfo));
+        ((TextView) findViewById(R.id.title)).setText(context.getString(R.string.RegisterInfo));
 
         mUseridET = (EditText) findViewById(R.id.register_userid_edit);
         mUserpwdET = (EditText) findViewById(R.id.register_pwd_edit);
         mUserRepwdET = (EditText) findViewById(R.id.register_repwd_edit);
         mUserEmailET = (EditText) findViewById(R.id.register_email_edit);
         mUserPhoneNumET = (EditText) findViewById(R.id.register_phone_edit);
-//        mUserCheckCodeET = (EditText) findViewById(R.id.register_checkcode_edit);
-        mCheckUseridBtn = (Button) findViewById(R.id.register_userid_checked_btn);
-        mUserBindBtn = (Button) findViewById(R.id.rightBtn);
-        mUserBindBtn.setText(R.string.RegisterUserbind);
-        mUserBindBtn.setVisibility(VISIBLE);
         mUserRegisterBtn = (Button) findViewById(R.id.register_register_btn);
         mUserResetBtn = (Button) findViewById(R.id.register_register_reset_btn);
-        mCheckUseridBtn.setOnClickListener(this);
-        mUserBindBtn.setOnClickListener(this);
         mUserRegisterBtn.setOnClickListener(this);
         mUserResetBtn.setOnClickListener(this);
-//        registerCheckcodeImage = (Button) findViewById(R.id.register_checkcode_image);
-//        registerCheckcodeImage.setOnClickListener(this);
-
     }
 
     /**
@@ -77,9 +63,6 @@ public class UserRegisterView extends BaseView {
 
     @Override
     public void onClicked(View v) {
-//        if (v.getId() == R.id.register_checkcode_image) {
-//            setVeriCode();
-//        }
         super.onClicked(v);
     }
 
@@ -130,13 +113,6 @@ public class UserRegisterView extends BaseView {
                 return false;
             }
         }
-//        if (!mUserCheckCodeET.getText().toString().equals(registerCheckcode.replace(" ", ""))) {
-//            LogInfo.LogOut(mUserCheckCodeET.getText().toString().trim() + "-------------" + registerCheckcode.trim());
-//            showToast("验证码不正确");
-//            return false;
-//        } else {
-//            setVeriCode();
-//        }
         return true;
     }
 
@@ -159,7 +135,6 @@ public class UserRegisterView extends BaseView {
         mUserRepwdET.setText("");
         mUserEmailET.setText("");
         mUserPhoneNumET.setText("");
-//        mUserCheckCodeET.setText("");
         mUseridET.requestFocusFromTouch();
     }
 
@@ -172,7 +147,7 @@ public class UserRegisterView extends BaseView {
 
     public void setVeriCode() {
         registerCheckcode = Utils.generateRandomVeriCode();
-//        registerCheckcodeImage.setText(registerCheckcode);
+        // registerCheckcodeImage.setText(registerCheckcode);
     }
 
     public String getUserAccount() {

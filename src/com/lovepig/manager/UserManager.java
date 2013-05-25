@@ -34,8 +34,6 @@ public class UserManager extends BaseManager {
 	public static final int STATE_NAME_CAN_USE = 18;// 用户名称可用
 	public static final int STATE_NAME_USEED = 19;// 用户名称不可用
 	private UserAccountView mainDC;
-	// private UserBindDC bindDC;
-	// private UserUnBindDC mUserUnBindDC;
 	private UserRegisterView registerDC;
 	private UserEngine engine;
 	private UserUpdateUserInfoView mUpdateUserInfoDC;

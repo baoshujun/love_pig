@@ -37,7 +37,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
     OnlineNewsManager manager;
     TextView timeText;
     private TlcyListLayout pulldownview;
-    private Button backBtn,selfInfo;
+    private Button backBtn,userInfo;
 
     public OnlineNewsView(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
@@ -72,8 +72,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         listView.setFocusable(false);
            listView.setOnItemClickListener(this);
         setLoadMoreButton(false);
-        selfInfo = (Button)this.findViewById(R.id.rightBtn);
-		selfInfo.setOnClickListener(this);
+        userInfo = (Button)this.findViewById(R.id.rightBtn);
+		userInfo.setOnClickListener(this);
     }
 
     @Override

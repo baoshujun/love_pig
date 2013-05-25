@@ -50,26 +50,10 @@ public class MainManager extends BaseManager {
         case R.id.deviceMsg://设备
           
             break;
-
-//        case R.id.menu_veterinary_drugs:
-//        case R.id.boarMsg: //兽药 
-//        	 if(!(Application.application.currentManager instanceof BoarManager)){
-//                 Application.application.setMainManager(Application.boarManager);
-//                 Application.boarManager.initData();
-//             }
-//            break;
-//        case R.id.menu_answer_questions: 
-//        case R.id.expertMsg://答疑
-//          
-//            break;
-//        case R.id.menu_foodstuff: //食料
-//            
-//            break;
-        case R.id.rightBtn:
+        case R.id.menu_user_info:
         	 if(!(Application.application.currentManager instanceof UserInfoManager)){
                  Application.application.setMainManager(Application.userInfoManager);
-                 Application.userInfoManager.initData();
-                 mainDC.viewReset(R.id.rightBtn);
+                 mainDC.viewReset(R.id.menu_user_info);
              }
         break;
 

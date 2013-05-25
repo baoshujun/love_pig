@@ -98,7 +98,7 @@
             android:singleLine="true"
             android:text="个人信息"
             android:textSize="@dimen/news_l_item_title_size"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </RelativeLayout>
 
 </RelativeLayout>

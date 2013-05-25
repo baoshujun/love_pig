@@ -45,6 +45,7 @@ SOFTWARE.
  * @version 2009-09-11
  */
 public class CDL {
+	
 
     /**
      * Get the next value. The value can be wrapped in quotes. The value can

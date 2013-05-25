@@ -17,6 +17,7 @@ import com.lovepig.manager.PriceManager;
 import com.lovepig.manager.UserInfoManager;
 import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseActivity;
+import com.lovepig.utils.ConfigInfo;
 
 public class Application extends BaseActivity {
     public static Application application;
@@ -54,6 +55,8 @@ public class Application extends BaseActivity {
         dcEngineContener = mainManager.getContainer();
         currentManager = mainManager;
         mainManager.onClicked(R.id.menu_news);
+        Configs.userid = ConfigInfo.getUserInfo()[0];
+        //获得用户名
         new InitDataTask().execute();
     }
 

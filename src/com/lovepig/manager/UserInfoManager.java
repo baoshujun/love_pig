@@ -13,11 +13,7 @@ import com.lovepig.utils.Utils;
 import com.lovepig.view.UserInfoView;
 
 public class UserInfoManager extends BaseManager {
-
     UserInfoView userInfoView;
-//    private MoreMsgMng messageProcessManager;
-//    private MoreUserFriendMng userFriendProcessManager;
-//    private UserReChargeManager userReChargeManager;
 
     public UserInfoManager(BaseActivity c) {
         super(c);
@@ -26,6 +22,8 @@ public class UserInfoManager extends BaseManager {
     @Override
     public void handleMessage(Message msg) {
         switch (msg.what) {
+        case 0:
+            break;
         case 1:// 获取到消息更新界面
             if (userInfoView != null && getNowShownDC() == userInfoView) {
                 userInfoView.notifyDataSetChanged();
@@ -54,47 +52,26 @@ public class UserInfoManager extends BaseManager {
                 showAlert("网络不可用,请检查您的网络！");
                 return;
             }
-//            userReChargeManager = new UserReChargeManager(context);
-//            userReChargeManager.sendEmptyMessage(60);
-            // context.setSubManager(userReChargeManager);
+
             break;
-        case 2:// 订阅
-//            if (!Utils.isNetworkValidate(context)) {
-//                showAlert("网络不可用,请检查您的网络！");
-//                return;
-//            }
-//            Application.subscriptionManager.setSelectNum(0);
-//            Application.subscriptionManager.sendEmptyMessage(1);
-            // Application.application.setSubManager(Application.subscriptionManager);
-            break;
+
         case 3:// 好友
             if (!Utils.isNetworkValidate(context)) {
                 showAlert("网络不可用,请检查您的网络！");
                 return;
             }
-//            userFriendProcessManager = new MoreUserFriendMng(context);
-//            userFriendProcessManager.sendEmptyMessage(MoreUserFriendMng.MSG_WHAT_FETCH_FRIENDS_LIST);
-            // context.setSubManager(userFriendProcessManager);
             break;
         case 4:// 消息
             if (!Utils.isNetworkValidate(context)) {
                 showAlert("网络不可用,请检查您的网络！");
                 return;
             }
-//            messageProcessManager = new MoreMsgMng(context);
-//            messageProcessManager.sendMessage(messageProcessManager.obtainMessage(3, 0, 0));
-            // context.setSubManager(messageProcessManager);
             break;
         case 5:// 收藏
             if (!Utils.isNetworkValidate(context)) {
                 showAlert("网络不可用,请检查您的网络！");
                 return;
             }
-//            Application.favoritesManager.getFavorites(0);
-            // Application.application.setSubManager(Application.favoritesManager);
-            break;
-        case 6:// 重新下载
-//            Application.application.setSubManager(Application.downloadProductManager);
             break;
         case 7:// 关于帮助
             Application.application.setSubManager(Application.aboutManager);

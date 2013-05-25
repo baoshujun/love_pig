@@ -65,7 +65,9 @@
                     android:layout_toRightOf="@+id/register_userid_edit"
                     android:background="@drawable/button"
                     android:text="@string/RegisterChecked"
-                    android:textColor="@color/text_color" />
+                    android:textColor="@color/text_color" 
+                    android:visibility="gone"
+                    />
                 <!-- 文号规则文字 -->
 
                 <TextView

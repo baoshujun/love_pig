@@ -1,7 +1,6 @@
 package com.lovepig.view;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lovepig.main.Application;
@@ -28,6 +26,7 @@ public class UserInfoView extends BaseView implements OnItemClickListener {
     ListView listView;
     Button button;
     MoreAdapter adapter;
+
     public UserInfoView(Context context, int layoutId, BaseManager manager) {
         super(context, layoutId, manager);
         init();
@@ -44,11 +43,10 @@ public class UserInfoView extends BaseView implements OnItemClickListener {
         title.setText(R.string.user_info);
         findViewById(R.id.logoImg).setVisibility(VISIBLE);
     }
-  
+
     @Override
     public void onShow() {
         super.onShow();
-      //  context.startActivity(new Intent(context,HelpActivity.class));
     }
 
     public void notifyDataSetChanged() {
@@ -56,36 +54,14 @@ public class UserInfoView extends BaseView implements OnItemClickListener {
     }
 
     @Override
-    protected void onConfigurationChanged(Configuration newConfig) {
-        /**
-         * 在横竖屏切换时,每个DC都会被回调此方法 有两种方式更新界面
-         */
-
-        /**
-         * 方式一,重新排版,适合更改范围较小的界面 优点:可无缝切换,如列表滑动位置等都不会变 缺点:代码量大
-         */
-        ((RelativeLayout.LayoutParams) button.getLayoutParams()).rightMargin = (int) context.getResources().getDimension(R.dimen.title_right_btn_margin);
-        button.requestLayout();
-        LogInfo.LogOut("id", "title_right_btn_margin =" + (int) context.getResources().getDimension(R.dimen.title_right_btn_margin));
-        /**
-         * 方式二,重新生成界面,适合更改范围很大的界面 优点:代码量小 缺点:界面是重新生成,原来的用户操作比较难以保留
-         */
-        // this.removeAllViews();
-        // inflate(context, R.layout.more, this);
-        // init();
-        //
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(Math.abs(System.currentTimeMillis() - l) > t){
-            l=System.currentTimeMillis();
-            if (position != 7 && !Utils.isNetworkValidate(context)) {
+        if (Math.abs(System.currentTimeMillis() - l) > t) {
+            l = System.currentTimeMillis();
+            if (position !=4 && !Utils.isNetworkValidate(context)) {
                 showAlert("网络不可用,请检查您的网络！");
                 return;
             }
-            if (position != 0 && position != 7 &&Configs.userid==null) {
+            if (position != 0 && position != 4 && Configs.userid == null) {
                 Application.userManager.ToBindOrRegister(R.string.More);
                 return;
             }
@@ -124,7 +100,7 @@ public class UserInfoView extends BaseView implements OnItemClickListener {
             ImageView newTip = (ImageView) convertView.findViewById(R.id.messageInfoTip);
             newTip.setVisibility(GONE);
             switch (position) {
-            case 0:
+            case 0://账号管理
                 textView.setText(context.getString(R.string.account));
                 break;
             case 1:
@@ -141,18 +117,6 @@ public class UserInfoView extends BaseView implements OnItemClickListener {
                 if (Configs.getTipSize(context) > 0) {
                     newTip.setVisibility(View.VISIBLE);
                 }
-                break;
-//            case 5:
-//                textView.setText(context.getString(R.string.favorites));
-//
-//                break;
-//            case 6:
-//                textView.setText(context.getString(R.string.downAgain));
-//                break;
-//            case 7:
-//                textView.setText(context.getString(R.string.abouthelp));
-//                break;
-            default:
                 break;
             }
             LogInfo.LogOut("moreDC.getView.postion=" + position);
