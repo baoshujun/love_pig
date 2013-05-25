@@ -14,14 +14,14 @@ import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Utils;
-import com.lovepig.view.PriceView;
+import com.lovepig.view.PigFactoryView;
 
 /**
  * 
  * 
  */
 public class DeviceManager extends BaseManager implements OnItemClickListener {
-    private PriceView priceDC;
+    private PigFactoryView priceDC;
 
     private DeviceEngine devicesEngine;
     private ArrayList<PriceModel> datas;
@@ -37,7 +37,7 @@ public class DeviceManager extends BaseManager implements OnItemClickListener {
         switch (msg.what) {
         case 1:
             datas = (ArrayList<PriceModel>) msg.obj;
-            priceDC.setListViewAdapter(datas);
+//            priceDC.setListViewAdapter(datas);
             break;
         case DeviceEngine.MSG_WHAT_SUCCESS_LIST_ALL:
             break;
@@ -58,7 +58,7 @@ public class DeviceManager extends BaseManager implements OnItemClickListener {
 
     @Override
     public ViewAnimator getMainDC() {
-        priceDC = new PriceView(context, R.layout.price, this);
+        priceDC = new PigFactoryView(context, R.layout.pig_factory, this);
         dcEngine.setMainDC(priceDC);
         return super.getMainDC();
     }

@@ -92,7 +92,7 @@ public class OnlineNewsEngine extends BaseEngine {
 
 		@Override
 		protected NewsDetailState doInBackground(String... params) {
-			String result = httpRequestThisThread(1, GET_NEWS_DETAILS);
+			String result = httpRequestThisThread(1, GET_NEWS_DETAILS,false);
 			if (isStop) {
 				return null;
 			} else {
@@ -179,7 +179,7 @@ public class OnlineNewsEngine extends BaseEngine {
 
 		@Override
 		protected ArrayList<NewsGalleryModel> doInBackground(String... params) {
-			return getGalleryItem(httpRequestThisThread(1, ""));
+			return getGalleryItem(httpRequestThisThread(1, "",false));
 		}
 
 		@Override
@@ -238,7 +238,7 @@ public class OnlineNewsEngine extends BaseEngine {
 
 		@Override
 		protected NewsState doInBackground(String... params) {
-			String result = httpRequestThisThread(1, GET_NEWS + params[0]);
+			String result = httpRequestThisThread(1, GET_NEWS + params[0],false);
 			if (isStop) {
 				return null;
 			} else {
@@ -299,7 +299,7 @@ public class OnlineNewsEngine extends BaseEngine {
 		@Override
 		protected NewsState doInBackground(String... params) {
 			 String result = httpRequestThisThread(1, GET_NEWS +
-			 params[0]);
+			 params[0],false);
 			 if (isStop) {
 			    return null;
 			} else {

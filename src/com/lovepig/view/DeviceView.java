@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.lovepig.main.R;
-import com.lovepig.manager.PriceManager;
+import com.lovepig.manager.PigFactoryManager;
 import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseView;
 import com.lovepig.pivot.BaseManager;
@@ -26,7 +26,7 @@ public class DeviceView extends BaseView {
 	// livePig 生猪 piglet仔猪
 	private Button livePig, piglet;
 	private ListView priceListview;
-	private PriceListViewAdapter adapter;
+	private PigFactoryListViewAdapter adapter;
 
 	public DeviceView(Context context, int layoutId, BaseManager manager) {
 		super(context, layoutId, manager);
@@ -35,16 +35,16 @@ public class DeviceView extends BaseView {
 		livePig.setText("生猪");
 		piglet.setText("仔猪");
 		
-		priceListview = (ListView) findViewById(R.id.priceLv);
+		priceListview = (ListView) findViewById(R.id.pigfactoryLv);
 		livePig.setOnClickListener(this);
 		piglet.setOnClickListener(this);
-		priceListview.setOnItemClickListener((PriceManager)manager);
+//		priceListview.setOnItemClickListener((PigFactoryManager)manager);
 	}
 
 	
 
 	public void setListViewAdapter(ArrayList<PriceModel> datas) {
-		adapter = new PriceListViewAdapter(datas, context);
+//		adapter = new PigFactoryListViewAdapter(datas, context);
 		priceListview.setAdapter(adapter);
 	}
 

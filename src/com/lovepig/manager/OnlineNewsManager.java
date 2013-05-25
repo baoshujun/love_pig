@@ -8,7 +8,6 @@ import android.widget.Toast;
 import android.widget.ViewAnimator;
 import com.lovepig.engine.OnlineNewsEngine;
 import com.lovepig.engine.database.OnlineNewsDBEngine;
-import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsGalleryModel;
@@ -18,10 +17,8 @@ import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.utils.Utils;
-import com.lovepig.view.MainView;
 import com.lovepig.view.OnlineNewsView;
 import com.lovepig.view.OnlineNewsDetailsView;
-import com.lovepig.view.UserInfoView;
 
 public class OnlineNewsManager extends BaseManager {
     public static final int DEFAULT_NEW_LENGTH = 20;// 默认取20条新闻

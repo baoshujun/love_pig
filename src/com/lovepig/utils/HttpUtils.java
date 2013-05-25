@@ -27,7 +27,7 @@ public class HttpUtils {
      * 
      * @return
      */
-    public static String getServerString(Context context, int server, String params) {
+    public static String getServerString(Context context, int server, String params,boolean isPost) {
         String newAurl;
         String rString = null;
         for (int i = 0; i < 4; i++) {// 主服务器和备用服务器各请求两次
@@ -36,7 +36,7 @@ public class HttpUtils {
             } else {
                 newAurl = Configs.HostName1[server] + params;
             }
-            rString = getServerString(context, newAurl, null, 30 * 1000);
+            rString = getServerString(context, newAurl, null, 30 * 1000,isPost);
             if (TextUtils.isEmpty(rString)) {
                 try {
                     Thread.sleep(500);
@@ -56,7 +56,7 @@ public class HttpUtils {
      * 
      * @author Li Hongjun
      */
-    public static String getServerString(Context context, String aurl, String savePath, int timeOut) {
+    public static String getServerString(Context context, String aurl, String savePath, int timeOut, boolean isPost) {
         String rsString = null;
         URL url = null;
         LogInfo.LogOut("request:  " + aurl);
@@ -77,16 +77,18 @@ public class HttpUtils {
                     cn = (HttpURLConnection) url.openConnection();
                 }
             }
-            
+
             cn.setRequestProperty("Accept", "*/*");
             cn.setRequestProperty("Accept-Language", "zh-cn");
             cn.setRequestProperty("Accept-Encoding", "");
             cn.setConnectTimeout(timeOut);
-          
+
             cn.setAllowUserInteraction(false);
-            //cn.setRequestMethod("POST");
-            //cn.setDoInput(true);
-            //cn.setDoOutput(true);
+            if (isPost) {
+                cn.setRequestMethod("POST");
+                cn.setDoInput(true);
+                cn.setDoOutput(true);
+            }
             cn.setReadTimeout(timeOut);
             cn.connect();
             int L = cn.getContentLength();
@@ -101,8 +103,8 @@ public class HttpUtils {
             byte[] rs = swapStream.toByteArray();
 
             rsString = new String(rs, "utf8");
-            rsString = rsString.replaceAll("\\r", "");//有的android手机支持此种替换方式
-            rsString = rsString.replaceAll("\\\\r", "");//有的android手机支持此种替换方式
+            rsString = rsString.replaceAll("\\r", "");// 有的android手机支持此种替换方式
+            rsString = rsString.replaceAll("\\\\r", "");// 有的android手机支持此种替换方式
             if (savePath != null) {
                 File file = new File(savePath);
                 if (!file.exists()) {
@@ -157,8 +159,8 @@ public class HttpUtils {
      * 
      * @author Li Hongjun
      */
-    public static String getServerString(String aurl, String savePath) {
-        return getServerString(Application.application, aurl, savePath, 30000);
+    public static String getServerString(String aurl, String savePath, boolean isPost) {
+        return getServerString(Application.application, aurl, savePath, 30000,isPost);
     }
 
     /**
@@ -167,7 +169,7 @@ public class HttpUtils {
      * @param urlStr
      */
     public static InputStream getInputStreamFromUrl(String urlStr) {
-        LogInfo.LogOut("request for stream:"+urlStr);
+        LogInfo.LogOut("request for stream:" + urlStr);
         try {
             // 创建一个URL对象；
             URL url = new URL(urlStr);

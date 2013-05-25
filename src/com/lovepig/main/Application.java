@@ -13,7 +13,7 @@ import com.lovepig.manager.CheckUserManager;
 import com.lovepig.manager.FoodstuffManager;
 import com.lovepig.manager.MainManager;
 import com.lovepig.manager.OnlineNewsManager;
-import com.lovepig.manager.PriceManager;
+import com.lovepig.manager.PigFactoryManager;
 import com.lovepig.manager.UserInfoManager;
 import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseActivity;
@@ -23,7 +23,7 @@ public class Application extends BaseActivity {
     public static Application application;
     public static OnlineNewsManager onlineNewsManager;
     public static FoodstuffManager pigManager;
-    public static PriceManager priceManager;
+    public static PigFactoryManager pigFactoryManager;
     public static BoarManager boarManager;
     public static UserManager userManager;
     public static UserInfoManager userInfoManager;
@@ -47,7 +47,7 @@ public class Application extends BaseActivity {
         aboutManager = new AboutManager(application);
         pigManager = new FoodstuffManager(application);
         // 加载价格
-        priceManager = new PriceManager(application);
+        pigFactoryManager = new PigFactoryManager(application);
         // 加载兽药
         boarManager = new BoarManager(application);
         setContentView(mainManager.getLayout());
@@ -56,7 +56,7 @@ public class Application extends BaseActivity {
         currentManager = mainManager;
         mainManager.onClicked(R.id.menu_news);
         Configs.userid = ConfigInfo.getUserInfo()[0];
-        //获得用户名
+        // 获得用户名
         new InitDataTask().execute();
     }
 
@@ -84,7 +84,7 @@ public class Application extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (currentManager instanceof OnlineNewsManager) {//隐藏菜单
+            if (currentManager instanceof OnlineNewsManager) {// 隐藏菜单
                 if (((OnlineNewsManager) currentManager).isHiddenMenu()) {
                     return true;
                 }
@@ -100,7 +100,7 @@ public class Application extends BaseActivity {
                         setMainManager(managerStack.pop());
                     }
                 } else {
-                    finish();
+                   finish();
                 }
             }
             return true;

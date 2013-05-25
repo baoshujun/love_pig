@@ -1,12 +1,8 @@
 package com.lovepig.engine;
 
-import java.util.ArrayList;
 
-import android.text.TextUtils;
 
-import com.lovepig.main.Application;
 import com.lovepig.main.Configs;
-import com.lovepig.manager.MainManager;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.ConfigInfo;
@@ -37,7 +33,7 @@ public class CheckUserEngine extends BaseEngine {
         // Configs.certificateId = certificateId;
         json.put("certificate", certificateId);
         LogInfo.LogOut("checkUser:" + json.toNormalString());
-        String rs = httpRequestThisThread(0, Configs.authenticationAction + json.toString());
+        String rs = httpRequestThisThread(0, Configs.authenticationAction + json.toString(),false);
         LogInfo.LogOut("result:" + rs);
         if (rs == null) {
             return;

@@ -200,20 +200,20 @@ public abstract class BaseActivity extends Activity {
      */
     long lastKeyDown = 0;
 
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-      
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (currentManager != null) {
-                if (Math.abs(System.currentTimeMillis() - lastKeyDown) > 500) {
-                    lastKeyDown = System.currentTimeMillis();
-                    currentManager.back();
-                    return true;
-                }
-            }
-        }
-        return super.onKeyUp(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyUp(int keyCode, KeyEvent event) {
+//      
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            if (currentManager != null) {
+//                if (Math.abs(System.currentTimeMillis() - lastKeyDown) > 500) {
+//                    lastKeyDown = System.currentTimeMillis();
+//                    currentManager.back();
+//                    return true;
+//                }
+//            }
+//        }
+//        return super.onKeyUp(keyCode, event);
+//    }
  
     /**
      * 如果此模块不在后台运行提供服务，请在onDestroy中调用此方法 调用Syste.exit(0)之前必须调用此方法

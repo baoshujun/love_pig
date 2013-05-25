@@ -73,7 +73,7 @@ public class DeviceEngine extends BaseEngine {
 
         @Override
         protected Void doInBackground(String... params) {
-            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_ALL);
+            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_ALL,false);
             if (isStop) {
                 return null;
             } else {
@@ -128,7 +128,7 @@ public class DeviceEngine extends BaseEngine {
 
         @Override
         protected Void doInBackground(String... params) {
-            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_CAT);
+            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_CAT,false);
             if (isStop) {
                 return null;
             } else {
@@ -183,7 +183,7 @@ public class DeviceEngine extends BaseEngine {
 
         @Override
         protected Void doInBackground(String... params) {
-            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_PRICE);
+            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_PRICE,false);
             if (isStop) {
                 return null;
             } else {
@@ -238,7 +238,7 @@ public class DeviceEngine extends BaseEngine {
 
         @Override
         protected Void doInBackground(String... params) {
-            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_MANU);
+            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_MANU,false);
             if (isStop) {
                 return null;
             } else {
@@ -293,7 +293,7 @@ public class DeviceEngine extends BaseEngine {
 
         @Override
         protected Void doInBackground(String... params) {
-            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_BRAND);
+            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_BRAND,false);
             if (isStop) {
                 return null;
             } else {
@@ -348,7 +348,7 @@ public class DeviceEngine extends BaseEngine {
 
         @Override
         protected Void doInBackground(String... params) {
-            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_NAME);
+            String result = httpRequestThisThread(1, GET_URL_DEVICE_LIST_BY_NAME,false);
             if (isStop) {
                 return null;
             } else {

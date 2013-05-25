@@ -61,20 +61,15 @@ public class UserInfoManager extends BaseManager {
                 return;
             }
             break;
-        case 4:// 消息
-            if (!Utils.isNetworkValidate(context)) {
-                showAlert("网络不可用,请检查您的网络！");
-                return;
-            }
+        case 4:// 关于帮助
+                
+        	Application.application.setSubManager(Application.aboutManager);
             break;
         case 5:// 收藏
             if (!Utils.isNetworkValidate(context)) {
                 showAlert("网络不可用,请检查您的网络！");
                 return;
             }
-            break;
-        case 7:// 关于帮助
-            Application.application.setSubManager(Application.aboutManager);
             break;
         default:
             if (button == null) {

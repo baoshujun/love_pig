@@ -36,7 +36,7 @@ public abstract class BaseEngine {
         protected Void doInBackground(String... params) {
             String rString = null;
             int server = Integer.parseInt(params[0]);
-            rString = httpRequestThisThread(server, params[1]);
+            rString = httpRequestThisThread(server, params[1],false);
             if (isStop) {
                 return null;
             }
@@ -61,9 +61,9 @@ public abstract class BaseEngine {
      * server 为Configs.HostName中server号 params 为构造好的参数
      * 默认30秒超时，最多主服务器和备用服务器各重试请求两次
      */
-    public String httpRequestThisThread(int server, String params) {
+    public String httpRequestThisThread(int server, String params,boolean isPost) {
         String rString = null;
-        rString = HttpUtils.getServerString(manager.context.getApplicationContext(), server, params);
+        rString = HttpUtils.getServerString(manager.context.getApplicationContext(), server, params,isPost);
         return rString;
     }
 
