@@ -34,6 +34,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
                 android:layout_below="@id/pigFactoryName"
+                android:layout_marginTop="5dip"
                 android:background="#9988aa" />
 
             <TextView
@@ -41,7 +42,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/singlLine01"
-                android:text="北京六马养猪科技有限公司是一家大体型种猪基因科技企业、国家生猪核心育种场，中国第一家美国华多（Waldo）合资原种猪公司，中国领先的集约化猪场一站式高效益服务平台、中国第一家大体型美国种猪基因品牌，中国大体型种猪基因的鼻祖。" />
+                android:padding="8dip"
+                android:text="     北京六马养猪科技有限公司是一家大体型种猪基因科技企业、国家生猪核心育种场，中国第一家美国华多（Waldo）合资原种猪公司，中国领先的集约化猪场一站式高效益服务平台、中国第一家大体型美国种猪基因品牌，中国大体型种猪基因的鼻祖。" />
 
             <TextView
                 android:id="@+id/singlLine02"
@@ -55,9 +57,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/singlLine02"
-                android:background="#0088aa"
+                android:layout_marginTop="5dip"
                 android:text="主营产品:"
-                android:textSize="20dip" />
+                android:textSize="20sp" />
 
             <RelativeLayout
                 android:id="@+id/pigProduct"
@@ -70,7 +72,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="60dip"
-                    android:background="#0088aa"
+                    android:padding="8dip"
                     android:text="六马华多长白种猪、六马华多大白种猪、六马华多杜洛克种猪、六马华多白杜洛克种猪、六马“九吨母猪”。"
                     android:textSize="15sp" />
 
@@ -88,6 +90,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
                 android:layout_below="@id/pigProduct"
+                android:layout_marginTop="5dip"
                 android:background="#9988aa" />
 
             <RelativeLayout
@@ -101,6 +104,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/pigProduct"
+                    android:layout_marginTop="5dip"
                     android:text="联系方式："
                     android:textSize="20sp" />
 

@@ -9,6 +9,7 @@
         android:layout_height="120dip"
         android:layout_marginLeft="4dip"
         android:layout_marginRight="58dip"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="vertical" >
 
         <TextView
@@ -61,6 +62,7 @@
         android:layout_height="42dip"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:focusable="false"
         android:paddingRight="6dip"
         android:src="@drawable/arraw_right" />
 

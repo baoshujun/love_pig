@@ -57,6 +57,7 @@ public class PigFactoryManager extends BaseManager  {
 			pigFactoryView.setListViewAdapter(datas);
 			break;
 		case SETDETAILVIEW: //去设置详情页
+			this.dismissLoading();
 			if (detailView == null) {
 				detailView = new PigFactoryDetailView(context,R.layout.pigfactory_detail, this);
 			}
@@ -65,7 +66,6 @@ public class PigFactoryManager extends BaseManager  {
 			}
 			break;
 		case PigFactoryManager.TOGETDETAILDATA: //获取详情
-			
 			int id = datas.get(msg.arg1).id;
 			fetchPigDetailData(id);
 			break;
