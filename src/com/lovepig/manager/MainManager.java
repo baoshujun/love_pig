@@ -39,13 +39,18 @@ public class MainManager extends BaseManager {
             break;
         case R.id.menu_boar://种猪
         case R.id.priceMsg:
-        	  if(!(Application.application.currentManager instanceof PriceManager)){
-                  Application.application.setMainManager(Application.priceManager);
-                  Application.priceManager.initData();
+        	  if(!(Application.application.currentManager instanceof PigFactoryManager)){
+                  Application.application.setMainManager(Application.pigFactoryManager);
+                  Application.pigFactoryManager.initData();
                   mainDC.viewReset(R.id.menu_boar);
               }
             break;
         case R.id.menu_pig_factory://附近猪场
+        	 if(!(Application.application.currentManager instanceof PigFactoryManager)){
+                 Application.application.setMainManager(Application.pigFactoryManager);
+                 Application.pigFactoryManager.initData();
+                 mainDC.viewReset(R.id.menu_pig_factory);
+             }
         	break;
         case R.id.deviceMsg://设备
           

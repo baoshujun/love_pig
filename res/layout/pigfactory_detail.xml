@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <include
+        android:id="@+id/head"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/head"
+        android:layout_marginTop="10dip" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/pigFactoryName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="北京顺陈养殖有限公司"
+                android:textSize="20dip" />
+
+            <TextView
+                android:id="@+id/singlLine01"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_below="@id/pigFactoryName"
+                android:background="#9988aa" />
+
+            <TextView
+                android:id="@+id/pigFactoryDetailDesc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/singlLine01"
+                android:text="北京六马养猪科技有限公司是一家大体型种猪基因科技企业、国家生猪核心育种场，中国第一家美国华多（Waldo）合资原种猪公司，中国领先的集约化猪场一站式高效益服务平台、中国第一家大体型美国种猪基因品牌，中国大体型种猪基因的鼻祖。" />
+
+            <TextView
+                android:id="@+id/singlLine02"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_below="@id/pigFactoryDetailDesc"
+                android:background="#9988aa" />
+
+            <TextView
+                android:id="@+id/product"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/singlLine02"
+                android:background="#0088aa"
+                android:text="主营产品:"
+                android:textSize="20dip" />
+
+            <RelativeLayout
+                android:id="@+id/pigProduct"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product" >
+
+                <TextView
+                    android:id="@+id/productContent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="60dip"
+                    android:background="#0088aa"
+                    android:text="六马华多长白种猪、六马华多大白种猪、六马华多杜洛克种猪、六马华多白杜洛克种猪、六马“九吨母猪”。"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/toListView"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/arraw_right" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/singlLine03"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_below="@id/pigProduct"
+                android:background="#9988aa" />
+
+            <RelativeLayout
+                android:id="@+id/pigFactoryAddress"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/singlLine03" >
+
+                <TextView
+                    android:id="@+id/connectMethod"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pigProduct"
+                    android:text="联系方式："
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/pigFactoryAddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/connectMethod"
+                    android:text="所在地区：北京市 顺义区"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/people"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pigFactoryAddress"
+                    android:text="联系人：张三"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/telephone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/people" >
+
+                    <TextView
+                        android:id="@+id/connectPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="联系电话："
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/phoneNum"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/connectPhone"
+                        android:inputType="phone"
+                        android:text="01012312323"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/detailAddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/telephone"
+                    android:text="详细地址：北京市顺义区十八号楼五号"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/mail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/detailAddress"
+                    android:text="邮箱:12323232@139.com"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/networkAddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mail"
+                    android:text="网址：www.hao123.com"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

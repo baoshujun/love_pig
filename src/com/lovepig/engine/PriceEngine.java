@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
-import com.lovepig.manager.PriceManager;
+import com.lovepig.manager.PigFactoryManager;
 import com.lovepig.model.PriceModel;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.utils.Json;
@@ -21,9 +21,9 @@ import com.lovepig.utils.LogInfo;
 public class PriceEngine extends BaseEngine {
     private static String GET_URL_PRICE_LIST = "price/list?provId=2&cityId=3&countiesId=65";
     private GetPriceTask getPriceTask;
-    private PriceManager priceManager;
+    private PigFactoryManager priceManager;
 
-	public PriceEngine(PriceManager manager) {
+	public PriceEngine(PigFactoryManager manager) {
 		super(manager);
 		if(priceManager == null){
 			this.priceManager =  manager;	
