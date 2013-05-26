@@ -76,11 +76,11 @@ public class Configs {
     public static String u_ShowPopStr = "";// 服务器连接信息
     public static String u_Url = "";// 升级地址
     public static String u_Discribe;
-    public static String userid = "123";// 用户名字
+    public static String userid = "123";// 用户id
     public static String readerUrl = null;// 阅读器下载地址
     public static String readerpackageName = "com.founder.readerforrd";// 阅读器包名称
     public static int readerVersionCode = -1;// 阅读器版本号
-    public static String mUser_Name;// 用户昵称
+    public static String mUser_Name;// 用户账号
     public static String mUser_Email;// 用户邮箱
     public static String mUser_PhoneNum;// 用户手机号
     public static int mMemberId;// 用户手机号
@@ -168,7 +168,7 @@ public class Configs {
     public static final String getCommentAction = "/xhs/getComment.action";// 获取用户评价
     public static final String accountAction = "/xhs/account.action";// 用户信息
     public static final String UserInfoaccountAction = "/xhs/getAccount.action";// 用户信息
-    public static final String RegisterUser = "/user/register";// 注册用户
+    public static final String RegisterUser = "user/register";// 注册用户
     public static final String CheckUsernameAction = "/xhs/checkUsername.action";// 验证用户文号
     public static final String UpdateUserInfoAction = "/xhs/changeAccount.action";// 修改用户信息
     public static final String ModifyUserPwdAction = "/xhs/changePassword.action";// 修改密码

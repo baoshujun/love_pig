@@ -64,16 +64,23 @@ public class Json {
 		}
 	}
 	@Override
+//	public String toString() {
+//		if(root==null){
+//			return null;
+//		}
+//		String rootString=root.toString();
+//		LogInfo.LogOut("before encode json="+rootString);
+//		rootString=XmlBase64.encode(rootString.getBytes());
+//		//return "?request="+rootString+"&sign="+MD5.md5Lower(rootString+"xinhuashe")+"&type=xhs";
+//		return "?request="+rootString+"&sign="+MD5.md5Lower(rootString+"5b889421cb1e4889bc56461336a1c440fd56f7fd811b4108a96eb40b3b258aa8")+"&type=006739a373b9490a";
+//	}
+	
 	public String toString() {
 		if(root==null){
 			return null;
 		}
-		String rootString=root.toString();
-		LogInfo.LogOut("before encode json="+rootString);
-		rootString=XmlBase64.encode(rootString.getBytes());
-		//return "?request="+rootString+"&sign="+MD5.md5Lower(rootString+"xinhuashe")+"&type=xhs";
-		return "?request="+rootString+"&sign="+MD5.md5Lower(rootString+"5b889421cb1e4889bc56461336a1c440fd56f7fd811b4108a96eb40b3b258aa8")+"&type=006739a373b9490a";
-	}
+		return root.toString();
+	};
 //	public String toTestString() {
 //        if (root == null) {
 //            return null;

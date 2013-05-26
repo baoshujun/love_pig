@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.lovepig.engine.ImageEngine;
+import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.model.NewsDetailModel;
 import com.lovepig.pivot.BaseManager;
@@ -17,7 +18,7 @@ import com.lovepig.utils.LogInfo;
 
 public class FavoriteAdapter extends BaseAdapter {
 	BaseManager manager;
-	private LayoutInflater layoutInflater = null;
+	
 	private ArrayList<NewsDetailModel> models;
 
 	public void setModels(ArrayList<NewsDetailModel> models) {
@@ -56,7 +57,7 @@ public class FavoriteAdapter extends BaseAdapter {
 		NewsDetailModel news = models.get(position);
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
-			view = layoutInflater.inflate(R.layout.online_news_item, null);
+			view = View.inflate(Application.application.getApplicationContext(),R.layout.online_news_item, null);
 			viewHolder.title = (TextView) view.findViewById(R.id.onlinetitle);
 			viewHolder.instro = (TextView) view.findViewById(R.id.onlineinstro);
 			viewHolder.img = (ImageView) view.findViewById(R.id.onlinepic);

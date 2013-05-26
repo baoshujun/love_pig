@@ -120,12 +120,11 @@ public class UserRegisterView extends BaseView {
         Json j = new Json(0);
         Configs.mUser_Email = mUserEmailET.getText().toString();
         Configs.mUser_PhoneNum = mUserPhoneNumET.getText().toString();
-        j.put("userId", mUseridET.getText().toString());
-        j.put("password", MD5.md5Lower(mUserpwdET.getText().toString()));
+        j.put("userName", mUseridET.getText().toString());
+        j.put("pwd", MD5.md5Lower(mUserpwdET.getText().toString()));
 
-        j.put("mail", Configs.mUser_Email);
-        j.put("phone", Configs.mUser_PhoneNum);
-        j.put("cerificate", ConfigInfo.getCertificateId());
+        j.put("userEmail", Configs.mUser_Email);
+        j.put("userPhoneNum", Configs.mUser_PhoneNum);
         return j;
     }
 

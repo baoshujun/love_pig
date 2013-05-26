@@ -1,11 +1,13 @@
 package com.lovepig.engine;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.lovepig.main.Application;
 import com.lovepig.main.Configs;
 import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseEngine;
+import com.lovepig.utils.ConfigInfo;
 import com.lovepig.utils.Json;
 
 public class UserEngine extends BaseEngine {
@@ -15,6 +17,7 @@ public class UserEngine extends BaseEngine {
     UpdateUserInfoTask mUpdateUserInfoTask;// 修改用户信息
     ModifyPWDTask mModifyPWDTask;// 修改密码
     CheckUserIdTask checkUserIdTask;
+    private Json userInfo = null;
 
     public UserEngine(UserManager manager) {
         super(manager);
@@ -44,8 +47,15 @@ public class UserEngine extends BaseEngine {
      */
     public void RegisterUser(Json j) {
         StopRegister();
+        userInfo = j;
+        StringBuilder mStrBuilder = new StringBuilder("?");
+		mStrBuilder.append("userName=").append(j.getString("userName"))
+				.append("&pwd=").append(j.getString("pwd")).append("&userEmail=")
+				.append(j.getString("userEmail")).append("&userPhoneNum=")
+				.append(j.getString("userPhoneNum"));
         mRegisterUserTask = new RegisterUserTask();
-        mRegisterUserTask.execute(j.toString());
+        
+        mRegisterUserTask.execute(mStrBuilder.toString());
     }
 
     /**
@@ -201,13 +211,8 @@ public class UserEngine extends BaseEngine {
 
         @Override
         protected String doInBackground(String... params) {
-//            if (!Configs.isCheckin) {
-//                Application.checkUserManager.checkUser();
-//            }
-//            if (!Configs.isCheckin) {
-//                return null;
-//            }
-            return httpRequestThisThread(1, Configs.RegisterUser + params[0],false);
+        	Log.d("LKP", params[0]);
+            return httpRequestThisThread(1, Configs.RegisterUser + params[0],true);
         }
 
         @Override
@@ -218,10 +223,11 @@ public class UserEngine extends BaseEngine {
             }
             if (result != null) {
                 Json j = new Json(result);
-                if (j.getInt("result") == 1) {
-                    Configs.userid = j.getString("userId");
-                    Configs.mUser_Name = j.getString("memberName");
-                    Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
+                if (j.getInt("status") == 1) {
+//                       Configs.userid = j.getString("userId");
+                    Configs.mUser_Name = j.getString("userName");
+//                  Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
+                	ConfigInfo.setUserInfo(userInfo.getString("userName"), userInfo.getString("pwd"));
                     manager.sendEmptyMessage(UserManager.STATE_REGISTERSUCESS);
                 } else {
                     manager.sendMessage(manager.obtainMessage(UserManager.STATE_REGISTERFAIL, j.getString("msg")));

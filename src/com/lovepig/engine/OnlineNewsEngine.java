@@ -32,6 +32,7 @@ public class OnlineNewsEngine extends BaseEngine {
 	// 获取评论引擎
 	private HttpEngine httpEngine = null;
 	private int catId;
+	private int newsId;
 
 	public OnlineNewsEngine(OnlineNewsManager manager) {
 		super(manager);
@@ -71,12 +72,13 @@ public class OnlineNewsEngine extends BaseEngine {
 	 * @param id
 	 * @param type
 	 */
-	public void fetchNewsDetail(int id, int type) {
+	public void fetchNewsDetail(int id) {
 		// Json j = new Json(0);
 		// j.put("typeId", type);
 		// j.put("flag", "0");
 		// j.put("id", id);
 		// j.put("size", RequestDataSize);
+		newsId=id;
 		GET_NEWS_DETAILS += id;
 		mGetNewsDetail = new getNewsDetailTask();
 		mGetNewsDetail.execute();
@@ -409,6 +411,7 @@ public class OnlineNewsEngine extends BaseEngine {
 				}
 				NewsDetailModel model=new NewsDetailModel();
 				model.paserJson(new Json(temp));
+				model.id=newsId;
 				newsDetailState.newsDetail = model;
 			} else {
 				newsDetailState.code = json.getString("msg");// 服务器正常返回，但没数据

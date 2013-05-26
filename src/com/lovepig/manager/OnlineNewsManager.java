@@ -109,27 +109,18 @@ public class OnlineNewsManager extends BaseManager {
             if (dcEngine.getNowDC() != detailsDC) {
                 enterSubDC(detailsDC);
             }
-            // if (msg.arg1 >= news.size()) {
-            // showLoading();
-            // Loading_For_Detail_Flag = msg.arg1;
-            // if(detailsDC!=null){
-            // detailsDC.isFromDetail=false;
-            // isComeFromTop = true;
-            // }
-            // sendEmptyMessage(STATE_LOADMORE);
-            // } else if (msg.arg1 < 0) {
-            // showLoading();
-            // Loading_For_Detail_Flag = -1;
-            // if(detailsDC!=null){
-            // detailsDC.isFromDetail=false;
-            // isComeFromTop = true;
-            // }
-            // sendEmptyMessage(STATE_REFRESH);
-            // } else {
-            // detailsDC.ShowNews(msg.arg1);
-            // }
             showLoading();
-            engine.fetchNewsDetail(1, 0);
+           int id=news.get(msg.arg1).id;
+            ArrayList<NewsDetailModel> datas=dbEngine.getNewsDetail(id);
+            if (datas.size()>0)
+            {
+            	NewsDetailModel model=datas.get(0);
+            	model.isFavorate=true;
+            	model.id=id;
+				showNewsDetails(model);
+			}else{
+				engine.fetchNewsDetail(id);
+			}
             break;
         case STATE_UPDATE:
             // 如果msg.arg1为1则需要设置更多按钮
@@ -195,8 +186,17 @@ public class OnlineNewsManager extends BaseManager {
             ArrayList<NewsModel> tops = (ArrayList<NewsModel>) msg.obj;
             if (tops != null && index < tops.size()) {
                 showLoading();
+                 id=tops.get(msg.arg1).id;
+                 datas=dbEngine.getNewsDetail(id);
+                if (datas.size()>0)
+                {
+                	NewsDetailModel model=datas.get(0);
+                	model.isFavorate=true;
+    				showNewsDetails(model);
+    			}else{
+    				engine.fetchNewsDetail(id);
+    			}
             }
-            engine.fetchNewsDetail(1, 0);
             // detailsDC.ShowTopNewNews((ArrayList<NewsModel>) msg.obj,
             // msg.arg1, msg.arg2);
             break;
