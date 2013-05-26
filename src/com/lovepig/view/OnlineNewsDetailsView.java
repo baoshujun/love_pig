@@ -3,6 +3,7 @@ package com.lovepig.view;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -33,7 +34,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     Context context;
     RelativeLayout headRelativeLayout;
     Button mBackBtn;
-    TextView mTitle;
+    TextView mTitle,title;
     TextView mTimeProvenance;
     TextView mDetails;
     ImageView mNewsImage;
@@ -62,10 +63,12 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         });
         findViewById(R.id.title).setVisibility(View.GONE);
         mTitle = (TextView) findViewById(R.id.onlinedetailstitle);
+        title = (TextView) findViewById(R.id.title);
         mTimeProvenance = (TextView) findViewById(R.id.onlinedetailstime);
         mDetails = (TextView) findViewById(R.id.onlinedetails);
         mNewsImage = (ImageView) findViewById(R.id.onlinedetailsimg);
-
+        title.setText("新闻详情");
+        title.setVisibility(View.VISIBLE);
         settings = (Button) this.findViewById(R.id.rightBtn);
         settings.setVisibility(VISIBLE);
         
@@ -105,10 +108,22 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
             }
         }, 50);
     }
+    
+    private void shareInfo(){
+    	  Intent intent=new Intent(Intent.ACTION_SEND);
+          intent.setType("text/plain");
+          intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+          intent.putExtra(Intent.EXTRA_TEXT, "I would like to share this with you...");
+          context.startActivity(Intent.createChooser(intent, "猪讯分享"));
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+        case R.id.shareBtn:
+        	hiddenMenuBg();
+        	shareInfo();
+        	break;
         case R.id.favoritBtn:
             hiddenMenuBg();
             break;
@@ -131,6 +146,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
             break;
         case R.id.menuBgLayout:
             hiddenMenuBg();
+            shareInfo();
             break;
         default:
             super.onClick(v);
