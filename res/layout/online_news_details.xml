@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+     >
 
     <include
         android:id="@+id/titleLayout"
@@ -46,6 +48,8 @@
                 android:layout_height="@dimen/news_details_img_height"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@null"
+                android:layout_below="@id/onlinedetailstime"
+                android:layout_marginTop="2dp"
                 android:scaleType="fitCenter" />
 
             <TextView
@@ -53,7 +57,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/onlinedetailsimg"
-                android:layout_marginTop="15dip"
+                android:layout_marginTop="5dip"
+                android:gravity="center_horizontal"
                 android:textColor="@color/btn_color_title"
                 android:textSize="@dimen/news_detail_content_size" />
 
@@ -81,18 +86,33 @@
         android:layout_below="@id/titleLayout"
         android:orientation="vertical"
         android:visibility="gone" >
-
-        <Button
+         <TextView
+            android:id="@+id/shareBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/base_pager_title_strip_bg"
+            android:drawableLeft="@drawable/biz_news_newspage_share_icon"
+            android:gravity="center"
+            android:text="分享" />
+        <TextView
             android:id="@+id/favoritBtn"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="收藏" />
+            android:text="收藏" 
+            android:gravity="center"
+            android:background="@drawable/base_pager_title_strip_bg"
+            android:drawableLeft="@drawable/biz_news_newspage_collect_icon"
+            />
 
-        <Button
+        <TextView
             android:id="@+id/fontSizeBtn"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="字体大小" />
+            android:text="字体大小" 
+            android:background="@drawable/base_pager_title_strip_bg"
+            android:gravity="center"
+            android:drawableLeft="@drawable/biz_news_newspage_font_icon"
+            />
     </LinearLayout>
 
 </RelativeLayout>

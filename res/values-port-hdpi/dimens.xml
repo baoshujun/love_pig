@@ -13,7 +13,7 @@
     <dimen name="more_item_margin_left">10px</dimen>
 
     <!-- modified by zengsonghai (shopping model) start -->
-    <dimen name="fenlei_title_height">55px</dimen>
+    <dimen name="fenlei_title_height">80px</dimen>
     <dimen name="shopping_searchEdit_height">52px</dimen>
     <dimen name="shopping_searchBtn_left">10px</dimen>
     <dimen name="shopping_searchBtn_right">10px</dimen>

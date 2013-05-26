@@ -4,7 +4,7 @@
     <dimen name="menu_item_margin">5dp</dimen>
     <dimen name="title_left_logo_margin">15px</dimen>
     <dimen name="title_left_btn_margin">10px</dimen>
-    <dimen name="title_right_btn_margin">10px</dimen>
+    <dimen name="title_right_btn_margin">5px</dimen>
     <dimen name="fenlei_item_width">90px</dimen>
     <dimen name="news_ad_height">150px</dimen>
     <dimen name="news_ad_txt_size">20sp</dimen>

@@ -39,7 +39,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     ImageView mNewsImage;
     OnlineNewsManager mManager;
     ScrollView scrollView;
-    private Button settings, favoritBtn, fontSizeBtn;
+    private TextView settings, favoritBtn, fontSizeBtn,shareBtn;
     public boolean isFromDetail = false;
     RelativeLayout menuBgLayout;
     LinearLayout menuLayout;
@@ -52,7 +52,6 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         scrollView.setOnTouchListener(this);
         mBackBtn = (Button) findViewById(R.id.leftBtn);
         mBackBtn.setVisibility(View.VISIBLE);
-        mBackBtn.setText("返回");
         headRelativeLayout = (RelativeLayout) findViewById(R.id.leftBtnLayout);
         headRelativeLayout.setVisibility(View.VISIBLE);
         mBackBtn.setOnClickListener(new OnClickListener() {
@@ -68,12 +67,17 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         mNewsImage = (ImageView) findViewById(R.id.onlinedetailsimg);
 
         settings = (Button) this.findViewById(R.id.rightBtn);
-        settings.setText("新闻设置");
+        settings.setVisibility(VISIBLE);
+        
+        settings.setText("");
+        settings.setBackgroundResource(R.drawable.night_base_action_bar_main_more);
         settings.setOnClickListener(this);
-        favoritBtn = (Button) findViewById(R.id.favoritBtn);
+        favoritBtn = (TextView) findViewById(R.id.favoritBtn);
         favoritBtn.setOnClickListener(this);
-        fontSizeBtn = (Button) findViewById(R.id.fontSizeBtn);
+        fontSizeBtn = (TextView) findViewById(R.id.fontSizeBtn);
         fontSizeBtn.setOnClickListener(this);
+        shareBtn = (TextView) findViewById(R.id.shareBtn);
+        shareBtn.setOnClickListener(this);
 
         menuBgLayout = (RelativeLayout) findViewById(R.id.menuBgLayout);
         menuBgLayout.setOnClickListener(this);

@@ -16,16 +16,11 @@
 
         <Button
             android:id="@+id/leftBtn"
-            style="@style/back_button"
             android:layout_width="55dp"
             android:layout_height="34dp"
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/title_left_btn_margin"
-            android:gravity="left"
-            android:maxWidth="120dp"
-            android:padding="0dip"
-            android:singleLine="true"
-            android:text="@string/back"
+            android:background="@drawable/biz_pics_detail_back"
             android:visibility="visible" />
 
         <ImageView
