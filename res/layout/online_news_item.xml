@@ -24,7 +24,7 @@
         android:layout_below="@+id/onlinetitle"
         android:layout_marginLeft="@dimen/news_l_item_title_magin"
         android:ellipsize="end"
-        android:lines="3"
+        android:lines="5"
         android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容" />
 
     <ImageView

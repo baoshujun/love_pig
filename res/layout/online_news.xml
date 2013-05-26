@@ -13,6 +13,7 @@
         android:layout_below="@id/head"
         android:id="@+id/galleryLayout"
         android:layout_width="fill_parent"
+        android:layout_marginTop="5dp"
         android:layout_height="@dimen/fenlei_item_height"
         android:background="#1d953f" >
 
