@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="120dip"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal" >
 
     <TextView
@@ -10,7 +11,8 @@
         android:layout_height="120dip"
         android:gravity="center_vertical"
         android:text="长白种猪"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/cateImg"
@@ -45,6 +47,7 @@
             android:layout_width="150dip"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dip"
+            android:descendantFocusability="blocksDescendants"
             android:orientation="horizontal" >
 
             <TextView

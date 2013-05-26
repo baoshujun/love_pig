@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.os.AsyncTask;
 
 import com.lovepig.manager.PigFactoryManager;
+import com.lovepig.model.BoarCateModel;
 import com.lovepig.model.PigFactoryModel;
 import com.lovepig.pivot.BaseEngine;
 
@@ -145,4 +146,73 @@ public class PigFactoryEngine extends BaseEngine {
 		}
 
 	}
+	
+	public void fetchPigProduct(int id) {
+		GetProductTask getPigProduct = new GetProductTask();
+		getPigProduct.execute(id);
+	}
+	
+	private class GetProductTask extends AsyncTask<Integer, Void, Void> {
+		@Override
+		protected Void doInBackground(Integer... params) {
+			// 联网获取猪场的主营产品
+			ArrayList<BoarCateModel> datas = new ArrayList<BoarCateModel>();
+			for (int i = 0; i < 10; i++) {
+				BoarCateModel m = new BoarCateModel();
+				m.boarName = "长白母猪";
+				m.info = "长白猪原产于丹麦，是世界著名的瘦肉型猪种。";
+				m.brandInfo = "品牌信息";
+				m.star = 4.5f;
+				m.categorizationId = i;
+				datas.add(m);
+			}
+			pigFactoryManager.sendMessage(pigFactoryManager.obtainMessage(PigFactoryManager.SETPRODUCTLISTVIEW,
+					datas));
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+		}
+		
+	}
+	
+	private void fetchBoarDetail(){
+		
+	}
+	
+	public void fetchBoarDetail(int id) {
+		GetBoarDetail getBoarDetail = new GetBoarDetail();
+		getBoarDetail.execute(id);
+	}
+	
+	private class GetBoarDetail extends AsyncTask<Integer, Void, Void> {
+		@Override
+		protected Void doInBackground(Integer... params) {
+			// 联网获取猪场的主营产品
+			ArrayList<BoarCateModel> datas = new ArrayList<BoarCateModel>();
+//			for (int i = 0; i < 10; i++) {
+//				BoarCateModel m = new BoarCateModel();
+//				m.boarName = "长白母猪";
+//				m.info = "长白猪原产于丹麦，是世界著名的瘦肉型猪种。";
+//				m.brandInfo = "品牌信息";
+//				m.star = 4.5f;
+//				m.categorizationId = i;
+//				datas.add(m);
+//			}
+			pigFactoryManager.sendMessage(pigFactoryManager.obtainMessage(PigFactoryManager.SET_BOAR_DETAIL,
+					datas));
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+		}
+		
+	}
+
 }
