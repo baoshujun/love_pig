@@ -223,7 +223,7 @@ public class OnlineNewsDBEngine extends DBEngine {
         LogInfo.LogOut("getOnlineNews.................");
         ArrayList<NewsDetailModel> programs = new ArrayList<NewsDetailModel>();
         try {
-            String sql = "select news_id,title,newsOrder,summary,iconUri,content,cTime,imgUri,newsfrom,subTitle from newsdetail where news_id=? order by id desc";
+            String sql = "select news_id,title,newsOrder,summary,iconUri,content,cTime,imgUri,newsfrom,subTitle from newsdetail where news_id=? order by news_id desc";
 
             Cursor cursor = db.rawQuery(sql, new String[] { String.valueOf(newsId) });
             NewsDetailModel lm;

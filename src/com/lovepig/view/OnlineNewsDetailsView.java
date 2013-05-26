@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.lovepig.engine.ImageEngine;
+import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsDetailModel;
@@ -44,6 +45,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     public boolean isFromDetail = false;
     RelativeLayout menuBgLayout;
     LinearLayout menuLayout;
+    public NewsDetailModel model;
 
     public OnlineNewsDetailsView(Context context1, int layoutId, OnlineNewsManager manager) {
         super(context1, layoutId, manager);
@@ -58,7 +60,8 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         mBackBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
+//                /EmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
+            	Application.application.currentManager.back();
             }
         });
         findViewById(R.id.title).setVisibility(View.GONE);
@@ -92,11 +95,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         fontModels.add(new NewsFontsModel("小号字", 12, false));
     }
 
-    // private void constructNewsUrl(ShareModel shareModel) {
-    // Json json = new Json();
-    // json.put("id", currentModel.id);
-    //
-    // }
+   
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
@@ -126,6 +125,17 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         	break;
         case R.id.favoritBtn:
             hiddenMenuBg();
+            if (model.isFavorate) {
+            	showToast("取消收藏成功！");
+				model.isFavorate=false;
+				favoritBtn.setText("收藏");
+				mManager.dbEngine.deleteNewsDetailsByID(model.id);
+			}else {
+				showToast("收藏成功！");
+				model.isFavorate=true;
+				favoritBtn.setText("取消收藏");
+				mManager.dbEngine.saveNewsDetail(model, model.id);
+			}
             break;
         case R.id.fontSizeBtn:
             hiddenMenuBg();
@@ -247,6 +257,12 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
      * @param index
      */
     public void ShowNewsDetail(NewsDetailModel model) {
+    	this.model=model;
+    	if (model.isFavorate) {
+			favoritBtn.setText("取消收藏");
+		}else {
+			favoritBtn.setText("收藏");
+		}
         scrollView.scrollTo(0, 0);
         scrollView.smoothScrollTo(0, 0);
         LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);

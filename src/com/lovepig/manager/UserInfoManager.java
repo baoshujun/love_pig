@@ -9,10 +9,12 @@ import com.lovepig.engine.OnlineNewsEngine;
 import com.lovepig.engine.database.OnlineNewsDBEngine;
 import com.lovepig.main.Application;
 import com.lovepig.main.R;
+import com.lovepig.model.NewsDetailModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Utils;
 import com.lovepig.view.FavoriteView;
+import com.lovepig.view.OnlineNewsDetailsView;
 import com.lovepig.view.UserInfoView;
 
 public class UserInfoManager extends BaseManager {
@@ -20,6 +22,7 @@ public class UserInfoManager extends BaseManager {
     FavoriteView fv;
     BaseActivity  mBaseActivity;
     OnlineNewsDBEngine engine;
+	private OnlineNewsDetailsView detailsDC;
 
     public UserInfoManager(BaseActivity c) {
         super(c);
@@ -38,6 +41,13 @@ public class UserInfoManager extends BaseManager {
                 userInfoView.notifyDataSetChanged();
             }
             break;
+        case 2: //进入收藏详情
+        	NewsDetailModel m=(NewsDetailModel)msg.obj;
+        	m.isFavorate=true;
+        	detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, Application.onlineNewsManager);
+        	enterSubDC(detailsDC);
+        	detailsDC.ShowNewsDetail(m);
+        	break;
         case 3:
             userInfoManageFunctionProcess(msg);
             break;
@@ -92,10 +102,8 @@ public class UserInfoManager extends BaseManager {
 
     @Override
     public ViewAnimator getMainDC() {
-        if (userInfoView == null) {
-            userInfoView = new UserInfoView(context, R.layout.user_info, this);
-            dcEngine.setMainDC(userInfoView);
-        }
+    	  userInfoView = new UserInfoView(context, R.layout.user_info, this);
+          dcEngine.setMainDC(userInfoView);
         userInfoView.notifyDataSetChanged();
         return super.getMainDC();
     }

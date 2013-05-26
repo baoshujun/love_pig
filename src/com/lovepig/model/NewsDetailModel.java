@@ -13,6 +13,7 @@ public class NewsDetailModel {
 	public String imgUrl;
 	public String cTime;
 	public String cFrom;
+	public boolean isFavorate;
     
     @Override
     public int hashCode() {

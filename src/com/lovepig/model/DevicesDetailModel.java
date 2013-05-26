@@ -41,6 +41,8 @@ public class DevicesDetailModel {
      * 价格
      */
     public String price;
+    
+    public boolean isFavorite;
 
     /**
      * {"price":[{"id":"1","name":"产床","brandId":"233", "catId":"44","des":"
