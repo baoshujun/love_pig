@@ -6,7 +6,9 @@ import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.lovepig.main.R;
 import com.lovepig.manager.PigFactoryManager;
@@ -24,12 +26,15 @@ import com.lovepig.pivot.BaseView;
 public class PigFactoryView extends BaseView implements OnItemClickListener {
 	private ListView pigFactoryListView;
 	private PigFactoryListViewAdapter adapter;
+	private TextView categoryName;
 
 	public PigFactoryView(Context context, int layoutId, BaseManager manager) {
 		super(context, layoutId, manager);
 
 		pigFactoryListView = (ListView) findViewById(R.id.pigfactoryLv);
 		pigFactoryListView.setOnItemClickListener(this);
+		categoryName = (TextView)findViewById(R.id.title);
+		categoryName.setText("附近猪场");
 	}
 
 	public void setListViewAdapter(ArrayList<PigFactoryModel> datas) {

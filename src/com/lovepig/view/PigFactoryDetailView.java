@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lovepig.main.R;
 import com.lovepig.pivot.BaseManager;
@@ -20,11 +21,14 @@ import com.lovepig.pivot.BaseView;
 public class PigFactoryDetailView extends BaseView implements OnClickListener {
 	RelativeLayout toListView;
 	ImageView toListViewiv;
+	TextView categoryName;
 
 	public PigFactoryDetailView(Context context, int layoutId,BaseManager manager) {
 		super(context, layoutId, manager);
 		toListView = (RelativeLayout) findViewById(R.id.pigProduct);
 		toListViewiv = (ImageView) findViewById(R.id.toListView);
+		categoryName = (TextView)findViewById(R.id.title);
+		categoryName.setText("猪场详情");
 		toListView.setOnClickListener(this);
 		toListView.setOnClickListener(this);
 	}

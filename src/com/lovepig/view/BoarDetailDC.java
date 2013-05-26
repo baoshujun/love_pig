@@ -1,7 +1,9 @@
 package com.lovepig.view;
 
 import android.content.Context;
+import android.widget.TextView;
 
+import com.lovepig.main.R;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.pivot.BaseView;
 
@@ -14,9 +16,12 @@ import com.lovepig.pivot.BaseView;
  * 
  */
 public class BoarDetailDC extends BaseView {
+	private TextView categoryName;
 
 	public BoarDetailDC(Context context, int layoutId, BaseManager manager) {
 		super(context, layoutId, manager);
+		categoryName = (TextView)findViewById(R.id.title);
+		categoryName.setText("产品详情");
 		
 	}
 

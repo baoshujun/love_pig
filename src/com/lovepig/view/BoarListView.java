@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.lovepig.main.R;
 import com.lovepig.manager.PigFactoryManager;
@@ -24,12 +25,15 @@ import com.lovepig.pivot.BaseView;
 public class BoarListView extends BaseView implements OnItemClickListener {
 	private ListView boarListView;
 	private BoarCateListViewAdapter adapter;
+	private TextView categoryName;
 
 	public BoarListView(Context context, int layoutId, BaseManager manager) {
 		super(context, layoutId, manager);
 
 		boarListView = (ListView) findViewById(R.id.boarLv);
 		boarListView.setOnItemClickListener(this);
+		categoryName = (TextView)findViewById(R.id.title);
+		categoryName.setText("主营产品");
 	}
 
 	public void setListViewAdapter(ArrayList<BoarCateModel> datas) {
