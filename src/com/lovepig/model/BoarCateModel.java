@@ -1,5 +1,11 @@
 package com.lovepig.model;
 
+/**
+ * 种猪信息
+ * 
+ * @author greenboy
+ * 
+ */
 public class BoarCateModel {
 	/**
 	 * 分类ID
@@ -22,7 +28,7 @@ public class BoarCateModel {
 	 * 推荐星级
 	 */
 
-	public int star;
+	public float star;
 	/**
 	 * 品牌信息
 	 */

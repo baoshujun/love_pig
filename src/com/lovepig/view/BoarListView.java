@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 import com.lovepig.main.R;
 import com.lovepig.manager.PigFactoryManager;
-import com.lovepig.model.PigFactoryModel;
+import com.lovepig.model.BoarCateModel;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.pivot.BaseView;
 
@@ -19,22 +19,22 @@ import com.lovepig.pivot.BaseView;
  * @E-mail:360315247@qq.com
  * @qq:360315247
  * @version 1.0 创建时间：May 5, 2013 3:40:10 PM
- * 
+ * 此类展现种猪list信息
  */
-public class PigFactoryView extends BaseView implements OnItemClickListener {
-	private ListView pigFactoryListView;
-	private PigFactoryListViewAdapter adapter;
+public class BoarListView extends BaseView implements OnItemClickListener {
+	private ListView boarListView;
+	private BoarCateListViewAdapter adapter;
 
-	public PigFactoryView(Context context, int layoutId, BaseManager manager) {
+	public BoarListView(Context context, int layoutId, BaseManager manager) {
 		super(context, layoutId, manager);
 
-		pigFactoryListView = (ListView) findViewById(R.id.pigfactoryLv);
-		pigFactoryListView.setOnItemClickListener(this);
+		boarListView = (ListView) findViewById(R.id.boarLv);
+		boarListView.setOnItemClickListener(this);
 	}
 
-	public void setListViewAdapter(ArrayList<PigFactoryModel> datas) {
-		adapter = new PigFactoryListViewAdapter(datas, context);
-		pigFactoryListView.setAdapter(adapter);
+	public void setListViewAdapter(ArrayList<BoarCateModel> datas) {
+		adapter = new BoarCateListViewAdapter(datas, context);
+		boarListView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -48,7 +48,7 @@ public class PigFactoryView extends BaseView implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> itemview, View view, int position, long arg3) {
 		showToast("111111");
 		manager.showLoading();
-		manager.sendMessageDelayed(manager.obtainMessage(PigFactoryManager.TO_GET_FACTORY_DETAIL, position,0),500);
+		manager.sendMessageDelayed(manager.obtainMessage(PigFactoryManager.TO_GET_BOAR_DETAIL, position,0),500);
 	}
 	
 

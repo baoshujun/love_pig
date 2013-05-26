@@ -1,8 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:orientation="vertical"
+    android:padding="5dip" >
 
-</LinearLayout>
+    <include
+        android:id="@+id/head"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/commtitle" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/head"
+        android:layout_marginTop="10dip" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/rg01"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/boarName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="美国母系长白猪"
+                    android:textSize="20dip" />
+
+                <TextView
+                    android:id="@+id/singlLine01"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dip"
+                    android:layout_below="@id/boarName"
+                    android:layout_marginRight="120dip"
+                    android:layout_marginTop="5dip"
+                    android:background="#9988aa" />
+
+                <TextView
+                    android:id="@+id/brand"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/singlLine01"
+                    android:layout_marginRight="120dip"
+                    android:layout_marginTop="5dip"
+                    android:text="品牌: 长城" />
+
+                <TextView
+                    android:id="@+id/boarFather"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/brand"
+                    android:layout_marginRight="120dip"
+                    android:layout_marginTop="5dip"
+                    android:text="父亲：长城PIKKUS " />
+
+                <TextView
+                    android:id="@+id/boarGrandFather"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/boarFather"
+                    android:layout_marginRight="120dip"
+                    android:layout_marginTop="5dip"
+                    android:text="外祖父：123" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/pig" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/singlLine02"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_below="@id/rg01"
+                android:background="#9988aa" />
+
+            <TextView
+                android:id="@+id/product"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/singlLine02"
+                android:layout_marginTop="5dip"
+                android:text="产品简介:"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/pigProduct"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product" >
+
+                <TextView
+                    android:id="@+id/productContent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dip"
+                    android:text="从其父系中可以找到大量的名系血统，良好的母系血统，采用国际先进的生产工艺，按照母乳的营养特征和初生仔猪的消化生理特点专门设计的接近母乳成分，易于仔猪消化吸收，符合仔猪快速生长需求的高档乳猪教槽料伴侣。"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/singlLine03"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_below="@id/pigProduct"
+                android:layout_marginTop="5dip"
+                android:background="#9988aa" />
+
+            <RelativeLayout
+                android:id="@+id/pigFactoryAddress"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/singlLine03" >
+
+                <TextView
+                    android:id="@+id/connectMethod"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pigProduct"
+                    android:layout_marginTop="5dip"
+                    android:text="参数"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/pigFactoryAddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/connectMethod"
+                    android:text="所在地区：北京市 顺义区"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/people"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pigFactoryAddress"
+                    android:text="联系人：张三"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/telephone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/people" >
+
+                    <TextView
+                        android:id="@+id/connectPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="联系电话："
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/phoneNum"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/connectPhone"
+                        android:inputType="phone"
+                        android:text="01012312323"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/detailAddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/telephone"
+                    android:text="详细地址：北京市顺义区十八号楼五号"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/mail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/detailAddress"
+                    android:text="邮箱:12323232@139.com"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/networkAddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mail"
+                    android:text="网址：www.hao123.com"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

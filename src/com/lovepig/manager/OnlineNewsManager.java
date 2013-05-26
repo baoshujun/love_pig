@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import android.os.Message;
-import android.widget.Toast;
 import android.widget.ViewAnimator;
 import com.lovepig.engine.OnlineNewsEngine;
 import com.lovepig.engine.database.OnlineNewsDBEngine;
