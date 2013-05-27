@@ -2,6 +2,17 @@
 <resources>
 
     <string name="app_name">猪讯</string>
+    <string name="username">账户:</string>
+	<string name="password">密码:</string>
+	<string name="login_name_hint">请输入您的猪讯账号</string>
+	<string name="login_pwd_hint">请输入您的猪讯密码</string>
+	<string name="inputpassword">请输入密码</string>
+	<string name="remPassword">记住密码</string>
+	<string name="autologin">自动登录</string>
+	<string name="login">登录</string>
+	<string name="register">注册</string>
+	<string name="get_back_password_title">找回密码</string>
+	<string name="lgGetbackPassword"><u>找回密码</u></string>
     <string name="pull_to_refresh">下拉可以刷新</string>
     <string name="tap_to_refresh">点击刷新</string>
     <string name="load_to_refresh">更多</string>
