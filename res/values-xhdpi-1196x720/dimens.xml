@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="news_l_item_h">70dp</dimen>
+    <dimen name="news_l_item_w">250dip</dimen>
+    <dimen name="news_l_item_image_w">70dip</dimen>
+
+</resources>

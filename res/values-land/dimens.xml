@@ -119,7 +119,7 @@
     <dimen name="news_l_item_jiant_margin_h">30dip</dimen>
     <dimen name="news_l_item_jiant_w">30dip</dimen>
     <dimen name="news_l_item_jiant_h">30dip</dimen>
-    <dimen name="news_l_item_title_magin">15dip</dimen>
+    <dimen name="news_l_item_title_magin">5dip</dimen>
     <dimen name="news_l_item_content_size">18sp</dimen>
     <dimen name="news_l_item_title_size">18sp</dimen>
     <dimen name="news_title_size">20sp</dimen>
