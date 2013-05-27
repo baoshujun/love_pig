@@ -245,7 +245,7 @@ public class UserManager extends BaseManager {
 	 */
 	public void goToRegister() {
 		isGetUserInfo = false;
-		dcEngine.setMainDC(registerView);
+		enterSubDC(registerView);
 	}
 	
 	/**
@@ -349,7 +349,7 @@ public class UserManager extends BaseManager {
 	public void EnterUserManager(int backtxtid) {
 //		if ( Configs.userid == null || !isGetUserInfo) {
 //			sendEmptyMessage(STATE_GETUSERINFO);
-			Application.application.setSubManager(this);
+//			Application.application.setSubManager(this);
 //		} else {
 //			Application.application.setSubManager(this);
 //		}
