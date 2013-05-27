@@ -66,11 +66,10 @@ public class UserInfoManager extends BaseManager {
             }
             Application.userManager.EnterUserManager(R.string.user_info);
             break;
-        case 1:// 充值中心
+        case 1:// 收藏列表
            fv=new FavoriteView(mBaseActivity,R.layout.favorite_layout, this);
            enterSubDC(fv);
            fv.setDatas(engine.getNewsDetail());
-
             break;
 
         case 3:// 好友
