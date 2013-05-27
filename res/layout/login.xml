@@ -92,6 +92,7 @@
         android:layout_below="@id/layout_login_input_pwd"
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip"
+        android:visibility="gone"
         android:layout_marginTop="20dip" >
 
         <ImageView

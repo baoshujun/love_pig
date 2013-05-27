@@ -100,10 +100,10 @@ public class UserInfoManager extends BaseManager {
     }
 
     @Override
-    public ViewAnimator getMainDC() {
-    	  userInfoView = new UserInfoView(context, R.layout.user_info, this);
-          dcEngine.setMainDC(userInfoView);
-        userInfoView.notifyDataSetChanged();
-        return super.getMainDC();
-    }
+	public ViewAnimator getMainDC() {
+		userInfoView = new UserInfoView(context, R.layout.user_info, this);
+		dcEngine.setMainDC(userInfoView);
+		userInfoView.notifyDataSetChanged();
+		return super.getMainDC();
+	}
 }

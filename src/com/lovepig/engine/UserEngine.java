@@ -9,6 +9,7 @@ import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.utils.ConfigInfo;
 import com.lovepig.utils.Json;
+import com.lovepig.view.UserLoginView;
 
 public class UserEngine extends BaseEngine {
     UserManager manager;
@@ -17,6 +18,8 @@ public class UserEngine extends BaseEngine {
     UpdateUserInfoTask mUpdateUserInfoTask;// 修改用户信息
     ModifyPWDTask mModifyPWDTask;// 修改密码
     CheckUserIdTask checkUserIdTask;
+    LoginTask loginTask;
+    
     private Json userInfo = null;
 
     public UserEngine(UserManager manager) {
@@ -39,6 +42,21 @@ public class UserEngine extends BaseEngine {
             mUserInfoTask = null;
         }
     }
+    
+    /**
+     * 用户登陆
+     * 
+     * @param j
+     */
+    public void login(Json j) {
+    	stopLogin();
+    	userInfo = j;
+    	StringBuilder mStrBuilder = new StringBuilder("?");
+    	mStrBuilder.append("userName=").append(j.getString("userName"))
+    	.append("&pwd=").append(j.getString("pwd"));
+    	loginTask = new LoginTask();
+    	loginTask.execute(mStrBuilder.toString());
+    }
 
     /**
      * 用户注册
@@ -58,6 +76,15 @@ public class UserEngine extends BaseEngine {
         mRegisterUserTask.execute(mStrBuilder.toString());
     }
 
+    /**
+     * 停止登陆
+     */
+    private void stopLogin() {
+    	if (mRegisterUserTask != null) {
+    		mRegisterUserTask.Stop();
+    		mRegisterUserTask = null;
+    	}
+    }
     /**
      * 停止注册
      */
@@ -231,6 +258,49 @@ public class UserEngine extends BaseEngine {
                     manager.sendEmptyMessage(UserManager.STATE_REGISTERSUCESS);
                 } else {
                     manager.sendMessage(manager.obtainMessage(UserManager.STATE_REGISTERFAIL, j.getString("msg")));
+                }
+            } else {
+                manager.sendEmptyMessage(UserManager.STATE_REGISTERFAIL);
+            }
+        }
+
+        public void Stop() {
+            iStop = true;
+            cancel(iStop);
+        }
+    }
+    
+    /**
+     * 用户注册
+     * 
+     * @author LKP
+     * 
+     */
+    class LoginTask extends AsyncTask<String, Void, String> {
+        boolean iStop;
+
+        @Override
+        protected String doInBackground(String... params) {
+        	Log.d("LKP", params[0]);
+            return httpRequestThisThread(1, Configs.loginUser + params[0],true);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (iStop) {
+                return;
+            }
+            if (result != null) {
+                Json j = new Json(result);
+                if (j.getInt("status") == 1) {
+                    Configs.userid = j.getString("userName");
+                    Configs.mUser_Name = j.getString("userName");
+//                  Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
+                	ConfigInfo.setUserInfo(userInfo.getString("userName"), userInfo.getString("pwd"));
+                    manager.sendEmptyMessage(UserManager.STATE_REGISTERSUCESS);
+                } else {
+                    manager.sendMessage(manager.obtainMessage(UserManager.STATE_LOGIN_SUCCESS, j.getString("msg")));
                 }
             } else {
                 manager.sendEmptyMessage(UserManager.STATE_REGISTERFAIL);

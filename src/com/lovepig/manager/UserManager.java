@@ -12,6 +12,7 @@ import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.utils.Json;
 import com.lovepig.view.UserAccountView;
+import com.lovepig.view.UserLoginView;
 import com.lovepig.view.UserModiyPWView;
 import com.lovepig.view.UserRegisterView;
 import com.lovepig.view.UserUpdateUserInfoView;
@@ -33,11 +34,15 @@ public class UserManager extends BaseManager {
 
 	public static final int STATE_NAME_CAN_USE = 18;// 用户名称可用
 	public static final int STATE_NAME_USEED = 19;// 用户名称不可用
-	private UserAccountView mainDC;
-	private UserRegisterView registerDC;
+	public static final int STATE_LOGIN_SUCCESS = 20;// 用户名称不可用
+	
+	
+	private UserAccountView userAccountView;
+	private UserRegisterView registerView;
 	private UserEngine engine;
-	private UserUpdateUserInfoView mUpdateUserInfoDC;
-	private UserModiyPWView mUserModiyPWDC;
+	private UserUpdateUserInfoView updateUserInfoView;
+	private UserModiyPWView userModiyPWview;
+	private UserLoginView userLoginView;
 	private boolean isGetUserInfo;
 
 	public UserManager(BaseActivity c) {
@@ -45,7 +50,7 @@ public class UserManager extends BaseManager {
 		if (engine == null) {
 			engine = new UserEngine(this);
 		}
-		initDC();
+		initView();
 	}
 
 	@Override
@@ -95,8 +100,8 @@ public class UserManager extends BaseManager {
 			Back();
 			break;
 		case STATE_UPDATESUCESS:
-			dcEngine.setMainDC(mainDC);
-			mainDC.setUserInfo();
+			dcEngine.setMainDC(userAccountView);
+			userAccountView.setUserInfo();
 			showToast("修改成功");
 			dismissLoading();
 			break;
@@ -109,7 +114,7 @@ public class UserManager extends BaseManager {
 			dismissLoading();
 			break;
 		case STATE_MODIFYPWDSUCESS:
-			dcEngine.setMainDC(mainDC);
+			dcEngine.setMainDC(userAccountView);
 			showToast("修改密码成功");
 			dismissLoading();
 			break;
@@ -130,14 +135,19 @@ public class UserManager extends BaseManager {
 			dismissLoading();
 			showToast("该用户名字已被使用！");
 			break;
+		case STATE_LOGIN_SUCCESS:
+			dismissLoading();
+			showToast("登陆成功！");
+			back();
+			break;
 		}
 
 	}
 
 	public void Back() {
-		if (getNowShownDC() == mUpdateUserInfoDC
-				|| getNowShownDC() == mUserModiyPWDC) {
-			dcEngine.setMainDC(mainDC);
+		if (getNowShownDC() == updateUserInfoView
+				|| getNowShownDC() == userModiyPWview) {
+			dcEngine.setMainDC(userAccountView);
 		} else {
 			back();
 		}
@@ -158,19 +168,19 @@ public class UserManager extends BaseManager {
 			// enterSubDC(bindDC);
 			break;
 		case R.id.register_register_btn:// 用户注册
-			if (registerDC.checkDataintegrity()) {
-				engine.RegisterUser(registerDC.getRegisterInfo());
+			if (registerView.checkDataintegrity()) {
+				engine.RegisterUser(registerView.getRegisterInfo());
 				showLoading();
 			}
 			break;
 		case R.id.register_register_reset_btn:// 重置
-			registerDC.Reset();
+			registerView.Reset();
 			break;
 		case R.id.register_userid_checked_btn:// 检测名称
-			if (registerDC != null) {
-				if (!TextUtils.isEmpty(registerDC.getUserAccount())) {
+			if (registerView != null) {
+				if (!TextUtils.isEmpty(registerView.getUserAccount())) {
 					showLoading();
-					engine.checkUserAccount(registerDC.getUserAccount());
+					engine.checkUserAccount(registerView.getUserAccount());
 				} else {
 					showToast("用户名称不能为空！");
 				}
@@ -178,20 +188,20 @@ public class UserManager extends BaseManager {
 			break;
 		case R.id.account_modifyinfo:// 修改个人信息
 			if (Configs.userid == null) {
-				dcEngine.setMainDC(registerDC);
+				dcEngine.setMainDC(registerView);
 			} else {
-				mUpdateUserInfoDC.setUserInfo();
-				enterSubDC(mUpdateUserInfoDC);
+				updateUserInfoView.setUserInfo();
+				enterSubDC(updateUserInfoView);
 
 			}
 			break;
 		case R.id.account_modifypwd:// 修改用户密码
 			if ( Configs.userid == null) {
-				dcEngine.setMainDC(registerDC);
+				dcEngine.setMainDC(registerView);
 			} else {
-				mUserModiyPWDC.setUserID();
-				enterSubDC(mUserModiyPWDC);
-				mUserModiyPWDC.setOldPasswdVisibility();
+				userModiyPWview.setUserID();
+				enterSubDC(userModiyPWview);
+				userModiyPWview.setOldPasswdVisibility();
 			}
 
 			break;
@@ -201,6 +211,15 @@ public class UserManager extends BaseManager {
 		case R.id.user_modifypwd_ok:
 			ModifyPWD();
 			break;
+		case R.id.btn_register://点击登陆页面的注册
+			goToRegister();
+			break;
+		case R.id.btn_login://点击登陆页面的登陆
+			if (userLoginView.checkUserNameOrPwd()) {
+				engine.login(userLoginView.getLoginInfo());
+				showLoading();
+			}
+			
 		default:
 			break;
 		}
@@ -217,7 +236,7 @@ public class UserManager extends BaseManager {
 	 */
 	public void UserInfoSucess() {
 		isGetUserInfo = true;
-		mainDC.setUserInfo();
+		userAccountView.setUserInfo();
 		dismissLoading();
 	}
 
@@ -226,14 +245,22 @@ public class UserManager extends BaseManager {
 	 */
 	public void goToRegister() {
 		isGetUserInfo = false;
-		dcEngine.setMainDC(registerDC);
+		dcEngine.setMainDC(registerView);
+	}
+	
+	/**
+	 * 去登陆
+	 */
+	public void goToLogin() {
+		isGetUserInfo = false;
+		dcEngine.setMainDC(userLoginView);
 	}
 
 	/**
 	 * 修改用户信息
 	 */
 	public void UpdateUserInfo() {
-		Json j = mUpdateUserInfoDC.getUserInfo();
+		Json j = updateUserInfoView.getUserInfo();
 		if (j != null) {
 			showLoading();
 			engine.UpdateUserInfo(j);
@@ -244,7 +271,7 @@ public class UserManager extends BaseManager {
 	 * 修改密码
 	 */
 	public void ModifyPWD() {
-		Json j = mUserModiyPWDC.getPwd();
+		Json j = userModiyPWview.getPwd();
 		if (j != null) {
 			showLoading();
 			engine.ModifyUserPWD(j);
@@ -279,21 +306,26 @@ public class UserManager extends BaseManager {
 		return true;
 	}
 
-	private void initDC() {
-		if (mainDC == null) {
-			mainDC = new UserAccountView(context, R.layout.user_account, this);
-		}
-		if (registerDC == null) {
-			registerDC = new UserRegisterView(context, R.layout.user_register,
-					this);
+	private void initView() {
+		
+		if(userLoginView == null){
+			userLoginView = new UserLoginView(context, R.layout.login, this);
 		}
 		
-		if (mUserModiyPWDC == null) {
-			mUserModiyPWDC = new UserModiyPWView(context,
-					R.layout.user_modifypwd, this);
+		if (userAccountView == null) {
+			userAccountView = new UserAccountView(context, R.layout.user_account, this);
 		}
-		if (mUpdateUserInfoDC == null) {
-			mUpdateUserInfoDC = new UserUpdateUserInfoView(context,
+		
+		if (registerView == null) {
+			registerView = new UserRegisterView(context, R.layout.user_register,this);
+		}
+		
+		if (userModiyPWview == null) {
+			userModiyPWview = new UserModiyPWView(context,R.layout.user_modifypwd, this);
+		}
+		
+		if (updateUserInfoView == null) {
+			updateUserInfoView = new UserUpdateUserInfoView(context,
 					R.layout.user_updateuserinfo, this);
 		}
 	}
@@ -310,34 +342,27 @@ public class UserManager extends BaseManager {
 	}
 
 	/**
-	 * 该设备没有绑定用户时调用
-	 */
-	public void ToBindOrRegister(int backtxtid) {
-		Application.application.setSubManager(this);
-		registerDC.setBackText(backtxtid);
-	}
-
-	/**
 	 * 进入用户管理
 	 * 
 	 * @param backtxtid
 	 */
 	public void EnterUserManager(int backtxtid) {
-		if ( Configs.userid == null || !isGetUserInfo) {
+//		if ( Configs.userid == null || !isGetUserInfo) {
 //			sendEmptyMessage(STATE_GETUSERINFO);
 			Application.application.setSubManager(this);
-		} else {
-			Application.application.setSubManager(this);
-		}
-		registerDC.setBackText(backtxtid);
+//		} else {
+//			Application.application.setSubManager(this);
+//		}
+		Application.application.setSubManager(this);
+		registerView.setBackText(backtxtid);
 	}
 
 	@Override
 	public ViewAnimator getMainDC() {
 		if (Configs.userid != null) {
-			dcEngine.setMainDC(mainDC);
+			dcEngine.setMainDC(userAccountView);
 		} else {
-			goToRegister();
+			goToLogin();
 		}
 		// mainDC.onShow();
 		return super.getMainDC();
