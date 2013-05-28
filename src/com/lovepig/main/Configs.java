@@ -169,11 +169,10 @@ public class Configs {
     public static final String accountAction = "/xhs/account.action";// 用户信息
     public static final String UserInfoaccountAction = "/xhs/getAccount.action";// 用户信息
     public static final String RegisterUser = "user/register";// 注册用户
-    public static final String updateUserInfo = "user/updateUserInfo";// 注册用户
+    public static final String updateUserInfo = "user/updateUserInfo";// 修改用户信息
     public static final String quicklyRegister = "user/quicklyRegister";// 快速注册
     public static final String loginUser = "user/login";// 用户
     public static final String CheckUsernameAction = "/xhs/checkUsername.action";// 验证用户文号
-    public static final String UpdateUserInfoAction = "/xhs/changeAccount.action";// 修改用户信息
     public static final String ModifyUserPwdAction = "/xhs/changePassword.action";// 修改密码
     public static final String TobindingAction = "/xhs/binding.action";// 用户绑定
     public static final String UnbindingAction = "/xhs/unpinless.action";// 解除绑定

@@ -67,7 +67,7 @@ public class UserUpdateUserInfoView extends BaseView {
             return j;
         } else if(mUserName.getText().toString().length() >0){
             j = new Json(0);
-            j.put("username", mUserName.getText().toString());
+            j.put("userName", mUserName.getText().toString());
         } else{
             showToast(context.getString(R.string.SureInputUserName));
             j = null;
@@ -77,30 +77,30 @@ public class UserUpdateUserInfoView extends BaseView {
             Pattern p = Pattern.compile(Configs.EmailPattern);
             Matcher m = p.matcher(mUserEmail.getText().toString());
             if (m.matches()) {
-                j.put("email", mUserEmail.getText().toString());
+                j.put("userEmail", mUserEmail.getText().toString());
             } else {
                 showToast(context.getString(R.string.EmailError));
                 j = null;
                 return j;
             }
         } else {
-            j.put("email", "");
+            j.put("userEmail", "");
         }
         if (mUserPhone.getText().toString().length() > 0) {
             Pattern p1 = Pattern.compile(Configs.PhonePattern);
             Matcher m1 = p1.matcher(mUserPhone.getText().toString());
             if (m1.matches() && mUserPhone.getText().toString().length() == 11) {
-                j.put("phone", mUserPhone.getText().toString());
+                j.put("userPhoneNum", mUserPhone.getText().toString());
             } else {
                 showToast(context.getString(R.string.PhoneError));
                 j = null;
                 return j;
             }
         } else {
-            j.put("phone", "");
+            j.put("userPhoneNum", "");
         }
         if (mUserPWD.getText().toString().length() > 0) {
-            j.put("password", MD5.md5Lower(mUserPWD.getText().toString()));
+            j.put("pwd", MD5.md5Lower(mUserPWD.getText().toString()));
         } else {
             showToast(context.getString(R.string.SureInputPWD));
             j = null;

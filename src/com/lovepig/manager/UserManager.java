@@ -57,6 +57,7 @@ public class UserManager extends BaseManager {
 	public void handleMessage(Message msg) {
 		switch (msg.what) {
 		case STATE_MODIFYINFO:
+			
 			break;
 		case STATE_MODIFYPWD:
 			break;
@@ -85,6 +86,7 @@ public class UserManager extends BaseManager {
 			break;
 		case STATE_REGISTERSUCESS:
 			showToast("注册成功");
+			back();
 			back();
 			dismissLoading();
 			break;
@@ -203,10 +205,9 @@ public class UserManager extends BaseManager {
 				enterSubDC(userModiyPWview);
 				userModiyPWview.setOldPasswdVisibility();
 			}
-
 			break;
-		case R.id.updateuserinfo_ok:
-			UpdateUserInfo();
+		case R.id.updateuserinfo_ok://联网修改用户信息
+			updateUserInfo();
 			break;
 		case R.id.user_modifypwd_ok:
 			ModifyPWD();
@@ -259,11 +260,11 @@ public class UserManager extends BaseManager {
 	/**
 	 * 修改用户信息
 	 */
-	public void UpdateUserInfo() {
+	public void updateUserInfo() {
 		Json j = updateUserInfoView.getUserInfo();
 		if (j != null) {
 			showLoading();
-			engine.UpdateUserInfo(j);
+			engine.upDateUserInfo(j);
 		}
 	}
 
@@ -347,12 +348,6 @@ public class UserManager extends BaseManager {
 	 * @param backtxtid
 	 */
 	public void EnterUserManager(int backtxtid) {
-//		if ( Configs.userid == null || !isGetUserInfo) {
-//			sendEmptyMessage(STATE_GETUSERINFO);
-//			Application.application.setSubManager(this);
-//		} else {
-//			Application.application.setSubManager(this);
-//		}
 		Application.application.setSubManager(this);
 		registerView.setBackText(backtxtid);
 	}

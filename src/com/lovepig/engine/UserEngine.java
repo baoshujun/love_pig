@@ -18,7 +18,7 @@ public class UserEngine extends BaseEngine {
     UpdateUserInfoTask mUpdateUserInfoTask;// 修改用户信息
     ModifyPWDTask mModifyPWDTask;// 修改密码
     CheckUserIdTask checkUserIdTask;
-    LoginTask loginTask;
+    LoginTask mLoginTask;
     
     private Json userInfo = null;
 
@@ -54,8 +54,8 @@ public class UserEngine extends BaseEngine {
     	StringBuilder mStrBuilder = new StringBuilder("?");
     	mStrBuilder.append("userName=").append(j.getString("userName"))
     	.append("&pwd=").append(j.getString("pwd"));
-    	loginTask = new LoginTask();
-    	loginTask.execute(mStrBuilder.toString());
+    	mLoginTask = new LoginTask();
+    	mLoginTask.execute(mStrBuilder.toString());
     }
 
     /**
@@ -100,10 +100,16 @@ public class UserEngine extends BaseEngine {
      * 
      * @param j
      */
-    public void UpdateUserInfo(Json j) {
+    public void upDateUserInfo(Json j) {
+    	userInfo = j;
+    	StringBuilder mStrBuilder = new StringBuilder("?");
+		mStrBuilder.append("userName=").append(j.getString("userName"))
+				.append("&pwd=").append(j.getString("pwd")).append("&userEmail=")
+				.append(j.getString("userEmail")).append("&userPhoneNum=")
+				.append(j.getString("userPhoneNum"));
         StopUpdateUserInfo();
         mUpdateUserInfoTask = new UpdateUserInfoTask();
-        mUpdateUserInfoTask.execute(j.toString());
+        mUpdateUserInfoTask.execute(mStrBuilder.toString());
     }
 
     public void StopUpdateUserInfo() {
@@ -251,8 +257,8 @@ public class UserEngine extends BaseEngine {
             if (result != null) {
                 Json j = new Json(result);
                 if (j.getInt("status") == 1) {
-//                       Configs.userid = j.getString("userId");
-                    Configs.mUser_Name = j.getString("userName");
+                    Configs.userid = userInfo.getString("userName");
+                    Configs.mUser_Name = userInfo.getString("userName");
 //                  Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
                 	ConfigInfo.setUserInfo(userInfo.getString("userName"), userInfo.getString("pwd"));
                     manager.sendEmptyMessage(UserManager.STATE_REGISTERSUCESS);
@@ -324,7 +330,7 @@ public class UserEngine extends BaseEngine {
 
         @Override
         protected String doInBackground(String... params) {
-            return httpRequestThisThread(1, Configs.UpdateUserInfoAction + params[0],false);
+            return httpRequestThisThread(1, Configs.updateUserInfo + params[0],true);
         }
 
         @Override
@@ -337,9 +343,9 @@ public class UserEngine extends BaseEngine {
             if (result != null) {
                 j = new Json(result);
                 if (j.getInt("result") == 1) {
-                    Configs.mUser_Email = j.getString("mail");
-                    Configs.mUser_Name = j.getString("userName");
-                    Configs.mUser_PhoneNum = j.getString("phone");
+                    Configs.mUser_Email = userInfo.getString("mail");
+                    Configs.mUser_Name = userInfo.getString("userName");
+                    Configs.mUser_PhoneNum = userInfo.getString("phone");
                     Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, Configs.mMemberId);
                     manager.sendEmptyMessage(UserManager.STATE_UPDATESUCESS);
                 } else {

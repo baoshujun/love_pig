@@ -5,7 +5,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ViewAnimator;
 
-import com.lovepig.engine.OnlineNewsEngine;
 import com.lovepig.engine.database.OnlineNewsDBEngine;
 import com.lovepig.main.Application;
 import com.lovepig.main.R;
