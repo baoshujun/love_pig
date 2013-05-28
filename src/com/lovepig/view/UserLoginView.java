@@ -56,12 +56,12 @@ public class UserLoginView extends BaseView {
     public boolean checkUserNameOrPwd(){
     	String name = mUseridET.getText().toString();
     	String pwd = mUserpwdET.getText().toString();
-    	if(name == null ){
+    	if("".equals(name.trim()) ){
     		showToast("用户名不可为空");
     		return false;
     	}
     	
-    	if(pwd == null){
+    	if("".equals(pwd.trim())){
     		showToast("密码不可为空");
     		return false;
     	}
