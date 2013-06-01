@@ -35,6 +35,7 @@ public class OnlineNewsFirstView extends BaseView {
 	        newsManager = (OnlineNewsManager) manager;
 	        detector = new GestureDetector(context, gestureListenerProcess);
 	        flipper = (ViewFlipper) this.findViewById(R.id.ViewFlipper01);
+	        flipper.setOnTouchListener(this);
 	        dianLayout = (LinearLayout) findViewById(R.id.dianLayout);
 	        dianView[0] = (ImageView) findViewById(R.id.image1);
 	        dianView[1] = (ImageView) findViewById(R.id.image2);
@@ -54,7 +55,7 @@ public class OnlineNewsFirstView extends BaseView {
 	        boolean isUpdate = false;
 	        newsManager.isTop=0;
 	        //currentNews=news;
-	        LogInfo.LogOut("OnlineNewsAdapter", "OnlineNewsFirstDC-->initData-->newsManager.topNews.size():"+newsManager.topNews.size());
+	        LogInfo.LogOut("OnlineNewsFirstView", "OnlineNewsFirstDC-->initData-->newsManager.topNews.size():"+newsManager.topNews.size()+" news.top.size:"+news.topNews.size());
 	        if (newsManager.topNews.size() > 0) {
 	            if (news.topNews == null) {// 无头条,将第一条当做头条
 	                if(newsManager.topNews.size() > 1 || newsManager.topNews.get(0).id != news.id) {
@@ -95,6 +96,7 @@ public class OnlineNewsFirstView extends BaseView {
 	                }
 	            }
 	            COUNT = newsManager.topNews.size();
+	            LogInfo.LogOut("OnlineNewsFirstView", "cout:"+COUNT);
 	            for (int i = 0; i < 3; i++) {
 	                dianLayout.removeView(dianView[i]);
 	                flipper.removeView(newsView[i]);
@@ -167,11 +169,11 @@ public class OnlineNewsFirstView extends BaseView {
 	        }, 1000);
 	    }
 
-//	    public boolean onTouchEvent(MotionEvent event) {
-//	        LogInfo.LogOut("-----------------onTouch:x="+event.getX()+"  y="+event.getY());
-//	        detector.onTouchEvent(event);
-//	        return true;
-//	    }
+	    public boolean onTouchEvent(MotionEvent event) {
+	        LogInfo.LogOut("-----------------onTouch:x="+event.getX()+"  y="+event.getY());
+	        detector.onTouchEvent(event);
+	        return true;
+	    }
 	    @Override
 	    public boolean dispatchTouchEvent(MotionEvent ev) {
 	        detector.onTouchEvent(ev);

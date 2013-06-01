@@ -6,6 +6,7 @@ import java.util.Date;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -83,12 +84,8 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
 
     @Override
     public void onRefresh() {
-        if (manager.isGalleryNull()) {
-            CancelRefresh();
-           // manager.UpdateGrally();
-        } else {
-            //manager.sendEmptyMessage(OnlineNewsManager.STATE_REFRESH);
-        }
+    	SystemClock.sleep(500);
+    	CancelRefresh();
     }
 
     /**

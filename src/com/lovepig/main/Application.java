@@ -73,7 +73,7 @@ public class Application extends BaseActivity {
 					file.mkdirs();
 				}
 				// 检查版本是否更新
-                SystemClock.sleep(10000);
+                SystemClock.sleep(1000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import android.os.Message;
 import android.widget.ViewAnimator;
-import com.lovepig.engine.OnlineNewsEngine;
+import com.lovepig.engine.NewsEngine;
 import com.lovepig.engine.database.OnlineNewsDBEngine;
 import com.lovepig.main.R;
 import com.lovepig.model.NewsDetailModel;
@@ -41,7 +41,7 @@ public class OnlineNewsManager extends BaseManager {
 
     private OnlineNewsView mainDC;
     private OnlineNewsDetailsView detailsDC;
-    public OnlineNewsEngine engine;
+    public NewsEngine engine;
     private int TypeID = -1;// 新闻栏目的ID
     private int Loading_For_Detail_Flag;// -1 表示获取最新 大于0表示加载更多
     private int typeIndex;// 当前选择的新闻栏目
@@ -56,7 +56,7 @@ public class OnlineNewsManager extends BaseManager {
     public OnlineNewsManager(BaseActivity c) {
         super(c);
         if (engine == null) {
-            engine = new OnlineNewsEngine(this);
+            engine = new NewsEngine(this);
         }
 
         if (dbEngine == null) {
@@ -77,14 +77,14 @@ public class OnlineNewsManager extends BaseManager {
             }
             showLoading();
             if (news != null && news.size() > 0) {
-                engine.refreshNews(mGallerys.get(typeIndex).id, OnlineNewsEngine.NEWS_LIMIT_LENGTH, news.get(news.size() - 1).id);
+                engine.refreshNews(mGallerys.get(typeIndex).id, NewsEngine.NEWS_LIMIT_LENGTH, news.get(news.size() - 1).id);
             } else {
-                engine.refreshNews(mGallerys.get(typeIndex).id, OnlineNewsEngine.NEWS_LIMIT_LENGTH, 0);
+                engine.refreshNews(mGallerys.get(typeIndex).id, NewsEngine.NEWS_LIMIT_LENGTH, 0);
             }
             break;
         case STATE_LOADMORE:
             try {
-                engine.moreNews(mGallerys.get(typeIndex).id, OnlineNewsEngine.NEWS_LIMIT_LENGTH, news.get(news.size() - 1).id);
+                engine.moreNews(mGallerys.get(typeIndex).id, NewsEngine.NEWS_LIMIT_LENGTH, news.get(news.size() - 1).id);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -170,7 +170,7 @@ public class OnlineNewsManager extends BaseManager {
                 }
                 showLoading();
                 typeIndex = position;
-                engine.refreshNews(mGallerys.get(typeIndex).id, OnlineNewsEngine.NEWS_LIMIT_LENGTH, 0);
+                engine.refreshNews(mGallerys.get(typeIndex).id, NewsEngine.NEWS_LIMIT_LENGTH, 0);
                 ;
             }
             break;
