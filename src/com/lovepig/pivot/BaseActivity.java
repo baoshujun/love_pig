@@ -131,7 +131,6 @@ public abstract class BaseActivity extends Activity {
                 loadingDialog.dismiss();
 
             loadingDialog = new ProgressDialog(this);
-            loadingDialog.setTitle("提示");
             loadingDialog.setMessage(text);
             loadingDialog.setIndeterminate(true);
             loadingDialog.setCancelable(cancelable);
@@ -199,38 +198,6 @@ public abstract class BaseActivity extends Activity {
      * 屏蔽过快的按键点击
      */
     long lastKeyDown = 0;
-
-//    @Override
-//    public boolean onKeyUp(int keyCode, KeyEvent event) {
-//      
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            if (currentManager != null) {
-//                if (Math.abs(System.currentTimeMillis() - lastKeyDown) > 500) {
-//                    lastKeyDown = System.currentTimeMillis();
-//                    currentManager.back();
-//                    return true;
-//                }
-//            }
-//        }
-//        return super.onKeyUp(keyCode, event);
-//    }
- 
-    /**
-     * 如果此模块不在后台运行提供服务，请在onDestroy中调用此方法 调用Syste.exit(0)之前必须调用此方法
-     * 
-     */
-    // public void unbindRemoteService() {
-    // if(REMOTE_SERVICE!=null){
-    // try {
-    // REMOTE_SERVICE.unRegisterCallback(mCallActivity,getClassName());
-    // unbindService(s);
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-    // }
-
-   
     /**
      * 返回程序主界面
      */
@@ -249,13 +216,6 @@ public abstract class BaseActivity extends Activity {
         } else {
             return false;
         }
-    }
-
-    /**
-     * 子类重写，用于换皮肤
-     */
-    public int getResid(int id) {
-        return id;
     }
 
     /**

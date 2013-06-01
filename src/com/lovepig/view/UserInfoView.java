@@ -87,9 +87,9 @@ public class UserInfoView extends BaseView implements OnItemClickListener {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null || Integer.valueOf(convertView.getTag().toString()) != Configs.nowOrientation) {
+            if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.user_info_item, null);
-                convertView.setTag(Configs.nowOrientation);
+                
             }
             TextView textView = (TextView) convertView.findViewById(R.id.textView1);
             ImageView newTip = (ImageView) convertView.findViewById(R.id.messageInfoTip);

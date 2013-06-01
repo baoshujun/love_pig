@@ -18,7 +18,7 @@ import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
 
 public class NewsEngine extends BaseEngine {
-	private static final String LogTag="NewsEngine";
+	private static final String LogTag = "NewsEngine";
 	public static int NEWS_LIMIT_LENGTH = 20;
 	private static String GET_NEWS = "news/list?";
 	private static String GET_NEWS_DETAILS = "news/detail?newsId=";
@@ -36,15 +36,6 @@ public class NewsEngine extends BaseEngine {
 		super(manager);
 		this.manager = manager;
 	}
-		
-
-	/**
-	 * 更新（获取）新闻类型
-	 */
-	public void updategrally() {
-		Json j = new Json(0);
-		new UpdateGalleryTask().execute(j.toString());
-	}
 
 	/**
 	 * 获取最新新闻
@@ -56,7 +47,7 @@ public class NewsEngine extends BaseEngine {
 	 *            ：上次获取新闻的做大id，第一次传0
 	 */
 	public void refreshNews(int catId, int limit, int maxId) {
-		this.catId=catId;
+		this.catId = catId;
 		StringBuilder mStrBuilder = new StringBuilder("catId=");
 		mStrBuilder.append(catId).append("&limit=").append(limit)
 				.append("&maxId=").append(maxId);
@@ -71,7 +62,7 @@ public class NewsEngine extends BaseEngine {
 	 * @param type
 	 */
 	public void fetchNewsDetail(int id) {
-		newsId=id;
+		newsId = id;
 		GET_NEWS_DETAILS += id;
 		mGetNewsDetail = new getNewsDetailTask();
 		mGetNewsDetail.execute();
@@ -88,15 +79,12 @@ public class NewsEngine extends BaseEngine {
 
 		@Override
 		protected NewsDetailState doInBackground(String... params) {
-			String result = httpRequestThisThread(1, GET_NEWS_DETAILS,false);
+			String result = httpRequestThisThread(1, GET_NEWS_DETAILS, false);
 			if (isStop) {
 				return null;
 			} else {
 				LogInfo.LogOut("result:" + result);
 				NewsDetailState rs = ParseHttp2(result, 0);
-				if (rs.code.equals("hasnews") && !isStop) {
-					// manager.SetLatestNews(rs.newslist);
-				}
 				return rs;
 			}
 		}
@@ -105,17 +93,6 @@ public class NewsEngine extends BaseEngine {
 		protected void onPostExecute(NewsDetailState result) {
 			if (!isStop && result != null) {
 				if (result.code.equals("hasnews")) {
-					// manager.SetLatestNews(result.newslist);
-					// // manager.SaveNews();
-					// manager.getNewsComplete(0);
-					// manager.ShowDetail();
-					// if (result.hasBtn != null) {
-					// // 有更多按钮
-					// manager.SetMoreBtn(true);
-					// } else {
-					// // 没有更多按钮
-					// manager.SetMoreBtn(false);
-					// }
 					manager.showNewsDetails(result.newsDetail);
 				} else if (result.code.equals("neterror")) {
 					// 网络错误
@@ -141,7 +118,7 @@ public class NewsEngine extends BaseEngine {
 	 * @param type
 	 */
 	public void moreNews(int catId, int limit, int maxId) {
-		this.catId=catId;
+		this.catId = catId;
 		StringBuilder mStrBuilder = new StringBuilder("catId=");
 		mStrBuilder.append(catId).append("&limit=").append(limit)
 				.append("&maxId=").append(maxId);
@@ -165,65 +142,6 @@ public class NewsEngine extends BaseEngine {
 	}
 
 	/**
-	 * 更新新闻类型
-	 * 
-	 * @author DCH
-	 * 
-	 */
-	class UpdateGalleryTask extends
-			AsyncTask<String, Void, ArrayList<NewsGalleryModel>> {
-
-		@Override
-		protected ArrayList<NewsGalleryModel> doInBackground(String... params) {
-			return getGalleryItem(httpRequestThisThread(1, "",false));
-		}
-
-		@Override
-		protected void onPostExecute(ArrayList<NewsGalleryModel> result) {
-			manager.getGrally(result);
-		}
-	}
-
-	/**
-	 * 解析新闻类型列表
-	 */
-	private ArrayList<NewsGalleryModel> getGalleryItem(String result) {
-		ArrayList<NewsGalleryModel> gallery = null;
-		int count = 0;
-		if (result != null) {
-			Json json = new Json(result);
-			if (json.getString("status").equals("1")) {
-				NewsGalleryModel gModel;
-				Json[] galleryarray = json.getJsonArray("news");
-				if (galleryarray == null || galleryarray.length == 0) {
-					return gallery;
-				}
-				gallery = new ArrayList<NewsGalleryModel>();
-				for (int i = 0; i < galleryarray.length; i++) {
-					gModel = new NewsGalleryModel();
-					gModel.id = galleryarray[i].getInt("id");
-					gModel.checked = galleryarray[i].getInt("checked");
-					gModel.indexNum = galleryarray[i].getInt("indexNum");
-					gModel.name = galleryarray[i].getString("name");
-					gallery.add(gModel);
-
-				}
-				Collections.sort(gallery, new Comparator<NewsGalleryModel>() {
-					@Override
-					public int compare(NewsGalleryModel object1,
-							NewsGalleryModel object2) {
-						if (object1.indexNum > object2.indexNum) {
-							return 1;
-						}
-						return -1;
-					}
-				});
-			}
-		}
-		return gallery;
-	}
-
-	/**
 	 * 获取最新新闻
 	 * 
 	 * @author DCH
@@ -234,16 +152,14 @@ public class NewsEngine extends BaseEngine {
 
 		@Override
 		protected NewsState doInBackground(String... params) {
-			String result = httpRequestThisThread(1, GET_NEWS + params[0],false);
+			String result = httpRequestThisThread(1, GET_NEWS + params[0],
+					false);
 			if (isStop) {
 				return null;
 			} else {
 				LogInfo.LogOut("result:" + result);
 				manager.dbEngine.deleteNewsByTypeID(catId);
-				NewsState rs = ParseHttp1(result, 0);
-				if (rs.code.equals("hasnews") && !isStop) {
-					manager.SaveNews(rs.newslist);
-				}
+				NewsState rs = ParseHttpNews(result, 0);
 				if (rs.code.equals("hasnews") && !isStop) {
 					manager.SetLatestNews(rs.newslist);
 				}
@@ -282,9 +198,54 @@ public class NewsEngine extends BaseEngine {
 	}
 
 	/**
-	 * 加载更多
+	 * 解析新闻数据
 	 * 
-	 * @author DCH
+	 * @param result
+	 * @param flag
+	 * @return
+	 */
+	private NewsState ParseHttpNews(String result, int flag) {
+		Json[] newsarray = null;
+		NewsState newsState = new NewsState();
+		if (result != null) {
+			Json json = new Json(result);
+			if (json.getString("status").equals("1")) {
+				NewsModel news;
+				ArrayList<NewsModel> topList = new ArrayList<NewsModel>();
+				newsarray = json.getJsonArray("news");
+				int L = newsarray.length;
+				if (L > 0) {
+					newsState.code = "hasnews";// 有新闻
+				}
+				if (L == OnlineNewsManager.DEFAULT_NEW_LENGTH) {
+					newsState.hasBtn = "hasmorebtn";// 有更多按钮
+				}
+				for (int i = 0; i < newsarray.length; i++) {
+					news = new NewsModel();
+					news.paserJson(newsarray[i]);
+					manager.dbEngine.saveNews(news, catId);
+					if (news.top == 1) {
+						topList.add(news);
+					} else {
+						newsState.newslist.add(news);
+					}
+				}
+				NewsModel model = new NewsModel();
+				model.top = 1;
+				model.topNews = topList;
+				LogInfo.LogOut(LogTag, "topNews size:" + topList.size());
+				newsState.newslist.add(0, model);
+			} else {
+				newsState.code = json.getString("msg");// 服务器正常返回，但没数据
+			}
+		} else {
+			newsState.code = "neterror";// 网络异常
+		}
+		return newsState;
+	}
+
+	/**
+	 * 加载更多
 	 * 
 	 */
 	class getMoreNewsTask extends AsyncTask<String, Void, NewsState> {
@@ -292,12 +253,12 @@ public class NewsEngine extends BaseEngine {
 
 		@Override
 		protected NewsState doInBackground(String... params) {
-			 String result = httpRequestThisThread(1, GET_NEWS +
-			 params[0],false);
-			 if (isStop) {
-			    return null;
+			String result = httpRequestThisThread(1, GET_NEWS + params[0],
+					false);
+			if (isStop) {
+				return null;
 			} else {
-				return ParseHttp1(result, 1);
+				return ParseHttpNews(result, 1);
 			}
 		}
 
@@ -309,7 +270,7 @@ public class NewsEngine extends BaseEngine {
 						manager.onLoadoldMoreNews(news);
 					}
 					manager.getNewsComplete(1);
-//					manager.ShowDetail();
+					// manager.ShowDetail();
 					if (result.hasBtn != null) {
 						// 有更多按钮
 						manager.SetMoreBtn(true);
@@ -337,56 +298,8 @@ public class NewsEngine extends BaseEngine {
 	}
 
 	/**
-	 * 解析新闻数据
-	 * 
-	 * @param result
-	 * @param flag
-	 * @return
-	 */
-	private NewsState ParseHttp1(String result, int flag) {
-		Json[] newsarray = null;
-		NewsState newsState = new NewsState();
-		if (result != null) {
-			Json json = new Json(result);
-			if (json.getString("status").equals("1")) {
-				NewsModel news;
-				ArrayList<NewsModel> topList=new ArrayList<NewsModel>();
-				newsarray = json.getJsonArray("news");
-				int L = newsarray.length;
-				if (L > 0) {
-					newsState.code = "hasnews";// 有新闻
-				}
-				if (L == OnlineNewsManager.DEFAULT_NEW_LENGTH) {
-					newsState.hasBtn = "hasmorebtn";// 有更多按钮
-				}
-				for (int i = 0; i < newsarray.length; i++) {
-					LogInfo.LogOut("news = " + newsarray.length);
-					news = new NewsModel();
-					news.paserJson(newsarray[i]);
-					manager.dbEngine.saveNews(news, catId);
-                   if (news.top==1) {
-                	   topList.add(news);
-                	   LogInfo.LogOut(LogTag, "enter...........");
-				   }else{
-					   newsState.newslist.add(news);
-				   }
-				  }
-				NewsModel model=new NewsModel();
-				model.top=1;
-				model.topNews=topList;
-				 LogInfo.LogOut(LogTag, "topNews size:"+topList.size());
-				newsState.newslist.add(0, model);
-			} else {
-				newsState.code = json.getString("msg");// 服务器正常返回，但没数据
-			}
-		} else {
-			newsState.code = "neterror";// 网络异常
-		}
-		return newsState;
-	}
-	
-	/**
 	 * 解析新闻详情信息
+	 * 
 	 * @param result
 	 * @param flag
 	 * @return
@@ -396,15 +309,13 @@ public class NewsEngine extends BaseEngine {
 		if (result != null) {
 			Json json = new Json(result);
 			if (json.getInt("status") == 1) {
-				NewsDetailModel news;
-				NewsDetailModel ndm =new NewsDetailModel();
 				String temp = json.getString("detail");
 				if (temp != null) {
 					newsDetailState.code = "hasnews";// 有新闻
 				}
-				NewsDetailModel model=new NewsDetailModel();
+				NewsDetailModel model = new NewsDetailModel();
 				model.paserJson(new Json(temp));
-				model.id=newsId;
+				model.id = newsId;
 				newsDetailState.newsDetail = model;
 			} else {
 				newsDetailState.code = json.getString("msg");// 服务器正常返回，但没数据
@@ -414,271 +325,21 @@ public class NewsEngine extends BaseEngine {
 		}
 		return newsDetailState;
 	}
-
-	class getNewsTask1 extends AsyncTask<String, Void, ArrayList<NewsModel>> {
-		boolean isStop = false;
-
-		@Override
-		protected ArrayList<NewsModel> doInBackground(String... params) {
-			// String result = httpRequestThisThread(1, Configs.getNewsAction +
-			// params[0]);
-			// if (isStop) {
-			return null;
-			// } else {
-			// return ParseHttp(result, 0);
-			// }
-		}
-
-		@Override
-		protected void onPostExecute(ArrayList<NewsModel> lastnews) {
-			if (!isStop) {
-				manager.onLaterNews(lastnews);
-			}
-		}
-
-		public void stop() {
-			isStop = true;
-			cancel(isStop);
-		}
-	}
-
-	private ArrayList<NewsModel> ParseHttp(String response, int type) {
-		ArrayList<NewsModel> lastnews = null;
-		Json[] newsarray = null;
-		if (response != null) {
-			Json json = new Json(response);
-			if (json.getString("status").equals("1")) {
-				lastnews = new ArrayList<NewsModel>();
-				NewsModel news;
-				newsarray = json.getJsonArray("news");
-				for (int i = 0; i < newsarray.length; i++) {
-					// LogInfo.LogOut("news = " + newsarray.length);
-					// news = new NewsModel();
-					// news.id = newsarray[i].getInt("id");
-					// news.createTime = newsarray[i].getString("createTime");
-					// news.title =
-					// newsarray[i].getString("title").replace("\r",
-					// "").replace("\n", "");
-					// news.summary = newsarray[i].getString("intro");
-					// news.details = newsarray[i].getString("content");
-					// news.commentNum = newsarray[i].getInt("commentSize");
-					// news.isTop = newsarray[i].getInt("isTop") == 1;
-					// if (news.summary != null) {// 简介段首自动缩进
-					// news.summary = "        " + news.summary;
-					// news.summary = news.summary.replaceAll("\n",
-					// "\n        ");
-					// }
-					// // if (news.details != null) {// 所有段首自动缩进
-					// // news.details = "        " + news.details;
-					// // news.details = news.details.replaceAll("\n",
-					// // "\n        ");
-					// // }
-					// if (newsarray[i].has("publisher")) {
-					// news.editor = newsarray[i].getString("publisher");
-					// }
-					// if (newsarray[i].has("picUrl")) {
-					// news.iconPath = newsarray[i].getString("picUrl");
-					// }
-					// if (newsarray[i].has("picInfo")) {
-					// news.picintro = newsarray[i].getString("picInfo");
-					// }
-					// if (newsarray[i].has("bigPic")) {
-					// news.imgPath = newsarray[i].getString("bigPic");
-					// }
-					// if (newsarray[i].has("commentSize")) {
-					// news.commentSize = newsarray[i].getInt("commentSize");
-					// }
-					// lastnews.add(news);
-					// if (type == 1) {// 更多
-					// manager.onLoadoldMoreNews(news);
-					// }
-					// LogInfo.LogOut("OnlineNewsEngine", "name:" + news.id);
-				}
-			} else {
-
-			}
-		}
-		return lastnews;
-	}
-
-	class getMoreNewsTask1 extends
-			AsyncTask<String, Void, ArrayList<NewsModel>> {
-		boolean isStop = false;
-
-		@Override
-		protected ArrayList<NewsModel> doInBackground(String... params) {
-			// String result = httpRequestThisThread(1, Configs.getNewsAction +
-			// params[0]);
-			// if (isStop) {
-			// return null;
-			// } else {
-			// return ParseHttp(result, 1);
-			// }
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(ArrayList<NewsModel> lastnews) {
-			if (!isStop) {
-				if (lastnews != null && lastnews.size() != RequestDataSize) {
-					manager.onOldNewsNoMore(lastnews);
-				} else {
-					manager.onOldNews(lastnews);
-				}
-			}
-		}
-
-		public void stop() {
-			isStop = true;
-			cancel(isStop);
-		}
-	}
-
 	class NewsState {
 		public ArrayList<NewsModel> newslist = new ArrayList<NewsModel>();// 新闻数据
 		public String code;// hasnews 表示有新闻 neterror 表示网络异常
 		public String hasBtn;// hasmore 表示有更多按钮
 	}
-	
+
 	class NewsDetailState {
 		public NewsDetailModel newsDetail = new NewsDetailModel();// 新闻数据
 		public String code;// hasnews 表示有新闻 neterror 表示网络异常
 		public String hasBtn;// hasmore 表示有更多按钮
 	}
-
-	public void sentNewsComments(NewsCommentModel newsCommentModel) {
-		if (httpEngine != null) {
-			httpEngine.cancelRequest();
-		}
-		// 判断一下网络是否可用
-
-		httpEngine = new HttpEngine(manager);
-		String params = newsCommentModel.updateCommentParams(0).toString();
-		httpEngine.setListener(new HttpEngine.HttpEngineListener() {
-
-			@Override
-			public void onPreHttp() {
-				manager.showLoading(
-						manager.context.getString(R.string.loading),
-						new OnCancelListener() {
-							@Override
-							public void onCancel(DialogInterface dialog) {
-								httpEngine.cancelRequest();
-							}
-						});
-			}
-
-			@Override
-			public void onPostHttp(String result) {
-				manager.dismissLoading();
-				if (!result.equals("ok")) {
-					if (result.equals("nologin")) {
-					} else {
-						manager.showAlert(result);
-					}
-
-				}
-			}
-
-			@Override
-			public String onParseHttp(String response) {
-				String msg = null;
-				Json json = new Json(response);
-				switch (json.getInt("result")) {
-				case 0:// 失败
-
-					return "发表评论失败";
-				case 1:// 成功
-					manager.sendMessage(manager.obtainMessage(
-							OnlineNewsManager.STATE_SENT_COMMENT_SUC,
-							json.getString("time")));
-					return "ok";
-
-				case 2:// 审核中
-					return "发表评论成功,审核中.....";
-				default:
-					break;
-				}
-				return msg;
-			}
-
-		});
-		// httpEngine.httpRequestNewThread(1, Configs.sentNewsCommentsAction +
-		// params);
-
-	}
-
-	public void getNewsComments(int firstNum, int newSId) {
-		if (httpEngine != null) {
-			httpEngine.cancelRequest();
-		}
-		// 判断一下网络是否可用
-
-		httpEngine = new HttpEngine(manager);
-		Json json = new Json(0);
-		json.put("newsId", newSId);
-		json.put("firstSize", firstNum);
-		json.put("maxSize", 20);
-		String params = json.toString();
-		httpEngine.setListener(new HttpEngine.HttpEngineListener() {
-
-			@Override
-			public void onPreHttp() {
-				manager.showLoading(
-						manager.context.getString(R.string.loading),
-						new OnCancelListener() {
-							@Override
-							public void onCancel(DialogInterface dialog) {
-								httpEngine.cancelRequest();
-							}
-						});
-			}
-
-			@Override
-			public void onPostHttp(String result) {
-				manager.dismissLoading();
-				if (!result.equals("ok")) {
-					if (result.equals("nologin")) {
-					} else {
-						manager.showAlert(result);
-					}
-
-				}
-			}
-
-			@Override
-			public String onParseHttp(String response) {
-				String msg = null;
-				Json json = new Json(response);
-				ArrayList<NewsCommentModel> datas = new ArrayList<NewsCommentModel>();
-				switch (json.getInt("result")) {
-				case 0:// 失败
-					return "获取评论失败";
-				case 1:// 成功
-					int count = json.getInt("count");
-					Json[] jsonArray = json.getJsonArray("comments");
-					if (jsonArray.length > 0) {
-						for (int i = 0; i < jsonArray.length; i++) {
-							datas.add(new NewsCommentModel(count)
-									.parserJsonForComments(jsonArray[i]));
-
-						}
-					}
-					manager.sendMessage(manager.obtainMessage(
-							OnlineNewsManager.STATE_SENT_COMMENT_LIST, count,
-							0, datas));
-					return "ok";
-				default:
-					break;
-				}
-				return msg;
-			}
-
-		});
-		// httpEngine.httpRequestNewThread(1, Configs.getNewsComment + params);
-
-	}
-
+	/**
+	 * 新闻分类
+	 * @return
+	 */
 	public ArrayList<NewsGalleryModel> getNewsGalleryModels() {
 		ArrayList<NewsGalleryModel> mNewsGallerModels = new ArrayList<NewsGalleryModel>();
 		mNewsGallerModels.add(new NewsGalleryModel(1, 1, "头条"));
@@ -689,7 +350,5 @@ public class NewsEngine extends BaseEngine {
 
 		return mNewsGallerModels;
 	}
-	
-	
 
 }
