@@ -25,6 +25,7 @@
         <activity
             android:name=".Application"
             android:configChanges="keyboardHidden|orientation|locale|navigation"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
