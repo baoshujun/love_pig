@@ -18,8 +18,13 @@ import com.lovepig.utils.LogInfo;
 import com.lovepig.utils.Utils;
 import com.lovepig.view.OnlineNewsView;
 import com.lovepig.view.OnlineNewsDetailsView;
-
+/**
+ * 
+ * 新闻
+ *
+ */
 public class OnlineNewsManager extends BaseManager {
+	
     public static final int DEFAULT_NEW_LENGTH = 20;// 默认取20条新闻
     public ArrayList<NewsModel> news = new ArrayList<NewsModel>();
     public ArrayList<NewsGalleryModel> mGallerys = new ArrayList<NewsGalleryModel>();

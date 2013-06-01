@@ -5,7 +5,6 @@ package com.lovepig.engine;
 import com.lovepig.main.Configs;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.pivot.BaseManager;
-import com.lovepig.utils.ConfigInfo;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
 
@@ -29,9 +28,6 @@ public class CheckUserEngine extends BaseEngine {
     public void checkUser() {
         isNetwork = false;
         Json json = new Json(0);
-        String certificateId = ConfigInfo.getCertificateId();
-        // Configs.certificateId = certificateId;
-        json.put("certificate", certificateId);
         LogInfo.LogOut("checkUser:" + json.toNormalString());
         String rs = httpRequestThisThread(0, Configs.authenticationAction + json.toString(),false);
         LogInfo.LogOut("result:" + rs);
@@ -61,15 +57,11 @@ public class CheckUserEngine extends BaseEngine {
                 }
             }
             
-            // Configs.userid=rJson.getString("userId");
-            // Configs.mUser_Name=rJson.getString("userName");
-            // Configs.updateUidToTypeAndVsersion(Configs.userid,Configs.mUser_Name,rJson.getInt("memberId"));
             Configs.isChangededPWD = rJson.getInt("changedPWD");
             boolean isSpecial = rJson.getInt("special") == 0 ? false : true;
             if (isSpecial != Configs.isSpecial(manager.context)) {
                 Configs.setSpecial(manager.context, isSpecial);
-                // 此处还要通知书架,已经改为在书架中自动刷新
-                // Application.bookshelfManager.specialNotifyDataSetChanged();
+                
 
             }
             Json uJson = rJson.getJson("upgrade");

@@ -39,8 +39,6 @@ public class Application extends BaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,//全屏
-//				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.init);
 		application = this;
 		// int tabID = getIntent().getIntExtra("tabID", -1);
@@ -93,6 +91,8 @@ public class Application extends BaseActivity {
 			currentManager = mainManager;
 			mainManager.onClicked(R.id.menu_news);
 			Configs.userid = ConfigInfo.getUserInfo()[0];
+			
+			
 		}
 
 	}

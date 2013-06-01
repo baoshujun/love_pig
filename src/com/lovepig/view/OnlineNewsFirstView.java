@@ -26,8 +26,8 @@ public class OnlineNewsFirstView extends BaseView {
 	    private int currentViewID;
 	    private int COUNT;
 	    private long lastFing;
-	    private ImageView[] dianView = new ImageView[3];
-	    private ImageView[] newsView = new ImageView[3];
+	    private ImageView[] dianView = new ImageView[4];
+	    private ImageView[] newsView = new ImageView[4];
 	    private TextView textView;
 
 	    public OnlineNewsFirstView(Context context, int layoutId, BaseManager manager) {
@@ -40,9 +40,11 @@ public class OnlineNewsFirstView extends BaseView {
 	        dianView[0] = (ImageView) findViewById(R.id.image1);
 	        dianView[1] = (ImageView) findViewById(R.id.image2);
 	        dianView[2] = (ImageView) findViewById(R.id.image3);
+	        dianView[3] = (ImageView) findViewById(R.id.image4);
 	        newsView[0] = (ImageView) findViewById(R.id.onlinepic1);
 	        newsView[1] = (ImageView) findViewById(R.id.onlinepic2);
 	        newsView[2] = (ImageView) findViewById(R.id.onlinepic3);
+	        newsView[3] = (ImageView) findViewById(R.id.onlinepic4);
 	        textView = (TextView) findViewById(R.id.onlinetitle);
 	        lastFing = System.currentTimeMillis();
 	        timePolling();
@@ -67,7 +69,7 @@ public class OnlineNewsFirstView extends BaseView {
 	                if (newsManager.topNews.size() != news.topNews.size()) {
 	                    isUpdate = true;
 	                }else{
-	                    for (int i = 0; i < news.topNews.size() && i < 3; i++) {
+	                    for (int i = 0; i < news.topNews.size() && i < 4; i++) {
 	                        if (newsManager.topNews.get(i).id != news.topNews.get(i).id) {
 	                            isUpdate = true;
 	                        }
@@ -90,14 +92,14 @@ public class OnlineNewsFirstView extends BaseView {
 	            } else {
 	                newsManager.isTop=1;
 	                newsManager.headModel=news;
-	                for (int i = 0; i < news.topNews.size() && i < 3; i++) {
+	                for (int i = 0; i < news.topNews.size() && i < 4; i++) {
 	                    newsManager.topNews.add(news.topNews.get(i));
 	                    
 	                }
 	            }
 	            COUNT = newsManager.topNews.size();
 	            LogInfo.LogOut("OnlineNewsFirstView", "cout:"+COUNT);
-	            for (int i = 0; i < 3; i++) {
+	            for (int i = 0; i < 4; i++) {
 	                dianLayout.removeView(dianView[i]);
 	                flipper.removeView(newsView[i]);
 	                if (i < COUNT) {

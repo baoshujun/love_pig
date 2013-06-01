@@ -36,6 +36,13 @@
             android:contentDescription="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_launcher" />
+        <ImageView
+            android:id="@+id/onlinepic4"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_launcher" />
     </ViewFlipper>
 
     <LinearLayout
@@ -77,6 +84,14 @@
 
         <ImageView
             android:id="@+id/image3"
+            android:layout_width="@dimen/ImageViewFlipperWidthSpace"
+            android:layout_height="@dimen/ImageViewFlipperHeight"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/ImageViewFlipperWidthSpace"
+            android:background="@drawable/dian_bg"
+            android:contentDescription="@string/nothingDescr" />
+        <ImageView
+            android:id="@+id/image4"
             android:layout_width="@dimen/ImageViewFlipperWidthSpace"
             android:layout_height="@dimen/ImageViewFlipperHeight"
             android:layout_gravity="center_vertical"
