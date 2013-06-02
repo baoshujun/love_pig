@@ -156,7 +156,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
      * 获取最新数据
      */
     public void onRefreshComplete(String mDate) {
-        setUpdateTime(mDate);
+//        setUpdateTime(mDate);
         UpdataData();
        // setLoadMoreButton(true);
         pulldownview.onRefreshComplete(mDate);
