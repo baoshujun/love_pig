@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.lovepig.manager.AboutManager;
+import com.lovepig.manager.BoarMallManager;
 import com.lovepig.manager.BoarManager;
 import com.lovepig.manager.CheckUserManager;
 import com.lovepig.manager.FoodstuffManager;
@@ -31,6 +32,7 @@ public class Application extends BaseActivity {
 	public static UserInfoManager userInfoManager;
 	public static CheckUserManager checkUserManager;
 	public static AboutManager aboutManager;
+	public static BoarMallManager boarMallManager;
 
 	long timeForAnimator;
 	public MainManager mainManager;
@@ -53,7 +55,8 @@ public class Application extends BaseActivity {
 		pigFactoryManager = new PigFactoryManager(application);
 		// 加载兽药
 		boarManager = new BoarManager(application);
-		
+		//加载种猪Mall
+		boarMallManager = new BoarMallManager(application);
 		// 获得用户名
 		new InitDataTask().execute();
 	}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/fenlei_title_height"
+    android:background="#123234"
+    android:gravity="center_vertical" >
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="地 区"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/provineceET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="60dip"
+        android:layout_toRightOf="@id/tv"
+        android:hint="点击选择省份" />
+
+    <Button
+        android:id="@+id/areaSearch"
+        android:layout_width="60dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="搜索" />
+
+</RelativeLayout>

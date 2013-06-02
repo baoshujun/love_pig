@@ -31,7 +31,7 @@
             android:layout_margin="@dimen/menu_item_margin"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="种猪"
+            android:text="种猪Mall"
             android:textColor="@color/bottom_btn_no_selected" />
 
         <Button

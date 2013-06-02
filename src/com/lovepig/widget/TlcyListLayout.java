@@ -23,7 +23,6 @@ import com.lovepig.utils.LogInfo;
 /**
  * 此layout 只能添加一个listview
  * 
- * @author DCH
  * 
  */
 public class TlcyListLayout extends FrameLayout implements GestureDetector.OnGestureListener {

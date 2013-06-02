@@ -56,14 +56,11 @@ public class OnlineNewsFirstView extends BaseView {
 	    public void initData(NewsModel news) {
 	        boolean isUpdate = false;
 	        newsManager.isTop=0;
-	        //currentNews=news;
-	        LogInfo.LogOut("OnlineNewsFirstView", "OnlineNewsFirstDC-->initData-->newsManager.topNews.size():"+newsManager.topNews.size()+" news.top.size:"+news.topNews.size());
 	        if (newsManager.topNews.size() > 0) {
 	            if (news.topNews == null) {// 无头条,将第一条当做头条
 	                if(newsManager.topNews.size() > 1 || newsManager.topNews.get(0).id != news.id) {
 	                    isUpdate = true;
 	                } 
-	                LogInfo.LogOut("OnlineNewsAdapter", "OnlineNewsFirstDC-->initData-->news.topNews == null+ 无头条,将第一条当做头条->isUpdate:"+isUpdate);
 	            } else {
 	                newsManager.isTop=1;
 	                if (newsManager.topNews.size() != news.topNews.size()) {
@@ -75,7 +72,6 @@ public class OnlineNewsFirstView extends BaseView {
 	                        }
 	                    }
 	                }
-	                LogInfo.LogOut("OnlineNewsAdapter", "OnlineNewsFirstDC-->initData-->有头条新闻->isUpdate:"+isUpdate);
 	            }
 	        } else {
 	            isUpdate = true;
@@ -172,12 +168,13 @@ public class OnlineNewsFirstView extends BaseView {
 	    }
 
 	    public boolean onTouchEvent(MotionEvent event) {
-	        LogInfo.LogOut("-----------------onTouch:x="+event.getX()+"  y="+event.getY());
+	        LogInfo.LogOut("OnlineNewsAdapter","-----------------onTouch:x="+event.getX()+"  y="+event.getY());
 	        detector.onTouchEvent(event);
 	        return true;
 	    }
 	    @Override
 	    public boolean dispatchTouchEvent(MotionEvent ev) {
+	        LogInfo.LogOut("OnlineNewsAdapter","-----------------dispatchTouchEvent");
 	        detector.onTouchEvent(ev);
 	        return true;
 	    }
@@ -203,6 +200,7 @@ public class OnlineNewsFirstView extends BaseView {
 
 	        @Override
 	        public boolean onSingleTapUp(MotionEvent e) {
+	            LogInfo.LogOut("OnlineNewsAdapter","-------------------------------------onSingleTapUp");
 	            newsManager.isComeFromTop=true;
 	            newsManager.sendMessage(newsManager.obtainMessage(OnlineNewsManager.WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW, currentViewID, newsManager.isTop, newsManager.topNews));
 	            return false;
@@ -235,8 +233,8 @@ public class OnlineNewsFirstView extends BaseView {
 
 	        @Override
 	        public boolean onDown(MotionEvent e) {
-	            return false;
+	            return true;
 	        }
-
+            
 	    };
 	}

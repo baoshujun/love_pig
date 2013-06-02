@@ -11,7 +11,7 @@
         layout="@layout/boarmall_top" />
 
     <ListView
-        android:id="@+id/boarLv"
+        android:id="@+id/boarMallLv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:cacheColorHint="#00000000"
