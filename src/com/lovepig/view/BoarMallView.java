@@ -18,10 +18,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.lovepig.main.R;
+import com.lovepig.manager.BoarMallManager;
+import com.lovepig.model.BoarMallModel;
+import com.lovepig.model.PigFactoryModel;
 import com.lovepig.model.ProvinceModel;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.pivot.BaseView;
@@ -39,6 +43,10 @@ public class BoarMallView extends BaseView {
 	private List<ProvinceModel> data = new ArrayList<ProvinceModel>();
 	private PopupWindow popupWindow;
 	private String choiceId ; 
+	//种猪商城的list
+	private ListView list;
+	private BoarMallAdapter adapter;
+	private BoarMallManager manager;
 
 	public BoarMallView(Context context, int layoutId, BaseManager manager) {
 		super(context, layoutId, manager);
@@ -51,8 +59,18 @@ public class BoarMallView extends BaseView {
 				openPopWindow(et);
 			}
 		});
+		list = (ListView)findViewById(R.id.listView1);
+		this.manager = (BoarMallManager)manager;
 	}
 	
+	public void setListViewAdapter(ArrayList<BoarMallModel> datas) {
+		adapter = new BoarMallAdapter(datas, context,manager);
+		list.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+	}
+	/**
+	 * 从txt文件读取信息
+	 */
 	private void initData(){
 		try {
 			InputStream in = getResources().getAssets().open(
@@ -71,6 +89,7 @@ public class BoarMallView extends BaseView {
 				data.add(pm);
 			}
 			
+			
 		} catch (Exception e) {
 			Log.e("LKP", e.getMessage());
 
@@ -85,8 +104,8 @@ public class BoarMallView extends BaseView {
 				R.layout.boar_mall_popupwindow, null);
 		GridView gridView = (GridView) contentView.findViewById(R.id.gridView);
 		gridView.setOnItemClickListener(new ItemClickListener());
-		GridViewAdapter adapter = new GridViewAdapter(context, data);
-		gridView.setAdapter(adapter);
+		GridViewAdapter gridViewAdapter = new GridViewAdapter(context, data);
+		gridView.setAdapter(gridViewAdapter);
 		popupWindow = new PopupWindow(contentView,
 				ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.FILL_PARENT);
@@ -101,6 +120,7 @@ public class BoarMallView extends BaseView {
 			if (popupWindow.isShowing())
 				popupWindow.dismiss();// 关闭
 			et.setText(data.get(position).name);
+			et.setInputType(0);
 			choiceId = data.get(position).id;
 			//发起联网请求
 			Log.d("LKP", "choiceId--->" + choiceId);
