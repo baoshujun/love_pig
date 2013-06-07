@@ -2,27 +2,20 @@ package com.lovepig.view;
 
 import java.util.ArrayList;
 
-import com.lovepig.engine.ImageEngine;
-import com.lovepig.main.R;
-import com.lovepig.manager.BoarMallManager;
-import com.lovepig.model.BoarAreaModel;
-import com.lovepig.model.BoarMallModel;
-import com.lovepig.view.BoarAreaAdapter.ViewHolder;
-
 import android.content.Context;
-import android.content.IntentSender.SendIntentException;
-import android.provider.ContactsContract.Contacts.Data;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.URLUtil;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
+
+import com.lovepig.engine.ImageEngine;
+import com.lovepig.main.R;
+import com.lovepig.manager.BoarMallManager;
+import com.lovepig.model.BoarMallModel;
 
 /**
  * @author greenboy1
@@ -67,27 +60,6 @@ public class BoarMallAdapter extends BaseAdapter {
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.common_img_item, null);
-			// if(bmm.type.equals("1")){
-			// convertView = inflater.inflate(R.layout.boar_mall_big_image,
-			// null);
-			// holder.bigImage = (ImageView)
-			// convertView.findViewById(R.id.bigImage);
-			// }
-			//
-			// if(bmm.type.equals("2")){
-			// convertView = inflater.inflate(R.layout.boar_mall_middle_image,
-			// null);
-			// holder.bigImage = (ImageView)
-			// convertView.findViewById(R.id.middleImg);
-			// }
-			//
-			// if(bmm.equals("3")){
-			// convertView = inflater.inflate(R.layout.boar_mall_middle_image,
-			// null);
-			// holder.smallImage01 = (ImageView)
-			// convertView.findViewById(R.id.middleImg);
-			// }
-			// convertView.setTag(holder);
 			holder.bigImage = (ImageView) convertView.findViewById(R.id.bigImg);
 			holder.middleImage = (ImageView) convertView
 					.findViewById(R.id.middleImg);

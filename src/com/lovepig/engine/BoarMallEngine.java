@@ -6,6 +6,7 @@ import com.lovepig.manager.BoarMallManager;
 import com.lovepig.model.BoarAreaModel;
 import com.lovepig.model.BoarBrandModel;
 import com.lovepig.model.BoarMallModel;
+import com.lovepig.model.PigFactoryModel;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.pivot.BaseManager;
 
@@ -35,10 +36,7 @@ public class BoarMallEngine extends BaseEngine {
 		m.bigImgId="1";
 		datas.add(m);
 		BoarMallModel m1 = new BoarMallModel();
-		m1.type = "2";
-		m1.middleImg = "http://i0.sinaimg.cn/ent/s/m/2013-06-05/U8551P28T3D3937030F358DT20130605221259.jpg";
-		m1.middleImgId="2";
-		datas.add(m1);
+		
 		
 		BoarMallModel m2 = new BoarMallModel();
 		m2.type = "3";
@@ -55,7 +53,45 @@ public class BoarMallEngine extends BaseEngine {
 		m2.smallImg04 = "http://i1.sinaimg.cn/ent/s/h/w/2013-06-03/U7357P28T3D3935300F326DT20130603233702.jpg";
 		m2.smallImgId04="6";
 		datas.add(m2);
+		
+		BoarMallModel m3 = new BoarMallModel();
+		m3.type = "3";
+		
+		m3.smallImg01 = "http://i1.sinaimg.cn/ent/s/h/w/2013-06-03/U7357P28T3D3935300F326DT20130603233702.jpg";
+		m3.smallImgId01="3";
+		
+		m3.smallImg02 = "http://i1.sinaimg.cn/ent/s/h/w/2013-06-03/U7357P28T3D3935300F326DT20130603233702.jpg";
+		m3.smallImgId02="4";
+		
+		m3.smallImg03 = "http://i1.sinaimg.cn/ent/s/h/w/2013-06-03/U7357P28T3D3935300F326DT20130603233702.jpg";
+		m3.smallImgId03="5";
+		
+		m3.smallImg04 = "http://i1.sinaimg.cn/ent/s/h/w/2013-06-03/U7357P28T3D3935300F326DT20130603233702.jpg";
+		m3.smallImgId04="6";
+		datas.add(m3);
+		datas.add(m3);
+		
+		m1.type = "2";
+		m1.middleImg = "http://i0.sinaimg.cn/ent/s/m/2013-06-05/U8551P28T3D3937030F358DT20130605221259.jpg";
+		m1.middleImgId="2";
+		datas.add(m1);
+		
 		boarManager.sendMessage(boarManager.obtainMessage(2, datas));
+	}
+	
+	
+	public void fetchProvincePigFactory(String provinceId){
+		ArrayList<PigFactoryModel> datas = new ArrayList<PigFactoryModel>();
+		for (int i = 0; i < 10; i++) {
+			PigFactoryModel m = new PigFactoryModel();
+			m.id = i;
+			m.pigFactoryName = "北京顺陈养殖有限公司";
+			m.pigFactoryDesc = "公司占地面积200亩，存栏基础母猪1200头。现经营品种为：英系大白、美系大白、美系长白、台系杜洛克、美系杜洛克。";
+			m.pigFactoryBrandInfo = "品牌信息";
+			m.pigFactoryGradebarNum = 4.5f;
+			datas.add(m);
+		}
+		boarManager.sendMessage(boarManager.obtainMessage(5,datas));
 	}
 
 	/**

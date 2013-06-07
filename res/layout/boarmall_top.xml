@@ -20,7 +20,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="60dip"
         android:layout_toRightOf="@id/tv"
-        android:inputType="none"
         android:hint="点击选择省份" />
 
     <Button

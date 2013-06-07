@@ -8,7 +8,9 @@ import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,7 @@ public class BoarMallView extends BaseView {
 		super(context, layoutId, manager);
 		et = (EditText) findViewById(R.id.provineceET);
 		initData();
+		et.setInputType(InputType.TYPE_NULL);
 		et.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -122,6 +125,7 @@ public class BoarMallView extends BaseView {
 			et.setText(data.get(position).name);
 			et.setInputType(0);
 			choiceId = data.get(position).id;
+			manager.sendMessage(manager.obtainMessage(4, choiceId));
 			//发起联网请求
 			Log.d("LKP", "choiceId--->" + choiceId);
 			
