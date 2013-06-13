@@ -24,6 +24,7 @@ import com.lovepig.utils.Utils;
 import com.lovepig.view.BoarMallDetailView;
 import com.lovepig.view.BoarMallPigFactoryView;
 import com.lovepig.view.BoarMallView;
+import com.lovepig.view.BoarPigFactoryDetailView;
 import com.lovepig.view.PigFactoryView;
 
 /**
@@ -41,13 +42,13 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 	private ArrayList<BoarMallModel> datas;
 	private ArrayList<PigFactoryModel> pigFactoryList;
 	private BoarMallPigFactoryView pigFactoryView;
+	private BoarPigFactoryDetailView pigFactoryDetailView;
 
-	public BoarMallManager(BaseActivity c) {
+	public  BoarMallManager(BaseActivity c) {
 		super(c);
 		boarMallEngine = new BoarMallEngine(this);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void handleMessage(Message msg) {
 		switch (msg.what) {
@@ -58,9 +59,16 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 			datas = (ArrayList<BoarMallModel>)msg.obj;
 			boarMallView.setListViewAdapter(datas);
 			break;
-		case 3:
+		case 3://点击后获取种猪场数据
 			String id = (String)msg.obj;
 			Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
+			boarMallEngine.fetchPigFactoryDetailData(id);
+			break;
+		case 6://进入种猪场布局
+			pigFactoryDetailView = new BoarPigFactoryDetailView(context, R.layout.boar_pigfactory_detail, this);
+			if (dcEngine.getNowDC() != pigFactoryDetailView) {
+				enterSubDC(pigFactoryDetailView);
+			}
 			break;
 		case 4://选择省份后获取数据
 			String provinceId = (String)msg.obj;

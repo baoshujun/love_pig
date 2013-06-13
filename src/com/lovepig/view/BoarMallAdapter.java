@@ -57,7 +57,7 @@ public class BoarMallAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		final BoarMallModel bmm = list.get(position);
-		if (convertView == null) {
+//		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.common_img_item, null);
 			holder.bigImage = (ImageView) convertView.findViewById(R.id.bigImg);
@@ -73,9 +73,9 @@ public class BoarMallAdapter extends BaseAdapter {
 					.findViewById(R.id.smallImg03);
 			holder.smallImage04 = (ImageView) convertView
 					.findViewById(R.id.smallImg04);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
+//		} else {
+//			holder = (ViewHolder) convertView.getTag();
+//		}
 
 		if (bmm.type.equals("1")) {
 			if (TextUtils.isEmpty(bmm.bigImg)) {
@@ -98,7 +98,6 @@ public class BoarMallAdapter extends BaseAdapter {
 			}
 		}
 		if (bmm.type.equals("3")) {
-			
 			if (TextUtils.isEmpty(bmm.smallImg01)) {
 				holder.smallImage01.setVisibility(View.GONE);
 			} else {
@@ -135,7 +134,6 @@ public class BoarMallAdapter extends BaseAdapter {
 				setOnClick(holder.smallImage04, bmm.smallImgId04);
 			}
 		}
-
 		return convertView;
 	}
 
