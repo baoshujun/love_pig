@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <!-- 大图显示效果 -->
+
+    <ImageView
+        android:id="@+id/bigImg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dip"
+        android:background="@drawable/test02"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/middleImg"
+        android:layout_width="fill_parent"
+        android:layout_height="120dip"
+        android:layout_margin="1dip"
+        android:background="@drawable/test03"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/smallImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/smallImg01"
+            android:layout_width="fill_parent"
+            android:layout_height="100dip"
+            android:layout_margin="1dip"
+            android:layout_weight="1"
+            android:background="@drawable/test01" />
+
+        <ImageView
+            android:id="@+id/smallImg02"
+            android:layout_width="fill_parent"
+            android:layout_height="100dip"
+            android:layout_margin="1dip"
+            android:layout_weight="1"
+            android:background="@drawable/test01" />
+
+        <ImageView
+            android:id="@+id/smallImg03"
+            android:layout_width="fill_parent"
+            android:layout_height="100dip"
+            android:layout_margin="1dip"
+            android:layout_weight="1"
+            android:background="@drawable/test01" />
+
+        <ImageView
+            android:id="@+id/smallImg04"
+            android:layout_width="fill_parent"
+            android:layout_height="100dip"
+            android:layout_margin="1dip"
+            android:layout_weight="1"
+            android:background="@drawable/test01" />
+
+    </LinearLayout>
+
+</LinearLayout>
