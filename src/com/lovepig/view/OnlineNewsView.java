@@ -3,7 +3,6 @@ package com.lovepig.view;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.SystemClock;
@@ -14,31 +13,34 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.pivot.BaseView;
 import com.lovepig.utils.LogInfo;
+import com.lovepig.widget.BaseVerticalListView;
+import com.lovepig.widget.BaseVerticalListView.onVerticalListViewListener;
 import com.lovepig.widget.MyGallery;
 import com.lovepig.widget.MyGallery.TlcyGalleryListener;
-import com.lovepig.widget.TlcyListLayout;
 import com.lovepig.widget.TlcyListLayout.OnRefreshListener;
 
-public class OnlineNewsView extends BaseView implements OnItemClickListener, OnRefreshListener,  TlcyGalleryListener {
+public class OnlineNewsView extends BaseView implements onVerticalListViewListener, OnItemClickListener, OnRefreshListener, TlcyGalleryListener {
     MyGallery myGallery;
-    ImageView  qian, hou;
+    ImageView qian, hou;
     TextView title;
     ArrayList<NewsGalleryModel> mNewsGalleryModels;
-    String[] mGalleryStr=new String[] { "头条", "行业", "企业", "市场", "会讯"};
+    String[] mGalleryStr = new String[] { "头条", "行业", "企业", "市场", "会讯" };
     private int index;
     OnlineNewsAdapter adapter;
+
     ListView listView;
+    public BaseVerticalListView baseVerticalListView;
+
     OnlineNewsManager manager;
     TextView timeText;
-    private TlcyListLayout pulldownview;
-    private Button backBtn,userInfo;
+    // private TlcyListLayout pulldownview;
+    private Button backBtn, userInfo;
 
     public OnlineNewsView(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
@@ -53,10 +55,15 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         qian = (ImageView) findViewById(R.id.galleryRight);
         hou.setOnClickListener(this);
         qian.setOnClickListener(this);
-        pulldownview = (TlcyListLayout) findViewById(R.id.pulldownview);
-        pulldownview.setRefreshListener(this);
-        listView = (ListView) findViewById(R.id.listView1);
-        backBtn=(Button) findViewById(R.id.leftBtn);
+        // pulldownview = (TlcyListLayout) findViewById(R.id.pulldownview);
+        // pulldownview.setRefreshListener(this);
+        // listView = (ListView) findViewById(R.id.listView1);
+        baseVerticalListView = new BaseVerticalListView(this);
+        baseVerticalListView.setPullType(3);
+        baseVerticalListView.setOnVertivalListViewListener(this);
+        listView = baseVerticalListView.getListView();
+
+        backBtn = (Button) findViewById(R.id.leftBtn);
         backBtn.setVisibility(VISIBLE);
         backBtn.setOnClickListener(this);
         if (!myGallery.isScroll()) {
@@ -67,14 +74,14 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
             hou.setVisibility(INVISIBLE);
         }
         myGallery.setOnItemClickListener(this);
-      
-        adapter = new OnlineNewsAdapter(manager, listView, pulldownview);
+
+        adapter = new OnlineNewsAdapter(manager, listView, null);
         listView.setAdapter(adapter);
         listView.setFocusable(false);
-           listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(this);
         setLoadMoreButton(false);
-        userInfo = (Button)this.findViewById(R.id.rightBtn);
-		userInfo.setOnClickListener(this);
+        userInfo = (Button) this.findViewById(R.id.rightBtn);
+        userInfo.setOnClickListener(this);
     }
 
     @Override
@@ -82,10 +89,13 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         manager.sendEmptyMessage(OnlineNewsManager.STATE_LOADMORE);
     }
 
+    /**
+     * 下拉刷新
+     */
     @Override
     public void onRefresh() {
-    	SystemClock.sleep(500);
-    	CancelRefresh();
+        SystemClock.sleep(500);
+        CancelRefresh();
     }
 
     /**
@@ -98,7 +108,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         if (mGallery != null) {
             LogInfo.LogOut("index:" + index);
             mNewsGalleryModels = mGallery;
-			this.index = index;
+            this.index = index;
             myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGalleryStr);
             LogInfo.LogOut("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx---tlcyGallery.isScroll() =" + myGallery.isScroll());
             if (!myGallery.isScroll()) {
@@ -125,6 +135,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
      * 更新界面数据
      */
     public void UpdataData() {
+        baseVerticalListView.onComplete();
         adapter.notifyDataSetChanged();
     }
 
@@ -149,17 +160,17 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
      * @param hasMoreBtn
      */
     public void setLoadMoreButton(boolean hasMoreBtn) {
-        pulldownview.setLoadMoreButton(hasMoreBtn);
+        // pulldownview.setLoadMoreButton(hasMoreBtn);
     }
 
     /**
      * 获取最新数据
      */
     public void onRefreshComplete(String mDate) {
-//        setUpdateTime(mDate);
+        // setUpdateTime(mDate);
         UpdataData();
-       // setLoadMoreButton(true);
-        pulldownview.onRefreshComplete(mDate);
+        // setLoadMoreButton(true);
+        // pulldownview.onRefreshComplete(mDate);
     }
 
     /**
@@ -167,7 +178,7 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
      */
     public void onLoadingComplete() {
         UpdataData();
-        pulldownview.onLoadMoreComplete();
+        // pulldownview.onLoadMoreComplete();
 
     }
 
@@ -182,12 +193,13 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
      * 取消刷新
      */
     public void CancelRefresh() {
-        pulldownview.onLoadMoreComplete();
+        // pulldownview.onLoadMoreComplete();
     }
-   //新闻列表被点击
+
+    // 新闻列表被点击
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    	LogInfo.LogOut("position:"+position);
+        LogInfo.LogOut("position:" + position);
         if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
             l = System.currentTimeMillis();
             manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, position, 0));
@@ -210,19 +222,21 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
             // tlcyGallery.scrollRight();
             break;
         case R.id.leftBtn:
-        	Application.application.finish();
-        	break;
+            Application.application.finish();
+            break;
         case R.id.rightBtn:
-        	manager.sendMessage(manager.obtainMessage(R.id.rightBtn));
+            manager.sendMessage(manager.obtainMessage(R.id.rightBtn));
         default:
             super.onClicked(v);
             break;
         }
     }
-   //新闻分类被点击
+
+    // 新闻分类被点击
     @Override
     public boolean onItemClick(int position) {
         if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
+            baseVerticalListView.onComplete();
             l = System.currentTimeMillis();
             manager.showLoading();
             manager.sendMessageDelayed(manager.obtainMessage(OnlineNewsManager.STATE_GALLERY_CLICKED, position, 0), 300);
@@ -232,10 +246,11 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         }
     }
 
-	public void setMyGallerySelected(int index) {
-		 UpdateGallery(mNewsGalleryModels, index);
+    public void setMyGallerySelected(int index) {
+        UpdateGallery(mNewsGalleryModels, index);
 
-	}
+    }
+
     @Override
     public void onState(int state) {
         if (state == 1) {
@@ -255,6 +270,5 @@ public class OnlineNewsView extends BaseView implements OnItemClickListener, OnR
         super.onShow();
         adapter.notifyDataSetChanged();
     }
-	
-    
+
 }

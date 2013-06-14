@@ -10,10 +10,10 @@
         layout="@layout/commtitle" />
 
     <RelativeLayout
-        android:layout_below="@id/head"
         android:id="@+id/galleryLayout"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/fenlei_item_height"
+        android:layout_below="@id/head"
         android:background="#1d953f" >
 
         <ImageView
@@ -47,19 +47,33 @@
             android:visibility="visible" />
     </RelativeLayout>
 
-    <com.lovepig.widget.TlcyListLayout
-        android:layout_marginTop="5dp"
-        android:id="@+id/pulldownview"
+    <!-- <com.lovepig.widget.TlcyListLayout -->
+    <!-- android:id="@+id/pulldownview" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_below="@id/galleryLayout" -->
+    <!-- android:layout_marginTop="5dp" > -->
+
+
+    <!-- <ListView -->
+    <!-- android:id="@+id/listView1" -->
+    <!-- style="@style/listview" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="fill_parent" > -->
+    <!-- </ListView> -->
+    <!-- </com.lovepig.widget.TlcyListLayout> -->
+
+    <RelativeLayout
+        android:id="@+id/list_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/galleryLayout" >
+        android:layout_below="@id/galleryLayout"
+        android:layout_marginTop="5dp" >
 
-        <ListView
-            android:id="@+id/listView1"
-            style="@style/listview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
-        </ListView>
-    </com.lovepig.widget.TlcyListLayout>
+        <include layout="@layout/online_news_item_first" />
+        <include
+            android:layout_below="@+id/adLayout"
+            layout="@layout/verticallistview" />
+    </RelativeLayout>
 
 </RelativeLayout>

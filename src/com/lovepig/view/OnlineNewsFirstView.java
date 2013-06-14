@@ -2,30 +2,19 @@ package com.lovepig.view;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
-
-import com.lovepig.engine.ImageEngine;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseManager;
-import com.lovepig.pivot.BaseView;
-import com.lovepig.utils.LogInfo;
 
-public class OnlineNewsFirstView extends BaseView implements OnPageChangeListener {
+public class OnlineNewsFirstView   implements OnPageChangeListener {
     private OnlineNewsManager newsManager;
     private ViewPager viewPager;
     List<View> listview = new ArrayList<View>();
@@ -42,10 +31,9 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
 //    // private ImageView[] newsView = new ImageView[4];
 //    private TextView textView;
 
-    public OnlineNewsFirstView(Context context, int layoutId, BaseManager manager) {
-        super(context, layoutId, manager);
+    public OnlineNewsFirstView(Context context, View view, BaseManager manager) {
         newsManager = (OnlineNewsManager) manager;
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPager.setOnPageChangeListener(this);
         ImageView iv1 = new ImageView(context);
         listview.add(iv1);
@@ -137,11 +125,6 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
 //            textView.setText(newsManager.topNews.get(0).title);
 //        }
     }
-
-    @Override
-    public void onClicked(View v) {
-    }
-
     /**
      * whatID 1=向右滑动 2=向左滑动
      */

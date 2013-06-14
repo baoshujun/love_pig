@@ -488,15 +488,21 @@ public class ImageEngine {
      * 根据网址获取已经下载到本地的原图,没有则为null
      */
     private Bitmap getBitmapFromLocal(String url) {
-        Bitmap bitmap = null;
-        File cacheDir = new File(Configs.lovePigImageCache);
-        // String urlConvert = XmlBase64.encode(url.getBytes());
-        String urlConvert = MD5.md5Upper(url);
-        File file = new File(cacheDir, urlConvert);
-        if (!file.exists()) {
-            return bitmap;
+        Bitmap bitmap=null;
+        try {
+            bitmap = null;
+            File cacheDir = new File(Configs.lovePigImageCache);
+            // String urlConvert = XmlBase64.encode(url.getBytes());
+            String urlConvert = MD5.md5Upper(url);
+            File file = new File(cacheDir, urlConvert);
+            if (!file.exists()) {
+                return bitmap;
+            }
+            bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
         return bitmap;
     }
 

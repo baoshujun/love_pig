@@ -230,11 +230,13 @@ public class NewsEngine extends BaseEngine {
 						newsState.newslist.add(news);
 					}
 				}
-				NewsModel model = new NewsModel();
-				model.top = 1;
-				model.topNews = topList;
-				LogInfo.LogOut(LogTag, "topNews size:" + topList.size());
-				newsState.newslist.add(0, model);
+				if (topList.size()>0) {
+				    NewsModel model = topList.get(0);
+				    model.top = 1;
+				    model.topNews = topList;
+				    LogInfo.LogOut(LogTag, "topNews size:" + topList.size());
+				    newsState.newslist.add(0, model);
+                }
 			} else {
 				newsState.code = json.getString("msg");// 服务器正常返回，但没数据
 			}

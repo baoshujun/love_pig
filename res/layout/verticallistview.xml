@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vertical_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:visibility="gone" >
+
+    <com.lovepig.widget.TlcyListVerticalLayout
+        android:id="@+id/vertical_list_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/accompany_list_margin_l"
+        android:layout_marginRight="@dimen/accompany_list_margin_l" >
+
+        <ListView
+            android:id="@+id/vertical_list"
+            style="@style/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fadingEdge="none"
+            android:scrollingCache="false" >
+        </ListView>
+    </com.lovepig.widget.TlcyListVerticalLayout>
+
+</RelativeLayout>
