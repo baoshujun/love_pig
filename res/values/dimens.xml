@@ -13,7 +13,6 @@
     <dimen name="more_item_height">80dip</dimen>
     <dimen name="more_item_margin_right">30dip</dimen>
     <dimen name="more_item_margin_left">10dip</dimen>
-
     <dimen name="fenlei_title_height">42dip</dimen>
     <dimen name="viewFlipper_left_margin">20dip</dimen>
     <dimen name="flipperlayoutHeight">295dip</dimen>
@@ -110,8 +109,12 @@
     <dimen name="fling_y">100dp</dimen>
     <dimen name="one_dp">1dp</dimen>
     <dimen name="share_input_h">120dp</dimen>
-    
-     <dimen name="news_l_item_w">210dip</dimen>
-     <dimen name="news_l_item_image_w">70dip</dimen>
+    <dimen name="news_l_item_w">210dip</dimen>
+    <dimen name="news_l_item_image_w">70dip</dimen>
+    <dimen name="widget_list_refresh_header_1">62px</dimen>
+    <dimen name="widget_list_refresh_header_2">40.0dip</dimen>
+    <dimen name="widget_list_refresh_header_3">40.0dip</dimen>
+    <dimen name="widget_list_refresh_header_4">15.0dip</dimen>
+     <dimen name="accompany_list_margin_l">12px</dimen>
 
 </resources>

@@ -22,7 +22,7 @@ public class ListViewImageEngine implements OnScrollListener,OnRefreshScrollList
     public ListViewImageEngine(ListView listview,TlcyListLayout layout) {
         this.listLayout = layout;
         this.listview = listview;
-        this.listLayout.setRefreshScrollListener(this);
+//        this.listLayout.setRefreshScrollListener(this);
     }
     public ListViewImageEngine(ListView listview) {
         this.listview = listview;

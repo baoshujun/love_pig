@@ -126,7 +126,6 @@ public class BoarMallView extends BaseView {
 			et.setInputType(0);
 			choiceId = data.get(position).id;
 			manager.sendMessage(manager.obtainMessage(4, choiceId));
-			//发起联网请求
 			Log.d("LKP", "choiceId--->" + choiceId);
 			
 		}

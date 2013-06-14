@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lovepig.main.R;
+import com.lovepig.manager.BoarMallManager;
 import com.lovepig.manager.PigFactoryManager;
 import com.lovepig.model.PigFactoryModel;
 import com.lovepig.pivot.BaseManager;
@@ -134,12 +135,11 @@ public class BoarMallPigFactoryView extends BaseView implements OnItemClickListe
 		super.onShow();
 		manager.sendEmptyMessage(-1);
 	}
-
+   //进入猪场详情页，需要判断是否已经登录，若是已经登录可以直接进入 若是无登录需要显示登录页面
 	@Override
 	public void onItemClick(AdapterView<?> itemview, View view, int position, long arg3) {
-		showToast("111111");
-		manager.showLoading();
-		manager.sendMessageDelayed(manager.obtainMessage(PigFactoryManager.TO_GET_FACTORY_DETAIL, position,0),500);
+		String choiceId = position+"";
+		manager.sendMessage(manager.obtainMessage(BoarMallManager.GET_PIG_FACTORY_DETAIL_DATA, choiceId));
 	}
 	
 
