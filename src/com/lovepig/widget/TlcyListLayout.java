@@ -211,8 +211,8 @@ public class TlcyListLayout extends FrameLayout implements GestureDetector.OnGes
         } else {
             foot.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View paramView) {
-                    if(Math.abs(System.currentTimeMillis() - l) > 500){
-                        l=System.currentTimeMillis();
+                    if (Math.abs(System.currentTimeMillis() - l) > 500) {
+                        l = System.currentTimeMillis();
                         onLoadMore();
                     }
                 }
@@ -393,12 +393,14 @@ public class TlcyListLayout extends FrameLayout implements GestureDetector.OnGes
     }
 
     int y = 0;
+    int x = 0;
 
     public boolean dispatchTouchEvent(MotionEvent paramMotionEvent) {
         int mMotionEventAction = paramMotionEvent.getAction();
         boolean mTouchEvent = mDetector.onTouchEvent(paramMotionEvent);
         switch (mMotionEventAction) {
         case MotionEvent.ACTION_DOWN:
+            x = (int) paramMotionEvent.getX();
             if (paramMotionEvent.getPointerCount() >= 2) {
                 paramMotionEvent = MotionEvent.obtain(paramMotionEvent.getDownTime(), paramMotionEvent.getEventTime(), MotionEvent.ACTION_CANCEL, paramMotionEvent.getX(0),
                         paramMotionEvent.getY(0), paramMotionEvent.getMetaState());
@@ -428,6 +430,11 @@ public class TlcyListLayout extends FrameLayout implements GestureDetector.OnGes
             super.dispatchTouchEvent(paramMotionEvent);
             break;
         case MotionEvent.ACTION_MOVE:
+            if (Math.abs(x - paramMotionEvent.getX()) >= 50&&Math.abs(y - paramMotionEvent.getY()) <= 50) {
+                x = (int) paramMotionEvent.getX();
+                y = (int) paramMotionEvent.getY();
+                return true;
+            }
             updateLayout();
             int mMove = y;
             if (paramMotionEvent.getPointerCount() >= 2) {
@@ -462,7 +469,7 @@ public class TlcyListLayout extends FrameLayout implements GestureDetector.OnGes
     public boolean onScroll(MotionEvent paramMotionEvent1, MotionEvent paramMotionEvent2, float paramFloat1, float paramFloat2) {
         boolean mScrollStatus = false;
         if (isSelectFirst && (Math.abs(paramFloat1) > 0 || (paramMotionEvent2.getY() >= acY && Math.abs(ActionDownTime - System.currentTimeMillis()) > timeDelay))) {
-            
+
         } else {
             if ((int) Math.abs(ActionDownTime - System.currentTimeMillis()) <= timeDelay || paramMotionEvent2.getY() < acY) {
                 isSelectFirst = false;
@@ -472,7 +479,7 @@ public class TlcyListLayout extends FrameLayout implements GestureDetector.OnGes
             ListView listview = (ListView) getChildAt(1);
             float f = (float) (SCALE * paramFloat2);
             if (listview.getCount() != 0) {
-                if ((listview.getFirstVisiblePosition() == 0) && (listview!=null&&listview.getChildAt(0)!=null&&listview.getChildAt(0).getTop() == 0)) {
+                if ((listview.getFirstVisiblePosition() == 0) && (listview != null && listview.getChildAt(0) != null && listview.getChildAt(0).getTop() == 0)) {
                     mScrollStatus = true;
                 } else {
                     mScrollStatus = false;
@@ -561,8 +568,8 @@ public class TlcyListLayout extends FrameLayout implements GestureDetector.OnGes
                 if (isAutoLoadMore || mState == STATE_REFRESH) {
                     return;
                 }
-                if(Math.abs(System.currentTimeMillis() - l) > 500){
-                    l=System.currentTimeMillis();
+                if (Math.abs(System.currentTimeMillis() - l) > 500) {
+                    l = System.currentTimeMillis();
                     onLoadMore();
                 }
             }
@@ -609,7 +616,7 @@ public class TlcyListLayout extends FrameLayout implements GestureDetector.OnGes
         LogInfo.LogOut("onDown");
         acY = (int) paramMotionEvent.getY();
         acX = (int) paramMotionEvent.getX();
-        if (acY < 255 &&mListView!=null&& mListView.getChildAt(0)!=null&&mListView.getChildAt(0).getTop() >= 0) {
+        if (acY < 255 && mListView != null && mListView.getChildAt(0) != null && mListView.getChildAt(0).getTop() >= 0) {
             isSelectFirst = true;
             ActionDownTime = System.currentTimeMillis();
         } else {

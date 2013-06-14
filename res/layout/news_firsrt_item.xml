@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dip"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/categorizationName"
+        android:layout_width="60dip"
+        android:layout_height="120dip"
+        android:gravity="center_vertical"
+        android:text="长白种猪"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/cateImg"
+        android:layout_width="70dip"
+        android:layout_height="120dip"
+        android:src="@drawable/pig" />
+
+    <LinearLayout
+        android:layout_width="150dip"
+        android:layout_height="120dip"
+        android:layout_marginLeft="4dip"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/pigName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dip"
+            android:text="长白山猪"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/pigDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:paddingTop="2dip"
+            android:text="长白山猪长白山猪长白山猪长白山猪长白山猪长白山猪长白山猪长白山猪"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dip"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐指数：" />
+
+            <RatingBar
+                android:id="@+id/gradebar"
+                style="@style/gradeRatingBar"
+                android:layout_width="80dip"
+                android:layout_height="20dip"
+                android:focusable="false"
+                android:focusableInTouchMode="false" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/brandInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="20dip"
+            android:text="品牌信息哈哈" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/pigBtn"
+        android:layout_width="42dip"
+        android:layout_height="42dip"
+        android:layout_gravity="center_vertical"
+        android:paddingRight="6dip"
+        android:src="@drawable/arraw_right" />
+
+</LinearLayout>
