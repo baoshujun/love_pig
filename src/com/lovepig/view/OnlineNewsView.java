@@ -3,6 +3,7 @@ package com.lovepig.view;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.SystemClock;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
@@ -26,6 +28,8 @@ import com.lovepig.widget.MyGallery.TlcyGalleryListener;
 import com.lovepig.widget.TlcyListLayout.OnRefreshListener;
 
 public class OnlineNewsView extends BaseView implements onVerticalListViewListener, OnItemClickListener, OnRefreshListener, TlcyGalleryListener {
+
+    private static final int[] pics = { R.drawable.advers, R.drawable.advers, R.drawable.advers };
     MyGallery myGallery;
     ImageView qian, hou;
     TextView title;
@@ -39,12 +43,14 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
 
     OnlineNewsManager manager;
     TextView timeText;
-    // private TlcyListLayout pulldownview;
     private Button backBtn, userInfo;
+    private OnlineNewsFirstView firstView;
+    private Context context;
 
     public OnlineNewsView(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
         this.manager = manager;
+        this.context = context;
         title = (TextView) findViewById(R.id.title);
         title.setText(context.getString(R.string.News));
         timeText = (TextView) findViewById(R.id.timeText);
@@ -55,17 +61,19 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
         qian = (ImageView) findViewById(R.id.galleryRight);
         hou.setOnClickListener(this);
         qian.setOnClickListener(this);
-        // pulldownview = (TlcyListLayout) findViewById(R.id.pulldownview);
-        // pulldownview.setRefreshListener(this);
-        // listView = (ListView) findViewById(R.id.listView1);
+
         baseVerticalListView = new BaseVerticalListView(this);
         baseVerticalListView.setPullType(3);
         baseVerticalListView.setOnVertivalListViewListener(this);
         listView = baseVerticalListView.getListView();
 
+        firstView = new OnlineNewsFirstView(context, R.layout.online_news_item_first, manager);
+        listView.addHeaderView(firstView, null, false);
+
         backBtn = (Button) findViewById(R.id.leftBtn);
         backBtn.setVisibility(VISIBLE);
         backBtn.setOnClickListener(this);
+
         if (!myGallery.isScroll()) {
             qian.setVisibility(GONE);
             hou.setVisibility(GONE);
@@ -74,9 +82,9 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
             hou.setVisibility(INVISIBLE);
         }
         myGallery.setOnItemClickListener(this);
-
         adapter = new OnlineNewsAdapter(manager, listView, null);
         listView.setAdapter(adapter);
+
         listView.setFocusable(false);
         listView.setOnItemClickListener(this);
         setLoadMoreButton(false);
@@ -135,7 +143,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
      * 更新界面数据
      */
     public void UpdataData() {
-        baseVerticalListView.onComplete();
+         baseVerticalListView.onComplete();
         adapter.notifyDataSetChanged();
     }
 
@@ -167,7 +175,10 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
      * 获取最新数据
      */
     public void onRefreshComplete(String mDate) {
-        // setUpdateTime(mDate);
+        listView.setVisibility(View.VISIBLE);
+        if (manager.news != null && manager.news.size() > 0) {
+            firstView.initData(manager.news.get(0));
+        }
         UpdataData();
         // setLoadMoreButton(true);
         // pulldownview.onRefreshComplete(mDate);
@@ -202,7 +213,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
         LogInfo.LogOut("position:" + position);
         if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
             l = System.currentTimeMillis();
-            manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, position, 0));
+            manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, manager.news.get(position).id, 0));
         }
     }
 
@@ -240,6 +251,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
             l = System.currentTimeMillis();
             manager.showLoading();
             manager.sendMessageDelayed(manager.obtainMessage(OnlineNewsManager.STATE_GALLERY_CLICKED, position, 0), 300);
+            listView.setVisibility(View.GONE);
             return !manager.isGalleryNull();
         } else {
             return false;

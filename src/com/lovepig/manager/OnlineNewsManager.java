@@ -122,7 +122,7 @@ public class OnlineNewsManager extends BaseManager {
                 enterSubDC(detailsDC);
             }
             showLoading();
-           int id=news.get(msg.arg1).id;
+            int id=msg.arg1;
             ArrayList<NewsDetailModel> datas=dbEngine.getNewsDetail(id);
             if (datas.size()>0)
             {

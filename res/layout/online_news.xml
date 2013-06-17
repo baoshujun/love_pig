@@ -69,11 +69,15 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/galleryLayout"
         android:layout_marginTop="5dp" >
-
-        <include layout="@layout/online_news_item_first" />
-        <include
-            android:layout_below="@+id/adLayout"
-            layout="@layout/verticallistview" />
+<!--         <com.lovepig.widget.MyListView> -->
+<!--  android:id="@+id/vertical_list" -->
+<!--             style="@style/listview" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:fadingEdge="none" -->
+<!--             android:scrollingCache="false" /> -->
+<!--         </com.lovepig.widget.MyListView> -->
+        <include layout="@layout/verticallistview" />
     </RelativeLayout>
 
 </RelativeLayout>
