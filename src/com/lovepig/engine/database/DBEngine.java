@@ -28,6 +28,7 @@ public class DBEngine {
                 db = SQLiteDatabase.openOrCreateDatabase("/data/data/com.lovepig.main/databases/" + Configs.DATABASE_NAME, null);
                 createOnlineNews();
                 createNewsDetails();
+                createPigFactory();
                 db.setVersion(1);
                 LogInfo.LogOut(TAG + " open db error and create db end");
             } catch (Exception e1) {// 捕获手机sdCard不存在的异常
@@ -59,6 +60,30 @@ public class DBEngine {
             LogInfo.LogOut(TAG + " Create Table onlinenews err,table exists." + e.getMessage());
         }
         return false;
+    }
+    /**
+     * 猪场列表数据 public String title;// 标题 public String summary;// 简介 public String
+     * order; public int id; public int top; public String iconPath;//新闻图片
+     * 
+     * @return
+     */
+    private static boolean createPigFactory() {
+    	try {
+    		db.execSQL("CREATE TABLE pigfactory (" + "table_id INTEGER PRIMARY KEY autoincrement, " + // 表id
+    				"id INTEGER ," + // 猪场ID
+    				"title TEXT ," + // 猪场名称
+    				"summary TEXT ," + // 内容简介
+    				"recommendNum FLOAT" + // 推荐指数
+    				"provinceId INTEGER" + //省份ID
+    				"type INTEGER ," + // 品系
+    				"scale INTEGER ," + //规模
+    				");");
+    		LogInfo.LogOut(TAG + " Create Table pigfactory ok");
+    		return true;
+    	} catch (Exception e) {
+    		LogInfo.LogOut(TAG + " Create Table pigfactory err,table exists." + e.getMessage());
+    	}
+    	return false;
     }
 
     private static boolean createNewsDetails() {

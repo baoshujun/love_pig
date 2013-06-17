@@ -74,7 +74,7 @@ public class Application extends BaseActivity {
 					file.mkdirs();
 				}
 				// 检查版本是否更新
-//                SystemClock.sleep(5000);
+                SystemClock.sleep(5000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -126,5 +126,4 @@ public class Application extends BaseActivity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-
 }

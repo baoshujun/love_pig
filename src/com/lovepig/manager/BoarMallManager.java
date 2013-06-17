@@ -1,21 +1,16 @@
 package com.lovepig.manager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 
-import com.lovepig.engine.BoarEngine;
 import com.lovepig.engine.BoarMallEngine;
 import com.lovepig.main.R;
-import com.lovepig.model.BoarAreaModel;
-import com.lovepig.model.BoarBrandModel;
-import com.lovepig.model.BoarCateModel;
 import com.lovepig.model.BoarMallModel;
 import com.lovepig.model.PigFactoryModel;
 import com.lovepig.pivot.BaseActivity;
@@ -25,7 +20,6 @@ import com.lovepig.view.BoarMallDetailView;
 import com.lovepig.view.BoarMallPigFactoryView;
 import com.lovepig.view.BoarMallView;
 import com.lovepig.view.BoarPigFactoryDetailView;
-import com.lovepig.view.PigFactoryView;
 
 /**
  * @author greenboy1
@@ -36,6 +30,13 @@ import com.lovepig.view.PigFactoryView;
  * 
  */
 public class BoarMallManager extends BaseManager implements OnItemClickListener {
+	public static final int GET_BOAR_MALL_DATA = 1;//获得进入商城数据
+	public static final int SET_BOAR_MALL_LISTVIEW = 2;//设置商城布局
+	public static final int GET_PIG_FACTORY_DETAIL_DATA = 3;
+	public static final int SET_PIG_FACTORY_DETAIL_VIEW = 6;
+	public static final int GET_PIG_FACTORY_LIST_DATA = 4;
+	public static final int SET_PIG_FACTORY_LIST_VIEW = 5;
+	
 	private BoarMallView boarMallView;
 	private BoarMallDetailView boarMallDetailView;
 	private BoarMallEngine boarMallEngine;
@@ -52,29 +53,29 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 	@Override
 	public void handleMessage(Message msg) {
 		switch (msg.what) {
-		case 1://联网获取数据
+		case GET_BOAR_MALL_DATA://联网获取数据
 			boarMallEngine.fetchBoarMallInfo();
 			break;
-		case 2:
+		case SET_BOAR_MALL_LISTVIEW:
 			datas = (ArrayList<BoarMallModel>)msg.obj;
 			boarMallView.setListViewAdapter(datas);
 			break;
-		case 3://点击后获取种猪场数据
+		case GET_PIG_FACTORY_DETAIL_DATA://点击后获取种猪场数据
 			String id = (String)msg.obj;
 			Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
 			boarMallEngine.fetchPigFactoryDetailData(id);
 			break;
-		case 6://进入种猪场布局
+		case SET_PIG_FACTORY_DETAIL_VIEW://进入种猪场布局
 			pigFactoryDetailView = new BoarPigFactoryDetailView(context, R.layout.boar_pigfactory_detail, this);
 			if (dcEngine.getNowDC() != pigFactoryDetailView) {
 				enterSubDC(pigFactoryDetailView);
 			}
 			break;
-		case 4://选择省份后获取数据
+		case GET_PIG_FACTORY_LIST_DATA://选择省份后获取数据
 			String provinceId = (String)msg.obj;
 			boarMallEngine.fetchProvincePigFactory(provinceId);
 			break;
-		case 5://进入选择省份种猪页面
+		case SET_PIG_FACTORY_LIST_VIEW://进入选择省份种猪页面
 			pigFactoryView = new BoarMallPigFactoryView(context, R.layout.boar_mall_pig_factory, this);
 			pigFactoryList = (ArrayList<PigFactoryModel>) msg.obj;
 			pigFactoryView.setListViewAdapter(pigFactoryList);
