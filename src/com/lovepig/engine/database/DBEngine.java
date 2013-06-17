@@ -52,7 +52,7 @@ public class DBEngine {
                     "top INTEGER ," + // 新闻来源
                     "iconPath TEXT ," + // 新闻简介
                     "summary TEXT ," + // 新闻内容
-                    "catId INTEGER" + // 新闻来源
+                    "catId INTEGER " + // 新闻来源
                     ");");
             LogInfo.LogOut(TAG + " Create Table onlinenews ok");
             return true;
@@ -76,7 +76,7 @@ public class DBEngine {
     				"recommendNum FLOAT" + // 推荐指数
     				"provinceId INTEGER" + //省份ID
     				"type INTEGER ," + // 品系
-    				"scale INTEGER ," + //规模
+    				"scale INTEGER " + //规模
     				");");
     		LogInfo.LogOut(TAG + " Create Table pigfactory ok");
     		return true;
