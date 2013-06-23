@@ -70,7 +70,9 @@
         android:layout_below="@id/galleryLayout"
         android:layout_marginTop="5dp" >
 
-        <include layout="@layout/online_news_item_first" />
+        <include layout="@layout/online_news_item_first" 
+             android:id="@+id/adLayout"
+            />
         <include
             android:layout_below="@+id/adLayout"
             layout="@layout/verticallistview" />
