@@ -11,15 +11,13 @@
         android:layout_height="fill_parent"
         android:layout_marginLeft="@dimen/accompany_list_margin_l"
         android:layout_marginRight="@dimen/accompany_list_margin_l" >
-
-        <ListView
+        <com.lovepig.widget.MyListView
             android:id="@+id/vertical_list"
             style="@style/listview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:fadingEdge="none"
-            android:scrollingCache="false" >
-        </ListView>
+            android:scrollingCache="false" />
     </com.lovepig.widget.TlcyListVerticalLayout>
 
 </RelativeLayout>

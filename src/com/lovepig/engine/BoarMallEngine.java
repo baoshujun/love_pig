@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.os.AsyncTask;
 
 import com.lovepig.manager.BoarMallManager;
-import com.lovepig.manager.PigFactoryManager;
 import com.lovepig.model.BoarAreaModel;
 import com.lovepig.model.BoarBrandModel;
 import com.lovepig.model.BoarCateModel;

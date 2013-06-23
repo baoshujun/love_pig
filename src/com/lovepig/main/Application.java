@@ -2,13 +2,19 @@ package com.lovepig.main;
 
 import java.io.File;
 
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.lovepig.engine.PushNewsService;
 import com.lovepig.manager.AboutManager;
 import com.lovepig.manager.BoarMallManager;
 import com.lovepig.manager.BoarManager;
@@ -22,7 +28,7 @@ import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.utils.ConfigInfo;
 
-public class Application extends BaseActivity {
+public class Application extends BaseActivity  implements ServiceConnection{
 	public static Application application;
 	public static OnlineNewsManager onlineNewsManager;
 	public static FoodstuffManager pigManager;
@@ -33,6 +39,7 @@ public class Application extends BaseActivity {
 	public static CheckUserManager checkUserManager;
 	public static AboutManager aboutManager;
 	public static BoarMallManager boarMallManager;
+	public PushNewsService service;
 
 	long timeForAnimator;
 	public MainManager mainManager;
@@ -55,10 +62,14 @@ public class Application extends BaseActivity {
 		pigFactoryManager = new PigFactoryManager(application);
 		// 加载兽药
 		boarManager = new BoarManager(application);
-		//加载种猪Mall
+		// 加载种猪Mall
 		boarMallManager = new BoarMallManager(application);
 		// 获得用户名
 		new InitDataTask().execute();
+		// 开始轮训
+		Intent mIntent = new Intent(this, PushNewsService.class);
+		startService(mIntent);
+		bindService(mIntent, this, Service.BIND_AUTO_CREATE);
 	}
 
 	class InitDataTask extends AsyncTask<Void, Void, Void> {
@@ -74,7 +85,8 @@ public class Application extends BaseActivity {
 					file.mkdirs();
 				}
 				// 检查版本是否更新
-                SystemClock.sleep(5000);
+				SystemClock.sleep(5000);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -86,7 +98,7 @@ public class Application extends BaseActivity {
 			super.onPostExecute(result);
 			Application.this.getWindow().clearFlags(
 					WindowManager.LayoutParams.FLAG_FULLSCREEN);
-			
+
 			setContentView(mainManager.getLayout());
 			getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 					R.layout.commtitle);
@@ -94,8 +106,17 @@ public class Application extends BaseActivity {
 			currentManager = mainManager;
 			mainManager.onClicked(R.id.menu_news);
 			Configs.userid = ConfigInfo.getUserInfo()[0];
-			
-			
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					while (true) {
+						onlineNewsManager.sendEmptyMessage(1000);
+						SystemClock.sleep(5000);
+					}
+				}
+			}).start();
+
 		}
 
 	}
@@ -127,4 +148,26 @@ public class Application extends BaseActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	@Override
+	public void onServiceConnected(ComponentName name, IBinder binder) {
+		PushNewsService.LocalBinder mBinder = (PushNewsService.LocalBinder)binder;
+         service = mBinder.getService();
+	}
+
+	@Override
+	public void onServiceDisconnected(ComponentName name) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	
+		try {
+			unbindService(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
