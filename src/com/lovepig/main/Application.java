@@ -48,7 +48,10 @@ public class Application extends BaseActivity  implements ServiceConnection{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.init);
+		int loading=getIntent().getIntExtra("loading", 0);
+		if (loading==0) {
+			setContentView(R.layout.init);
+		}
 		application = this;
 		// int tabID = getIntent().getIntExtra("tabID", -1);
 		// Configs.initTypeAndVsersion(application);
@@ -64,6 +67,11 @@ public class Application extends BaseActivity  implements ServiceConnection{
 		boarManager = new BoarManager(application);
 		// 加载种猪Mall
 		boarMallManager = new BoarMallManager(application);
+		if (loading==0) {
+			new InitDataTask().execute();
+		}else {
+			enterNews();
+		}
 		// 获得用户名
 		new InitDataTask().execute();
 		// 开始轮训
@@ -96,16 +104,7 @@ public class Application extends BaseActivity  implements ServiceConnection{
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			Application.this.getWindow().clearFlags(
-					WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-			setContentView(mainManager.getLayout());
-			getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-					R.layout.commtitle);
-			dcEngineContener = mainManager.getContainer();
-			currentManager = mainManager;
-			mainManager.onClicked(R.id.menu_news);
-			Configs.userid = ConfigInfo.getUserInfo()[0];
+			enterNews();
 			new Thread(new Runnable() {
 
 				@Override
@@ -119,8 +118,22 @@ public class Application extends BaseActivity  implements ServiceConnection{
 
 		}
 
-	}
+		
 
+	}
+	public void enterNews() {
+		Application.this.getWindow().clearFlags(
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		setContentView(mainManager.getLayout());
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
+				R.layout.commtitle);
+		dcEngineContener = mainManager.getContainer();
+		currentManager = mainManager;
+		mainManager.onClicked(R.id.menu_news);
+		Configs.userid = ConfigInfo.getUserInfo()[0];
+	}
+	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {

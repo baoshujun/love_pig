@@ -35,8 +35,9 @@ public class PushNewsService extends Service {
 			@Override
 			public void run() {
 				while (true) {
+					SystemClock.sleep(1000*60*5);
 					hander.sendEmptyMessage(1);
-					SystemClock.sleep(5000);
+					
 				}
 			}
 		}).start();
@@ -48,7 +49,7 @@ public class PushNewsService extends Service {
 	            @Override
 	            public void handleMessage(Message msg) {
 	                super.handleMessage(msg);
-	               pushNews(0, 0, Utils.returnNowTime());
+	              pushNews(0, 0, Utils.returnNowTime());
 	            }
 	        };
 	    }
@@ -105,21 +106,27 @@ public class PushNewsService extends Service {
 		protected void onPostExecute(NewsState result) {
 			NotificationManager nm = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 			Notification  n = new Notification(R.drawable.ic_launcher, "爱养猪!", System.currentTimeMillis());             
-			n.flags = Notification.FLAG_ONGOING_EVENT;
+			n.flags = Notification.FLAG_AUTO_CANCEL;
 			
-			Intent i = new Intent(PushNewsService.this, Application.class);
-			i.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+//			Intent i = new Intent(PushNewsService.this, Application.class);
+//			i.putExtra("loading", 1);
+//			i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+			
+			Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.setClass(PushNewsService.this, Application.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 			
 			PendingIntent contentIntent = PendingIntent.getActivity(
 					PushNewsService.this, 
 			        R.string.app_name, 
-			        i, 
+			        intent, 
 			        PendingIntent.FLAG_UPDATE_CURRENT);
 			
 			n.setLatestEventInfo(
 					PushNewsService.this,
-			        "爱养猪!", 
-			        "人一样的猪，猪一样的人！", 
+			        "猪讯!", 
+			        "好消息！", 
 			        contentIntent);
 			
 			nm.notify(R.string.app_name, n);
