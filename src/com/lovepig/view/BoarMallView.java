@@ -83,7 +83,7 @@ public class BoarMallView extends BaseView {
 			in.read(buffer);
 			in.close();
 			String res = EncodingUtils.getString(buffer, "UTF-8");
-			Log.d("LKP", res);
+//			Log.d("LKP", res);
 			JSONArray ja = new JSONArray(res);
 			for (int i = 0; i < ja.length(); i++) {
 				ProvinceModel pm = new ProvinceModel();
@@ -126,7 +126,7 @@ public class BoarMallView extends BaseView {
 			et.setInputType(0);
 			choiceId = data.get(position).id;
 			manager.sendMessage(manager.obtainMessage(4, choiceId));
-			Log.d("LKP", "choiceId--->" + choiceId);
+//			Log.d("LKP", "choiceId--->" + choiceId);
 			
 		}
 	}

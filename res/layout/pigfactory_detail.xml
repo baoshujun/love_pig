@@ -75,13 +75,13 @@
                     android:text="六马华多长白种猪、六马华多大白种猪、六马华多杜洛克种猪、六马华多白杜洛克种猪、六马“九吨母猪”。"
                     android:textSize="15sp" />
 
-                <ImageView
+                <!-- <ImageView
                     android:id="@+id/toListView"
                     android:layout_width="50dip"
                     android:layout_height="50dip"
                     android:layout_alignParentRight="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/arraw_right" />
+                    android:src="@drawable/arraw_right" /> -->
             </RelativeLayout>
 
             <TextView
@@ -99,29 +99,14 @@
                 android:layout_below="@id/singlLine03" >
 
                 <TextView
-                    android:id="@+id/connectMethod"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/pigProduct"
-                    android:layout_marginTop="5dip"
-                    android:text="联系方式："
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/pigFactoryAddress"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/connectMethod"
-                    android:text="所在地区：北京市 顺义区"
-                    android:textSize="18sp" />
-
-                <TextView
                     android:id="@+id/people"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pigFactoryAddress"
+                    android:layout_below="@id/pigProduct"
                     android:text="联系人：张三"
                     android:textSize="18sp" />
+
+                
 
                 <RelativeLayout
                     android:id="@+id/telephone"

@@ -98,7 +98,7 @@ public class PigFactoryEngine extends BaseEngine {
 				m.pigFactoryName = "北京顺陈养殖有限公司";
 				m.pigFactoryDesc = "公司占地面积200亩，存栏基础母猪1200头。现经营品种为：英系大白、美系大白、美系长白、台系杜洛克、美系杜洛克。";
 				m.pigFactoryBrandInfo = "品牌信息";
-				m.pigFactoryGradebarNum = 4.5f;
+				m.recommendNum = 4.5f;
 				datas.add(m);
 			}
 			pigFactoryManager.sendMessage(pigFactoryManager.obtainMessage(1,

@@ -3,7 +3,6 @@
     android:id="@+id/adLayout"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/News_Topstories_height"
-    android:layout_below="@id/galleryLayout"
     android:background="@drawable/liebiao"
     android:descendantFocusability="blocksDescendants" >
     <android.support.v4.view.ViewPager

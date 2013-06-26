@@ -3,7 +3,6 @@ package com.lovepig.view;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,7 +55,7 @@ public class BoarMallAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		final BoarMallModel bmm = list.get(position);
+		 BoarMallModel bmm = list.get(position);
 //		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.common_img_item, null);
@@ -77,64 +76,67 @@ public class BoarMallAdapter extends BaseAdapter {
 //			holder = (ViewHolder) convertView.getTag();
 //		}
 
-		if (bmm.type.equals("1")) {
-			if (TextUtils.isEmpty(bmm.bigImg)) {
-				holder.bigImage.setVisibility(View.GONE);
-			} else {
-				holder.bigImage.setVisibility(View.VISIBLE);
-				ImageEngine.setImageBitmap(bmm.bigImg, holder.bigImage,
-						R.drawable.ic_launcher, -1);
-				setOnClick(holder.bigImage, bmm.bigImgId);
-			}
+		if (bmm.type.equals("1")) {//大图显示
+			setVisible(holder, 1);
+			ImageEngine.setImageBitmap(bmm.bigImg, holder.bigImage,
+					R.drawable.ic_launcher, -1);
+			setOnClick(holder.bigImage, bmm.bigImgId);
 		}
 		if (bmm.type.equals("2")) {
-			if (TextUtils.isEmpty(bmm.middleImg)) {
-				holder.middleImage.setVisibility(View.GONE);
-			} else {
-				holder.middleImage.setVisibility(View.VISIBLE);
-				ImageEngine.setImageBitmap(bmm.middleImg, holder.middleImage,
-						R.drawable.ic_launcher, -1);
-				setOnClick(holder.middleImage, bmm.middleImgId);
-			}
+			setVisible(holder, 2);
+			ImageEngine.setImageBitmap(bmm.middleImg, holder.middleImage,
+					R.drawable.ic_launcher, -1);
+			setOnClick(holder.middleImage, bmm.middleImgId);
 		}
+		
 		if (bmm.type.equals("3")) {
-			if (TextUtils.isEmpty(bmm.smallImg01)) {
-				holder.smallImage01.setVisibility(View.GONE);
-			} else {
-				holder.smallImage01.setVisibility(View.VISIBLE);
-				ImageEngine.setImageBitmap(bmm.smallImg01, holder.smallImage01,
-						R.drawable.ic_launcher, -1);
-				setOnClick(holder.smallImage01, bmm.smallImgId01);
-			}
-
-			if (TextUtils.isEmpty(bmm.smallImg02)) {
-				holder.smallImage02.setVisibility(View.GONE);
-			} else {
-				holder.smallImage02.setVisibility(View.VISIBLE);
-				ImageEngine.setImageBitmap(bmm.smallImg02, holder.smallImage02,
-						R.drawable.ic_launcher, -1);
-				setOnClick(holder.smallImage02, bmm.smallImgId02);
-			}
-
-			if (TextUtils.isEmpty(bmm.smallImg03)) {
-				holder.smallImage03.setVisibility(View.GONE);
-			} else {
-				holder.smallImage03.setVisibility(View.VISIBLE);
-				ImageEngine.setImageBitmap(bmm.smallImg03, holder.smallImage03,
-						R.drawable.ic_launcher, -1);
-				setOnClick(holder.smallImage03, bmm.smallImgId03);
-			}
-
-			if (TextUtils.isEmpty(bmm.smallImg04)) {
-				holder.smallImage04.setVisibility(View.GONE);
-			} else {
-				holder.smallImage04.setVisibility(View.VISIBLE);
-				ImageEngine.setImageBitmap(bmm.smallImg04, holder.smallImage04,
-						R.drawable.ic_launcher, -1);
-				setOnClick(holder.smallImage04, bmm.smallImgId04);
-			}
+			setVisible(holder, 3);
+			ImageEngine.setImageBitmap(bmm.smallImg01, holder.smallImage01,
+					R.drawable.ic_launcher, -1);
+			setOnClick(holder.smallImage01, bmm.smallImgId01);
+	
+			ImageEngine.setImageBitmap(bmm.smallImg02, holder.smallImage02,
+					R.drawable.ic_launcher, -1);
+			setOnClick(holder.smallImage02, bmm.smallImgId02);
+	
+			ImageEngine.setImageBitmap(bmm.smallImg03, holder.smallImage03,
+					R.drawable.ic_launcher, -1);
+			setOnClick(holder.smallImage03, bmm.smallImgId03);
+			
+			ImageEngine.setImageBitmap(bmm.smallImg04, holder.smallImage04,
+					R.drawable.ic_launcher, -1);
+			setOnClick(holder.smallImage04, bmm.smallImgId04);
 		}
 		return convertView;
+	}
+	/**
+	 * 
+	 * @param type【1 大图】【2 中图】 【3 小图】
+	 */
+	private void setVisible(ViewHolder holder,int type){
+		if(type == 1){
+			holder.bigImage.setVisibility(View.VISIBLE);
+			holder.middleImage.setVisibility(View.GONE);
+			holder.smallImage01.setVisibility(View.GONE);
+			holder.smallImage02.setVisibility(View.GONE);
+			holder.smallImage03.setVisibility(View.GONE);
+			holder.smallImage04.setVisibility(View.GONE);
+		} else if(type == 2){
+			holder.bigImage.setVisibility(View.GONE);
+			holder.middleImage.setVisibility(View.VISIBLE);
+			holder.smallImage01.setVisibility(View.GONE);
+			holder.smallImage02.setVisibility(View.GONE);
+			holder.smallImage03.setVisibility(View.GONE);
+			holder.smallImage04.setVisibility(View.GONE);
+		} else if(type == 3){
+			holder.bigImage.setVisibility(View.GONE);
+			holder.middleImage.setVisibility(View.GONE);
+			holder.smallImage01.setVisibility(View.VISIBLE);
+			holder.smallImage02.setVisibility(View.VISIBLE);
+			holder.smallImage03.setVisibility(View.VISIBLE);
+			holder.smallImage04.setVisibility(View.VISIBLE);
+		}
+//		
 	}
 
 	public void setPositionNum(int num) {
@@ -163,5 +165,4 @@ public class BoarMallAdapter extends BaseAdapter {
 			}
 		});
 	}
-
 }

@@ -1,34 +1,32 @@
 package com.lovepig.engine;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
+
 import android.os.AsyncTask;
-import com.lovepig.main.R;
+
 import com.lovepig.manager.OnlineNewsManager;
-import com.lovepig.model.NewsCommentModel;
 import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseEngine;
-import com.lovepig.pivot.HttpEngine;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
 
 public class NewsEngine extends BaseEngine {
+	private static final int LIMIT_PUSHNEWS=20;
 	private static final String LogTag = "NewsEngine";
 	public static int NEWS_LIMIT_LENGTH = 20;
 	private static String GET_NEWS = "news/list?";
 	private static String GET_NEWS_DETAILS = "news/detail?newsId=";
+	private static String PUSH_NEWS = "news/pushNews?";
+	
 	OnlineNewsManager manager;
 	getNewsTask mGetNewsTask;
 	getMoreNewsTask mGetMoreNewsTask;
 	getNewsDetailTask mGetNewsDetail;
 	int RequestDataSize = 20;// 请求的数据条数
 	// 获取评论引擎
-	private HttpEngine httpEngine = null;
+//	private HttpEngine httpEngine = null;
 	private int catId;
 	private int newsId;
 
@@ -352,5 +350,74 @@ public class NewsEngine extends BaseEngine {
 
 		return mNewsGallerModels;
 	}
+	
+	/**
+	 * 新闻轮询
+	 * 
+	 * news/pushNews (新增)新闻推送 param: catId limit maxId time
+	 */
+	public void pushNews(int catId,int maxId,String time){
+		StringBuilder mStrBuilder = new StringBuilder("catId=");
+		mStrBuilder.append(catId).append("&limit=").append(LIMIT_PUSHNEWS)
+				.append("&maxId=").append(maxId).append("&time=").append(System.currentTimeMillis());
+		PushNewsTask mPushNewsTask = new PushNewsTask();
+		mPushNewsTask.execute(mStrBuilder.toString());
+		
+	}
+	/**
+	 * 获取最新新闻
+	 * 
+	 * 
+	 */
+	class PushNewsTask extends AsyncTask<String, Void, NewsState> {
+		boolean isStop;
+
+		@Override
+		protected NewsState doInBackground(String... params) {
+//			String result = httpRequestThisThread(1, PUSH_NEWS + params[0],
+//					false);
+//			if (isStop) {
+				return null;
+//			} else {
+//				LogInfo.LogOut("result:" + result);
+//				manager.dbEngine.deleteNewsByTypeID(catId);
+//				NewsState rs = ParseHttpNews(result, 0);
+//				if (rs.code.equals("hasnews") && !isStop) {
+//					manager.SetLatestNews(rs.newslist);
+//				}
+//				return rs;
+//			}
+		}
+
+		@Override
+		protected void onPostExecute(NewsState result) {
+//			if (!isStop && result != null) {
+//				if (result.code.equals("hasnews")) {
+//					manager.SetLatestNews(result.newslist);
+//					manager.getNewsComplete(0);
+//					if (result.hasBtn != null) {
+//						// 有更多按钮
+//						manager.SetMoreBtn(true);
+//					} else {
+//						// 没有更多按钮
+//						manager.SetMoreBtn(false);
+//					}
+//				} else if (result.code.equals("neterror")) {
+//					// 网络错误
+//					manager.ShowNewsError("网络不可用,请检查您的网络！");
+//				} else {
+//					// 服务器正常返回但没内容
+//					manager.ShowNewsError(result.code);
+//				}
+//			} else {
+//			}
+		}
+
+		public void stop() {
+			isStop = true;
+			cancel(isStop);
+		}
+	}
+
 
 }

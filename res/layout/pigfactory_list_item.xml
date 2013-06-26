@@ -3,12 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="120dip" >
 
+    <ImageView
+        android:layout_marginLeft="4dip"
+        android:id="@+id/pigImg"
+        android:layout_centerVertical="true"
+        android:layout_width="80dip"
+        android:layout_height="100dip"
+        android:src="@drawable/ic_launcher" />
+
     <LinearLayout
+        android:layout_toRightOf="@id/pigImg"
         android:id="@+id/pigfactorylg"
         android:layout_width="fill_parent"
         android:layout_height="120dip"
         android:layout_marginLeft="4dip"
-        android:layout_marginRight="58dip"
         android:descendantFocusability="blocksDescendants"
         android:orientation="vertical" >
 
@@ -21,13 +29,18 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/pigFactoryDesc"
+            android:id="@+id/pigFactoryProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="3"
             android:paddingTop="2dip"
             android:text="公司占地面积200亩，存栏基础母猪1200头。现经营品种为：英系大白、美系大白、美系长白、台系杜洛克、美系杜洛克。"
             android:textSize="14sp" />
+        <TextView
+            android:id="@+id/scale"
+            android:layout_width="wrap_content"
+            android:layout_height="20dip"
+            android:text="1000--2000头" />
 
         <LinearLayout
             android:layout_width="150dip"
@@ -49,14 +62,11 @@
                 android:focusableInTouchMode="false" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/pigFactoryBrandInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="20dip"
-            android:text="品牌信息哈哈" />
+        
     </LinearLayout>
 
-    <ImageView
+    <!--
+         <ImageView
         android:id="@+id/pigFactoryBtn"
         android:layout_width="42dip"
         android:layout_height="42dip"
@@ -65,5 +75,6 @@
         android:focusable="false"
         android:paddingRight="6dip"
         android:src="@drawable/arraw_right" />
+    -->
 
 </RelativeLayout>

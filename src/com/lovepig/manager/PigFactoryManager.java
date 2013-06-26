@@ -6,6 +6,7 @@ import android.os.Message;
 import android.widget.ViewAnimator;
 
 import com.lovepig.engine.PigFactoryEngine;
+import com.lovepig.engine.database.PigFactoryDBEngine;
 import com.lovepig.main.R;
 import com.lovepig.model.BoarCateModel;
 import com.lovepig.model.PigFactoryModel;
@@ -42,11 +43,15 @@ public class PigFactoryManager extends BaseManager  {
 	private PigFactoryEngine pigFactoryEngine;
 	private ArrayList<PigFactoryModel> datas;
 	private ArrayList<BoarCateModel> productDatas;
+	private PigFactoryDBEngine pigFactoryDBEngine;
 	
 
 	public PigFactoryManager(BaseActivity c) {
 		super(c);
 		pigFactoryEngine = new PigFactoryEngine(this);
+		if (pigFactoryDBEngine == null) {
+			pigFactoryDBEngine = new PigFactoryDBEngine();
+		}
 	}
 
 	@Override

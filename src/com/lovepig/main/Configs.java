@@ -199,7 +199,4 @@ public class Configs {
         c.getSharedPreferences(PREFS_NAME, 0).edit().putString("IMEI", imei).commit();
     }
 
-
-
-
 }

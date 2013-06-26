@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.database.Cursor;
 import android.database.SQLException;
+import android.util.Log;
 
 import com.lovepig.model.PigFactoryModel;
 import com.lovepig.utils.LogInfo;
@@ -23,13 +24,14 @@ public class PigFactoryDBEngine extends DBEngine {
 	 * @param PigFactoryModel pfm
 	 */
 	public void save(ArrayList<PigFactoryModel> pfm){
-        String sql = "insert into pigfactory(id,title,summary,recommendNum,provinceId) values(?,?,?,?,?)";
+        String sql = "insert into pigfactory(id,name,summary,recommendNum,provinceId,imgUrl,scale,type) values(?,?,?,?,?,?,?,?)";
         db.beginTransaction();
         try {
         	PigFactoryModel pigFactoryModel;
             for (int i = 0; i < pfm.size(); i++) {
                 pigFactoryModel = pfm.get(i);
-                db.execSQL(sql, new String[] { String.valueOf(pigFactoryModel.id), String.valueOf(pigFactoryModel.pigFactoryName), String.valueOf(pigFactoryModel.pigFactoryDesc), String.valueOf(pigFactoryModel.pigFactoryGradebarNum),String.valueOf(pigFactoryModel.provId) });
+                db.execSQL(sql, new String[] { String.valueOf(pigFactoryModel.id), String.valueOf(pigFactoryModel.pigFactoryName), String.valueOf(pigFactoryModel.product), String.valueOf(pigFactoryModel.recommendNum),String.valueOf(pigFactoryModel.provId) 
+                ,pigFactoryModel.img,pigFactoryModel.scale,pigFactoryModel.species});
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,23 +47,32 @@ public class PigFactoryDBEngine extends DBEngine {
 	 * @param 猪场品类 type
 	 * @return
 	 */
-	public ArrayList<PigFactoryModel> findPigFactory(String name,int scale,String type){
+	public ArrayList<PigFactoryModel> findPigFactory(String name,String scale,String type){
         LogInfo.LogOut("getOnlineNews.................");
         ArrayList<PigFactoryModel> programs = new ArrayList<PigFactoryModel>();
         try {
         	String sql;
         	Cursor cursor = null;
-        	if(name != null){
-        		sql = "select * from pigfactory where name like %" + name + "% order by id desc"; 
+        	if(name != null && scale == null && type == null){
+        		sql = "select * from pigfactory where name like '%" + name + "%' order by id desc"; 
         		cursor = db.rawQuery(sql,null);
         	} 
         	
-        	if(scale != 0){
-        		sql = "select * from pigfactory where name like %" + name + "% and scale = ? order by id desc";
+        	if(scale != null){
+        		if(name != null){
+        			sql = "select * from pigfactory where name like '%" + name + "%' and scale = ? order by id desc";
+        		} else {
+        			sql = "select * from pigfactory where scale = ? order by id desc";
+        		}
         		cursor = db.rawQuery(sql,new String[]{String.valueOf(scale)});
         	}else if(type != null){
-        		sql = "select * from pigfactory where name like %" + name + "% and type = ? order by id desc";
-        		cursor = db.rawQuery(sql,new String[]{type});
+        		if (name != null) {
+        			sql = "select * from pigfactory where name like '%" + name + "%' and (',' || type || ',') LIKE '%,"+type+ ",%' order by id desc";
+        		} else {
+        			sql = "select * from pigfactory where  (',' || type || ',') LIKE '%,"+type+ ",%' order by id desc";
+        		}
+        		Log.d("LKP", "查询类型：" + sql);
+        		cursor = db.rawQuery(sql,null);
         	}
             
             PigFactoryModel lm;
@@ -69,9 +80,13 @@ public class PigFactoryDBEngine extends DBEngine {
                 while (cursor.moveToNext()) {
                     lm = new PigFactoryModel();
                     lm.id = cursor.getInt(cursor.getColumnIndex("id"));
-                    lm.pigFactoryName = cursor.getString(cursor.getColumnIndex("title"));
-                    lm.pigFactoryDesc = cursor.getString(cursor.getColumnIndex("summary"));
-                    lm.pigFactoryGradebarNum = cursor.getFloat(cursor.getColumnIndex("recommendNum"));
+                    lm.pigFactoryName = cursor.getString(cursor.getColumnIndex("name"));
+                    lm.product = cursor.getString(cursor.getColumnIndex("summary"));
+                    lm.recommendNum = cursor.getFloat(cursor.getColumnIndex("recommendNum"));
+//                    lm.scale = cursor.getString(cursor.getColumnIndex("scale"));
+                    lm.scale="11111111";
+                    lm.species = cursor.getString(cursor.getColumnIndex("type"));
+                    lm.img = cursor.getString(cursor.getColumnIndex("imgUrl"));
                     LogInfo.LogOut("getpigfactory................." + lm.pigFactoryName);
                     programs.add(lm);
                 }

@@ -3,13 +3,16 @@ package com.lovepig.view;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.lovepig.engine.ImageEngine;
 import com.lovepig.main.R;
 import com.lovepig.model.PigFactoryModel;
 
@@ -47,18 +50,21 @@ public class PigFactoryListViewAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.pigfactory_list_item, null);
 			holder.pigFactoryName = (TextView) convertView.findViewById(R.id.pigFactoryName);
-			holder.pigFactoryDesc = (TextView) convertView.findViewById(R.id.pigFactoryDesc);
-			holder.pigFactoryBrandInfo = (TextView)convertView.findViewById(R.id.pigFactoryBrandInfo);
+			holder.pigFactoryProduct = (TextView) convertView.findViewById(R.id.pigFactoryProduct);
+			holder.scale = (TextView)convertView.findViewById(R.id.scale);
 			holder.pigFactoryGradebar = (RatingBar)convertView.findViewById(R.id.pigFactoryGradebar);
+			holder.pigImg = (ImageView)convertView.findViewById(R.id.pigImg);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
 		holder.pigFactoryName.setText(list.get(position).pigFactoryName);
-		holder.pigFactoryDesc.setText(list.get(position).pigFactoryDesc);
-		holder.pigFactoryBrandInfo.setText(list.get(position).pigFactoryBrandInfo);
-		holder.pigFactoryGradebar.setRating(list.get(position).pigFactoryGradebarNum);
+		holder.pigFactoryProduct.setText(list.get(position).product);
+		holder.scale.setText("猪场规模：" + list.get(position).scale);
+		holder.pigFactoryGradebar.setRating(list.get(position).recommendNum);
+		Log.d("LKP", list.get(position).img);
+		ImageEngine.setImageBitmap(list.get(position).img, holder.pigImg,R.drawable.ic_launcher, 0);
 		return convertView;
 	}
 
@@ -68,9 +74,10 @@ public class PigFactoryListViewAdapter extends BaseAdapter {
 
 	public final class ViewHolder {
 		public TextView pigFactoryName;
-		public TextView pigFactoryDesc;
+		public TextView pigFactoryProduct;
 		public RatingBar pigFactoryGradebar;
-		public TextView pigFactoryBrandInfo;
+		public TextView scale;
+		public ImageView pigImg;
 	}
 
 }

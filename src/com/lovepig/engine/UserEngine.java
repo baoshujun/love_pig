@@ -244,7 +244,7 @@ public class UserEngine extends BaseEngine {
 
         @Override
         protected String doInBackground(String... params) {
-        	Log.d("LKP", params[0]);
+//        	Log.d("LKP", params[0]);
             return httpRequestThisThread(1, Configs.RegisterUser + params[0],true);
         }
 
@@ -287,7 +287,7 @@ public class UserEngine extends BaseEngine {
 
         @Override
         protected String doInBackground(String... params) {
-        	Log.d("LKP", params[0]);
+//        	Log.d("LKP", params[0]);
             return httpRequestThisThread(1, Configs.loginUser + params[0],true);
         }
 

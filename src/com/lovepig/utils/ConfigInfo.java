@@ -14,19 +14,6 @@ public class ConfigInfo {
     private static SharedPreferences cfg;
     private static Editor cfgEdit;
 
-  
-
-    // get TerminalSpecID (changeable)
-    public static String getSpecID() {
-        if ("MH900".equals(android.os.Build.MODEL)) {
-            return "SMP_XHPM_" + android.os.Build.MODEL;// for moto.
-        }
-
-        return android.os.Build.MODEL.replaceAll("\\s", "");// default
-    }
-
-   
-
     private static SharedPreferences getcfg() {
         return Application.application.getSharedPreferences("ctfInfo", 0);
     }
@@ -45,7 +32,6 @@ public class ConfigInfo {
         cfgEdit.putString("MemberAccount", userId);
         cfgEdit.putString("MemberPassword", userPassword);
         y = cfgEdit.commit();
-
         return y;
     }
 
@@ -60,7 +46,6 @@ public class ConfigInfo {
         boolean y = false;
         cfgEdit = getEditor();
         cfgEdit.putString("MemberAccount", sMemberAccount);
-
         y = cfgEdit.commit();
         LogInfo.LogOut("setmemacc is " + sMemberAccount);
         return y;
@@ -75,15 +60,4 @@ public class ConfigInfo {
         userInfo[1] = cfg.getString("MemberPassword", null);
         return userInfo;
     }
-
-
-
-    
-
- 
-
-  
-    
-
-  
 }

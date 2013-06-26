@@ -71,12 +71,13 @@ public class DBEngine {
     	try {
     		db.execSQL("CREATE TABLE pigfactory (" + "table_id INTEGER PRIMARY KEY autoincrement, " + // 表id
     				"id INTEGER ," + // 猪场ID
-    				"title TEXT ," + // 猪场名称
-    				"summary TEXT ," + // 内容简介
-    				"recommendNum FLOAT" + // 推荐指数
-    				"provinceId INTEGER" + //省份ID
-    				"type INTEGER ," + // 品系
-    				"scale INTEGER " + //规模
+    				"name TEXT ," + // 猪场名称
+    				"summary TEXT ," + // 产品
+    				"recommendNum FLOAT," + // 推荐指数
+    				"provinceId INTEGER," + //省份ID
+    				"imgUrl TEXT," + //猪场图片
+    				"scale TEXT ," + // 品系
+    				"type TEXT " + //规模
     				");");
     		LogInfo.LogOut(TAG + " Create Table pigfactory ok");
     		return true;

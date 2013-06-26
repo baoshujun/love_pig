@@ -3,6 +3,7 @@ package com.lovepig.manager;
 import java.util.ArrayList;
 
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -10,11 +11,15 @@ import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import com.lovepig.engine.BoarMallEngine;
+import com.lovepig.engine.database.PigFactoryDBEngine;
+import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.model.BoarMallModel;
+import com.lovepig.model.BoarPigFactoryDetailModel;
 import com.lovepig.model.PigFactoryModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
+import com.lovepig.utils.ConfigInfo;
 import com.lovepig.utils.Utils;
 import com.lovepig.view.BoarMallDetailView;
 import com.lovepig.view.BoarMallPigFactoryView;
@@ -36,6 +41,7 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 	public static final int SET_PIG_FACTORY_DETAIL_VIEW = 6;
 	public static final int GET_PIG_FACTORY_LIST_DATA = 4;
 	public static final int SET_PIG_FACTORY_LIST_VIEW = 5;
+	public static final int CHANGE_PIG_FACTORY_LIST_VIEW = 7;
 	
 	private BoarMallView boarMallView;
 	private BoarMallDetailView boarMallDetailView;
@@ -44,10 +50,14 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 	private ArrayList<PigFactoryModel> pigFactoryList;
 	private BoarMallPigFactoryView pigFactoryView;
 	private BoarPigFactoryDetailView pigFactoryDetailView;
+	public PigFactoryDBEngine pigFactoryDBEngine ;
 
 	public  BoarMallManager(BaseActivity c) {
 		super(c);
 		boarMallEngine = new BoarMallEngine(this);
+		if (pigFactoryDBEngine == null) {
+			pigFactoryDBEngine = new PigFactoryDBEngine();
+		}
 	}
 
 	@Override
@@ -60,13 +70,23 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 			datas = (ArrayList<BoarMallModel>)msg.obj;
 			boarMallView.setListViewAdapter(datas);
 			break;
-		case GET_PIG_FACTORY_DETAIL_DATA://点击后获取种猪场数据
+		case GET_PIG_FACTORY_DETAIL_DATA://点击后获取种猪场详情数据
 			String id = (String)msg.obj;
 			Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
-			boarMallEngine.fetchPigFactoryDetailData(id);
+			//需要判断用户是否注册，若是无注册需要注册
+			if(ConfigInfo.getMemberAccount() != null && !ConfigInfo.getMemberAccount().equals("")){
+				boarMallEngine.fetchPigFactoryDetailData(id);
+			} else {
+				 if (!Utils.isNetworkValidate(context)) {
+		                showAlert("网络不可用,请检查您的网络！");
+		                return;
+		            }
+		            Application.userManager.EnterUserManager(R.string.user_info);
+			}
 			break;
-		case SET_PIG_FACTORY_DETAIL_VIEW://进入种猪场布局
-			pigFactoryDetailView = new BoarPigFactoryDetailView(context, R.layout.boar_pigfactory_detail, this);
+		case SET_PIG_FACTORY_DETAIL_VIEW://进入种猪场详情布局
+			BoarPigFactoryDetailModel pfm = (BoarPigFactoryDetailModel)msg.obj;
+			pigFactoryDetailView = new BoarPigFactoryDetailView(context, R.layout.boar_pigfactory_detail, this,pfm);
 			if (dcEngine.getNowDC() != pigFactoryDetailView) {
 				enterSubDC(pigFactoryDetailView);
 			}
@@ -83,6 +103,11 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 				enterSubDC(pigFactoryView);
 			}
 			break;
+		case CHANGE_PIG_FACTORY_LIST_VIEW://改变省份种猪页面
+			pigFactoryList = (ArrayList<PigFactoryModel>) msg.obj;
+			pigFactoryView.setListViewAdapter(pigFactoryList);
+			break;
+			
 		default:
 			break;
 		}

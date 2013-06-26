@@ -204,6 +204,10 @@ public class OnlineNewsManager extends BaseManager {
     			}
             }
             break;
+            
+        case 1000:
+        	exePushNews();
+        	break;
         }
     }
 
@@ -419,7 +423,7 @@ public class OnlineNewsManager extends BaseManager {
             detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
         }
         dcEngine.setMainDC(mainDC);
-        LogInfo.LogOut("11111111111111");
+        
         return super.getMainDC();
     }
     public void showNewsDetails(NewsDetailModel ndm) {
@@ -436,5 +440,9 @@ public class OnlineNewsManager extends BaseManager {
             return detailsDC.isBack();
         }
         return false;
+    }
+    
+    public void exePushNews(){
+    	engine.pushNews(0, 0, Utils.returnNowTime());
     }
 }

@@ -79,5 +79,4 @@
 <!--         </com.lovepig.widget.MyListView> -->
         <include layout="@layout/verticallistview" />
     </RelativeLayout>
-
 </RelativeLayout>
