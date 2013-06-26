@@ -36,6 +36,10 @@ public class HttpUtils {
             } else {
                 newAurl = Configs.HostName1[server] + params;
             }
+            if (params.equals("dload/update")) {
+            	newAurl="http://test.dreawin.com/dload/update";
+			}
+            
             rString = getServerString(context, newAurl, null, 30 * 1000,isPost);
             if (TextUtils.isEmpty(rString)) {
                 try {

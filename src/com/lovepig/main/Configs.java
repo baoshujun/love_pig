@@ -11,6 +11,7 @@ import com.lovepig.utils.Utils;
 
 public class Configs {
     public static final String lovePigPath = Utils.getSdcardPath() + "/lovepig/";
+    public static final String VERSION_NO="0.0.1";
 
     /**
      * 图片存储

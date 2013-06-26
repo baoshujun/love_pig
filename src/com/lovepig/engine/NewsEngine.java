@@ -2,8 +2,12 @@ package com.lovepig.engine;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 
+import com.lovepig.main.Application;
+import com.lovepig.main.Configs;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsGalleryModel;
@@ -11,6 +15,7 @@ import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
+import com.lovepig.widget.TlcyDialog.TlcyDialogListener;
 
 public class NewsEngine extends BaseEngine {
 	private static final int LIMIT_PUSHNEWS=20;
@@ -19,7 +24,8 @@ public class NewsEngine extends BaseEngine {
 	private static String GET_NEWS = "news/list?";
 	private static String GET_NEWS_DETAILS = "news/detail?newsId=";
 	private static String PUSH_NEWS = "news/pushNews?";
-	
+	private static String VERSION_UPDATE = "dload/update";
+		
 	OnlineNewsManager manager;
 	getNewsTask mGetNewsTask;
 	getMoreNewsTask mGetMoreNewsTask;
@@ -419,5 +425,65 @@ public class NewsEngine extends BaseEngine {
 		}
 	}
 
+// public String updateVersion(){
+//	String result= httpRequestThisThread(1, VERSION_UPDATE, false);
+//	if (result!=null) {
+//		Json json = new Json(result);
+//		String versionNub=json.getString("version");
+//		if (versionNub.compareTo(Configs.VERSION_NO)<0) {
+//			return json.getString("url");
+//		}
+//	}
+//	
+//	return null;
+// }
+	
+ /**
+	 * 获取最新新闻
+	 * 
+	 * 
+	 */
+	class VersionUpdateTask extends AsyncTask<String, Void, String> {
+		boolean isStop;
 
+		@Override
+		protected String doInBackground(String... params) {
+			String result= httpRequestThisThread(1, VERSION_UPDATE, false);
+			if (result!=null) {
+				Json json = new Json(result);
+				String versionNub=json.getString("version");
+				LogInfo.LogOut("versionNub:"+versionNub+" v:"+Configs.VERSION_NO+versionNub.compareTo(Configs.VERSION_NO));
+				if (versionNub.compareTo(Configs.VERSION_NO)>0) {
+					return json.getString("url");
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(final String result) {
+			if (result!=null) {
+				manager.showAlert("有新版本，是否更新？", new TlcyDialogListener() {
+					
+					@Override
+					public void onClick() {
+						  Uri uri = Uri.parse(result);
+                          Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                          Application.application.startActivity(intent);
+						
+					}
+				}, null);
+			}
+		}
+
+		public void stop() {
+			isStop = true;
+			cancel(isStop);
+		}
+	}
+	
+	public void updateVersion(){
+		VersionUpdateTask mPushNewsTask = new VersionUpdateTask();
+		mPushNewsTask.execute();
+	}
 }
