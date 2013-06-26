@@ -445,4 +445,8 @@ public class OnlineNewsManager extends BaseManager {
     public void exePushNews(){
     	engine.pushNews(0, 0, Utils.returnNowTime());
     }
+    
+    public void updateVersion(){
+    	 engine.updateVersion();
+    }
 }

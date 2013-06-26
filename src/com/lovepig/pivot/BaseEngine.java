@@ -2,6 +2,7 @@ package com.lovepig.pivot;
 
 import android.os.AsyncTask;
 
+import com.lovepig.main.Application;
 import com.lovepig.utils.HttpUtils;
 import com.lovepig.utils.LogInfo;
 
@@ -63,7 +64,7 @@ public abstract class BaseEngine {
      */
     public String httpRequestThisThread(int server, String params,boolean isPost) {
         String rString = null;
-        rString = HttpUtils.getServerString(manager.context.getApplicationContext(), server, params,isPost);
+        rString = HttpUtils.getServerString(Application.application.getApplicationContext(), server, params,isPost);
         return rString;
     }
 
