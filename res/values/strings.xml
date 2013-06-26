@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">猪讯</string>
+    <string name="app_name">豆粒</string>
     <string name="username">账户:</string>
 	<string name="password">密码:</string>
 	<string name="login_name_hint">请输入您的猪讯账号</string>
