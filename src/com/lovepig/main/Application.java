@@ -6,7 +6,6 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -28,7 +27,6 @@ import com.lovepig.manager.UserInfoManager;
 import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.utils.ConfigInfo;
-import com.lovepig.widget.TlcyDialog.TlcyDialogListener;
 
 public class Application extends BaseActivity  implements ServiceConnection{
 	public static Application application;
