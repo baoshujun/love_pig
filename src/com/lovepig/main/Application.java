@@ -188,7 +188,7 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 
 	@Override
 	public void onServiceDisconnected(ComponentName name) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		
 	}
 	
@@ -205,8 +205,6 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 
 	@Override
 	public void onClick(View v) {
-		initTask.cancel(true);
-		initTask=null;
 		isEnterNews=true;
 		enterNews();
 		new Thread(new Runnable() {

@@ -164,7 +164,7 @@ public class NewsEngine extends BaseEngine {
 				LogInfo.LogOut("result:" + result);
 				manager.dbEngine.deleteNewsByTypeID(catId);
 				NewsState rs = ParseHttpNews(result, 0);
-				if (rs.code.equals("hasnews") && !isStop) {
+				if (rs!=null&&rs.code!=null&&rs.code.equals("hasnews") && !isStop) {
 					manager.SetLatestNews(rs.newslist);
 				}
 				return rs;
@@ -174,7 +174,7 @@ public class NewsEngine extends BaseEngine {
 		@Override
 		protected void onPostExecute(NewsState result) {
 			if (!isStop && result != null) {
-				if (result.code.equals("hasnews")) {
+				if (result.code!=null&&result.code.equals("hasnews")) {
 					manager.SetLatestNews(result.newslist);
 					manager.getNewsComplete(0);
 					if (result.hasBtn != null) {
@@ -184,7 +184,7 @@ public class NewsEngine extends BaseEngine {
 						// 没有更多按钮
 						manager.SetMoreBtn(false);
 					}
-				} else if (result.code.equals("neterror")) {
+				} else if (result.code!=null&&result.code.equals("neterror")) {
 					// 网络错误
 					manager.ShowNewsError("网络不可用,请检查您的网络！");
 				} else {
@@ -192,6 +192,8 @@ public class NewsEngine extends BaseEngine {
 					manager.ShowNewsError(result.code);
 				}
 			} else {
+				// 网络错误
+				manager.ShowNewsError("网络不可用,请检查您的网络！");
 			}
 		}
 
