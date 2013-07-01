@@ -63,7 +63,7 @@ public class PigFactoryListViewAdapter extends BaseAdapter {
 		holder.pigFactoryProduct.setText(list.get(position).product);
 		holder.scale.setText("猪场规模：" + list.get(position).scale);
 		holder.pigFactoryGradebar.setRating(list.get(position).recommendNum);
-		Log.d("LKP", list.get(position).img);
+//		Log.d("LKP", list.get(position).img);
 		ImageEngine.setImageBitmap(list.get(position).img, holder.pigImg,R.drawable.ic_launcher, 0);
 		return convertView;
 	}

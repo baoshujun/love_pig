@@ -127,6 +127,7 @@ public class UserRegisterView extends BaseView {
         j.put("userPhoneNum", Configs.mUser_PhoneNum);
         return j;
     }
+    
 
     public void Reset() {
         mUseridET.setText("");

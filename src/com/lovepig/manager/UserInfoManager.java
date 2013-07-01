@@ -63,7 +63,7 @@ public class UserInfoManager extends BaseManager {
                 showAlert("网络不可用,请检查您的网络！");
                 return;
             }
-            Application.userManager.EnterUserManager(R.string.user_info);
+            Application.userManager.enterUserManager(R.string.user_info,false,null);
             break;
         case 1:// 收藏列表
            fv=new FavoriteView(mBaseActivity,R.layout.favorite_layout, this);
@@ -78,7 +78,6 @@ public class UserInfoManager extends BaseManager {
             }
             break;
         case 4:// 关于帮助
-                
         	Application.application.setSubManager(Application.aboutManager);
             break;
         case 5:// 收藏

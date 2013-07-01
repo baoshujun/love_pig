@@ -40,6 +40,7 @@ public class Configs {
      * 是否开启程序日志
      */
     public static boolean isDebug = true;
+    public static boolean isFromPigFactory = false;
    
     public static final String PREFS_NAME = "TlPrefsFile";
     public static final String PREFS_UserInfo = "UserInfo";
@@ -74,10 +75,12 @@ public class Configs {
     public static final String getCommentAction = "/xhs/getComment.action";// 获取用户评价
     public static final String accountAction = "/xhs/account.action";// 用户信息
     public static final String UserInfoaccountAction = "/xhs/getAccount.action";// 用户信息
-    public static final String RegisterUser = "user/register";// 注册用户
+    public static final String RegisterUser = "user/registerByCode";// 注册用户
     public static final String updateUserInfo = "user/updateUserInfo";// 修改用户信息
     public static final String quicklyRegister = "user/quicklyRegister";// 快速注册
     public static final String loginUser = "user/login";// 用户
+    public static final String verificaitonCode = "user/getCode";// 用户
+    
     public static final String CheckUsernameAction = "/xhs/checkUsername.action";// 验证用户文号
     public static final String ModifyUserPwdAction = "/xhs/changePassword.action";// 修改密码
     public static final String TobindingAction = "/xhs/binding.action";// 用户绑定
@@ -88,7 +91,6 @@ public class Configs {
 
 	public static  int UPDATE_FLAG = 0;
 
-    
     public static String typeAndVsersion = null;
     public static String oldtypeAndVsersion = null;
 
@@ -183,8 +185,6 @@ public class Configs {
     public static int getTxtSize(Context c) {
         return c.getSharedPreferences(PREFS_NAME, 0).getInt("txtsize", 25);
     }
-
-   
 
     /**
      * 把IMEI保存到本地

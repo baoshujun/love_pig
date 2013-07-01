@@ -55,6 +55,7 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		int loading=getIntent().getIntExtra("loading", 0);
+		//加载启动页面
 		if (loading==0) {
 			setContentView(R.layout.init);
 		}
