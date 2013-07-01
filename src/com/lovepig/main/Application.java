@@ -6,14 +6,16 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.lovepig.engine.PushNewsService;
 import com.lovepig.manager.AboutManager;
@@ -28,9 +30,8 @@ import com.lovepig.manager.UserInfoManager;
 import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.utils.ConfigInfo;
-import com.lovepig.widget.TlcyDialog.TlcyDialogListener;
 
-public class Application extends BaseActivity  implements ServiceConnection{
+public class Application extends BaseActivity  implements ServiceConnection,OnClickListener{
 	public static Application application;
 	public static OnlineNewsManager onlineNewsManager;
 	public static FoodstuffManager pigManager;
@@ -45,6 +46,9 @@ public class Application extends BaseActivity  implements ServiceConnection{
 
 	long timeForAnimator;
 	public MainManager mainManager;
+	private ImageView initImage;
+	private boolean isEnterNews;
+	private InitDataTask initTask;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -54,6 +58,11 @@ public class Application extends BaseActivity  implements ServiceConnection{
 		//加载启动页面
 		if (loading==0) {
 			setContentView(R.layout.init);
+		}
+		
+		initImage=(ImageView)findViewById(R.id.initImage);
+		if (initImage!=null) {
+			initImage.setOnClickListener(this);
 		}
 		application = this;
 		// int tabID = getIntent().getIntExtra("tabID", -1);
@@ -76,7 +85,8 @@ public class Application extends BaseActivity  implements ServiceConnection{
 			enterNews();
 		}
 		// 获得用户名
-		new InitDataTask().execute();
+		initTask=new InitDataTask();
+		initTask.execute();
 		// 开始轮训
 		Intent mIntent = new Intent(this, PushNewsService.class);
 		startService(mIntent);
@@ -108,6 +118,10 @@ public class Application extends BaseActivity  implements ServiceConnection{
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
+			if (isEnterNews) {
+				isEnterNews=false;
+				return;
+			}
 			enterNews();
 			new Thread(new Runnable() {
 
@@ -115,7 +129,7 @@ public class Application extends BaseActivity  implements ServiceConnection{
 				public void run() {
 					while (true) {
 						onlineNewsManager.sendEmptyMessage(1000);
-						SystemClock.sleep(5000);
+						SystemClock.sleep(50000);
 					}
 				}
 			}).start();
@@ -188,5 +202,26 @@ public class Application extends BaseActivity  implements ServiceConnection{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		initTask.cancel(true);
+		initTask=null;
+		isEnterNews=true;
+		enterNews();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				while (true) {
+					onlineNewsManager.sendEmptyMessage(1000);
+					SystemClock.sleep(5000);
+				}
+			}
+		}).start();
+
+		onlineNewsManager.updateVersion();
+		
 	}
 }
