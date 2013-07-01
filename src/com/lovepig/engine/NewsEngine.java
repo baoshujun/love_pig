@@ -273,7 +273,7 @@ public class NewsEngine extends BaseEngine {
 		@Override
 		protected void onPostExecute(NewsState result) {
 			if (!isStop) {
-				if (result.code.equals("hasnews")) {
+				if (result.code!=null&&result.code.equals("hasnews")) {
 					for (NewsModel news : result.newslist) {
 						manager.onLoadoldMoreNews(news);
 					}
@@ -286,12 +286,12 @@ public class NewsEngine extends BaseEngine {
 						// 没有更多按钮
 						manager.SetMoreBtn(false);
 					}
-				} else if (result.code.equals("neterror")) {
+				} else if (result.code!=null&&result.code.equals("neterror")) {
 					// 网络错误
-					manager.ShowNewsError("网络不可用,请检查您的网络！");
+					manager.ShowNewsError2("网络不可用,请检查您的网络！");
 				} else {
 					// 服务器正常返回但没内容
-					manager.ShowNewsError(result.code);
+					manager.ShowNewsError2(result.code);
 					manager.SetMoreBtn(false);
 				}
 

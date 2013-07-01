@@ -224,6 +224,19 @@ public class OnlineNewsManager extends BaseManager {
         dismissLoading();
 
     }
+    /**
+     * 网络错误或无新闻
+     * 
+     * @param code
+     */
+    public void ShowNewsError2(String code) {
+       
+        mainDC.CancelRefresh();
+        mainDC.UpdataData();
+        ShowDetail();
+       
+
+    }
 
     /**
      * 是否有更多按钮
