@@ -96,7 +96,7 @@ public class NewsEngine extends BaseEngine {
 		@Override
 		protected void onPostExecute(NewsDetailState result) {
 			if (!isStop && result != null) {
-				if (result.code.equals("hasnews")) {
+				if (result.code!=null&&result.code.equals("hasnews")) {
 					manager.showNewsDetails(result.newsDetail);
 				} else if (result.code.equals("neterror")) {
 					// 网络错误
@@ -244,7 +244,7 @@ public class NewsEngine extends BaseEngine {
 				    newsState.newslist.add(0, model);
                 }
 			} else {
-				newsState.code = json.getString("msg");// 服务器正常返回，但没数据
+				newsState.code = json.getString("errorCode");// 服务器正常返回，但没数据
 			}
 		} else {
 			newsState.code = "neterror";// 网络异常
@@ -326,7 +326,7 @@ public class NewsEngine extends BaseEngine {
 				model.id = newsId;
 				newsDetailState.newsDetail = model;
 			} else {
-				newsDetailState.code = json.getString("msg");// 服务器正常返回，但没数据
+				newsDetailState.code = json.getString("errorCode");// 服务器正常返回，但没数据
 			}
 		} else {
 			newsDetailState.code = "neterror";// 网络异常
