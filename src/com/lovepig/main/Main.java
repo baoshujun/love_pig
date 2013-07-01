@@ -26,7 +26,7 @@ public class Main extends Activity {
 		initView();
 		setOnclickEvent();
 	}
-
+	
 	/**
 	 * init first_main activity
 	 */

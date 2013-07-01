@@ -9,7 +9,6 @@ import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseEngine;
 import com.lovepig.utils.ConfigInfo;
 import com.lovepig.utils.Json;
-import com.lovepig.view.UserLoginView;
 
 public class UserEngine extends BaseEngine {
     UserManager manager;
@@ -19,6 +18,7 @@ public class UserEngine extends BaseEngine {
     ModifyPWDTask mModifyPWDTask;// 修改密码
     CheckUserIdTask checkUserIdTask;
     LoginTask mLoginTask;
+    VerificationCodeTask mVerificationCodeTask;
     
     private Json userInfo = null;
 
@@ -67,10 +67,9 @@ public class UserEngine extends BaseEngine {
         StopRegister();
         userInfo = j;
         StringBuilder mStrBuilder = new StringBuilder("?");
-		mStrBuilder.append("userName=").append(j.getString("userName"))
-				.append("&pwd=").append(j.getString("pwd")).append("&userEmail=")
-				.append(j.getString("userEmail")).append("&userPhoneNum=")
-				.append(j.getString("userPhoneNum"));
+		mStrBuilder.append("code=").append(j.getString("code"))
+				.append("&pwd=").append(j.getString("pwd")).append("&phoneNum=")
+				.append(j.getString("phoneNum"));
         mRegisterUserTask = new RegisterUserTask();
         
         mRegisterUserTask.execute(mStrBuilder.toString());
@@ -93,6 +92,15 @@ public class UserEngine extends BaseEngine {
             mRegisterUserTask.Stop();
             mRegisterUserTask = null;
         }
+    }
+    /**
+     * 停止获取手机验证码
+     */
+    private void stopVerificationCode() {
+    	 if (mRegisterUserTask != null) {
+             mRegisterUserTask.Stop();
+             mRegisterUserTask = null;
+         }
     }
 
     /**
@@ -257,10 +265,10 @@ public class UserEngine extends BaseEngine {
             if (result != null) {
                 Json j = new Json(result);
                 if (j.getInt("status") == 1) {
-                    Configs.userid = userInfo.getString("userName");
-                    Configs.mUser_Name = userInfo.getString("userName");
+                    Configs.userid = userInfo.getString("phoneNum");
+//                    Configs.mUser_Name = userInfo.getString("userName");
 //                  Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
-                	ConfigInfo.setUserInfo(userInfo.getString("userName"), userInfo.getString("pwd"));
+                	ConfigInfo.setUserInfo(userInfo.getString("phoneNum"), userInfo.getString("pwd"));
                     manager.sendEmptyMessage(UserManager.STATE_REGISTERSUCESS);
                 } else {
                     manager.sendMessage(manager.obtainMessage(UserManager.STATE_REGISTERFAIL, j.getString("msg")));
@@ -277,7 +285,7 @@ public class UserEngine extends BaseEngine {
     }
     
     /**
-     * 用户注册
+     * 用户登陆
      * 
      * @author LKP
      * 
@@ -400,107 +408,7 @@ public class UserEngine extends BaseEngine {
             cancel(iStop);
         }
     }
-
-    /**
-     * 解除绑定
-     * 
-     * @author DCH
-     * 
-     */
-//    class UnbindTask extends AsyncTask<String, Void, String> {
-//        boolean iStop;
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            String result = httpRequestThisThread(1, Configs.UnbindingAction + params[0]);
-//            if (result != null) {
-//                Json j = new Json(result);
-//                if (j.getInt("result") == 1) {
-//                    Configs.userid = null;
-//                    Configs.updateUidToTypeAndVsersion(null, null, -1);
-//                    Configs.setSpecial(manager.context, false);
-//                    Application.application.mainManager.sendEmptyMessage(1);
-//                    manager.sendEmptyMessage(UserManager.STATE_UNBINDSUCESS);
-//                    Application.application.mainManager.sendMessage(Application.application.mainManager.obtainMessage(MainManager.MSG_WHAT_HAVE_NEW_INFO, 0, 0));
-//                    // 清楚所有与用户有关的数据
-////                    Application.bookshelfManager.clearDataBases();
-//                } else {
-//                    manager.sendMessage(manager.obtainMessage(UserManager.STATE_UNBINDFAIL, j.getString("msg")));
-//                }
-//            } else {
-//                manager.sendEmptyMessage(UserManager.STATE_UNBINDFAIL);
-//            }
-//
-//            return result;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//
-//        }
-//
-//        public void Stop() {
-//            iStop = true;
-//            cancel(iStop);
-//        }
-//    }
-
-    /**
-     * 用户绑定
-     * 
-     * @author DCH
-     * 
-     */
-//    class ToBindTask extends AsyncTask<String, Void, String> {
-//        boolean iStop;
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-////            if (!Configs.isCheckin) {
-////                Application.checkUserManager.checkUser();
-////            }
-////            if (!Configs.isCheckin) {
-////                return null;
-////            }
-//            return httpRequestThisThread(1, Configs.TobindingAction + params[0]);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//            if (iStop) {
-//                return;
-//            }
-//            boolean isSpecial = false;
-//            if (result != null) {
-//                Json j = new Json(result);
-//                if (j.getInt("result") == 1) {
-//                    Configs.userid = j.getString("userId");
-//                    Configs.readerUrl = j.getString("reader");
-//                    Configs.mUser_Name = j.getString("userName");
-//                    Configs.mUser_Email = j.getString("mail");
-//                    Configs.mUser_PhoneNum = j.getString("phone");
-//                    Configs.isChangededPWD = j.getInt("checkedPWD");
-//                    if (j.getInt("special") == 1) {
-//                        isSpecial = true;
-//                    }
-//                    Configs.setSpecial(manager.context, isSpecial);
-//                    Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
-//                    manager.sendEmptyMessage(UserManager.STATE_TOBINDSUCESS);
-//                } else if (j.getInt("result") == 0) {
-//                    manager.sendMessage(manager.obtainMessage(UserManager.STATE_TOBINDFAIL, j.getString("msg")));
-//                }
-//            } else {
-//                manager.sendEmptyMessage(UserManager.STATE_TOBINDFAIL);
-//            }
-//        }
-//
-//        public void Stop() {
-//            iStop = true;
-//            cancel(iStop);
-//        }
-//    }
+    
 
     public void checkUserAccount(String userAccount) {
         stopCheckUserId();
@@ -544,6 +452,58 @@ public class UserEngine extends BaseEngine {
                     manager.sendEmptyMessage(UserManager.STATE_NAME_CAN_USE);
                 } else {
                     manager.sendEmptyMessage(UserManager.STATE_NAME_USEED);
+                }
+            } else {
+                manager.showToast("网络失败");
+            }
+        }
+
+        public void Stop() {
+            iStop = true;
+            cancel(iStop);
+        }
+    }
+
+	public void getVerificationCode(String memberAccount) {
+		 stopVerificationCode();
+	     StringBuilder mStrBuilder = new StringBuilder("?");
+			mStrBuilder.append("phoneNum=").append(memberAccount);
+	     mVerificationCodeTask = new VerificationCodeTask();
+	     mVerificationCodeTask.execute(mStrBuilder.toString());
+	}
+	
+	 	
+	
+    /**
+     * 获取验证码
+     * 
+     * @author LKP
+     * 
+     */
+    class VerificationCodeTask extends AsyncTask<String, Void, String> {
+        boolean iStop;
+        @Override
+        protected String doInBackground(String... params) {
+        	Log.d("LKP", Configs.verificaitonCode + params[0]);
+        	return httpRequestThisThread(1, Configs.verificaitonCode + params[0],false);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (iStop) {
+                return;
+            }
+            if (result != null) {
+                Json j = new Json(result);
+                if (j.getInt("status") == 1) {
+                    manager.sendEmptyMessage(UserManager.STATE_VERIFCATION_CODE);
+                } else if(j.getInt("status") == 0) {
+                    if(j.getInt("errorCode") == 100010) {
+                    	manager.sendEmptyMessage(UserManager.STATE_NAME_USEED);
+                    } else {
+                    	manager.sendEmptyMessage(UserManager.STATE_VERIFCATION_CODE_FAIL);
+                    }
                 }
             } else {
                 manager.showToast("网络失败");

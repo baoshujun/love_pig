@@ -253,11 +253,4 @@ public abstract class BaseActivity extends Activity {
             e.printStackTrace();
         }
     }
-    
-    /**
-     * 金立，魅族等手机在不显示时无法弹出dialog 此方法自动判断当前activity是否正在显示，并作出直接显示还是等显示后再弹出dialog
-     */
-    public Dialog showAlert(String text) {
-        return showDialog(new TlcyDialog(this).setTitle(this.getString(R.string.tip)).setMessage(text).setOnlyOkPositiveMethod(this.getString(R.string.OK)));
-    }
 }

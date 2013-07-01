@@ -3,7 +3,6 @@ package com.lovepig.manager;
 import java.util.ArrayList;
 
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -13,6 +12,7 @@ import android.widget.ViewAnimator;
 import com.lovepig.engine.BoarMallEngine;
 import com.lovepig.engine.database.PigFactoryDBEngine;
 import com.lovepig.main.Application;
+import com.lovepig.main.Configs;
 import com.lovepig.main.R;
 import com.lovepig.model.BoarMallModel;
 import com.lovepig.model.BoarPigFactoryDetailModel;
@@ -81,7 +81,7 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 		                showAlert("网络不可用,请检查您的网络！");
 		                return;
 		            }
-		            Application.userManager.EnterUserManager(R.string.user_info);
+		            Application.userManager.enterUserManager(R.string.user_info,true,id);
 			}
 			break;
 		case SET_PIG_FACTORY_DETAIL_VIEW://进入种猪场详情布局

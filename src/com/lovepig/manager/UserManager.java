@@ -36,6 +36,12 @@ public class UserManager extends BaseManager {
 	public static final int STATE_NAME_USEED = 19;// 用户名称不可用
 	public static final int STATE_LOGIN_SUCCESS = 20;// 用户名称不可用
 	
+	public static final int STATE_VERIFCATION_CODE = 21;//用户获取验证码
+	public static final int STATE_VERIFCATION_CODE_FAIL = 22;//获取验证码失败
+	public static boolean isFromPigFactory = false;
+	public static String pigFactoryId = null;
+	
+	
 	
 	private UserAccountView userAccountView;
 	private UserRegisterView registerView;
@@ -86,9 +92,14 @@ public class UserManager extends BaseManager {
 			break;
 		case STATE_REGISTERSUCESS:
 			showToast("注册成功");
-			back();
-			back();
-			dismissLoading();
+			if(isFromPigFactory){
+				back();
+				Application.boarMallManager.sendMessage(Application.boarMallManager.obtainMessage(BoarMallManager.GET_PIG_FACTORY_DETAIL_DATA, pigFactoryId));
+			} else {
+				back();
+				back();
+				dismissLoading();
+			}
 			break;
 		case STATE_REGISTERFAIL:
 			if (msg.obj != null) {
@@ -132,7 +143,6 @@ public class UserManager extends BaseManager {
 			dismissLoading();
 			showToast("用户名字可用");
 			break;
-			
 		case STATE_NAME_USEED:
 			dismissLoading();
 			showToast("该用户名字已被使用！");
@@ -141,6 +151,16 @@ public class UserManager extends BaseManager {
 			dismissLoading();
 			showToast("登陆成功！");
 			back();
+			break;
+		case STATE_VERIFCATION_CODE://获取验证码
+			//联网获取返回码
+			dismissLoading();
+			showToast("获取验证码成功，请耐心等待短信通知！");
+			break;
+		case STATE_VERIFCATION_CODE_FAIL://获取验证码失败
+			//联网获取返回码
+			dismissLoading();
+			showToast("因网络原因，获取验证码失败，请重新获取");
 			break;
 		}
 
@@ -213,13 +233,24 @@ public class UserManager extends BaseManager {
 			ModifyPWD();
 			break;
 		case R.id.btn_register://点击登陆页面的注册
-			goToRegister();
+//			goToRegister();
+			if(userLoginView.checkDataintegrity()) {
+				engine.RegisterUser(userLoginView.getRegisterInfo());
+			}
 			break;
 		case R.id.btn_login://点击登陆页面的登陆
-			if (userLoginView.checkUserNameOrPwd()) {
+			if (userLoginView.checkDataintegrity()) {
 				engine.login(userLoginView.getLoginInfo());
 				showLoading();
 			}
+			break;
+		case R.id.verificationCode://获取用户验证码
+			String result = userLoginView.checkPhoneNum();
+			if(result != null){
+				showLoading();
+				engine.getVerificationCode(result);
+			}
+			break;
 			
 		default:
 			break;
@@ -255,6 +286,7 @@ public class UserManager extends BaseManager {
 	public void goToLogin() {
 		isGetUserInfo = false;
 		dcEngine.setMainDC(userLoginView);
+		userLoginView.setverificationTextVisible(isFromPigFactory);
 	}
 
 	/**
@@ -346,8 +378,12 @@ public class UserManager extends BaseManager {
 	 * 进入用户管理
 	 * 
 	 * @param backtxtid
+	 * @param isFrom 判断是否来自猪场
+	 * @param pigFactoryID 猪场的ID
 	 */
-	public void EnterUserManager(int backtxtid) {
+	public void enterUserManager(int backtxtid,boolean isFrom,String pigFactoryID) {
+		isFromPigFactory = isFrom;
+		this.pigFactoryId = pigFactoryID;
 		Application.application.setSubManager(this);
 		registerView.setBackText(backtxtid);
 	}
