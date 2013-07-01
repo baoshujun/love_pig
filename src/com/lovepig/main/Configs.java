@@ -110,32 +110,6 @@ public class Configs {
     public static String certificate;
     public static int bingding;
 
-    public static void initTypeAndVsersion(Activity context) {
-        try {
-          
-            JSONStringer stringer = new JSONStringer();
-            stringer.object();
-            stringer.key("product").value("XHPM");
-            stringer.key("clienttype").value("Android");
-            stringer.key("clientversion").value("2.0.004");
-            stringer.key("model").value(Utils.getMobileModel());
-            stringer.key("resolution").value(Utils.getScreenWidth(context) + "X" + Utils.getScreenHeight(context));
-            stringer.key("systemversion").value(Utils.getSDKVersion());
-            stringer.key("channel").value("DEV");
-            stringer.key("updatechannel").value("2");
-            IMEI = Utils.getIMEI(context);
-            LogInfo.LogOut("imei:" + IMEI);
-            stringer.key("imei").value(IMEI);
-            stringer.key("imsi").value(Utils.getIMSI(context) == null ? "" : Utils.getIMSI(context));
-            stringer.key("login").value(0);
-            stringer.key("memberId").value(2);
-            stringer.key("language").value(Utils.getLocalLanguage());
-            typeAndVsersion = stringer.endObject().toString();
-            oldtypeAndVsersion = typeAndVsersion;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void updateUidToTypeAndVsersion(String uid, String username, int memberId) {
         Json json = new Json(oldtypeAndVsersion);

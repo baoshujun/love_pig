@@ -20,7 +20,6 @@ public abstract class BaseEngine {
      * @param url
      */
     public void httpRequestNewThread(int server, String params) {
-        LogInfo.LogOut("-------params = " + params);
         httpRequest = new HttpRequest();
         httpRequest.execute(String.valueOf(server), params);
     }

@@ -189,11 +189,9 @@ public class ViewEngine implements AnimationListener {
                     isClickEnabled = true;
                 }
             }, 200);
-            // isClickEnabled=true;
-            // viewSwiter.setClickable(true);
+           viewSwiter.setClickable(true);
         } else {
             isClickEnabled = false;
-            // viewSwiter.setClickable(false);
         }
     }
 
@@ -233,8 +231,6 @@ public class ViewEngine implements AnimationListener {
         dc.invalidate();
         viewSwiter.addView(dc, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
         viewSwiter.setDisplayedChild(viewSwiter.getChildCount() - 1);
-        // viewSwiter.setDisplayedChild(1);
-        // viewSwiter.removeViewAt(0);
         dc.onShow();
         fromManager = from;
         toManager = to;
@@ -280,7 +276,6 @@ public class ViewEngine implements AnimationListener {
         dc.invalidate();
         viewSwiter.removeAllViews();
         viewSwiter.addView(dc);
-        // viewSwiter.setAnimation(alphaAnimation);
         viewSwiter.setDisplayedChild(0);
         dc.onShow();
     }

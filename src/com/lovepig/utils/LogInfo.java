@@ -28,21 +28,5 @@ public class LogInfo {
             Log.d(tag, info);
         }
     }
-//	public static void logToFile(String info) {
-//		try {
-//			String aLogFile = Utils.getSdcardPath()+"/TL_LI.log";
-//			File iFile = new File(aLogFile);
-//			if (!iFile.exists()) {
-//				iFile.createNewFile();
-//			}
-//			FileWriter aFileStream = new FileWriter(iFile, true);
-//			BufferedWriter aWriter = new BufferedWriter(aFileStream);
-//			aWriter.write("["+Utils.returnNowTime()+"]"+info);
-//			aWriter.write("\r\n");
-//			aWriter.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 }

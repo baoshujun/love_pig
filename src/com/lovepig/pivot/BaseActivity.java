@@ -15,10 +15,6 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.lovepig.main.R;
-import com.lovepig.utils.Utils;
-import com.lovepig.widget.TlcyDialog;
-
 /**
  * 每一个Activity为一个功能模块，其内部存放处理不同事务的manager
  */
@@ -33,42 +29,12 @@ public abstract class BaseActivity extends Activity {
     public RelativeLayout dcEngineContener;
    
 
-    /**
-     * 与此activity绑定的服务接口，多进程时使用
-     */
-    // private IServiceBinder REMOTE_SERVICE;
-    // private ServiceConnection s = new ServiceConnection() {
-    // @Override
-    // public void onServiceDisconnected(ComponentName name) {
-    // REMOTE_SERVICE=null;
-    // }
-    // @Override
-    // public void onServiceConnected(ComponentName name, IBinder service) {
-    // REMOTE_SERVICE = IServiceBinder.Stub.asInterface(service);
-    // try {
-    // REMOTE_SERVICE.registerCallback(mCallActivity,getClassName());//此处为回调，使用getClass()获得的是BaseActivity的class，所以使用子类实现的getClassName方法
-    // } catch (RemoteException e) {
-    // e.printStackTrace();
-    // }
-    // }
-    // };
-    // private ICallActivity mCallActivity=new ICallActivity.Stub() {
-    // @Override
-    // public String doAction(String json) throws RemoteException {
-    // return callFromRemote(json);
-    // }
-    // };
+  
     /**
      * 多进程时，调用别的进程，参数以json形式传递，返回json形式字符串
      */
     public String remoteDoAction(String json) {
-        // if(REMOTE_SERVICE!=null){
-        // try {
-        // return REMOTE_SERVICE.doAction(json);
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        // }
+       
         return null;
     }
 
@@ -82,23 +48,14 @@ public abstract class BaseActivity extends Activity {
     /**
      * 返回子类类型，判断是否向远程service注册了回调函数，防止重复注册 一般返回getClass().getName()即可
      */
-    // private String getClassName(){
-    // return getClass().getName();
-    // }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
 
-    /**
-     * 绑定服务，已封装
-     */
-    // public boolean bindService(Intent service){
-    // return super.bindService(service,s, Context.BIND_AUTO_CREATE);
-    // }
+   
 
     private Toast mToast;// 统一toast
 
@@ -106,11 +63,8 @@ public abstract class BaseActivity extends Activity {
      * 显示小提示
      */
     public void showToast(String text) {
-        //if (mToast != null) {
-        //    mToast.cancel();
-        //} else {
-            mToast = Toast.makeText(this, text, Toast.LENGTH_LONG);
-        //}
+       
+        mToast = Toast.makeText(this, text, Toast.LENGTH_LONG);
         mToast.setText(text);
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.setDuration(Toast.LENGTH_SHORT);
@@ -179,7 +133,6 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-//        Utils.updateNotify(this, getClass());// 此处getClass为子类的class
         isShowing = true;
         if (toDialog != null) {
             toDialog.show();
@@ -187,12 +140,7 @@ public abstract class BaseActivity extends Activity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-//        Utils.updateNotify(this, null);// 取消标题
-        // unbindRemoteService();
-        super.onDestroy();
-    }
+   
 
     /**
      * 屏蔽过快的按键点击

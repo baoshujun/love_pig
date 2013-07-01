@@ -18,7 +18,6 @@ public class ConfigInfo {
         return Application.application.getSharedPreferences("ctfInfo", 0);
     }
 
-    // get the editable SharedPreferences Object.
     private static Editor getEditor() {
         return getcfg().edit();
     }

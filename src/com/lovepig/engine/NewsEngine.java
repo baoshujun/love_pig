@@ -382,43 +382,13 @@ public class NewsEngine extends BaseEngine {
 
 		@Override
 		protected NewsState doInBackground(String... params) {
-//			String result = httpRequestThisThread(1, PUSH_NEWS + params[0],
-//					false);
-//			if (isStop) {
+
 				return null;
-//			} else {
-//				LogInfo.LogOut("result:" + result);
-//				manager.dbEngine.deleteNewsByTypeID(catId);
-//				NewsState rs = ParseHttpNews(result, 0);
-//				if (rs.code.equals("hasnews") && !isStop) {
-//					manager.SetLatestNews(rs.newslist);
-//				}
-//				return rs;
-//			}
+
 		}
 
 		@Override
 		protected void onPostExecute(NewsState result) {
-//			if (!isStop && result != null) {
-//				if (result.code.equals("hasnews")) {
-//					manager.SetLatestNews(result.newslist);
-//					manager.getNewsComplete(0);
-//					if (result.hasBtn != null) {
-//						// 有更多按钮
-//						manager.SetMoreBtn(true);
-//					} else {
-//						// 没有更多按钮
-//						manager.SetMoreBtn(false);
-//					}
-//				} else if (result.code.equals("neterror")) {
-//					// 网络错误
-//					manager.ShowNewsError("网络不可用,请检查您的网络！");
-//				} else {
-//					// 服务器正常返回但没内容
-//					manager.ShowNewsError(result.code);
-//				}
-//			} else {
-//			}
 		}
 
 		public void stop() {
@@ -427,18 +397,7 @@ public class NewsEngine extends BaseEngine {
 		}
 	}
 
-// public String updateVersion(){
-//	String result= httpRequestThisThread(1, VERSION_UPDATE, false);
-//	if (result!=null) {
-//		Json json = new Json(result);
-//		String versionNub=json.getString("version");
-//		if (versionNub.compareTo(Configs.VERSION_NO)<0) {
-//			return json.getString("url");
-//		}
-//	}
-//	
-//	return null;
-// }
+
 	
  /**
 	 * 获取最新新闻

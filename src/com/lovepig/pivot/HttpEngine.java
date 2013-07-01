@@ -2,7 +2,6 @@ package com.lovepig.pivot;
 
 import android.os.AsyncTask;
 
-import com.lovepig.main.Configs;
 import com.lovepig.utils.HttpUtils;
 import com.lovepig.utils.LogInfo;
 
