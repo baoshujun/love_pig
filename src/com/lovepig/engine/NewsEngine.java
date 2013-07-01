@@ -29,7 +29,7 @@ public class NewsEngine extends BaseEngine {
 	OnlineNewsManager manager;
 	getNewsTask mGetNewsTask;
 	getMoreNewsTask mGetMoreNewsTask;
-	getNewsDetailTask mGetNewsDetail;
+	GetNewsDetailTask mGetNewsDetail;
 	int RequestDataSize = 20;// 请求的数据条数
 	// 获取评论引擎
 //	private HttpEngine httpEngine = null;
@@ -67,23 +67,21 @@ public class NewsEngine extends BaseEngine {
 	 */
 	public void fetchNewsDetail(int id) {
 		newsId = id;
-		GET_NEWS_DETAILS += id;
-		mGetNewsDetail = new getNewsDetailTask();
-		mGetNewsDetail.execute();
+		String params = GET_NEWS_DETAILS + id;
+		mGetNewsDetail = new GetNewsDetailTask();
+		mGetNewsDetail.execute(params);
 	}
 
 	/**
 	 * 获取最新详情
 	 * 
-	 * @author DCH
-	 * 
 	 */
-	class getNewsDetailTask extends AsyncTask<String, Void, NewsDetailState> {
+	class GetNewsDetailTask extends AsyncTask<String, Void, NewsDetailState> {
 		boolean isStop;
 
 		@Override
 		protected NewsDetailState doInBackground(String... params) {
-			String result = httpRequestThisThread(1, GET_NEWS_DETAILS, false);
+			String result = httpRequestThisThread(1, params[0], false);
 			if (isStop) {
 				return null;
 			} else {
