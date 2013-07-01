@@ -7,6 +7,7 @@ import java.util.Date;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -213,6 +214,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
         LogInfo.LogOut("position:" + position);
         if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
             l = System.currentTimeMillis();
+            Log.d("LKP", "id01=" + manager.news.get(position).id);
             manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, manager.news.get(position).id, 0));
         }
     }

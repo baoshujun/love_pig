@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.os.Message;
+import android.util.Log;
 import android.widget.ViewAnimator;
 
 import com.lovepig.engine.NewsEngine;
@@ -123,6 +124,7 @@ public class OnlineNewsManager extends BaseManager {
             }
             showLoading();
             int id=msg.arg1;
+            Log.d("LKP", "id--->" + id);
             ArrayList<NewsDetailModel> datas=dbEngine.getNewsDetail(id);
             if (datas.size()>0)
             {
