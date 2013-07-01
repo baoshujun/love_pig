@@ -30,6 +30,7 @@ import com.lovepig.manager.UserInfoManager;
 import com.lovepig.manager.UserManager;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.utils.ConfigInfo;
+import com.lovepig.utils.LogInfo;
 
 public class Application extends BaseActivity  implements ServiceConnection,OnClickListener{
 	public static Application application;
@@ -107,7 +108,7 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 				}
 				// 检查版本是否更新
 				
-				SystemClock.sleep(5000);
+				SystemClock.sleep(500000);
             
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -189,7 +190,7 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 
 	@Override
 	public void onServiceDisconnected(ComponentName name) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
 		
 	}
 	
@@ -206,8 +207,7 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 
 	@Override
 	public void onClick(View v) {
-		initTask.cancel(true);
-		initTask=null;
+		LogInfo.LogOut("11","onclick..................");
 		isEnterNews=true;
 		enterNews();
 		new Thread(new Runnable() {

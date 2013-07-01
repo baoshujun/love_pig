@@ -121,8 +121,10 @@ public class BoarMallManager extends BaseManager implements OnItemClickListener 
 
 	@Override
 	public ViewAnimator getMainDC() {
-		boarMallView = new BoarMallView(context, R.layout.boar_mall_view, this);
-		dcEngine.setMainDC(boarMallView);
+		if (boarMallView==null) {
+			boarMallView = new BoarMallView(context, R.layout.boar_mall_view, this);
+			dcEngine.setMainDC(boarMallView);
+		}
 //		boarMallDetailView = new (context, R.layout.boar, this);
 		return super.getMainDC();
 	}
