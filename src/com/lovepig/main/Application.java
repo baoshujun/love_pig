@@ -62,8 +62,10 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 		}
 		
 		initImage=(ImageView)findViewById(R.id.initImage);
+		LogInfo.LogOut("11","initImage..................");
 		if (initImage!=null) {
 			initImage.setOnClickListener(this);
+			LogInfo.LogOut("11","onclick..................");
 		}
 		application = this;
 		// int tabID = getIntent().getIntExtra("tabID", -1);
