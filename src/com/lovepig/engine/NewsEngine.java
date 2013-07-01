@@ -230,7 +230,7 @@ public class NewsEngine extends BaseEngine {
 					news = new NewsModel();
 					news.paserJson(newsarray[i]);
 					manager.dbEngine.saveNews(news, catId);
-					if (news.top == 1) {
+					if (news.top) {
 						topList.add(news);
 					} else {
 						newsState.newslist.add(news);
@@ -238,7 +238,7 @@ public class NewsEngine extends BaseEngine {
 				}
 				if (topList.size()>0) {
 				    NewsModel model = topList.get(0);
-				    model.top = 1;
+				    model.top = true;
 				    model.topNews = topList;
 				    LogInfo.LogOut(LogTag, "topNews size:" + topList.size());
 				    newsState.newslist.add(0, model);

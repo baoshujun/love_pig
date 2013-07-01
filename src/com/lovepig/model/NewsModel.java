@@ -9,7 +9,7 @@ public class NewsModel {
 	public String summary;// 简介
 	public int order;
 	public int id;
-	public int top;
+	public boolean top;
 	public String iconPath;//新闻图片
     public ArrayList<NewsModel> topNews;//头条列表
     
@@ -46,7 +46,7 @@ public class NewsModel {
     	this.iconPath = json.getString("iconUri");
     	this.order=json.getInt("order");
     	this.title = json.getString("title");
-    	this.top= json.getInt("top");
+    	this.top= json.getBoolean("top");
     	return this;
     }
 }

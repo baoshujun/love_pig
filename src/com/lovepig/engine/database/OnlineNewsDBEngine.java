@@ -100,11 +100,15 @@ public class OnlineNewsDBEngine extends DBEngine {
                     lm.title = cursor.getString(cursor.getColumnIndex("title"));
                     lm.order = cursor.getInt(cursor.getColumnIndex("newsOrder"));
                     lm.iconPath = cursor.getString(cursor.getColumnIndex("iconPath"));
-                    lm.top = cursor.getInt(cursor.getColumnIndex("top"));
+                    if(cursor.getInt(cursor.getColumnIndex("top")) == 1){
+                    	lm.top = true;
+                    } else {
+                    	lm.top = false;
+                    }
                     lm.summary = cursor.getString(cursor.getColumnIndex("summary"));
 
                     LogInfo.LogOut("getOnlineNews................." + lm.title);
-                    if (lm.top == 1) {
+                    if (lm.top) {
                         tops.add(lm);
                     } else {
                         programs.add(lm);
