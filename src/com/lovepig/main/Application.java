@@ -110,7 +110,7 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 				}
 				// 检查版本是否更新
 				
-				SystemClock.sleep(500000);
+				SystemClock.sleep(500);
             
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -126,16 +126,16 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 				return;
 			}
 			enterNews();
-			new Thread(new Runnable() {
-
-				@Override
-				public void run() {
-					while (true) {
-						onlineNewsManager.sendEmptyMessage(1000);
-						SystemClock.sleep(50000);
-					}
-				}
-			}).start();
+//			new Thread(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					while (true) {
+//						onlineNewsManager.sendEmptyMessage(1000);
+//						SystemClock.sleep(50000);
+//					}
+//				}
+//			}).start();
 
 			onlineNewsManager.updateVersion();
 			
@@ -160,11 +160,11 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (currentManager instanceof OnlineNewsManager) {// 隐藏菜单
-				if (((OnlineNewsManager) currentManager).isHiddenMenu()) {
-					return true;
-				}
-			}
+//			if (currentManager instanceof OnlineNewsManager) {// 隐藏菜单
+//				if (((OnlineNewsManager) currentManager).isHiddenMenu()) {
+//					return true;
+//				}
+//			}
 			if (currentManager != null && !currentManager.backOnKeyDown()) {
 				if (managerStack.size() > 0) {
 					managerStack.pop();
@@ -212,16 +212,16 @@ public class Application extends BaseActivity  implements ServiceConnection,OnCl
 		LogInfo.LogOut("11","onclick..................");
 		isEnterNews=true;
 		enterNews();
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				while (true) {
-					onlineNewsManager.sendEmptyMessage(1000);
-					SystemClock.sleep(5000);
-				}
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				while (true) {
+//					onlineNewsManager.sendEmptyMessage(1000);
+//					SystemClock.sleep(5000);
+//				}
+//			}
+//		}).start();
 
 		onlineNewsManager.updateVersion();
 		

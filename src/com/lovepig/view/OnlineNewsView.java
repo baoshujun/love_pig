@@ -235,7 +235,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
             // tlcyGallery.scrollRight();
             break;
         case R.id.leftBtn:
-            Application.application.finish();
+            manager.back();
             break;
         case R.id.rightBtn:
             manager.sendMessage(manager.obtainMessage(R.id.rightBtn));

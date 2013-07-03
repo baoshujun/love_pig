@@ -285,15 +285,15 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         }
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-            mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//
+//            mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 
     public boolean isBack() {
         if (menuBgLayout.getVisibility() == View.VISIBLE) {

@@ -397,20 +397,20 @@ public class OnlineNewsManager extends BaseManager {
 
    
 
-    @Override
-    public boolean backOnKeyDown() {
-        if (getNowShownDC() == detailsDC) {
-            Loading_For_Detail_Flag = 0;
-            //
-            if (isTop == 1) {
-                news.removeAll(topNews);
-                news.add(0, headModel);
-            }
-            dcEngine.setMainDC(mainDC);
-            return true;
-        }
-        return super.backOnKeyDown();
-    }
+//    @Override
+//    public boolean backOnKeyDown() {
+//        if (getNowShownDC() == detailsDC) {
+//            Loading_For_Detail_Flag = 0;
+//            //
+//            if (isTop == 1) {
+//                news.removeAll(topNews);
+//                news.add(0, headModel);
+//            }
+//            dcEngine.setMainDC(mainDC);
+//            return true;
+//        }
+//        return super.backOnKeyDown();
+//    }
 
    
 
