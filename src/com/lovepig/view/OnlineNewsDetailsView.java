@@ -9,7 +9,6 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +17,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.lovepig.engine.ImageEngine;
-import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsDetailModel;
@@ -275,7 +273,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
         final NewsDetailModel news = model;
         mTitle.setText(news.title);
-        mTimeProvenance.setText(news.cTime + (TextUtils.isEmpty(news.cFrom) ? "" : "    来源: " + news.cFrom));
+        mTimeProvenance.setText( (TextUtils.isEmpty(news.cFrom) ? "" : "    来源: " + news.cFrom)+"\t"+news.cTime );
         LogInfo.LogOut("字数:" + (news.content == null ? 0 : news.content.length()));
         mDetails.setText("");
         postDelayed(new Runnable() {

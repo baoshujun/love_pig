@@ -123,12 +123,12 @@ public class NewsEngine extends BaseEngine {
      * @param fontSize
      * @param type
      */
-    public void moreNews(int catId, int limit, int maxId) {
+    public void moreNews(int catId, int limit, int maxId, String upMore) {
         this.catId = catId;
         StringBuilder mStrBuilder = new StringBuilder("catId=");
         mStrBuilder.append(catId).append("&limit=").append(limit).append("&maxId=").append(maxId);
         mGetMoreNewsTask = new getMoreNewsTask();
-        mGetMoreNewsTask.execute(mStrBuilder.toString());
+        mGetMoreNewsTask.execute(mStrBuilder.toString(), upMore);
     }
 
     /**
@@ -143,7 +143,6 @@ public class NewsEngine extends BaseEngine {
             mGetMoreNewsTask.stop();
             mGetMoreNewsTask = null;
         }
-        manager.CancelRefresh();
     }
 
     /**
@@ -176,13 +175,6 @@ public class NewsEngine extends BaseEngine {
                 if (result.code != null && result.code.equals("hasnews")) {
                     manager.SetLatestNews(result.newslist);
                     manager.getNewsComplete(0);
-                    if (result.hasBtn != null) {
-                        // 有更多按钮
-                        manager.SetMoreBtn(true);
-                    } else {
-                        // 没有更多按钮
-                        manager.SetMoreBtn(false);
-                    }
                 } else if (result.code != null && result.code.equals("neterror")) {
                     // 网络错误
                     manager.ShowNewsError("网络不可用,请检查您的网络！");
@@ -245,8 +237,8 @@ public class NewsEngine extends BaseEngine {
                     newsState.newslist.add(news);
                 }
                 Collections.sort(newsState.newslist, new NewsModelOrder());
-                
-                if (topList.size() > 0&&flag==0) {
+
+                if (topList.size() > 0 && flag == 0) {
                     NewsModel model = topList.get(0);
                     model.top = true;
                     model.topNews = topList;
@@ -267,10 +259,12 @@ public class NewsEngine extends BaseEngine {
      */
     class getMoreNewsTask extends AsyncTask<String, Void, NewsState> {
         boolean isStop;
+        boolean isUpMore = false;
 
         @Override
         protected NewsState doInBackground(String... params) {
             String result = httpRequestThisThread(1, GET_NEWS + params[0], false);
+            isUpMore = params[0].equals("upMore");
             if (isStop) {
                 return null;
             } else {
@@ -281,26 +275,22 @@ public class NewsEngine extends BaseEngine {
         @Override
         protected void onPostExecute(NewsState result) {
             if (!isStop) {
+                if (isUpMore) {
+                    manager.getUpNewsComplete(result.newslist);
+                    return;
+                }
+
                 if (result.code != null && result.code.equals("hasnews")) {
                     for (NewsModel news : result.newslist) {
                         manager.onLoadoldMoreNews(news);
                     }
                     manager.getNewsComplete(1);
-                    // manager.ShowDetail();
-                    if (result.hasBtn != null) {
-                        // 有更多按钮
-                        manager.SetMoreBtn(true);
-                    } else {
-                        // 没有更多按钮
-                        manager.SetMoreBtn(false);
-                    }
                 } else if (result.code != null && result.code.equals("neterror")) {
                     // 网络错误
                     manager.ShowNewsError2("网络不可用,请检查您的网络！");
                 } else {
                     // 服务器正常返回但没内容
                     manager.ShowNewsError2(result.code);
-                    manager.SetMoreBtn(false);
                 }
 
             }
@@ -456,7 +446,7 @@ public class NewsEngine extends BaseEngine {
         VersionUpdateTask mPushNewsTask = new VersionUpdateTask();
         mPushNewsTask.execute();
     }
-    
+
     class NewsModelOrder implements Comparator<NewsModel> {
 
         public int compare(NewsModel newsModel_1, NewsModel newsModel_2) {

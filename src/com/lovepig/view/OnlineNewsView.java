@@ -6,7 +6,6 @@ import java.util.Date;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,7 +29,6 @@ import com.lovepig.widget.TlcyListLayout.OnRefreshListener;
 
 public class OnlineNewsView extends BaseView implements onVerticalListViewListener, OnItemClickListener, OnRefreshListener, TlcyGalleryListener {
 
-    private static final int[] pics = { R.drawable.advers, R.drawable.advers, R.drawable.advers };
     MyGallery myGallery;
     ImageView qian, hou;
     TextView title;
@@ -46,12 +44,10 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
     TextView timeText;
     private Button backBtn, userInfo;
     private OnlineNewsFirstView firstView;
-    private Context context;
 
     public OnlineNewsView(Context context, int layoutId, OnlineNewsManager manager) {
         super(context, layoutId, manager);
         this.manager = manager;
-        this.context = context;
         title = (TextView) findViewById(R.id.title);
         title.setText(context.getString(R.string.News));
         timeText = (TextView) findViewById(R.id.timeText);
@@ -64,7 +60,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
         qian.setOnClickListener(this);
 
         baseVerticalListView = new BaseVerticalListView(this);
-        baseVerticalListView.setPullType(3);
+        baseVerticalListView.setPullType(1);
         baseVerticalListView.setOnVertivalListViewListener(this);
         listView = baseVerticalListView.getListView();
 
@@ -88,7 +84,6 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
 
         listView.setFocusable(false);
         listView.setOnItemClickListener(this);
-        setLoadMoreButton(false);
         userInfo = (Button) this.findViewById(R.id.rightBtn);
         userInfo.setOnClickListener(this);
     }
@@ -103,8 +98,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
      */
     @Override
     public void onRefresh() {
-        SystemClock.sleep(500);
-        CancelRefresh();
+        manager.sendEmptyMessage(OnlineNewsManager.STATE_UP_LOADMORE);
     }
 
     /**
@@ -119,7 +113,6 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
             mNewsGalleryModels = mGallery;
             this.index = index;
             myGallery.setAdapter(R.layout.item, R.drawable.button_1, R.dimen.fenlei_item_width, R.dimen.fenlei_item_height, mGalleryStr);
-            LogInfo.LogOut("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx---tlcyGallery.isScroll() =" + myGallery.isScroll());
             if (!myGallery.isScroll()) {
                 hou.setVisibility(GONE);
                 qian.setVisibility(GONE);
@@ -144,8 +137,8 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
      * 更新界面数据
      */
     public void UpdataData() {
-         baseVerticalListView.onComplete();
-         adapter.notifyDataSetChanged();
+        baseVerticalListView.onComplete();
+        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -164,15 +157,6 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
     }
 
     /**
-     * 设置是否需要更多按钮
-     * 
-     * @param hasMoreBtn
-     */
-    public void setLoadMoreButton(boolean hasMoreBtn) {
-        // pulldownview.setLoadMoreButton(hasMoreBtn);
-    }
-
-    /**
      * 获取最新数据
      */
     public void onRefreshComplete(String mDate) {
@@ -181,8 +165,6 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
             firstView.initData(manager.news.get(0));
         }
         UpdataData();
-        // setLoadMoreButton(true);
-        // pulldownview.onRefreshComplete(mDate);
     }
 
     /**
@@ -190,22 +172,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
      */
     public void onLoadingComplete() {
         UpdataData();
-        // pulldownview.onLoadMoreComplete();
 
-    }
-
-    /**
-     * 已经没有更多了
-     */
-    public void onLoadingNoMore() {
-        setLoadMoreButton(false);
-    }
-
-    /**
-     * 取消刷新
-     */
-    public void CancelRefresh() {
-        // pulldownview.onLoadMoreComplete();
     }
 
     // 新闻列表被点击

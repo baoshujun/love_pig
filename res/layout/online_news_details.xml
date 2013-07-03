@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dip"
                 android:layout_marginRight="15dip"
-                android:gravity="center_horizontal"
+                android:gravity="left"
                 android:text="@string/ multi_media"
                 android:textSize="@dimen/news_detail_title_size" />
 
@@ -39,7 +39,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/onlinedetailstitle"
-                android:gravity="center_horizontal"
+                android:gravity="left"
                 android:text="@string/abouthelp" />
 
             <ImageView
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/onlinedetailsimg"
                 android:layout_marginTop="5dip"
-                android:gravity="center_horizontal"
+                android:gravity="left"
                 android:textColor="@color/btn_color_title"
                 android:textSize="@dimen/news_detail_content_size" />
 

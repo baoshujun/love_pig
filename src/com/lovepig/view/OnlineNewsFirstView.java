@@ -53,60 +53,37 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
      * 初始化数据
      */
     public void initData(NewsModel news) {
-        boolean isUpdate = false;
-        newsManager.isTop = 0;
-        if (newsManager.topNews.size() > 0) {
-            if (news.topNews == null) {// 无头条,将第一条当做头条
-                if (newsManager.topNews.size() > 1 || newsManager.topNews.get(0).id != news.id) {
-                    isUpdate = true;
-                }
-            } else {
-                newsManager.isTop = 1;
-                if (newsManager.topNews.size() != news.topNews.size()) {
-                    isUpdate = true;
-                } else {
-                    for (int i = 0; i < news.topNews.size() && i < 4; i++) {
-                        if (newsManager.topNews.get(i).id != news.topNews.get(i).id) {
-                            isUpdate = true;
-                        }
-                    }
-                }
-            }
+        newsManager.topNews.clear();
+        if (news.topNews == null) {// 无头条,将第一条当做头条,第一条从newslist中删除
+            newsManager.topNews.add(news);
         } else {
-            isUpdate = true;
-        }
-
-        if (isUpdate) {
-            LogInfo.LogOut("OnlineNewsAdapter", "OnlineNewsFirstDC-->initData-->有头条新闻->isUpdate=true");
-            newsManager.topNews.clear();
-            if (news.topNews == null) {// 无头条,将第一条当做头条,第一条从newslist中删除
-                newsManager.topNews.add(news);
-            } else {
-                newsManager.isTop = 1;
-                newsManager.headModel = news;
-                for (int i = 0; i < news.topNews.size() && i < 4; i++) {
-                    newsManager.topNews.add(news.topNews.get(i));
-                }
+            newsManager.headModel = news;
+            for (int i = 0; i < news.topNews.size() && i < 4; i++) {
+                newsManager.topNews.add(news.topNews.get(i));
             }
-            ImageView iv1 = new ImageView(context);
-            iv1.setScaleType(ScaleType.FIT_XY);
-            listview.add(iv1);
-            ImageView iv2 = new ImageView(context);
-            iv2.setScaleType(ScaleType.FIT_XY);
-            listview.add(iv2);
-            ImageView iv3 = new ImageView(context);
-            iv3.setScaleType(ScaleType.FIT_XY);
-            listview.add(iv3);
-            ImageView iv4 = new ImageView(context);
-            iv4.setScaleType(ScaleType.FIT_XY);
-            listview.add(iv4);
-            adapter.notifyDataSetChanged();
-            viewPager.setCurrentItem(0);
-            dianLayout.setVisibility(View.VISIBLE);
-            // textView.setText(newsManager.topNews.get(currentViewID).title);
-            // textView.setText(newsManager.topNews.get(0).title);
         }
+        ImageView iv1 = new ImageView(context);
+        iv1.setScaleType(ScaleType.FIT_XY);
+        listview.add(iv1);
+        ImageView iv2 = new ImageView(context);
+        iv2.setScaleType(ScaleType.FIT_XY);
+        listview.add(iv2);
+        ImageView iv3 = new ImageView(context);
+        iv3.setScaleType(ScaleType.FIT_XY);
+        listview.add(iv3);
+        ImageView iv4 = new ImageView(context);
+        iv4.setScaleType(ScaleType.FIT_XY);
+        listview.add(iv4);
+        adapter.notifyDataSetChanged();
+        viewPager.setCurrentItem(0);
+        dianLayout.setVisibility(View.VISIBLE);
+
         currentViewID = 0;
+        dianView[0].setBackgroundResource(R.drawable.dian_bg);
+        dianView[1].setBackgroundResource(R.drawable.dian_bg);
+        dianView[2].setBackgroundResource(R.drawable.dian_bg);
+        dianView[3].setBackgroundResource(R.drawable.dian_bg);
+        dianView[currentViewID].setBackgroundResource(R.drawable.dian);
     }
 
     public void clearData() {
