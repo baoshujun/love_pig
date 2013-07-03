@@ -146,6 +146,21 @@ public abstract class BaseActivity extends Activity {
      * 屏蔽过快的按键点击
      */
     long lastKeyDown = 0;
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+      
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (currentManager != null) {
+                if (Math.abs(System.currentTimeMillis() - lastKeyDown) > 500) {
+                    lastKeyDown = System.currentTimeMillis();
+                    currentManager.back();
+                    return true;
+                }
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+ 
     /**
      * 返回程序主界面
      */

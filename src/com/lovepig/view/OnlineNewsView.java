@@ -145,7 +145,7 @@ public class OnlineNewsView extends BaseView implements onVerticalListViewListen
      */
     public void UpdataData() {
          baseVerticalListView.onComplete();
-        adapter.notifyDataSetChanged();
+         adapter.notifyDataSetChanged();
     }
 
     /**

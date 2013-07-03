@@ -1,5 +1,7 @@
 package com.lovepig.pivot;
 
+import com.lovepig.utils.LogInfo;
+
 import android.content.Context;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -96,7 +98,7 @@ public class ViewEngine implements AnimationListener {
     /**
      * 不在动画中,用于判断是否相应click
      * 
-     * @author  
+     * @author
      */
     public boolean notAnimition() {
         return isClickEnabled;
@@ -106,9 +108,10 @@ public class ViewEngine implements AnimationListener {
      * 初始化之后,将初始化完毕的MainDC呈现,作为最底层的DC,重复back()方法N次后显示此DC,quit()方法直接返回到此DC,
      * 要在acitvity中的setContentView()方法前设置
      * 
-     * @author  
+     * @author
      */
     public void setMainDC(BaseView mainDC) {
+        LogInfo.LogOut("setMainDC..................");
         viewSwiter.removeAllViews();
         viewSwiter.addView(mainDC, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
         viewSwiter.setAnimation(alphaAnimation);
@@ -117,6 +120,7 @@ public class ViewEngine implements AnimationListener {
     }
 
     public void setInitDC(BaseView initDC) {
+        LogInfo.LogOut("setInitDC..................");
         viewSwiter.removeAllViews();
         viewSwiter.addView(initDC, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
         viewSwiter.setAnimation(scaleAnimation);
@@ -127,7 +131,7 @@ public class ViewEngine implements AnimationListener {
     /**
      * 用于设置到activity中
      * 
-     * @author  
+     * @author
      */
     public ViewAnimator getContentView() {
         /***** 新华频媒只用到了当前显示的DC判断,如果需要,请将viewSwiter中所有子项都执行checkOrientation()方法 *****************/
@@ -140,7 +144,7 @@ public class ViewEngine implements AnimationListener {
     /**
      * 判断正在显示的dc是否是某dc
      * 
-     * @author  
+     * @author
      */
     public boolean isShowDC(BaseView dc) {
         if (viewSwiter.getCurrentView() == dc) {
@@ -182,20 +186,23 @@ public class ViewEngine implements AnimationListener {
     }
 
     private void setClickEnabled(boolean isCleckEnabled) {
-        if (isCleckEnabled) {
+        if (!isCleckEnabled) {
             viewSwiter.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    LogInfo.LogOut(" isClickEnabled = true;");
                     isClickEnabled = true;
                 }
             }, 200);
-           viewSwiter.setClickable(true);
+//            viewSwiter.setClickable(true);
         } else {
             isClickEnabled = false;
+            LogInfo.LogOut(" isClickEnabled = false;");
         }
     }
 
     public boolean back() {
+        LogInfo.LogOut("back....................");
         if (viewSwiter.getChildCount() > 1) {
             final BaseView toShow = (BaseView) viewSwiter.getChildAt(viewSwiter.getChildCount() - 2);
             toShow.onShow();
@@ -234,9 +241,9 @@ public class ViewEngine implements AnimationListener {
         dc.onShow();
         fromManager = from;
         toManager = to;
-        if (type == 0) {// 专为播放界面进入别的界面设置
-            toManager.sendMessageDelayed(toManager.obtainMessage(BaseManager.MSG_ENTER_IN_END), 500);
-        }
+//        if (type == 0) {// 专为播放界面进入别的界面设置
+//            toManager.sendMessageDelayed(toManager.obtainMessage(BaseManager.MSG_ENTER_IN_END), 500);
+//        }
     }
 
     public void showDC(BaseView dc) {
@@ -273,6 +280,7 @@ public class ViewEngine implements AnimationListener {
     }
 
     public void changSkin(BaseView dc) {
+        LogInfo.LogOut("viewSwiter...changSkin.................");
         dc.invalidate();
         viewSwiter.removeAllViews();
         viewSwiter.addView(dc);

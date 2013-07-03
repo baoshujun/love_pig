@@ -10,6 +10,7 @@ import android.widget.ViewAnimator;
 
 import com.lovepig.engine.NewsEngine;
 import com.lovepig.engine.database.OnlineNewsDBEngine;
+import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.model.NewsDetailModel;
 import com.lovepig.model.NewsGalleryModel;
@@ -20,33 +21,34 @@ import com.lovepig.utils.LogInfo;
 import com.lovepig.utils.Utils;
 import com.lovepig.view.OnlineNewsDetailsView;
 import com.lovepig.view.OnlineNewsView;
+
 /**
  * 
  * 新闻
- *
+ * 
  */
 public class OnlineNewsManager extends BaseManager {
-	
-    public static final int DEFAULT_NEW_LENGTH = 20;// 默认取20条新闻
+
+    public static final int DEFAULT_NEW_LENGTH = 20;
     public ArrayList<NewsModel> news = new ArrayList<NewsModel>();
     public ArrayList<NewsGalleryModel> mGallerys = new ArrayList<NewsGalleryModel>();
-    public static final int STATE_REFRESH = 1;// 刷新获取最新新闻
-    public static final int STATE_LOADMORE = 2;// 加载更多
-    public static final int STATE_DETAILSBACK = 3;// 详情页面返回
-    public static final int STATE_SHOWNEWS = 4;// 查看新闻详情
-    public static final int STATE_GALLERY_CLICKED = 5;// 新闻分类被点击
-    public static final int STATE_GALLERY_GETDATA_FIRST = 6;// 从数据库读取新闻数据，并通知更新新闻类型
-    public static final int STATE_UPDATE = 7;// 更新界面
-    public static final int STATE_UPDATE_AFTER_DB = 8;// 从数据库查询缓存后到网络更新types
-    public static final int STATE_UPDATE_AFTER_TYPES = 9;// 从从网络更新types后
-    public static final int WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW = 14;// 由top新闻进入新闻详情
+    public static final int STATE_REFRESH = 1;
+    public static final int STATE_LOADMORE = 2;
+    public static final int STATE_DETAILSBACK = 3;
+    public static final int STATE_SHOWNEWS = 4;
+    public static final int STATE_GALLERY_CLICKED = 5;
+    public static final int STATE_GALLERY_GETDATA_FIRST = 6;
+    public static final int STATE_UPDATE = 7;
+    public static final int STATE_UPDATE_AFTER_DB = 8;
+    public static final int STATE_UPDATE_AFTER_TYPES = 9;
+    public static final int WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW = 14;
 
     private OnlineNewsView mainDC;
     private OnlineNewsDetailsView detailsDC;
     public NewsEngine engine;
-    private int Loading_For_Detail_Flag;// -1 表示获取最新 大于0表示加载更多
-    private int typeIndex;// 当前选择的新闻栏目
-    public int isTop;// 记录是否有头条新闻
+    private int Loading_For_Detail_Flag;
+    private int typeIndex;
+    public int isTop;
     public ArrayList<NewsModel> topNews = new ArrayList<NewsModel>();
     public boolean isComeFromTop = false;
     public NewsModel headModel = new NewsModel();
@@ -63,13 +65,16 @@ public class OnlineNewsManager extends BaseManager {
             dbEngine = new OnlineNewsDBEngine();
         }
     }
+
     /**
      * 初始化新闻数据
      */
     @Override
     public void initData() {
         try {
-            LogInfo.LogOut("newsManager-->typeIndex:" + typeIndex);
+            if (news != null && news.size() > 0) {
+                return;
+            }
             mGallerys = engine.getNewsGalleryModels();
             mainDC.UpdateGallery(mGallerys, typeIndex);
             sendMessage(obtainMessage(STATE_REFRESH, typeIndex, 0));
@@ -77,6 +82,7 @@ public class OnlineNewsManager extends BaseManager {
             e.printStackTrace();
         }
     }
+
     @SuppressWarnings("unchecked")
     @Override
     public void handleMessage(Message msg) {
@@ -97,44 +103,43 @@ public class OnlineNewsManager extends BaseManager {
             break;
         case STATE_LOADMORE:
             try {
-                engine.moreNews(mGallerys.get(typeIndex).id, NewsEngine.NEWS_LIMIT_LENGTH, news.get(news.size() - 1).id);
+                int maxId = 0;
+                for (int i = 0; i < news.size(); i++) {
+                    if (maxId < news.get(i).id) {
+                        maxId = news.get(i).id;
+                    }
+
+                }
+                engine.moreNews(mGallerys.get(typeIndex).id, NewsEngine.NEWS_LIMIT_LENGTH, maxId);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             break;
         case STATE_DETAILSBACK:
             if (getNowShownDC() == detailsDC) {
-                Loading_For_Detail_Flag = 0;
-                //
-                if (isTop == 1) {
-                    news.removeAll(topNews);
-                    news.add(0, headModel);
-                }
                 dcEngine.setMainDC(mainDC);
             } else {
-                back();
+                // back();
+                Application.application.finish();
             }
             break;
         case STATE_SHOWNEWS:// 获取新闻详情页面
             if (detailsDC == null) {
                 detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
             }
-            if (dcEngine.getNowDC() != detailsDC) {
-                enterSubDC(detailsDC);
-            }
+            enterSubDC(detailsDC);
             showLoading();
-            int id=msg.arg1;
+            int id = msg.arg1;
             Log.d("LKP", "id--->" + id);
-            ArrayList<NewsDetailModel> datas=dbEngine.getNewsDetail(id);
-            if (datas.size()>0)
-            {
-            	NewsDetailModel model=datas.get(0);
-            	model.isFavorate=true;
-            	model.id=id;
-				showNewsDetails(model);
-			}else{
-				engine.fetchNewsDetail(id);
-			}
+            ArrayList<NewsDetailModel> datas = dbEngine.getNewsDetail(id);
+            if (datas.size() > 0) {
+                NewsDetailModel model = datas.get(0);
+                model.isFavorate = true;
+                model.id = id;
+                showNewsDetails(model);
+            } else {
+                engine.fetchNewsDetail(id);
+            }
             break;
         case STATE_UPDATE:
             // 如果msg.arg1为1则需要设置更多按钮
@@ -184,32 +189,33 @@ public class OnlineNewsManager extends BaseManager {
             break;
 
         case WHAT_NEWSDETAIL_ENTER_FROM_TOPNEW:// 由顶部新闻进入新闻详情
-            if (detailsDC == null) {
-                detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
-            }
-            if (dcEngine.getNowDC() != detailsDC) {
-                enterSubDC(detailsDC);
-            }
-            int index = msg.arg1;
-            ArrayList<NewsModel> tops = (ArrayList<NewsModel>) msg.obj;
-            if (tops != null && index < tops.size()) {
-                showLoading();
-                 id=tops.get(msg.arg1).id;
-                 datas=dbEngine.getNewsDetail(id);
-                if (datas.size()>0)
-                {
-                	NewsDetailModel model=datas.get(0);
-                	model.isFavorate=true;
-    				showNewsDetails(model);
-    			}else{
-    				engine.fetchNewsDetail(id);
-    			}
-            }
+            // if (detailsDC == null) {
+            // detailsDC = new OnlineNewsDetailsView(context,
+            // R.layout.online_news_details, this);
+            // }
+            // if (dcEngine.getNowDC() != detailsDC) {
+            // enterSubDC(detailsDC);
+            // }
+            // int index = msg.arg1;
+            // ArrayList<NewsModel> tops = (ArrayList<NewsModel>) msg.obj;
+            // if (tops != null && index < tops.size()) {
+            // showLoading();
+            // id=tops.get(msg.arg1).id;
+            // datas=dbEngine.getNewsDetail(id);
+            // if (datas.size()>0)
+            // {
+            // NewsDetailModel model=datas.get(0);
+            // model.isFavorate=true;
+            // showNewsDetails(model);
+            // }else{
+            // engine.fetchNewsDetail(id);
+            // }
+            // }
             break;
-            
+
         case 1000:
-        	exePushNews();
-        	break;
+            // exePushNews();
+            break;
         }
     }
 
@@ -226,17 +232,17 @@ public class OnlineNewsManager extends BaseManager {
         dismissLoading();
 
     }
+
     /**
      * 网络错误或无新闻
      * 
      * @param code
      */
     public void ShowNewsError2(String code) {
-       
+
         mainDC.CancelRefresh();
         mainDC.UpdataData();
         ShowDetail();
-       
 
     }
 
@@ -297,6 +303,7 @@ public class OnlineNewsManager extends BaseManager {
             Loading_For_Detail_Flag = 0;
         }
     }
+
     /**
      * 最新新闻
      * 
@@ -380,7 +387,6 @@ public class OnlineNewsManager extends BaseManager {
         mainDC.CancelRefresh();
     }
 
-
     /**
      * 新闻类型是否已经更新
      * 
@@ -392,10 +398,6 @@ public class OnlineNewsManager extends BaseManager {
         }
         return true;
     }
-
-   
-
-   
 
     @Override
     public boolean backOnKeyDown() {
@@ -411,8 +413,6 @@ public class OnlineNewsManager extends BaseManager {
         }
         return super.backOnKeyDown();
     }
-
-   
 
     @Override
     public void onLoadingCacel() {
@@ -438,9 +438,10 @@ public class OnlineNewsManager extends BaseManager {
             detailsDC = new OnlineNewsDetailsView(context, R.layout.online_news_details, this);
         }
         dcEngine.setMainDC(mainDC);
-        
+
         return super.getMainDC();
     }
+
     public void showNewsDetails(NewsDetailModel ndm) {
         dismissLoading();
         if (ndm != null) {
@@ -456,12 +457,12 @@ public class OnlineNewsManager extends BaseManager {
         }
         return false;
     }
-    
-    public void exePushNews(){
-    	engine.pushNews(0, 0, Utils.returnNowTime());
+
+    public void exePushNews() {
+        engine.pushNews(0, 0, Utils.returnNowTime());
     }
-    
-    public void updateVersion(){
-    	 engine.updateVersion();
+
+    public void updateVersion() {
+        engine.updateVersion();
     }
 }

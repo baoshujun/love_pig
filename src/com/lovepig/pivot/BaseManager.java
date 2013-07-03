@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.ViewAnimator;
 import com.lovepig.main.R;
+import com.lovepig.utils.LogInfo;
 import com.lovepig.widget.TlcyDialog;
 import com.lovepig.widget.TlcyDialog.TlcyDialogListener;
 
@@ -63,6 +64,7 @@ public abstract class BaseManager extends Handler {
      * 用于按钮被点击时做相应
      */
     public boolean back() {
+        LogInfo.LogOut(" baseManager back....................");
         if (dcEngine.back()) {
             return true;
         } else {
@@ -87,6 +89,7 @@ public abstract class BaseManager extends Handler {
      * 用于back按键被点击时做相应
      */
     public boolean backOnKeyDown() {
+        LogInfo.LogOut("backOnKeyDown....................");
         return dcEngine.back();
     };
 
@@ -101,9 +104,10 @@ public abstract class BaseManager extends Handler {
      * 模块内界面前进跳转
      */
     public void enterSubDC(BaseView dc) {
-        if (dcEngine.notAnimition()) {
-            dcEngine.showDC(dc, 0, this, this);
-        }
+//        if (dcEngine.notAnimition()) {
+//            dcEngine.showDC(dc, 0, this, this);
+//        }
+        dcEngine.showDC(dc, 0, this, this);
     }
 
     /**

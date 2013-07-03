@@ -9,6 +9,7 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -60,10 +61,16 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         mBackBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//                /EmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
-            	Application.application.currentManager.back();
+                mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
             }
         });
+//        new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                /EmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
+//            	Application.application.currentManager.back();
+//            }
+//        });
         findViewById(R.id.title).setVisibility(View.GONE);
         mTitle = (TextView) findViewById(R.id.onlinedetailstitle);
         title = (TextView) findViewById(R.id.title);
@@ -288,7 +295,6 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-
             mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
             return true;
         }
