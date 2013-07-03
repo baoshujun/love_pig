@@ -144,10 +144,10 @@ public abstract class BaseView extends FrameLayout implements OnClickListener, O
      * 检查DC生成后,是否发生过屏幕旋转
      */
     public void checkOrientation(){
-        if(getResources().getConfiguration().orientation!=orientation){
-            orientation=getResources().getConfiguration().orientation;
-            onConfigurationChanged(getResources().getConfiguration());
-        }
+//        if(getResources().getConfiguration().orientation!=orientation){
+//            orientation=getResources().getConfiguration().orientation;
+//            onConfigurationChanged(getResources().getConfiguration());
+//        }
     }
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {

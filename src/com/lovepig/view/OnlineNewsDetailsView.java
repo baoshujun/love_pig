@@ -17,7 +17,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.lovepig.engine.ImageEngine;
-import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsDetailModel;
@@ -60,10 +59,16 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         mBackBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//                /EmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
-            	Application.application.currentManager.back();
+                mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
             }
         });
+//        new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                /EmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
+//            	Application.application.currentManager.back();
+//            }
+//        });
         findViewById(R.id.title).setVisibility(View.GONE);
         mTitle = (TextView) findViewById(R.id.onlinedetailstitle);
         title = (TextView) findViewById(R.id.title);
@@ -268,7 +273,7 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         LogInfo.LogOut("OnlineNewsAdapter", "ShowNews-->pos:" + pos);
         final NewsDetailModel news = model;
         mTitle.setText(news.title);
-        mTimeProvenance.setText(news.cTime + (TextUtils.isEmpty(news.cFrom) ? "" : "    来源: " + news.cFrom));
+        mTimeProvenance.setText( (TextUtils.isEmpty(news.cFrom) ? "" : "    来源: " + news.cFrom)+"\t"+news.cTime );
         LogInfo.LogOut("字数:" + (news.content == null ? 0 : news.content.length()));
         mDetails.setText("");
         postDelayed(new Runnable() {
@@ -285,15 +290,15 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
         }
     }
 
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
-//
-//            mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
-//            return true;
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            mManager.sendEmptyMessage(OnlineNewsManager.STATE_DETAILSBACK);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     public boolean isBack() {
         if (menuBgLayout.getVisibility() == View.VISIBLE) {

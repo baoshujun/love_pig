@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,12 +28,8 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
     List<View> listview = new ArrayList<View>();
     MyPagerAdapter adapter;
 
-    private NewsModel currentNews;
     private int currentViewID;
-    private int COUNT;
-    // private long lastFing;
     private ImageView[] dianView = new ImageView[4];
-    // // private ImageView[] newsView = new ImageView[4];
     private TextView textView;
     private LinearLayout dianLayout;
 
@@ -50,86 +47,49 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
         dianView[2] = (ImageView) findViewById(R.id.image3);
         dianView[3] = (ImageView) findViewById(R.id.image4);
         textView = (TextView) findViewById(R.id.onlinetitle);
-        // lastFing = System.currentTimeMillis();
-        // timePolling();
     }
 
     /**
      * 初始化数据
      */
     public void initData(NewsModel news) {
-        boolean isUpdate = false;
-        newsManager.isTop = 0;
-        if (newsManager.topNews.size() > 0) {
-            if (news.topNews == null) {// 无头条,将第一条当做头条
-                if (newsManager.topNews.size() > 1 || newsManager.topNews.get(0).id != news.id) {
-                    isUpdate = true;
-                }
-            } else {
-                newsManager.isTop = 1;
-                if (newsManager.topNews.size() != news.topNews.size()) {
-                    isUpdate = true;
-                } else {
-                    for (int i = 0; i < news.topNews.size() && i < 4; i++) {
-                        if (newsManager.topNews.get(i).id != news.topNews.get(i).id) {
-                            isUpdate = true;
-                        }
-                    }
-                }
-            }
+        newsManager.topNews.clear();
+        if (news.topNews == null) {// 无头条,将第一条当做头条,第一条从newslist中删除
+            newsManager.topNews.add(news);
         } else {
-            isUpdate = true;
-        }
-
-        if (isUpdate) {
-            LogInfo.LogOut("OnlineNewsAdapter", "OnlineNewsFirstDC-->initData-->有头条新闻->isUpdate=true");
-            newsManager.topNews.clear();
-            if (news.topNews == null) {// 无头条,将第一条当做头条,第一条从newslist中删除
-                newsManager.topNews.add(news);
-            } else {
-                newsManager.isTop = 1;
-                newsManager.headModel = news;
-                for (int i = 0; i < news.topNews.size() && i < 4; i++) {
-                    newsManager.topNews.add(news.topNews.get(i));
-                }
+            newsManager.headModel = news;
+            for (int i = 0; i < news.topNews.size() && i < 4; i++) {
+                newsManager.topNews.add(news.topNews.get(i));
             }
-            COUNT = newsManager.topNews.size();
-            ImageView iv1 = new ImageView(context);
-            listview.add(iv1);
-            ImageView iv2 = new ImageView(context);
-            listview.add(iv2);
-            ImageView iv3 = new ImageView(context);
-            listview.add(iv3);
-            ImageView iv4 = new ImageView(context);
-            listview.add(iv4);
-            adapter.notifyDataSetChanged();
-            viewPager.setCurrentItem(0);
-            dianLayout.setVisibility(View.VISIBLE);
-            textView.setText(newsManager.topNews.get(currentViewID).title);
-            textView.setText(newsManager.topNews.get(0).title);
         }
+        listview.clear();
+        ImageView iv1 = new ImageView(context);
+        iv1.setScaleType(ScaleType.FIT_XY);
+        listview.add(iv1);
+        ImageView iv2 = new ImageView(context);
+        iv2.setScaleType(ScaleType.FIT_XY);
+        listview.add(iv2);
+        ImageView iv3 = new ImageView(context);
+        iv3.setScaleType(ScaleType.FIT_XY);
+        listview.add(iv3);
+        ImageView iv4 = new ImageView(context);
+        iv4.setScaleType(ScaleType.FIT_XY);
+        listview.add(iv4);
+        adapter.notifyDataSetChanged();
+        viewPager.setCurrentItem(0);
+        dianLayout.setVisibility(View.VISIBLE);
+
+        currentViewID = 0;
+        dianView[0].setBackgroundResource(R.drawable.dian_bg);
+        dianView[1].setBackgroundResource(R.drawable.dian_bg);
+        dianView[2].setBackgroundResource(R.drawable.dian_bg);
+        dianView[3].setBackgroundResource(R.drawable.dian_bg);
+        dianView[currentViewID].setBackgroundResource(R.drawable.dian);
     }
 
     public void clearData() {
         listview.clear();
         adapter.notifyDataSetChanged();
-    }
-
-    /**
-     * 定时10秒滑动新闻
-     */
-    void timePolling() {
-        // postDelayed(new Runnable() {
-        // @Override
-        // public void run() {
-        // if (Math.abs(System.currentTimeMillis() - lastFing) > 10000) {
-        // if (isShown() && COUNT > 1) {
-        // setImageViewBackground(2);
-        // }
-        // }
-        // timePolling();
-        // }
-        // }, 1000);
     }
 
     class MyPagerAdapter extends PagerAdapter {
@@ -150,9 +110,9 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
             if (position <= newsManager.topNews.size() - 1) {
                 ImageEngine.setImageBitmap(newsManager.topNews.get(position).iconPath, v, R.drawable.ic_launcher, -1);
             } else {
-                v.setBackgroundResource(R.drawable.ic_launcher);
+                v.setImageResource(R.drawable.ic_launcher);
             }
-            v.setOnClickListener(OnlineNewsFirstView.this);
+            // v.setOnClickListener(OnlineNewsFirstView.this);
             ((ViewPager) container).addView(v, 0);
             return listview.get(position);
         }
@@ -176,6 +136,7 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
     @Override
     public void onPageSelected(int position) {
         if (position >= 4) {
+            currentViewID = 0;
             return;
         }
         currentViewID = position;
@@ -189,9 +150,10 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
 
     @Override
     public void onClick(View v) {
-        if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
-            l = System.currentTimeMillis();
-            manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, newsManager.topNews.get(currentViewID).id, 0));
-        }
+        // if (Math.abs(System.currentTimeMillis() - l) > t + 300) {
+        // l = System.currentTimeMillis();
+        // manager.sendMessage(manager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS,
+        // newsManager.topNews.get(currentViewID).id, 0));
+        // }
     }
 }
