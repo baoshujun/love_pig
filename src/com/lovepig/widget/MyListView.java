@@ -36,7 +36,7 @@ public class MyListView extends ListView {
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             if (distanceY != 0 && distanceX != 0) {
             }
-            if (Math.abs(distanceY) >= Math.abs(distanceX)) {
+            if (Math.abs(distanceY)>= Math.abs(distanceX)) {
                 return true;
             }
             return false;

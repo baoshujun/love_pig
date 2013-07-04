@@ -26,9 +26,8 @@ import com.lovepig.pivot.BaseView;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.widget.FontSizeSelectedDialog;
 import com.lovepig.widget.FontSizeSelectedDialog.DialogListener;
-import com.lovepig.widget.OnFlingListener;
 
-public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
+public class OnlineNewsDetailsView extends BaseView   {
     private ArrayList<NewsFontsModel> fontModels = new ArrayList<NewsFontsModel>();
     int pos;
     Context context;
@@ -228,18 +227,6 @@ public class OnlineNewsDetailsView extends BaseView implements OnFlingListener {
 
     float eventStartX, eventStartY;
 
-    @Override
-    public void onFling(int to) {
-        if (to == 1) {
-            pos++;
-            isFromDetail = true;
-            mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 1));
-        } else if (to == 2) {
-            pos--;
-            isFromDetail = true;
-            mManager.sendMessage(mManager.obtainMessage(OnlineNewsManager.STATE_SHOWNEWS, pos, 2));
-        }
-    }
 
     public void setCommentBtnText(String text) {
     }

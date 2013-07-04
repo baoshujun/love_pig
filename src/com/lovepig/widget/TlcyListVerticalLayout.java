@@ -432,6 +432,7 @@ public class TlcyListVerticalLayout extends FrameLayout implements GestureDetect
     }
 
     int y = 0;
+    int x = 0;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -444,12 +445,13 @@ public class TlcyListVerticalLayout extends FrameLayout implements GestureDetect
                 event.setAction(MotionEvent.ACTION_CANCEL);
             } else {
                 y = (int) event.getY();
+                x = (int) event.getX();
             }
-            updateLayout();
             try {
                 super.dispatchTouchEvent(event);
             } catch (Exception e) {
             }
+            updateLayout();
             break;
         case MotionEvent.ACTION_UP:
             if (mHeaderPadding != -HEADPADDING_MAX_LENGHT && mState != STATE_CLOSE) {
@@ -457,12 +459,21 @@ public class TlcyListVerticalLayout extends FrameLayout implements GestureDetect
             } else if (mFooterPadding != 0 && mState != STATE_CLOSE) {
                 releaseFooter();
             }
-            updateLayout();
+
+            if (Math.abs(x - event.getX()) + 10 > Math.abs(y - event.getY()) && Math.abs(y - event.getY()) <= 50) {
+                return super.dispatchTouchEvent(event);
+            }
             super.dispatchTouchEvent(event);
+            updateLayout();
             break;
         case MotionEvent.ACTION_MOVE:
-            updateLayout();
             int mMove = y;
+            LogInfo.LogOut("aaa", "  ACTION_MOVE  x:" + Math.abs(x - event.getX()) + " y:" + Math.abs(y - event.getY()));
+            if (Math.abs(x - event.getX()) + 10 > Math.abs(y - event.getY()) && Math.abs(y - event.getY()) <= 50) {
+                this.UnPull = 2;
+                return super.dispatchTouchEvent(event);
+            }
+            updateLayout();
             if (event.getPointerCount() >= 2) {
                 event = MotionEvent.obtain(event.getDownTime(), event.getEventTime(), MotionEvent.ACTION_CANCEL, event.getX(0), event.getY(0), event.getMetaState());
                 event.setAction(MotionEvent.ACTION_CANCEL);
@@ -481,8 +492,13 @@ public class TlcyListVerticalLayout extends FrameLayout implements GestureDetect
             }
             break;
         case MotionEvent.ACTION_CANCEL:
+            LogInfo.LogOut("aaa", " ACTION_CANCEL x:" + Math.abs(x - event.getX()) + " y:" + Math.abs(y - event.getY()));
+            if (Math.abs(x - event.getX()) + 10 > Math.abs(y - event.getY())) {
+                return super.dispatchTouchEvent(event);
+            }
             updateLayout();
             super.dispatchTouchEvent(event);
+            this.UnPull = 1;
             break;
         }
         return true;
@@ -754,8 +770,8 @@ public class TlcyListVerticalLayout extends FrameLayout implements GestureDetect
 
         public void onLoadMore();
     }
-    
-    public int getState(){
+
+    public int getState() {
         return mState;
     }
 }

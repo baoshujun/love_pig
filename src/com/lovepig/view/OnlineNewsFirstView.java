@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.lovepig.engine.ImageEngine;
 import com.lovepig.main.R;
@@ -30,9 +30,9 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
 
     private int currentViewID;
     private ImageView[] dianView = new ImageView[4];
-    private TextView textView;
+//    private TextView textView;
     private LinearLayout dianLayout;
-
+    private RelativeLayout adLayout;
     public OnlineNewsFirstView(Context context, int layoutId, BaseManager manager) {
         super(context, layoutId, manager);
         newsManager = (OnlineNewsManager) manager;
@@ -46,7 +46,8 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
         dianView[1] = (ImageView) findViewById(R.id.image2);
         dianView[2] = (ImageView) findViewById(R.id.image3);
         dianView[3] = (ImageView) findViewById(R.id.image4);
-        textView = (TextView) findViewById(R.id.onlinetitle);
+        adLayout = (RelativeLayout) findViewById(R.id.adLayout);
+//        textView = (TextView) findViewById(R.id.onlinetitle);
     }
 
     /**
@@ -54,9 +55,13 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
      */
     public void initData(NewsModel news) {
         newsManager.topNews.clear();
-        if (news.topNews == null) {// 无头条,将第一条当做头条,第一条从newslist中删除
-            newsManager.topNews.add(news);
+       
+        if (news.topNews == null||news.topNews.size()==0) {// 无头条,将第一条当做头条,第一条从newslist中删除
+//            newsManager.topNews.add(news);
+            adLayout.setVisibility(View.GONE);
+            LogInfo.LogOut("news.topNews == null||news.topNews.size():");
         } else {
+            adLayout.setVisibility(View.VISIBLE);
             newsManager.headModel = news;
             for (int i = 0; i < news.topNews.size() && i < 4; i++) {
                 newsManager.topNews.add(news.topNews.get(i));

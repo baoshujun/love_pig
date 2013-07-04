@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.lovepig.main.Application;
 import com.lovepig.main.R;
 import com.lovepig.manager.OnlineNewsManager;
 import com.lovepig.model.NewsGalleryModel;
@@ -25,9 +24,8 @@ import com.lovepig.widget.BaseVerticalListView;
 import com.lovepig.widget.BaseVerticalListView.onVerticalListViewListener;
 import com.lovepig.widget.MyGallery;
 import com.lovepig.widget.MyGallery.TlcyGalleryListener;
-import com.lovepig.widget.TlcyListLayout.OnRefreshListener;
 
-public class OnlineNewsView extends BaseView implements onVerticalListViewListener, OnItemClickListener, OnRefreshListener, TlcyGalleryListener {
+public class OnlineNewsView extends BaseView implements onVerticalListViewListener, OnItemClickListener,   TlcyGalleryListener {
 
     MyGallery myGallery;
     ImageView qian, hou;
