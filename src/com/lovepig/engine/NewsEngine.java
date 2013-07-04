@@ -354,7 +354,7 @@ public class NewsEngine extends BaseEngine {
         mNewsGallerModels.add(new NewsGalleryModel(1, 1, "头条"));
         mNewsGallerModels.add(new NewsGalleryModel(2, 0, "行业"));
         mNewsGallerModels.add(new NewsGalleryModel(3, 0, "企业"));
-        mNewsGallerModels.add(new NewsGalleryModel(3, 0, "市场"));
+        mNewsGallerModels.add(new NewsGalleryModel(4, 0, "市场"));
         mNewsGallerModels.add(new NewsGalleryModel(5, 0, "会讯"));
 
         return mNewsGallerModels;
