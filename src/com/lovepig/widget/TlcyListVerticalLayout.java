@@ -470,9 +470,10 @@ public class TlcyListVerticalLayout extends FrameLayout implements GestureDetect
             int mMove = y;
             LogInfo.LogOut("aaa", "  ACTION_MOVE  x:" + Math.abs(x - event.getX()) + " y:" + Math.abs(y - event.getY()));
             if (Math.abs(x - event.getX()) + 10 > Math.abs(y - event.getY()) && Math.abs(y - event.getY()) <= 50) {
-                this.UnPull = 2;
+                this.UnPull = 0;
                 return super.dispatchTouchEvent(event);
             }
+            this.UnPull = 1;
             updateLayout();
             if (event.getPointerCount() >= 2) {
                 event = MotionEvent.obtain(event.getDownTime(), event.getEventTime(), MotionEvent.ACTION_CANCEL, event.getX(0), event.getY(0), event.getMetaState());
@@ -498,7 +499,6 @@ public class TlcyListVerticalLayout extends FrameLayout implements GestureDetect
             }
             updateLayout();
             super.dispatchTouchEvent(event);
-            this.UnPull = 1;
             break;
         }
         return true;
@@ -506,11 +506,9 @@ public class TlcyListVerticalLayout extends FrameLayout implements GestureDetect
 
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         if (Configs.isDebug) {
-            LogInfo.LogOut("onScroll");
+            LogInfo.LogOut("onScroll。。。。。。。。。。。。。。。。。。。。。。。。。。。");
         }
-        // if (UnPull&&!isHasMore) {
-        // return false;
-        // }
+       
         float f = SCALE * velocityY;
         if (mListView != null && mListView.getCount() != 0) {
             if (Configs.isDebug) {
