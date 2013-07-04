@@ -50,6 +50,7 @@ public class UserRegisterView extends BaseView {
         mUserResetBtn = (Button) findViewById(R.id.register_register_reset_btn);
         mUserRegisterBtn.setOnClickListener(this);
         mUserResetBtn.setOnClickListener(this);
+        
     }
 
     /**
@@ -61,6 +62,7 @@ public class UserRegisterView extends BaseView {
         mBackBtn.setText(backtxtid);
     }
 
+   
     @Override
     public void onClicked(View v) {
         super.onClicked(v);
@@ -135,7 +137,7 @@ public class UserRegisterView extends BaseView {
         mUserRepwdET.setText("");
         mUserEmailET.setText("");
         mUserPhoneNumET.setText("");
-        mUseridET.requestFocusFromTouch();
+       
     }
 
     @Override
@@ -143,6 +145,7 @@ public class UserRegisterView extends BaseView {
         super.onShow();
         setVeriCode();
         Reset();
+        mUserPhoneNumET.requestFocus();
     }
 
     public void setVeriCode() {

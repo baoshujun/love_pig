@@ -62,6 +62,7 @@ public class OnlineNewsFirstView extends BaseView implements OnPageChangeListene
                 newsManager.topNews.add(news.topNews.get(i));
             }
         }
+        listview.clear();
         ImageView iv1 = new ImageView(context);
         iv1.setScaleType(ScaleType.FIT_XY);
         listview.add(iv1);
