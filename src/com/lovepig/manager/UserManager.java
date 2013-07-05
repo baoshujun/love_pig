@@ -381,9 +381,9 @@ public class UserManager extends BaseManager {
 	 * @param isFrom 判断是否来自猪场
 	 * @param pigFactoryID 猪场的ID
 	 */
-	public void enterUserManager(int backtxtid,boolean isFrom,String pigFactoryID) {
+	public void enterUserManager(int backtxtid,boolean isFrom,String pigFtyID) {
 		isFromPigFactory = isFrom;
-		this.pigFactoryId = pigFactoryID;
+		pigFactoryId = pigFtyID;
 		Application.application.setSubManager(this);
 		registerView.setBackText(backtxtid);
 	}
