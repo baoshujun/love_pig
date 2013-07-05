@@ -19,19 +19,20 @@ import com.lovepig.utils.MD5;
 
 public class UserLoginView extends BaseView {
     EditText mUserPhoneNum;// 用户电话号码
-    EditText mUserpwdET;//密码
-    EditText mUserpwdAgainET;//再次确认密码
-    EditText mUserVerificationCode;//用户验证码
+    EditText mUserpwdET;// 密码
+    EditText mUserpwdAgainET;// 再次确认密码
+    EditText mUserVerificationCode;// 用户验证码
     Button mUserRegisterBtn;
     Button mUserLoginBtn;
     Button mBackBtn;
     Button vericationCode;
     TextView mTitlem;
     TextView verificationText;
+    BaseManager m;
 
     public UserLoginView(Context context, int layoutId, BaseManager manager) {
         super(context, layoutId, manager);
-
+        m = manager;
         mBackBtn = (Button) findViewById(R.id.leftBtn);
         mBackBtn.setText("返回");
         mBackBtn.setVisibility(View.VISIBLE);
@@ -40,32 +41,52 @@ public class UserLoginView extends BaseView {
 
         mUserPhoneNum = (EditText) findViewById(R.id.et_login_user_name);
         mUserpwdET = (EditText) findViewById(R.id.et_login_input_pwd);
-        mUserpwdAgainET = (EditText)findViewById(R.id.et_login_input_pwd_again);
-        
-        vericationCode = (Button)findViewById(R.id.verificationCode);
-        verificationText = (TextView)findViewById(R.id.verificationText);
-        
+        mUserpwdAgainET = (EditText) findViewById(R.id.et_login_input_pwd_again);
+
+        vericationCode = (Button) findViewById(R.id.verificationCode);
+        verificationText = (TextView) findViewById(R.id.verificationText);
+
         verificationText.setVisibility(View.GONE);
-        
-        vericationCode.setOnClickListener(this);
-        
+
+        vericationCode.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                m.onClicked(v.getId());
+            }
+        });
+
         mUserRegisterBtn = (Button) findViewById(R.id.btn_register);
         mUserLoginBtn = (Button) findViewById(R.id.btn_login);
-        mUserRegisterBtn.setOnClickListener(this);
-        mUserLoginBtn.setOnClickListener(this);
-        mUserVerificationCode = (EditText)findViewById(R.id.et_login_input_code);
+        mUserRegisterBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                m.onClicked(v.getId());
+            }
+        });
+        mUserLoginBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                m.onClicked(v.getId());
+            }
+        });
+        mUserVerificationCode = (EditText) findViewById(R.id.et_login_input_code);
     }
+
     /**
      * check phonenum
+     * 
      * @param v
-     * @return 
+     * @return
      */
-	public String checkPhoneNum() {
-		String phoneNum = mUserPhoneNum.getEditableText().toString();
-		if(phoneNum.equals("") ) {
-			showToast("请填写电话号码");
-			phoneNum = null;
-		} else if (mUserPhoneNum.getText().toString().length() > 0) {
+    public String checkPhoneNum() {
+        String phoneNum = mUserPhoneNum.getEditableText().toString();
+        if (phoneNum.equals("")) {
+            showToast("请填写电话号码");
+            phoneNum = null;
+        } else if (mUserPhoneNum.getText().toString().length() > 0) {
             Pattern p1 = Pattern.compile(Configs.PhonePattern);
             Matcher m1 = p1.matcher(mUserPhoneNum.getText().toString());
             if (!m1.matches() || mUserPhoneNum.getText().toString().length() != 11) {
@@ -73,8 +94,8 @@ public class UserLoginView extends BaseView {
                 phoneNum = null;
             }
         }
-		return phoneNum;
-	}
+        return phoneNum;
+    }
 
     /**
      * 设置返回按钮文字
@@ -89,7 +110,7 @@ public class UserLoginView extends BaseView {
     public void onClicked(View v) {
         super.onClicked(v);
     }
-    
+
     public Json getLoginInfo() {
         Json j = new Json(0);
         j.put("userName", mUserPhoneNum.getText().toString());
@@ -97,33 +118,32 @@ public class UserLoginView extends BaseView {
         return j;
     }
 
-
     @Override
     public void onShow() {
         super.onShow();
-//        setVeriCode();
+        // setVeriCode();
     }
 
-//    public void setVeriCode() {
-//        registerCheckcode = Utils.generateRandomVeriCode();
-//        // registerCheckcodeImage.setText(registerCheckcode);
-//    }
+    // public void setVeriCode() {
+    // registerCheckcode = Utils.generateRandomVeriCode();
+    // // registerCheckcodeImage.setText(registerCheckcode);
+    // }
 
     public String getUserAccount() {
         return mUserPhoneNum.getText().toString();
     }
-    
+
     public boolean checkDataintegrity() {
         LogInfo.LogOut(mUserPhoneNum.getText().toString());
-        if(checkPhoneNum() == null){
-        	return false;
+        if (checkPhoneNum() == null) {
+            return false;
         }
-        if(mUserVerificationCode.getText().toString().equals("")){
-        	showToast("验证码不可为空");
-        	return false;
-        } else if(mUserVerificationCode.getText().toString().length() != 6){
-        	showToast("验证码不符合要求，请输入六位数字验证码");
-        	return false;
+        if (mUserVerificationCode.getText().toString().equals("")) {
+            showToast("验证码不可为空");
+            return false;
+        } else if (mUserVerificationCode.getText().toString().length() != 6) {
+            showToast("验证码不符合要求，请输入六位数字验证码");
+            return false;
         }
         if (mUserpwdET.getText().toString().length() < 4) {
             if (mUserpwdET.getText().toString().length() == 0) {
@@ -143,7 +163,7 @@ public class UserLoginView extends BaseView {
         }
         return true;
     }
-    
+
     public Json getRegisterInfo() {
         Json j = new Json(0);
         Configs.mUser_PhoneNum = mUserPhoneNum.getText().toString();
@@ -152,13 +172,13 @@ public class UserLoginView extends BaseView {
         j.put("code", mUserVerificationCode.getText().toString());
         return j;
     }
-    
-    public void setverificationTextVisible(boolean isVisible){
-    	if(isVisible){
-    		verificationText.setVisibility(View.VISIBLE);
-    	} else {
-    		verificationText.setVisibility(View.GONE);
-    	}
+
+    public void setverificationTextVisible(boolean isVisible) {
+        if (isVisible) {
+            verificationText.setVisibility(View.VISIBLE);
+        } else {
+            verificationText.setVisibility(View.GONE);
+        }
     }
-   
+
 }

@@ -32,8 +32,8 @@
     <!-- input user name -->
 <!-- 34-43行临时解决进入注册页面点击不弹出软键盘的问题 -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_width="1dip"
+        android:layout_height="1dip" >
         <EditText
             android:layout_width="1dip"
             android:layout_height="1dip"
@@ -55,7 +55,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/login_input_et"
-            android:enabled="true"
             android:hint="@string/login_name_hint"
             android:inputType="number"
             android:paddingLeft="40dip"
@@ -82,7 +81,6 @@
         android:layout_marginLeft="20dip"
         android:layout_marginRight="20dip"
         android:layout_marginTop="10dip"
-        android:focusable="false"
         android:text="@string/verificationCode"
         android:textSize="15sp" />
     <!-- input user pwd -->
