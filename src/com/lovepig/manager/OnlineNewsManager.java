@@ -17,7 +17,6 @@ import com.lovepig.model.NewsGalleryModel;
 import com.lovepig.model.NewsModel;
 import com.lovepig.pivot.BaseActivity;
 import com.lovepig.pivot.BaseManager;
-import com.lovepig.utils.LogInfo;
 import com.lovepig.utils.Utils;
 import com.lovepig.view.OnlineNewsDetailsView;
 import com.lovepig.view.OnlineNewsView;
@@ -145,7 +144,6 @@ public class OnlineNewsManager extends BaseManager {
             enterSubDC(detailsDC);
             showLoading();
             int id = msg.arg1;
-            Log.d("LKP", "id--->" + id);
             ArrayList<NewsDetailModel> datas = dbEngine.getNewsDetail(id);
             if (datas.size() > 0) {
                 NewsDetailModel model = datas.get(0);
@@ -192,8 +190,9 @@ public class OnlineNewsManager extends BaseManager {
                 }
                 showLoading();
                 typeIndex = position;
+                Log.d("LKP", "position=" + position);
+            	Log.d("LKP", "galleryId=" + mGallerys.get(typeIndex).id);
                 engine.refreshNews(mGallerys.get(typeIndex).id, NewsEngine.NEWS_LIMIT_LENGTH, 0);
-                ;
             }
             break;
 

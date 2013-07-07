@@ -97,11 +97,11 @@ public class BoarMallEngine extends BaseEngine {
 							big.bigImgId = allAds[i].getString("pfId");
 							big.type = "1";
 							big.bigImg = allAds[i].getString("url");
-						}else if(allAds[i].getInt("type") == 3){//中图
+						}else if(allAds[i].getInt("type") == 2){//中图
 							middle.middleImgId = allAds[i].getString("pfId");
 							middle.type = "2";
 							middle.middleImg = allAds[i].getString("url");
-						} else if(allAds[i].getInt("type") == 2){//小图
+						} else if(allAds[i].getInt("type") == 3){//小图
 							j++;
 							switch (j) {
 							case 1:
@@ -161,7 +161,7 @@ public class BoarMallEngine extends BaseEngine {
 		StringBuffer sb = new StringBuffer();
 		sb.append(GET_PROVINCE_PIG_FACTORY).append("provId=").append(provinceId)
 				.append("&cityId=").append("0").append("&countiesId=")
-				.append("0").append("&limit=").append("10").append("&maxId=300");
+				.append("0").append("&limit=").append("1000").append("&maxId=0");
 		FetchProvincePigFactoryTask task = new FetchProvincePigFactoryTask();
 		task.execute(sb.toString());
 	}
@@ -294,7 +294,5 @@ public class BoarMallEngine extends BaseEngine {
 				
 			}
 		}
-		
 	}
-
 }

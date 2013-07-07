@@ -5,6 +5,18 @@
     android:background="@drawable/liebiao"
     android:minHeight="@dimen/news_l_item_h" >
 
+    <ImageView
+        android:id="@+id/onlinepic"
+        android:layout_width="@dimen/news_l_item_image_w"
+        android:layout_height="@dimen/news_l_item_image_w"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_launcher" 
+        android:visibility="gone"
+        />
+
     <TextView
         android:id="@+id/onlinetitle"
         android:layout_width="wrap_content"
@@ -12,6 +24,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/news_l_item_title_magin"
         android:layout_marginTop="@dimen/news_l_item_title_magin"
+        android:layout_toLeftOf="@id/onlinepic"
         android:ellipsize="end"
         android:maxLength="14"
         android:singleLine="true"
@@ -22,32 +35,13 @@
 
     <TextView
         android:id="@+id/onlineinstro"
-        android:layout_width="@dimen/news_l_item_w"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/onlinetitle"
         android:layout_marginLeft="@dimen/news_l_item_title_magin"
+        android:layout_toLeftOf="@id/onlinepic"
         android:ellipsize="end"
         android:lines="3"
         android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容" />
-
-    <ImageView
-        android:id="@+id/onlinepic"
-        android:layout_width="@dimen/news_l_item_image_w"
-        android:layout_height="@dimen/news_l_item_image_w"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_launcher" />
-
-    <ImageView
-        android:id="@+id/jiantou"
-        android:layout_width="@dimen/news_l_item_jiant_w"
-        android:layout_height="@dimen/news_l_item_jiant_h"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/news_l_item_jiant_margin_r"
-        android:background="@drawable/onlienews_item_jiantou"
-        android:contentDescription="@null"
-        android:visibility="gone" />
 
 </RelativeLayout>

@@ -63,7 +63,7 @@ public class UserEngine extends BaseEngine {
      * 
      * @param j
      */
-    public void RegisterUser(Json j) {
+    public void registerUser(Json j) {
         StopRegister();
         userInfo = j;
         StringBuilder mStrBuilder = new StringBuilder("?");
@@ -249,10 +249,8 @@ public class UserEngine extends BaseEngine {
      */
     class RegisterUserTask extends AsyncTask<String, Void, String> {
         boolean iStop;
-
         @Override
         protected String doInBackground(String... params) {
-//        	Log.d("LKP", params[0]);
             return httpRequestThisThread(1, Configs.RegisterUser + params[0],true);
         }
 
@@ -262,21 +260,21 @@ public class UserEngine extends BaseEngine {
             if (iStop) {
                 return;
             }
-            if (result != null) {
-                Json j = new Json(result);
-                if (j.getInt("status") == 1) {
-                    Configs.userid = userInfo.getString("phoneNum");
-//                    Configs.mUser_Name = userInfo.getString("userName");
-//                  Configs.updateUidToTypeAndVsersion(Configs.userid, Configs.mUser_Name, j.getInt("memberId"));
-                	ConfigInfo.setUserInfo(userInfo.getString("phoneNum"), userInfo.getString("pwd"));
-                    manager.sendEmptyMessage(UserManager.STATE_REGISTERSUCESS);
-                } else {
-                    manager.sendMessage(manager.obtainMessage(UserManager.STATE_REGISTERFAIL, j.getString("msg")));
-                }
-            } else {
-                manager.sendEmptyMessage(UserManager.STATE_REGISTERFAIL);
-            }
-        }
+			if (result != null) {
+				Json j = new Json(result);
+				if (j.getInt("status") == 1) {
+					Log.d("LKP", "resutl:==" + result);
+					Configs.userid = userInfo.getString("phoneNum");
+					ConfigInfo.setUserInfo(userInfo.getString("phoneNum"),userInfo.getString("pwd"));
+					manager.sendEmptyMessage(UserManager.STATE_REGISTERSUCESS);
+				} else if (j.getInt("status") == 0) {
+					String str = getErrorMsg(j.getInt("errorCode"));
+					manager.sendMessage(manager.obtainMessage(UserManager.STATE_REGISTERFAIL, str));
+				} else {
+					manager.sendEmptyMessage(UserManager.STATE_REGISTERFAIL);
+				}
+			}
+		}
 
         public void Stop() {
             iStop = true;
@@ -472,8 +470,6 @@ public class UserEngine extends BaseEngine {
 	     mVerificationCodeTask.execute(mStrBuilder.toString());
 	}
 	
-	 	
-	
     /**
      * 获取验证码
      * 
@@ -499,11 +495,8 @@ public class UserEngine extends BaseEngine {
                 if (j.getInt("status") == 1) {
                     manager.sendEmptyMessage(UserManager.STATE_VERIFCATION_CODE);
                 } else if(j.getInt("status") == 0) {
-                    if(j.getInt("errorCode") == 100010) {
-                    	manager.sendEmptyMessage(UserManager.STATE_NAME_USEED);
-                    } else {
-                    	manager.sendEmptyMessage(UserManager.STATE_VERIFCATION_CODE_FAIL);
-                    }
+                	String errorMsg = getErrorMsg(j.getInt("errorCode"));
+                	manager.sendMessage(manager.obtainMessage(UserManager.STATE_REGISTERFAIL, errorMsg));
                 }
             } else {
                 manager.showToast("网络失败");

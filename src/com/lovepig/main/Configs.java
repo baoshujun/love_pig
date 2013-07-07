@@ -1,17 +1,13 @@
 package com.lovepig.main;
 
-import org.json.JSONStringer;
-
-import android.app.Activity;
 import android.content.Context;
 
 import com.lovepig.utils.Json;
-import com.lovepig.utils.LogInfo;
 import com.lovepig.utils.Utils;
 
 public class Configs {
     public static final String lovePigPath = Utils.getSdcardPath() + "/lovepig/";
-    public static final String VERSION_NO="0.0.1";
+    public static final String VERSION_NO="0.0.3";
 
     /**
      * 图片存储
@@ -57,15 +53,10 @@ public class Configs {
     public static String mUser_PhoneNum;// 用户手机号
     public static int mMemberId;// 用户手机号
     public static String mCheckCode = "1234";// 验证码
-  
-    
-
     public static final int MORE_LIST_DATA = 50;
     public static final int PRE_LIST_DATA = 51;
     public static final int JUMP_LIST_PAGE = 52;
     public static final int CLICK_LIST_ADVER_IMAGE = 53;
-    
-   
 
     /**
      * 用户相关

@@ -13,7 +13,6 @@ import com.lovepig.utils.LogInfo;
 public class OnlineNewsDBEngine extends DBEngine {
     /**
      * 保存新闻类型
-     * 
      * @param gm
      */
     public void saveType(ArrayList<NewsGalleryModel> l) {
@@ -46,7 +45,6 @@ public class OnlineNewsDBEngine extends DBEngine {
         String sql = "insert into onlinenews(id,title,newsOrder,top,iconPath,summary,catId) values(?,?,?,?,?,?,?)";
         db.beginTransaction();
         try {
-
             db.execSQL(sql, new String[] { String.valueOf(m.id), m.title, String.valueOf(m.order), String.valueOf(m.top), m.iconPath, m.summary, String.valueOf(catId) });
 
         } catch (SQLException e) {
@@ -91,7 +89,7 @@ public class OnlineNewsDBEngine extends DBEngine {
         try {
             String sql = "select id,title,newsOrder,top,iconPath,summary from onlinenews where catId=? order by id desc";
 
-            Cursor cursor = db.rawQuery(sql, new String[] { String.valueOf(catId) });
+            Cursor cursor = db.rawQuery(sql, new String[] { String.valueOf(catId)});
             NewsModel lm;
             if (cursor.getCount() > 0) {
                 while (cursor.moveToNext()) {
@@ -192,7 +190,11 @@ public class OnlineNewsDBEngine extends DBEngine {
     public void deleteNewsByTypeID(int typeid) {
         String sqlnews = "delete from onlinenews where catId = ?";
         db.beginTransaction();
-        db.execSQL(sqlnews, new String[] { String.valueOf(typeid) });
+        try {
+        	db.execSQL(sqlnews, new String[] { String.valueOf(typeid) });
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
         db.setTransactionSuccessful();
         db.endTransaction();
     }
@@ -282,7 +284,6 @@ public class OnlineNewsDBEngine extends DBEngine {
                     lm.imgUrl = cursor.getString(cursor.getColumnIndex("imgUri"));
                     lm.cFrom = cursor.getString(cursor.getColumnIndex("newsfrom"));
                     lm.subTitle = cursor.getString(cursor.getColumnIndex("subTitle"));
-
                     LogInfo.LogOut("getOnlineNews................." + lm.title);
                     programs.add(lm);
                 }

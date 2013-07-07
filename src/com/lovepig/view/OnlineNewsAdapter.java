@@ -1,5 +1,6 @@
 package com.lovepig.view;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,14 +62,13 @@ public class OnlineNewsAdapter extends BaseAdapter {
         } else {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
-            view.setFocusable(true);
-            view.requestFocus();
         }
         viewHolder.img.setVisibility(View.VISIBLE);
         if (URLUtil.isHttpUrl(news.iconPath)) {
             syncImageLoader.imageLoaderScale(viewHolder.img, news.iconPath, R.drawable.ic_launcher, position);
         } else {
             viewHolder.img.setImageResource(R.drawable.ic_launcher);
+            viewHolder.img.setVisibility(View.GONE);
         }
         LogInfo.LogOut("pos" + position);
         viewHolder.title.setText(news.title);

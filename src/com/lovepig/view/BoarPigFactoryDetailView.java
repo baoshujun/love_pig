@@ -62,8 +62,8 @@ public class BoarPigFactoryDetailView extends BaseView implements OnClickListene
 		ImageEngine.setImageBitmap(pfm.img, pigImg,R.drawable.ic_launcher, -1);
 		Json imgJson = new Json(pfm.pigImgs);
 		ImageEngine.setImageBitmap(imgJson.getString("icon1"), icon01, R.drawable.ic_launcher, -1);
-		ImageEngine.setImageBitmap(imgJson.getString("icon2"), icon01, R.drawable.ic_launcher, -1);
-		ImageEngine.setImageBitmap(imgJson.getString("icon3"), icon01, R.drawable.ic_launcher, -1);
+		ImageEngine.setImageBitmap(imgJson.getString("icon2"), icon02, R.drawable.ic_launcher, -1);
+		ImageEngine.setImageBitmap(imgJson.getString("icon3"), icon03, R.drawable.ic_launcher, -1);
 	}
 
 }

@@ -45,9 +45,9 @@ public class DBEngine {
      */
     private static boolean createOnlineNews() {
         try {
-            db.execSQL("CREATE TABLE onlinenews (" + "table_id INTEGER PRIMARY KEY autoincrement, " + // 表id
-                    "id INTEGER ," + // 新闻序号
-                    "title TEXT ," + // 视频名称
+            db.execSQL("CREATE TABLE onlinenews (" + "table_id INTEGER, " + // 表id
+                    "id INTEGER PRIMARY KEY ," + // 新闻序号
+                    "title TEXT ," + // 新闻标题
                     "newsOrder INTEGER ," + // 新闻发布时间
                     "top INTEGER ," + // 新闻来源
                     "iconPath TEXT ," + // 新闻简介
@@ -97,7 +97,7 @@ public class DBEngine {
                     "iconUri TEXT ," + // 新闻来源
                     "content TEXT ," + // 新闻简介
                     "cTime TEXT ," + // 新闻来源
-                    "imgUri TEXT ," + // 新闻简介
+                    "imgUri TEXT ," + // 图片
                     "newsfrom TEXT ," + // 新闻简介
                     "subTitle TEXT" + // 新闻来源
                     ");");

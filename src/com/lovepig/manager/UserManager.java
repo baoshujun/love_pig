@@ -191,7 +191,7 @@ public class UserManager extends BaseManager {
 			break;
 		case R.id.register_register_btn:// 用户注册
 			if (registerView.checkDataintegrity()) {
-				engine.RegisterUser(registerView.getRegisterInfo());
+				engine.registerUser(registerView.getRegisterInfo());
 				showLoading();
 			}
 			break;
@@ -235,11 +235,11 @@ public class UserManager extends BaseManager {
 		case R.id.btn_register://点击登陆页面的注册
 //			goToRegister();
 			if(userLoginView.checkDataintegrity()) {
-				engine.RegisterUser(userLoginView.getRegisterInfo());
+				engine.registerUser(userLoginView.getRegisterInfo());
 			}
 			break;
 		case R.id.btn_login://点击登陆页面的登陆
-			if (userLoginView.checkDataintegrity()) {
+			if (userLoginView.checkLoginData()) {
 				engine.login(userLoginView.getLoginInfo());
 				showLoading();
 			}
@@ -309,17 +309,6 @@ public class UserManager extends BaseManager {
 			showLoading();
 			engine.ModifyUserPWD(j);
 		}
-	}
-
-	/**
-	 * 用户绑定
-	 */
-	public void ToBinding() {
-		// Json j = bindDC.getBindingInfo();
-		// if (j != null) {
-		// showLoading();
-		// engine.ToBinding(j);
-		// }
 	}
 
 	/**

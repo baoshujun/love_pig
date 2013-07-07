@@ -1,10 +1,10 @@
 package com.lovepig.pivot;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.lovepig.main.Application;
 import com.lovepig.utils.HttpUtils;
-import com.lovepig.utils.LogInfo;
 
 public abstract class BaseEngine {
     public BaseManager manager;
@@ -57,12 +57,13 @@ public abstract class BaseEngine {
         }
     }
 
-    /**
+    /**+
      * server 为Configs.HostName中server号 params 为构造好的参数
      * 默认30秒超时，最多主服务器和备用服务器各重试请求两次
      */
     public String httpRequestThisThread(int server, String params,boolean isPost) {
         String rString = null;
+        Log.d("LKP", "server=" + server + "params=" + params );
         rString = HttpUtils.getServerString(Application.application.getApplicationContext(), server, params,isPost);
         return rString;
     }
@@ -103,5 +104,39 @@ public abstract class BaseEngine {
     public void setMoreBtnFlag(boolean flag) {
         moreBtnFlag = flag;
     }
+    
+    /**
+     * userDuplicate = 100010;
+    //用户名或者密码错误
+     public static final Integer userPassIncorrect = 100020;
+     public static final Integer codeExpire = 100030;
+     public static final Integer codeAlreadyExsits = 100040;
+     public static final Integer mobileInconsistent = 100050;
+     * @param errorCode
+     */
+	public String getErrorMsg(int errorCode) {
+		Log.d("LKP", "errorCode:" + errorCode);
+		String str = null;
+		switch (errorCode) {
+		case 100010:
+			str = "电话号码已经注册！";
+			break;
+		case 100020:
+			str = "用户名或者密码错误！";
+			break;
+		case 100030:
+			str = "注册码无效！";
+			break;
+		case 100040:
+			str = "注册码已经发送，请稍等！";
+			break;
+		case 100050:
+			str = "电话号码不一致！";
+			break;
+		default:
+			break;
+		}
+		return str;
+	}
 
 }

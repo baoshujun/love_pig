@@ -13,7 +13,6 @@ import com.lovepig.main.Configs;
 import com.lovepig.main.R;
 import com.lovepig.pivot.BaseManager;
 import com.lovepig.pivot.BaseView;
-import com.lovepig.utils.ConfigInfo;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
 import com.lovepig.utils.MD5;
@@ -124,7 +123,6 @@ public class UserRegisterView extends BaseView {
         Configs.mUser_PhoneNum = mUserPhoneNumET.getText().toString();
         j.put("userName", mUseridET.getText().toString());
         j.put("pwd", MD5.md5Lower(mUserpwdET.getText().toString()));
-
         j.put("userEmail", Configs.mUser_Email);
         j.put("userPhoneNum", Configs.mUser_PhoneNum);
         return j;

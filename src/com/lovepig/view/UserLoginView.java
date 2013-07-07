@@ -15,7 +15,6 @@ import com.lovepig.pivot.BaseManager;
 import com.lovepig.pivot.BaseView;
 import com.lovepig.utils.Json;
 import com.lovepig.utils.LogInfo;
-import com.lovepig.utils.MD5;
 
 public class UserLoginView extends BaseView {
     EditText mUserPhoneNum;// 用户电话号码
@@ -114,7 +113,7 @@ public class UserLoginView extends BaseView {
     public Json getLoginInfo() {
         Json j = new Json(0);
         j.put("userName", mUserPhoneNum.getText().toString());
-        j.put("pwd", MD5.md5Lower(mUserpwdET.getText().toString()));
+        j.put("pwd", mUserpwdET.getText().toString());
         return j;
     }
 
@@ -132,7 +131,7 @@ public class UserLoginView extends BaseView {
     public String getUserAccount() {
         return mUserPhoneNum.getText().toString();
     }
-
+    //用户注册的时候点击的事件
     public boolean checkDataintegrity() {
         LogInfo.LogOut(mUserPhoneNum.getText().toString());
         if (checkPhoneNum() == null) {
@@ -163,11 +162,28 @@ public class UserLoginView extends BaseView {
         }
         return true;
     }
+    
+    /**
+     * 登录的时候检查登陆所需要的信息
+     * @return
+     */
+    public boolean checkLoginData(){
+    	if (checkPhoneNum() == null) {
+            return false;
+        }
+    	if (mUserpwdAgainET.getText().toString().length() == 0) {
+            showToast("请输入确认密码");
+            return false;
+        }
+    	return true;
+    }
+    
+    
 
     public Json getRegisterInfo() {
         Json j = new Json(0);
         Configs.mUser_PhoneNum = mUserPhoneNum.getText().toString();
-        j.put("pwd", MD5.md5Lower(mUserpwdET.getText().toString()));
+        j.put("pwd", mUserpwdET.getText().toString());
         j.put("phoneNum", Configs.mUser_PhoneNum);
         j.put("code", mUserVerificationCode.getText().toString());
         return j;

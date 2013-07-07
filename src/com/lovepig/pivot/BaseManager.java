@@ -181,23 +181,17 @@ public abstract class BaseManager extends Handler {
         dismissLoading();
     }
 
-    /**
-     * 金立，魅族等手机在不显示时无法弹出dialog 此方法自动判断当前activity是否正在显示，并作出直接显示还是等显示后再弹出dialog
-     */
+    
     public Dialog showAlert(String text) {
         return context.showDialog(new TlcyDialog(context).setTitle(context.getString(R.string.tip)).setMessage(text).setOnlyOkPositiveMethod(context.getString(R.string.OK)));
     }
 
-    /**
-     * 金立，魅族等手机在不显示时无法弹出dialog 此方法自动判断当前activity是否正在显示，并作出直接显示还是等显示再在弹出dialog
-     */
+    
     public Dialog showAlert(String title, String text, String ok, String cancel, TlcyDialogListener okListener, TlcyDialogListener cancelListener) {
         return context.showDialog(new TlcyDialog(context).setTitle(title).setMessage(text).setButton(ok, cancel, okListener, cancelListener));
     }
 
-    /**
-     * 金立，魅族等手机在不显示时无法弹出dialog 此方法自动判断当前activity是否正在显示，并作出直接显示还是等显示再在弹出dialog
-     */
+    
     public Dialog showAlert(String text, TlcyDialogListener okListener, TlcyDialogListener cancelListener) {
         return context.showDialog(new TlcyDialog(context).setTitle("提示").setMessage(text).setButton("确定", "取消", okListener, cancelListener));
     }

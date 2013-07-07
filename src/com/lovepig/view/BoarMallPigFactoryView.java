@@ -193,11 +193,12 @@ public class BoarMallPigFactoryView extends BaseView implements OnItemClickListe
 	};
 
 	public void setListViewAdapter(ArrayList<PigFactoryModel> datas) {
+		pfmDatas = datas;
 		adapter = new PigFactoryListViewAdapter(datas, context);
 		pigFactoryListView.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
-
+ 
 	@Override
 	public void onShow() {
 		super.onShow();
@@ -206,7 +207,7 @@ public class BoarMallPigFactoryView extends BaseView implements OnItemClickListe
    //进入猪场详情页，需要判断是否已经登录，若是已经登录可以直接进入 若是无登录需要显示登录页面
 	@Override
 	public void onItemClick(AdapterView<?> itemview, View view, int position, long arg3) {
-		String choiceId = position+"";
+		String choiceId = pfmDatas.get(position).id +"";
 		manager.sendMessage(manager.obtainMessage(BoarMallManager.GET_PIG_FACTORY_DETAIL_DATA, choiceId));
 	}
 	

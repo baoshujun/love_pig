@@ -11,7 +11,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="1dip"
-        android:background="@drawable/test02"
         android:visibility="gone" />
 
     <ImageView
@@ -19,7 +18,6 @@
         android:layout_width="fill_parent"
         android:layout_height="120dip"
         android:layout_margin="1dip"
-        android:background="@drawable/test03"
         android:visibility="gone" />
 
     <LinearLayout
@@ -33,33 +31,28 @@
             android:layout_width="fill_parent"
             android:layout_height="100dip"
             android:layout_margin="1dip"
-            android:layout_weight="1"
-            android:background="@drawable/test01" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/smallImg02"
             android:layout_width="fill_parent"
             android:layout_height="100dip"
             android:layout_margin="1dip"
-            android:layout_weight="1"
-            android:background="@drawable/test01" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/smallImg03"
             android:layout_width="fill_parent"
             android:layout_height="100dip"
             android:layout_margin="1dip"
-            android:layout_weight="1"
-            android:background="@drawable/test01" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/smallImg04"
             android:layout_width="fill_parent"
             android:layout_height="100dip"
             android:layout_margin="1dip"
-            android:layout_weight="1"
-            android:background="@drawable/test01" />
-
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>
